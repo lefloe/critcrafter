@@ -1,1 +1,2 @@
-#Critcrafter Charaqcter Builder for LOSS built with LAravel/filament
+# Critcrafter 
+Character Builder for LOSS. Built with Laravel/Filament
