@@ -13,13 +13,33 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('Characters', function (Blueprint $table) {
+        Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
             $table->foreignIdFor(System::class)->constrained();
             $table->string('race');
+            $table->string('leiteigenschaft1');
+            $table->string('leiteigenschaft2');
+            $table->json('rassenmerkmale')->nullable();
+            $table->integer('ko');
+            $table->integer('st');
+            $table->integer('ag');
+            $table->integer('ge');
+            $table->integer('we');
+            $table->integer('in');
+            $table->integer('mu');
+            $table->integer('ch');
+            $table->integer('leps');
+            $table->integer('tragkraft');
+            $table->integer('geschwindigkeit');
+            $table->integer('handwerksbonus');
+            $table->integer('kontrollwiderstand');
+            $table->integer('initiative');
+            $table->integer('verteidigung');
+            $table->integer('seelenpunkte');
             $table->integer('experience-level');
+            $table->string('lore');
             $table->timestamps();
         });
     }

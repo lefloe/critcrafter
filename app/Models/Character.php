@@ -13,8 +13,31 @@ class Character extends Model
         'name',
         'description',
         'system_id',
+        'leiteigenschaft1',
+        'leiteigenschaft2',
         'race',
+        'rassenmerkmale',
+        'ko',
+        'st',
+        'ag',
+        'ge',
+        'we',
+        'in',
+        'mu',
+        'ch',
+        'leps',
+        'tragkraft',
+        'geschwindigkeit',
+        'handwerksbonus',
+        'kontrollwiderstand',
+        'initiative',
+        'verteidigung',
+        'seelenpunkte',
         'experience-level',
+        'lore'
+    ];
+    protected $casts = [
+        'rassenmerkmale' => 'array', // Konvertiert die Spalte in ein Array beim Abrufen und in JSON beim Speichern
     ];
 
     public function system(): BelongsTo
