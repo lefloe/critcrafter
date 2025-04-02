@@ -20,8 +20,8 @@ use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Illuminate\Database\Eloquent\Model;
-
-// use Filament\Forms\Components\Repeater;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 
 
@@ -32,6 +32,7 @@ class CharacterResource extends Resource
     protected static ?string $model = Character::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
 
     public static function form(Form $form): Form
     {
@@ -84,9 +85,18 @@ class CharacterResource extends Resource
                                         'CH' => 'Charisma',
                                     ])
                                     ->reactive()
-                                    ->afterStateUpdated(fn ($state, callable $set, callable $get) => 
-                                    $set('archetype', self::getArchetype($state, $get('leading-attribute2')))
-                                    ),
+                                    ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                        // set the achetype 
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
+
+                                        // set the main_stat_value
+                                        $mainCharacteristic1 = $get('leiteigenschaft1');
+
+                                        if ($mainCharacteristic1) {
+                                            $mainStatValue = $get($mainCharacteristic1);
+                                            $set('main_stat_value', $mainStatValue);
+                                        }
+                                    }),
                                     Select::make('leiteigenschaft2')
                                     ->label('Leiteigenschaft 2')
                                     ->required()
@@ -106,11 +116,19 @@ class CharacterResource extends Resource
                                     $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')))
                                     ),
                                 ]),
-                            TextInput::make('archetype')
-                            ->label('Archetyp')
-                            ->live()
-                            ->default(fn (callable $get) => self::getArchetype($get('leiteigenschaft1'), $get('leiteigenschaft2')))
-                            ->disabled(),
+                            Grid::make(2)
+                            ->schema([
+                                TextInput::make('archetype')
+                                ->label('Archetyp')
+                                ->live()
+                                ->default(fn (callable $get) => self::getArchetype($get('leiteigenschaft1'), $get('leiteigenschaft2')))
+                                ->disabled(),
+
+                                TextInput::make('main_stat_value')
+                                ->label('Ressourcen')
+                                ->live()
+                                ->disabled(),
+                            ])
                             ]),
                             Section::make('Rasse und Rassenmerkmale')
                             ->description('Rasse und Rassenmerkmale auswählen')
@@ -182,56 +200,120 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('leps', $get('ko') * 2))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update LeP value
+                                            $set('leps', $get('ko') * 2);
+
+                                            // If ko is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'KO') {
+                                                $set('main_stat_value', $get('ko') + );
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('st') // Stärke
                                         ->label('Stärke (ST)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('tragkraft', $get('st')))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Tragkraft value
+                                            $set('tragkraft', $get('st'));
+                                            
+                                            // If st is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'ST') {
+                                                $set('main_stat_value', $get('st'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('ag') // Agilität
                                         ->label('Agilität (AG)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('geschwindigkeit', round($get('ag') / 2)))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Geschwindigkeit value
+                                            $set('geschwindigkeit', round($get('ag') / 2));
+                                            
+                                            // If ag is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'AG') {
+                                                $set('main_stat_value', $get('ag'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('ge') // Geschick
                                         ->label('Geschick (GE)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('handwerksbonus', $get('ge') - 12))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Handwerksbonus value
+                                            $set('handwerksbonus', $get('ge') - 12);
+                                            
+                                            // If ge is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'GE') {
+                                                $set('main_stat_value', $get('ge'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('we') // Weisheit
                                         ->label('Weisheit (WE)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('kontrollwiderstand', $get('we') - 12))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Kontrollwiderstand value
+                                            $set('kontrollwiderstand', $get('we') - 12);
+                                            
+                                            // If we is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'WE') {
+                                                $set('main_stat_value', $get('we'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('in') // Instinkt
                                         ->label('Instinkt (IN)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('initiative', round($get('in') / 2)))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Initiative value
+                                            $set('initiative', round($get('in') / 2));
+                                            
+                                            // If in is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'IN') {
+                                                $set('main_stat_value', $get('in'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('mu') // Mut
                                         ->label('Mut (MU)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('verteidigung', $get('mu') - 12))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Verteidigung value
+                                            $set('verteidigung', $get('mu') - 12);
+                                            
+                                            // If mu is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'MU') {
+                                                $set('main_stat_value', $get('mu'));
+                                            }
+                                        })
                                         ->required(),
                                     TextInput::make('ch') // Charisma
                                         ->label('Charisma (CH)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(fn ($state, callable $get, callable $set) => $set('seelenpunkte', $get('ch') * 2))
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
+                                            // update Seelenpunkte value
+                                            $set('seelenpunkte', $get('ch') * 2);
+                                            
+                                            // If ch is the main characteristic, update main_stat_value
+                                            if ($get('leiteigenschaft1') == 'CH') {
+                                                $set('main_stat_value', $get('ch'));
+                                            }
+                                        })
                                         ->required(),
                                 ])
 
@@ -239,30 +321,41 @@ class CharacterResource extends Resource
                             Section::make('Berechnete Werte')
                             ->collapsible()
                             ->schema([
-                                TextInput::make('leps') // Lebenspunkte
-                                    ->label('Lebenspunkte (LeP)')                                 
-                                    ->disabled(),
-                                TextInput::make('tragkraft') // Tragkraft
+                                Grid::make(4)
+                                ->schema([
+                                    TextInput::make('leps') // Lebenspunkte
+                                    ->label('Lebenspunkte (LeP)')   
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('tragkraft') // Tragkraft
                                     ->label('Tragkraft')
-                                    ->disabled(),
-                                TextInput::make('geschwindigkeit') // Geschwindigkeit
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('geschwindigkeit') // Geschwindigkeit
                                     ->label('Geschwindigkeit')
-                                    ->disabled(),
-                                TextInput::make('handwerksbonus') // Handwerksbonus
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('handwerksbonus') // Handwerksbonus
                                     ->label('Handwerksbonus')
-                                    ->disabled(),
-                                TextInput::make('kontrollwiderstand') // Kontrollwiderstand
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('kontrollwiderstand') // Kontrollwiderstand
                                     ->label('Kontrollwiderstand')
-                                    ->disabled(),
-                                TextInput::make('initiative') // Initiative
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('initiative') // Initiative
                                     ->label('Initiative (Ini)')
-                                    ->disabled(),
-                                TextInput::make('verteidigung') // Verteidigung
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('verteidigung') // Verteidigung
                                     ->label('Verteidigung')
-                                    ->disabled(),
-                                TextInput::make('seelenpunkte') // Seelenpunkte
+                                    ->disabled()
+                                    ->dehydrated(),                              
+                                    TextInput::make('seelenpunkte') // Seelenpunkte
                                     ->label('Seelenpunkte (SeP)')
-                                    ->disabled(),
+                                    ->disabled()
+                                    ->dehydrated(),                                  
+                                ])
                             ])
                         ]),
                         Tabs\Tab::make('Tab 3')
@@ -379,7 +472,9 @@ class CharacterResource extends Resource
         }
 
         return 'Unbekannt'; // Falls keine Kombination passt
+
     }
+    
 
     public static function table(Table $table): Table
     {
