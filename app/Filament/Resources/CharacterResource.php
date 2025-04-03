@@ -87,15 +87,11 @@ class CharacterResource extends Resource
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                         // set the achetype 
-                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2'))); 
 
-                                        // set the main_stat_value
-                                        $mainCharacteristic1 = $get('leiteigenschaft1');
+                                        $data = self::getAttributeArray($get);                             
+                                        $set('main_stat_value', self::getResources($state, $data, $get('leiteigenschaft2')));
 
-                                        if ($mainCharacteristic1) {
-                                            $mainStatValue = $get($mainCharacteristic1);
-                                            $set('main_stat_value', $mainStatValue);
-                                        }
                                     }),
                                     Select::make('leiteigenschaft2')
                                     ->label('Leiteigenschaft 2')
@@ -112,9 +108,17 @@ class CharacterResource extends Resource
                                         'CH' => 'Charisma',
                                     ])
                                     ->reactive()
-                                    ->afterStateUpdated(fn ($state, callable $set, callable $get) => 
-                                    $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')))
-                                    ),
+                                    ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                        // set the achetype 
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   
+                                        $data = self::getAttributeArray($get);                             
+                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
+
+                                    })
+                                    ->afterStateHydrated(function ($state, Get $get, Set $set) {
+                                            $data = self::getAttributeArray($get);
+                                            self::getResources($state, $data, $get('leiteigenschaft1'));
+                                    }),
                                 ]),
                             Grid::make(2)
                             ->schema([
@@ -206,7 +210,7 @@ class CharacterResource extends Resource
 
                                             // If ko is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'KO') {
-                                                $set('main_stat_value', $get('ko') + );
+                                                $set('main_stat_value', $get('ko') + 5);
                                             }
                                         })
                                         ->required(),
@@ -474,6 +478,36 @@ class CharacterResource extends Resource
         return 'Unbekannt'; // Falls keine Kombination passt
 
     }
+
+    public static function getAttributeArray(Get $get): array
+    {
+        return [
+            'KO' => $get('ko'),
+            'ST' => $get('st'),
+            'AG' => $get('ag'),
+            'GE' => $get('ge'),
+            'WE' => $get('we'),
+            'IN' => $get('in'),
+            'MU' => $get('mu'),
+            'CH' => $get('ch'),
+        ];
+
+    }
+
+    public static function getResources(?string $leiteigenschaft2, ?array $data, ?string $leiteigenschaft1): int
+    {
+        $value1 = isset($data[$leiteigenschaft1]) ? (int)$data[$leiteigenschaft1]: 0;
+        $value2 = isset($data[$leiteigenschaft2]) ? (int)$data[$leiteigenschaft2]: 0;
+
+
+        return $value1 + $value2;
+
+        // such im array data nach dem key leiteigenschaft1 und summiere den passenden value mit dem passenden ky/value pair aus leiteigenschaft 2 
+
+
+
+
+    }
     
 
     public static function table(Table $table): Table
@@ -502,12 +536,6 @@ class CharacterResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
 
     public static function getPages(): array
     {
