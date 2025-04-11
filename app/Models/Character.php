@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Equipment;
+
 
 class Character extends Model
 {
@@ -24,7 +26,15 @@ class Character extends Model
         'we',
         'in',
         'mu',
-        'ch',
+        'ch',        
+        'skill_ko',
+        'skill_st',
+        'skill_ag',
+        'skill_ge',
+        'skill_we',
+        'skill_in',
+        'skill_mu',
+        'skill_ch',
         'leps',
         'tragkraft',
         'geschwindigkeit',
@@ -34,14 +44,34 @@ class Character extends Model
         'verteidigung',
         'seelenpunkte',
         'experience-level',
-        'lore'
+        'klassenfertigkeiten',
+        'handwerkskenntnisse',
+        'lore',
+        // 'equipment_id',
     ];
     protected $casts = [
-        'rassenmerkmale' => 'array', // Konvertiert die Spalte in ein Array beim Abrufen und in JSON beim Speichern
+        'rassenmerkmale' => 'array', 
+        'handwerkskenntnisse' => 'array', 
+        'klassenfertigkeiten' => 'array', 
+        'skill_ko' => 'array',
+        'skill_st' => 'array',
+        'skill_ag' => 'array',
+        'skill_ge' => 'array',
+        'skill_we' => 'array',
+        'skill_in' => 'array',
+        'skill_mu' => 'array',
+        'skill_ch' => 'array',
+        'equipment' => 'array',
     ];
+
 
     public function system(): BelongsTo
     {
         return $this->belongsTo(System::class);
+    }
+
+    public function equipment()
+    {
+        return $this->hasMany(equipment::class);
     }
 }

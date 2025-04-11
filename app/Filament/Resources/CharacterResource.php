@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CharacterResource\Pages;
 use App\Filament\Resources\CharacterResource\RelationManagers;
 use App\Models\Character;
+use App\Models\Equipment;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -61,6 +62,7 @@ class CharacterResource extends Resource
                                 ->editOptionForm([
                                     TextInput::make('name'),
                                 ])
+                                ->preload()
                                 ->required(),
                         ]),
                         Tabs\Tab::make('Tab 2')
@@ -88,10 +90,14 @@ class CharacterResource extends Resource
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                         // set the achetype 
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2'))); 
-
                                         $data = self::getAttributeArray($get);                             
                                         $set('main_stat_value', self::getResources($state, $data, $get('leiteigenschaft2')));
-
+                                    })
+                                    ->afterStateHydrated(function ($state, Get $get, Set $set) {
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));   //sets archetype
+                                        $data = self::getAttributeArray($get);
+                                        $set('main_stat_value', self::getResources($get('leiteigenschaft2'), $data, $state));
+    
                                     }),
                                     Select::make('leiteigenschaft2')
                                     ->label('Leiteigenschaft 2')
@@ -109,15 +115,16 @@ class CharacterResource extends Resource
                                     ])
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                        // set the achetype 
-                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   
+
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
                                         $data = self::getAttributeArray($get);                             
                                         $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
-
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
-                                            $data = self::getAttributeArray($get);
-                                            self::getResources($state, $data, $get('leiteigenschaft1'));
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
+                                        $data = self::getAttributeArray($get);
+                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
+
                                     }),
                                 ]),
                             Grid::make(2)
@@ -210,7 +217,7 @@ class CharacterResource extends Resource
 
                                             // If ko is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'KO') {
-                                                $set('main_stat_value', $get('ko') + 5);
+                                                $set('main_stat_value', $get('ko'));
                                             }
                                         })
                                         ->required(),
@@ -363,26 +370,336 @@ class CharacterResource extends Resource
                             ])
                         ]),
                         Tabs\Tab::make('Tab 3')
-                            ->schema([
-                                // Select::make('race')
-                                //     ->options([
-                                //         'Ainu' => 'Ainu',
-                                //         'Alkonost' => 'Alkonost',
-                                //         'Balachko' => 'Balachko',
-                                //         'Bastet' => 'Bastet',
-                                //         'Crocotta' => 'Crocotta',
-                                //         'Karura' => 'Karura',
-                                //         'Leshy' => 'Leshy',
-                                //         'Vanaras' => 'Vanaras',
-                                //         'Vodyanoy' => 'Vodyanoy',
-                                //         'Vukodlak' => 'Vukodlak',
-                                //         'Chepri' => 'Chepri',
-                                //     ]),
+                        ->schema([
                                 TextInput::make('experience-level')
+                                ->Label('Erfahrungsstufe')
                                 ->numeric()
                                 ->step(1)
                                 ->maxValue(22)
-                                ->minValue(1)
+                                ->minValue(1),
+
+                                Section::make('Klassenfertigkeiten und Handwerkskenntnis wählen')
+                                ->description('Klassenfertigkeiten und Handwerkskenntnis auswählen')
+                                ->collapsible()
+                                ->schema([
+                                    Grid::make(2)
+                                    ->schema([
+                                        Select::make('klassenfertigkeiten')
+                                        ->multiple()
+                                        ->options([
+                                            'Animist I' => 'Animist I',
+                                            'Barde I' => 'Barde I',
+                                            'Berserker I' => 'Berserker I',
+                                            'Druide I' => 'Druide I',
+                                            'Elementarist I' => 'Elementarist I',
+                                            'Fechter I' => 'Fechter I',
+                                            'Gladiator I' => 'Gladiator I',
+                                            'Hexer I' => 'Hexer I',
+                                            'Klingenmeister I' => 'Klingenmeister I',
+                                            'Koloss I' => 'Koloss I',
+                                            'Krieger I' => 'Krieger I',
+                                            'Monsterjäger I' => 'Monsterjäger I',
+                                            'Mystiker I' => 'Mystiker I',
+                                            'Nekromant I' => 'Nekromant I',
+                                            'Paladin I' => 'Paladin I',
+                                            'Pirscher I' => 'Pirscher I',
+                                            'Runenschnitzer I' => 'Runenschnitzer I',
+                                            'Sappeur I' => 'Sappeur I',
+                                            'Schamane I' => 'Schamane I',
+                                            'Schreckensritter I' => 'Schreckensritter I',
+                                            'Seher I' => 'Seher I',
+                                            'Späher I' => 'Späher I',
+                                            'Spiritualist I' => 'Spiritualist I',
+                                            'Tänzer I' => 'Tänzer I',
+                                            'Templer I' => 'Templer I',
+                                            'Thaumaturg I' => 'Thaumaturg I',
+                                            'Waldläufer I' => 'Waldläufer I',
+                                            'Eigenschaftsbonus' => 'Eigenschaftsbonus',
+                                            'Basistalentbonus' => 'Basistalentbonus',
+                                        ]),
+                                        Select::make('handwerkskenntnisse')
+                                        ->multiple()
+                                        ->options([
+                                            'Handelswaren' => 'Handelswaren',
+                                            'Werkzeuge' => 'Werkzeuge',
+                                            'Offensive Anwendungen' => 'Offensive Anwendungen',
+                                            'Unterstützende Anwendungen' => 'Unterstützende Anwendungen',
+                                            'Nahrungsmittel' => 'Nahrungsmittel',
+                                            'Paraphernalia & Leiber' => 'Paraphernalia & Leiber',
+                                            'Rüstungen & Schilde' => 'Rüstungen & Schilde',
+                                            'Schmuckstücke & Talismane' => 'Schmuckstücke & Talismane',
+                                            'Verzauberungen' => 'Verzauberungen',
+                                            'Waffen' => 'Waffen',
+                                        ]),
+                                    ]),                                
+                                ]),
+                                Section::make('Fertgkeiten wählen')
+                                ->description('Aspekt- und Waffenfertigkeiten auswählen')
+                                ->collapsible()
+                                ->schema([
+                                    Grid::make(4)
+                                    ->schema([
+                                        Select::make('skill_ko')
+                                        ->multiple()
+                                        ->options([
+                                            'Block' => 'Block',
+                                            'Aus der Deckung' => 'Aus der Deckung',
+                                            'Entwaffnen' => 'Entwaffnen',
+                                            'Schildschlag' => 'Schildschlag',
+                                            'Durch den Hagel' => 'Durch den Hagel',
+                                            'Sprengfalle' => 'Sprengfalle',
+                                            'Notreserve' => 'Notreserve',
+                                            'Ricochet' => 'Ricochet',
+                                            'Aus dem Gleichgewicht' => 'Aus dem Gleichgewicht',
+                                            'Schulterwurf' => 'Schulterwurf',
+                                            'Katapult' => 'Katapult',
+                                            'An meine Seite' => 'An meine Seite',
+                                            'Kommando' => 'Kommando',
+                                            'Kriegslärm' => 'Kriegslärm',
+                                            'Aus der Not' => 'Aus der Not',
+                                        ]),
+                                        Select::make('skill_st')
+                                        ->multiple()
+                                        ->options([
+                                            'Plattenbrecher' => 'Plattenbrecher',
+                                            'Schädelbrecher' => 'Schädelbrecher',
+                                            'Tausend Schläge' => 'Tausend Schläge',
+                                            'Schmettern' => 'Schmettern',
+                                            'Ansturm' => 'Ansturm',
+                                            'Schwitzkasten' => 'Schwitzkasten',
+                                            'Sprungangriff' => 'Sprungangriff',
+                                            'Bieststärke' => 'Bieststärke',
+                                            'Gegenangriff' => 'Gegenangriff',
+                                            'Rücksichtslos' => 'Rücksichtslos',
+                                            'Aufwühlen' => 'Aufwühlen',
+                                            'Raserei' => 'Raserei',
+                                            'Kraftvoller Wurf' => 'Kraftvoller Wurf',
+                                        ]),
+                                        Select::make('skill_ag')
+                                        ->multiple()
+                                        ->options([
+                                            'Ausweiden' => 'Ausweiden',
+                                            'Rüstung zerreißen' => 'Rüstung zerreißen',
+                                            'Wirbelwind' => 'Wirbelwind',
+                                            'Waffenmeister' => 'Waffenmeister',
+                                            'Vorbereitung' => 'Vorbereitung',
+                                            'An die Kehle' => 'An die Kehle',
+                                            'Sehnenschnitt' => 'Sehnenschnitt',
+                                            'Durchbruch' => 'Durchbruch',
+                                            'Klingentanz' => 'Klingentanz',
+                                            'Heranziehen' => 'Heranziehen',
+                                            'Klingenwirbel' => 'Klingenwirbel',
+                                            'Zwischen die Schuppen' => 'Zwischen die Schuppen',
+                                            'Entwaffnen' => 'Entwaffnen',
+                                            'Reflektion' => 'Reflektion',
+                                            'Waffenschmuck' => 'Waffenschmuck',
+                                        ]),
+                                        Select::make('skill_ge')
+                                        ->multiple()
+                                        ->options([
+                                            'Meucheln' => 'Meucheln',
+                                            'Mit dem Spitzen Ende' => 'Mit dem Spitzen Ende',
+                                            'Präzise' => 'Präzise',
+                                            'Taschenspieler' => 'Taschenspieler',
+                                            'In die Augen' => 'In die Augen',
+                                            'Auf Distanz halten' => 'Auf Distanz halten',
+                                            'Binden' => 'Binden',
+                                            'Sturmangriff' => 'Sturmangriff',
+                                            'Entschwinden' => 'Entschwinden',
+                                            'Festnageln' => 'Festnageln',
+                                            'Fester Stand' => 'Fester Stand',
+                                            'Arsenal' => 'Arsenal',
+                                            'Platzieren' => 'Platzieren',
+                                            'Riposte' => 'Riposte',
+                                        ]),
+                                        Select::make('skill_in')
+                                        ->multiple()
+                                        ->options([
+                                            'Illuminos' => 'Illuminos',
+                                            'Spiri Exvocare' => 'Spiri Exvocare',
+                                            'Soliri' => 'Soliri',
+                                            'Lux Columna' => 'Lux Columna',
+                                            'Purgato' => 'Purgato',
+                                            'Oculux' => 'Oculux',
+                                            'Calefaciendo' => 'Calefaciendo',
+                                            'Calefaciendo' => 'Calefaciendo',
+                                            'Anhelitus' => 'Anhelitus',
+                                            'Intu' => 'Intu',
+                                            'Volaris' => 'Volaris',
+                                            'Liberare' => 'Liberare',
+                                            'Sonarus' => 'Sonarus',
+                                            'Ambulaqua' => 'Ambulaqua',
+                                            'Caligos' => 'Caligos',
+                                            'Mollis' => 'Mollis',
+                                            'Pundio' => 'Pundio',
+                                            'Sitis' => 'Sitis',
+                                            'Tempestare' => 'Tempestare',
+                                            'Siccatio' => 'Siccatio',
+                                            'Quaestio Elementi' => 'Quaestio Elementi',
+                                            'Crystaspino' => 'Crystaspino',
+                                            'Fricarcer' => 'Fricarcer',
+                                            'Calyx' => 'Calyx',
+                                            'Pellucidus' => 'Pellucidus',
+                                            'Frigtreus' => 'Frigtreus',
+                                            'Convertempa' => 'Convertempa',
+                                            'Praeterivide' => 'Praeterivide',
+                                            'Tardius' => 'Tardius',
+                                            'Posultempa' => 'Posultempa',
+                                            'Divinatio' => 'Divinatio',
+                                            'Furtim' => 'Furtim',
+                                            'Sano' => 'Sano',
+                                            'Corpus Mutare' => 'Corpus Mutare',
+                                            'Dumus' => 'Dumus',
+                                            'Vocatus Pral' => 'Vocatus Pral',
+                                            'Vocatus Bestia' => 'Vocatus Bestia',
+                                            'Caminus' => 'Caminus',
+                                            'Arsitis' => 'Arsitis',
+                                            'Circuligne' => 'Circuligne',
+                                            'Ahenum' => 'Ahenum',
+                                            'Incendium' => 'Incendium',
+                                            'Gravis' => 'Gravis',
+                                            'Terra Motus' => 'Terra Motus',
+                                            'Magnes' => 'Magnes',
+                                            'Terra Sculpta' => 'Terra Sculpta',
+                                            'Corpus Lapis' => 'Corpus Lapis',
+                                        ]),
+                                        Select::make('skill_we')
+                                        ->multiple()
+                                        ->options([
+                                            'Iunctio' => 'Iunctio',
+                                            'Veto Umbrax' => 'Veto Umbrax',
+                                            'Vitae' => 'Vitae',
+                                            'Quaestio Arcana' => 'Quaestio Arcana',
+                                            'Effio Arcana' => 'Effio Arcana',
+                                            'Porta Speculum' => 'Porta Speculum',
+                                            'Forma Kinetia' => 'Forma Kinetia',
+                                            'Proiectum' => 'Proiectum',
+                                            'Pupa' => 'Pupa',
+                                            'Celero' => 'Celero',
+                                            'Ictos' => 'Ictos',
+                                            'Moveo' => 'Moveo',
+                                            'Corpus Morpha' => 'Corpus Morpha',
+                                            'Corpus Forma' => 'Corpus Forma',
+                                            'Forma Mutatio' => 'Forma Mutatio',
+                                            'Confirma' => 'Confirma',
+                                            'Erupit' => 'Erupit',
+                                            'Principor' => 'Principor',
+                                            'Collatio' => 'Collatio',
+                                            'Vexillum' => 'Vexillum',
+                                            'Auxillum' => 'Auxillum',
+                                            'Sucus Constantia' => 'Sucus Constantia',
+                                            'Exvocare Exterreo' => 'Exvocare Exterreo',
+                                            'Corpus Nox' => 'Corpus Nox',
+                                            'Perdita' => 'Perdita',
+                                            'Tenebra' => 'Tenebra',
+                                            'Maledictum' => 'Maledictum',
+                                            'Duplici' => 'Duplici',
+                                            'Fecundo' => 'Fecundo',
+                                            'Purus' => 'Purus',
+                                            'Curatio Morbus' => 'Curatio Morbus',
+                                            'Corpus Renovo' => 'Corpus Renovo',
+                                            'Corpus Cupla' => 'Corpus Cupla',
+                                            'Veritas' => 'Veritas',
+                                            'Lepos' => 'Lepos',
+                                            'Ligo Spiri' => 'Ligo Spiri',
+                                            'Pondus' => 'Pondus',
+                                            'Spiri Duro' => 'Spiri Duro',
+                                            'Vigil' => 'Vigil',
+                                            'Percello' => 'Percello',
+                                            'Custodia' => 'Custodia',
+                                        ]),
+                                        Select::make('skill_mu')
+                                        ->multiple()
+                                        ->options([
+                                            'Coactus' => 'Coactus',
+                                            'Veto Nexus' => 'Veto Nexus',
+                                            'Corpo Sucus' => 'Corpo Sucus',
+                                            'Vocare Inmortui' => 'Vocare Inmortui',
+                                            'Quaestio Chaos' => 'Quaestio Chaos',
+                                            'Porta Exterreo' => 'Porta Exterreo',
+                                            'Inanis' => 'Inanis',
+                                            'Effio Chaos' => 'Effio Chaos',
+                                            'Vocare Interdict' => 'Vocare Interdict',
+                                            'Reicio' => 'Reicio',
+                                            'Veto Memoria' => 'Veto Memoria',
+                                            'Vocare Phantasma' => 'Vocare Phantasma',
+                                            'Ligo Irae' => 'Ligo Irae',
+                                            'Trepidatio' => 'Trepidatio',
+                                            'Terrere' => 'Terrere',
+                                            'Porta Fracti' => 'Porta Fracti',
+                                            'Mille Acus' => 'Mille Acus',
+                                            'Cruciatus' => 'Cruciatus',
+                                            'Vocare Tormentis' => 'Vocare Tormentis',
+                                            'Tedium' => 'Tedium',
+                                            'Vinculum' => 'Vinculum',
+                                            'Malum Specio' => 'Malum Specio',
+                                            'Simulacrum' => 'Simulacrum',
+                                            'Vocatus Malum' => 'Vocatus Malum',
+                                            'Magniforma' => 'Magniforma',
+                                            'Pandemalum' => 'Pandemalum',
+                                            'Pestis' => 'Pestis',
+                                            'Morbus' => 'Morbus',
+                                            'Rubigo' => 'Rubigo',
+                                            'Corpus Verto' => 'Corpus Verto',
+                                            'Vocare Toxicum' => 'Vocare Toxicum',
+                                            'Venatio' => 'Venatio',
+                                            'Vocare Furia' => 'Vocare Furia',
+                                            'Dissolutium' => 'Dissolutium',
+                                            'Concavum' => 'Concavum',
+                                            'Atrox' => 'Atrox',
+                                            'Legere' => 'Legere',
+                                            'Plaga' => 'Plaga',
+                                            'Vinco' => 'Vinco',
+                                            'Vis' => 'Vis',
+                                            'Impero' => 'Impero',
+                                            'Dissaeptum' => 'Dissaeptum',
+                                        ]),
+                                        Select::make('skill_ch')
+                                        ->multiple()
+                                        ->options([
+                                            'Quaestio Spiri' => 'Quaestio Spiri',
+                                            'Conventus' => 'Conventus',
+                                            'Sensus' => 'Sensus',
+                                            'Alienus' => 'Alienus',
+                                            'Aenigma' => 'Aenigma',
+                                            'Vocare Spiri' => 'Vocare Spiri',
+                                            'Peregrinus' => 'Peregrinus',
+                                            'Pax' => 'Pax',
+                                            'Nuntius' => 'Nuntius',
+                                            'Veto Spiri' => 'Veto Spiri',
+                                            'Lacero Spiri' => 'Lacero Spiri',
+                                            'Machina Vitam' => 'Machina Vitam',
+                                            'Artifex' => 'Artifex',
+                                            'Inspiratio' => 'Inspiratio',
+                                            'Ars' => 'Ars',
+                                            'Clavicarius' => 'Clavicarius',
+                                            'Ico' => 'Ico',
+                                            'Ira' => 'Ira',
+                                            'Spiritelum' => 'Spiritelum',
+                                            'Sententia' => 'Sententia',
+                                            'Ferus' => 'Ferus',
+                                            'Recuso' => 'Recuso',
+                                            'Recordatio' => 'Recordatio',
+                                            'Recuso' => 'Recuso',
+                                            'Pertinax' => 'Pertinax',
+                                            'Detineo' => 'Detineo',
+                                            'Effio Spiri' => 'Effio Spiri',
+                                            'Ligo Anima' => 'Ligo Anima',
+                                            'Spiri Vitae' => 'Spiri Vitae',
+                                            'Nanciscor' => 'Nanciscor',
+                                            'Sermo' => 'Sermo',
+                                            'Meretrix' => 'Meretrix',
+                                            'Cupiditas' => 'Cupiditas',
+                                            'Affectio' => 'Affectio',
+                                            'Ines' => 'Ines',
+                                            'Fortuna' => 'Fortuna',
+                                            'Cavillor' => 'Cavillor',
+                                            'Vocare Credo' => 'Vocare Credo',
+                                            'Velox' => 'Velox',
+                                            'Exeo' => 'Exeo',
+                                        ]),
+                                    ])
+                                ])
                             ]),
                         Tabs\Tab::make('Tab 4')
                             ->schema([
@@ -402,6 +719,21 @@ class CharacterResource extends Resource
                                         'Völker des Nordens' => 'Völker des Nordens',
                                         'Völker des Südens' => 'Völker des Südens',
                                     ]),
+                                Section::make('Ausrüstung hinzufügen')
+                                ->description('Füge Ausrüstung hinzu')
+                                ->schema([
+                                    Select::make('equipment_id')
+                                    ->relationship('equipment', 'name')
+                                    ->createOptionAction(fn($action) => $action->slideOver())
+                                    ->createOptionForm([
+                                        TextInput::make('name'),
+                                    ])
+                                    ->editOptionForm([
+                                        TextInput::make('name'),
+                                        ])
+                                    ->preload()
+                                    ->multiple(),
+                                ])
                             ]),
                         Tabs\Tab::make('Zusammenfassung')
                             ->schema([
