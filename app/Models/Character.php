@@ -17,7 +17,9 @@ class Character extends Model
         'system_id',
         'leiteigenschaft1',
         'leiteigenschaft2',
+        'achretype',
         'race',
+        'wesen',
         'rassenmerkmale',
         'ko',
         'st',
@@ -47,6 +49,7 @@ class Character extends Model
         'klassenfertigkeiten',
         'handwerkskenntnisse',
         'lore',
+        'portrait',
         // 'equipment_id',
     ];
     protected $casts = [
@@ -62,6 +65,7 @@ class Character extends Model
         'skill_mu' => 'array',
         'skill_ch' => 'array',
         'equipment' => 'array',
+        'lore' => 'array',
     ];
 
 

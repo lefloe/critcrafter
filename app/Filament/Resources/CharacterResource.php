@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -45,15 +47,27 @@ class CharacterResource extends Resource
                     ->tabs([
                         Tabs\Tab::make('Tab 1')
                         ->schema([
-                            TextInput::make('name')
-                                            ->label('Name')
-                                            ->required()
-                                            ->maxLength(255),
+                            Grid::make(2)
+                            ->schema([
+                                TextInput::make('name')
+                                ->label('Name')
+                                ->required()
+                                ->maxLength(255),
+                                TextInput::make('experience-level')
+                                ->Label('Erfahrungsstufe')
+                                ->numeric()
+                                ->step(1)
+                                ->maxValue(22)
+                                ->required()
+                                ->minValue(1),
+                            ]),
                             Textarea::make('description')
                             ->label('Description')
                             ->required()
                             ->maxLength(800),
-                            Select::make('system_id')
+                            Grid::make(2)
+                            ->schema([
+                                Select::make('system_id')
                                 ->relationship('system', 'name')
                                 ->createOptionAction(fn($action) => $action->slideOver())
                                 ->createOptionForm([
@@ -64,6 +78,18 @@ class CharacterResource extends Resource
                                 ])
                                 ->preload()
                                 ->required(),
+                                FileUpload::make('portrait')
+                                ->label('Portrait')
+                                ->image()
+                                ->directory('portraits')        // Speicherort im Storage
+                                ->preserveFilenames()
+                                ->imagePreviewHeight('150')     // Vorschaugröße
+                                ->openable()
+                                ->downloadable()
+                                ->maxSize(2048)                 // in KB (2 MB)
+                                ->acceptedFileTypes(['image/jpeg', 'image/png'])
+
+                            ]),
                         ]),
                         Tabs\Tab::make('Tab 2')
                         ->schema([
@@ -71,7 +97,7 @@ class CharacterResource extends Resource
                             ->description('Leiteigenschaften und Archetyp auswählen')
                             ->collapsible()
                             ->schema([
-                                Grid::make(2) // Grid mit 2 Spalten
+                                Grid::make(2)
                                 ->schema([
                                     Select::make('leiteigenschaft1')
                                     ->label('Leiteigenschaft 1')
@@ -145,20 +171,30 @@ class CharacterResource extends Resource
                             ->description('Rasse und Rassenmerkmale auswählen')
                             ->collapsible()
                             ->schema([
-                                Select::make('race')
-                                ->label('Rasse')
-                                ->options([
-                                    'Ainu' => 'Ainu',
-                                    'Alkonost' => 'Alkonost',
-                                    'Balachko' => 'Balachko',
-                                    'Bastet' => 'Bastet',
-                                    'Crocotta' => 'Crocotta',
-                                    'Karura' => 'Karura',
-                                    'Leshy' => 'Leshy',
-                                    'Vanaras' => 'Vanaras',
-                                    'Vodyanoy' => 'Vodyanoy',
-                                    'Vukodlak' => 'Vukodlak',
-                                    'Chepri' => 'Chepri',
+                                Grid::make(2)
+                                ->schema([
+                                    Select::make('race')
+                                    ->required()
+                                    ->label('Rasse')
+                                    ->options([
+                                        'Ainu' => 'Ainu',
+                                        'Alkonost' => 'Alkonost',
+                                        'Balachko' => 'Balachko',
+                                        'Bastet' => 'Bastet',
+                                        'Crocotta' => 'Crocotta',
+                                        'Karura' => 'Karura',
+                                        'Leshy' => 'Leshy',
+                                        'Vanaras' => 'Vanaras',
+                                        'Vodyanoy' => 'Vodyanoy',
+                                        'Vukodlak' => 'Vukodlak',
+                                        'Chepri' => 'Chepri',
+                                    ]),
+                                    Radio::make('wesen')
+                                    ->required()
+                                    ->options([
+                                        'Biest' => 'Biest/Geist',
+                                        'Dämon' => 'Dämon/Spekter',
+                                    ]),
                                 ]),
                                 Select::make('rassenmerkmale')
                                 ->multiple()
@@ -371,13 +407,6 @@ class CharacterResource extends Resource
                         ]),
                         Tabs\Tab::make('Tab 3')
                         ->schema([
-                                TextInput::make('experience-level')
-                                ->Label('Erfahrungsstufe')
-                                ->numeric()
-                                ->step(1)
-                                ->maxValue(22)
-                                ->minValue(1),
-
                                 Section::make('Klassenfertigkeiten und Handwerkskenntnis wählen')
                                 ->description('Klassenfertigkeiten und Handwerkskenntnis auswählen')
                                 ->collapsible()
@@ -831,14 +860,7 @@ class CharacterResource extends Resource
         $value1 = isset($data[$leiteigenschaft1]) ? (int)$data[$leiteigenschaft1]: 0;
         $value2 = isset($data[$leiteigenschaft2]) ? (int)$data[$leiteigenschaft2]: 0;
 
-
         return $value1 + $value2;
-
-        // such im array data nach dem key leiteigenschaft1 und summiere den passenden value mit dem passenden ky/value pair aus leiteigenschaft 2 
-
-
-
-
     }
     
 
@@ -860,6 +882,11 @@ class CharacterResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('pdf')
+                ->label('PDF')
+                ->icon('heroicon-o-printer')
+                ->url(fn (Character $record) => route('character.print', ['id' => $record->id]))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

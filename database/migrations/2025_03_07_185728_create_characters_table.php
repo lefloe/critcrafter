@@ -17,11 +17,13 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->foreignIdFor(System::class)->constrained();
             $table->string('race');
+            $table->string('wesen');
             $table->string('leiteigenschaft1');
             $table->string('leiteigenschaft2');
+            $table->string('archetype')->nullable();
             $table->json('rassenmerkmale')->nullable();
             $table->integer('ko');
             $table->integer('st');
@@ -50,7 +52,7 @@ return new class extends Migration
             $table->integer('experience-level');
             $table->json('klassenfertigkeiten')->nullable();
             $table->json('handwerkskenntnisse')->nullable();
-            $table->string('lore');
+            $table->json('lore')->nullable();
             $table->timestamps();
         });
     }
