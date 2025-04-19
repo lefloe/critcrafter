@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -68,8 +69,6 @@ class EquipmentResource extends Resource
                         'sonstiges' => 'sonstiges',
                     ])
                     ->reactive()
-                    // fn(dd $get('item_type'));
-
                 ])
             ]),
             Section::make('weapon')
@@ -331,7 +330,10 @@ class EquipmentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                ->searchable(),                
+                Tables\Columns\TextColumn::make('item_type')
                 ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                 ->dateTime()
                 ->sortable()

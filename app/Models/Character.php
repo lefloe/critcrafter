@@ -49,8 +49,7 @@ class Character extends Model
         'klassenfertigkeiten',
         'handwerkskenntnisse',
         'lore',
-        'portrait',
-        // 'equipment_id',
+        'portrait'
     ];
     protected $casts = [
         'rassenmerkmale' => 'array', 
@@ -74,8 +73,13 @@ class Character extends Model
         return $this->belongsTo(System::class);
     }
 
-    public function equipment()
+    // public function equipment()
+    // {
+    //     return $this->hasMany(equipment::class);
+    // }
+
+    public function equipmentAssignments()
     {
-        return $this->hasMany(equipment::class);
+        return $this->hasMany(EquipmentAssignment::class);
     }
 }

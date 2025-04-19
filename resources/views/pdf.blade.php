@@ -208,10 +208,6 @@
             </table>
         </div>
 
-    <!-- </div> evtl in zwei Container unterteilen?
-        
-    <div class="container"> -->
-
     <!-- Abschnitt: dark half -->
         <div class="dark-area" padding>
         <div class="section" ><!-- Leib und co -->
@@ -331,11 +327,11 @@
             </table>
         </div>
 
-        <!-- Optional: Weitere Sektionen, z. B. Equipment -->
+        <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
         <div class="section">
             <h2>Equipment</h2>
-            @if ($character->equipment && $character->equipment->count() > 0)
+            @if ($character->Equipment()->exists())
                 <table class="table">
                     <thead>
                         <tr>
@@ -346,16 +342,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($character->equipment as $item)
+                        @foreach($character->Equipment as $item)
                             <tr>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>{{ $item->qualität }}</td>
+                                <td>{{ $item->item_type }}</td>
+                                <td>{{ $item->quality }}</td>
                                 <td>
                                     @if($item->hwp)
                                         HwP: {{ $item->hwp }}
                                     @endif
-                                    {{-- Füge weitere Felder hinzu, je nach Equipment-Art --}}
                                 </td>
                             </tr>
                         @endforeach

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('waffengattung')->nullable();
             $table->integer('angriffswert')->nullable();
             $table->json('damage_type')->nullable();
-            $table->integer('tefferwuerfel')->nullable();
+            $table->integer('trefferwuerfel')->nullable();
             $table->integer('traglast')->nullable();
             $table->integer('passive_verteidigung')->nullable();
             $table->integer('schild_verteidigung')->nullable();
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->json('ts_erweiterungen')->nullable();
             $table->timestamps();
             $table->foreignIdFor(Character::class)->nullable()->constrained()->onDelete('set Null');
-
+            $table->boolean('equipped')->default(false);
         });
     }
 

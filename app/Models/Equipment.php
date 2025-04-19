@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Equipment extends Model
 {
@@ -34,7 +36,8 @@ class Equipment extends Model
         'rs_chaos',
         'rs_erweiterungen',
         'ts_erweiterungen',
-        'character_id'
+        'character_id',
+        'equipped'
     ];
     protected $casts = [
         'damage_type' => 'array', 

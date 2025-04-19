@@ -22,6 +22,8 @@ use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -748,21 +750,41 @@ class CharacterResource extends Resource
                                         'Völker des Nordens' => 'Völker des Nordens',
                                         'Völker des Südens' => 'Völker des Südens',
                                     ]),
-                                Section::make('Ausrüstung hinzufügen')
-                                ->description('Füge Ausrüstung hinzu')
+                                // Section::make('Ausrüstung hinzufügen')
+                                // ->description('Füge Ausrüstung hinzu')
+                                // ->schema([
+                                //     Select::make('equipment_id')
+                                //     ->relationship('equipment', 'name')
+                                //     ->createOptionAction(fn($action) => $action->slideOver())
+                                //     ->createOptionForm([
+                                //         TextInput::make('name'),
+                                //     ])
+                                //     ->editOptionAction(fn($action) => $action->slideOver())
+                                //     ->editOptionForm([
+                                //         TextInput::make('name'),
+                                //         ])
+                                //     ->preload()
+                                //     ->reactive()
+                                //     ->multiple(),
+                                // ]),
+                                Section::make('equip_items')
+                                ->description('Wähle die aktuelle Ausrütung')
                                 ->schema([
-                                    Select::make('equipment_id')
-                                    ->relationship('equipment', 'name')
-                                    ->createOptionAction(fn($action) => $action->slideOver())
-                                    ->createOptionForm([
-                                        TextInput::make('name'),
+                                    Repeater::make('equipmentAssignments')
+                                    ->relationship('equipmentAssignments') // wichtig! Dadurch wird character_id automatisch gesetzt
+                                    ->label('Ausrüstung zuweisen')
+                                    ->schema([
+                                        Select::make('equipment_id')
+                                        ->label('Ausrüstung wählen')
+                                        ->options(\App\Models\Equipment::all()->pluck('name', 'id'))
+                                        ->required(),
+                                        Toggle::make('equipped')
+                                            ->label('Ausgerüstet')
+                                            ->inline(false),
                                     ])
-                                    ->editOptionForm([
-                                        TextInput::make('name'),
-                                        ])
-                                    ->preload()
-                                    ->multiple(),
-                                ])
+                                    ->createItemButtonLabel('weitere Ausrüstung hinzufügen')
+                                    // ->columns(3)
+                                ]),
                             ]),
                         Tabs\Tab::make('Zusammenfassung')
                             ->schema([

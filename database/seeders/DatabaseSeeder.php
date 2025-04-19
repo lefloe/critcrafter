@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Character;
+use App\Models\Equipment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -53,5 +54,68 @@ class DatabaseSeeder extends Seeder
             'handwerkskenntnisse' => ['Schmieden'],
             'lore' => 'Aspektwesen',
         ]);
+
+        // Beispiel-Waffe
+        Equipment::create([
+            'name' => 'Kriegsaxt der Glut',
+            'description' => 'Eine schwere, geschmiedete Axt mit glühender Schneide.',
+            'quality' => 'episch',
+            'item_type' => 'Waffe',
+            'hwp' => 12,
+            'waffengattung' => 'Nahkampfwaffe',
+            'angriffswert' => 7,
+            'damage_type' => ['stumpf', 'schnitt'],
+            'trefferwuerfel' => 6,
+            'traglast' => 3,
+            'erweiterungen' => ['der Präzision', 'des Gemetzels'],
+        ]);
+
+        // Beispiel-Rüstung
+        Equipment::create([
+            'name' => 'Verstärkte Knochenrüstung',
+            'description' => 'Rüstung aus alchemistisch gehärtetem Knochen.',
+            'quality' => 'selten',
+            'item_type' => 'Rüstung',
+            'hwp' => 9,
+            'passive_verteidigung' => 4,
+            'rs_schnitt' => 5,
+            'rs_stumpf' => 3,
+            'rs_stich' => 4,
+            'rs_elementar' => 2,
+            'traglast' => 4,
+            'verzauberungen' => 'des Schutzes',
+            'rs_erweiterungen' => 'verstärkt',
+        ]);
+
+        // Beispiel-Talisman
+        Equipment::create([
+            'name' => 'Talisman der Klarheit',
+            'description' => 'Ein schimmernder Kristall, der geistige Klarheit spendet.',
+            'quality' => 'legendär',
+            'item_type' => 'Talisman',
+            'hwp' => 8,
+            'kontrollwiderstand' => 5,
+            'rs_arcan' => 2,
+            'rs_chaos' => 1,
+            'rs_spirit' => 3,
+            'verzauberungen' => 'der klarheit',
+            'ts_erweiterungen' => 'der konzentration',
+        ]);
+
+        // Beispiel-Schild
+        Equipment::create([
+            'name' => 'Schild der Vorhut',
+            'description' => 'Ein massiver Schild mit Gravuren eines Löwen.',
+            'quality' => 'ungewöhnlich',
+            'item_type' => 'Schild',
+            'hwp' => 6,
+            'schild_verteidigung' => 5,
+            'rs_arcan' => 1,
+            'rs_chaos' => 1,
+            'rs_spirit' => 2,
+            'verzauberungen' => 'des Schutzes',
+            'ts_erweiterungen' => 'der ruhe',
+        ]);
+        \Database\Factories\EquipmentFactory::new()->count(10)->create();
     }
 }
