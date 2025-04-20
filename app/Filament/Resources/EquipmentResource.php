@@ -14,6 +14,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -42,15 +43,7 @@ class EquipmentResource extends Resource
                     ->maxLength(800),
                     Select::make('quality')
                     ->required()
-                    ->options([
-                        'schlecht' => 'schlecht',
-                        'einfach' => 'einfach',
-                        'gewöhnlich' => 'gewöhnlich',
-                        'ungewöhnlich' => 'ungewöhnlich',
-                        'selten' => 'selten',
-                        'episch' => 'episch',
-                        'legendär' => 'legendär',
-                    ]),                        
+                    ->options(self::getQS()),                        
                     Select::make('item_type')
                     ->label('Ausrüstungsart')
                     ->required()
@@ -113,7 +106,7 @@ class EquipmentResource extends Resource
                 ->step(1)
                 ->minvalue(1)
                 ->maxvalue(9),
-                Select::make('erweiterungen')
+                Select::make('wp_erweiterungen')
                 ->label('Erweiterungen')
                 ->multiple()
                 ->options([
@@ -182,12 +175,20 @@ class EquipmentResource extends Resource
                     ->maxvalue(9),
                 ]),
                 Grid::make(2)
-                ->schema([                        
-                    Select::make('verzauberungen')
+                ->schema([   
+                    Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
-                    ->options(self::getEnchantments()),
+                    ->schema([
+                        Select::make('enchantment')
+                        ->label('Verzauberung')
+                        ->options(self::getEnchantments()),
+                        Select::make('enchantment_qs')
+                        ->label('QS Verzauberung')
+                        ->options(self::getQS()),
+                    ]),               
                     Select::make('rs_erweiterungen')
                     ->label('Erweiterungen')
+                    ->multiple()
                     ->options([
                         'getarnt' => 'Getarnt (3 HwP)',
                         'gleitend' => 'Gleitend (3 HwP)',
@@ -239,11 +240,19 @@ class EquipmentResource extends Resource
                 ]),
                 Grid::make(2)
                 ->schema([                        
-                    Select::make('verzauberungen')
+                    Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
-                    ->options(self::getEnchantments()),
+                    ->schema([
+                        Select::make('enchantment')
+                        ->label('Verzauberung')
+                        ->options(self::getEnchantments()),
+                        Select::make('enchantment_qs')
+                        ->label('QS Verzauberung')
+                        ->options(self::getQS()),
+                    ]),
                     Select::make('ts_erweiterungen')
                     ->label('Erweiterungen')
+                    ->multiple()
                     ->options([
                         'der fokussierung' => 'der fokussierung (3 HwP)',
                         'der konzentration' => 'der konzentration (5 HwP)',
@@ -295,9 +304,16 @@ class EquipmentResource extends Resource
                 ]),
                 Grid::make(2)
                 ->schema([                        
-                    Select::make('verzauberungen')
+                    Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
-                    ->options(self::getEnchantments()),
+                    ->schema([
+                        Select::make('enchantment')
+                        ->label('Verzauberung')
+                        ->options(self::getEnchantments()),
+                        Select::make('enchantment_qs')
+                        ->label('QS Verzauberung')
+                        ->options(self::getQS()),
+                    ]),
                     Select::make('ts_erweiterungen')
                     ->label('Erweiterungen')
                     ->options([
@@ -322,6 +338,25 @@ class EquipmentResource extends Resource
                 ]),
             ])
             ->visible(fn (callable $get) => in_array($get('item_type'), ['Schild'])),
+            Section::make('schmuckstück')
+            ->description('Werte des Schmuckstück wählen')
+            ->schema([
+                Grid::make(2)
+                ->schema([                        
+                    Fieldset::make('verzauberungen')
+                    ->label('Verzauberungen')
+                    ->schema([
+                        Select::make('enchantment')
+                        ->label('Verzauberung')
+                        ->options(self::getEnchantments()),
+                        Select::make('enchantment_qs')
+                        ->label('QS Verzauberung')
+                        ->options(self::getQS()),
+                    ])
+                ])
+            ])
+            ->visible(fn (callable $get) => in_array($get('item_type'), ['Schmuckstück'])),
+
         ]);
     }
 
@@ -390,5 +425,20 @@ class EquipmentResource extends Resource
             'des kosmischen Durchflusses' => 'des kosmischen Durchflusses',
         ];
     }
+
+    protected static function getQS(): array
+    {
+        return [
+            'schlecht' => 'schlecht',
+            'einfach' => 'einfach',
+            'gewöhnlich' => 'gewöhnlich',
+            'ungewöhnlich' => 'ungewöhnlich',
+            'selten' => 'selten',
+            'episch' => 'episch',
+            'legendär' => 'legendär',
+
+        ];
+    }
+
 
 }

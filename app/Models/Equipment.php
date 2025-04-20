@@ -30,7 +30,8 @@ class Equipment extends Model
         'rs_arcan',
         'rs_chaos',
         'rs_spirit',
-        'verzauberungen',
+        'enchantment',
+        'enchantment_qs',
         'kontrollwiderstand',
         'rs_arcan',
         'rs_chaos',
@@ -41,8 +42,8 @@ class Equipment extends Model
     ];
     protected $casts = [
         'damage_type' => 'array', 
-        'verzauberungen' => 'array', 
-        'erweiterungen' => 'array', 
+        'enchantment' => 'array', 
+        'wp_erweiterungen' => 'array', 
         'rs_erweiterungen' => 'array',
         'ts_erweiterungen' => 'array',
     ];

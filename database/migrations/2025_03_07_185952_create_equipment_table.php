@@ -35,8 +35,9 @@ return new class extends Migration
             $table->integer('rs_arcan')->nullable();
             $table->integer('rs_chaos')->nullable();
             $table->integer('rs_spirit')->nullable();
-            $table->json('verzauberungen')->nullable();
-            $table->json('erweiterungen')->nullable(); 
+            $table->json('enchantment')->nullable();
+            $table->string('enchantment_qs')->nullable();
+            $table->json('wp_erweiterungen')->nullable(); 
             $table->json('rs_erweiterungen')->nullable();
             $table->json('ts_erweiterungen')->nullable();
             $table->timestamps();

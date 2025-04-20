@@ -12,7 +12,7 @@ class CharacterPdfController extends Controller
     public function printCharacter($id)
     {
         // Lade den Charakter oder scheitere, falls nicht gefunden
-        $character = Character::with('equipment')->findOrFail($id);        
+        $character = Character::with('equipmentAssignments.equipment')->findOrFail($id);        
         // Lade die View "pdf.character" und übergebe den Character
         $pdf = Pdf::loadView('pdf', compact('character'));
         

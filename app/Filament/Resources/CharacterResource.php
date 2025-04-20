@@ -750,23 +750,6 @@ class CharacterResource extends Resource
                                         'Völker des Nordens' => 'Völker des Nordens',
                                         'Völker des Südens' => 'Völker des Südens',
                                     ]),
-                                // Section::make('Ausrüstung hinzufügen')
-                                // ->description('Füge Ausrüstung hinzu')
-                                // ->schema([
-                                //     Select::make('equipment_id')
-                                //     ->relationship('equipment', 'name')
-                                //     ->createOptionAction(fn($action) => $action->slideOver())
-                                //     ->createOptionForm([
-                                //         TextInput::make('name'),
-                                //     ])
-                                //     ->editOptionAction(fn($action) => $action->slideOver())
-                                //     ->editOptionForm([
-                                //         TextInput::make('name'),
-                                //         ])
-                                //     ->preload()
-                                //     ->reactive()
-                                //     ->multiple(),
-                                // ]),
                                 Section::make('equip_items')
                                 ->description('Wähle die aktuelle Ausrütung')
                                 ->schema([

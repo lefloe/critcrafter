@@ -210,128 +210,133 @@
 
     <!-- Abschnitt: dark half -->
         <div class="dark-area" padding>
-        <div class="section" ><!-- Leib und co -->
-            <table class="table" style="width: 95%;">
-                <tr>
-                    <td style="width: 30%; vertical-align: top;">
-                        <h2>Seele</h2>
-                    </td>
-                    <td style="width: 70%; vertical-align: top;">
-                        <table class="table" style="width: 50%; border-collapse: collapse; table-layout: fixed">
-                            
-                            <tr>
-                                <th style="font-size: 10pt;">WE</th>
-                                <th style="font-size: 10pt;">IN</th>
-                                <th style="font-size: 10pt;">MU</th>
-                                <th style="font-size: 10pt;">CH</th>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 12pt;"> {{ $character->we }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->in }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->mu }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->ch }}</td>
-                            </tr>                            
+            <div class="section" ><!-- Leib und co -->
+                <table class="table" style="width: 95%;">
+                    <tr>
+                        <td style="width: 30%; vertical-align: top;">
+                            <h2>Seele</h2>
+                        </td>
+                        <td style="width: 70%; vertical-align: top;">
+                            <table class="table" style="width: 50%; border-collapse: collapse; table-layout: fixed">
+                                
+                                <tr>
+                                    <th style="font-size: 10pt;">WE</th>
+                                    <th style="font-size: 10pt;">IN</th>
+                                    <th style="font-size: 10pt;">MU</th>
+                                    <th style="font-size: 10pt;">CH</th>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 12pt;"> {{ $character->we }}</td>
+                                    <td style="font-size: 12pt;"> {{ $character->in }}</td>
+                                    <td style="font-size: 12pt;"> {{ $character->mu }}</td>
+                                    <td style="font-size: 12pt;"> {{ $character->ch }}</td>
+                                </tr>                            
 
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="section" >
-            <table class="table" style="width: 95%;">
-                <tr>
-                    <td style="width: 25%;">
-                        <table class="table" style="width: 100%;">
-                            <tr>
-                                <td>{{ $character->kontrollwiderstand }}</td>
-                                <th>Kontrollwiderstand (LeP)</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->initiative }}</td>
-                                <th>Initiative (Ini)</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->verteidigung }}</td>
-                                <th>Verteidigung</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->seelenpunkte }}</td>
-                                <th>Seelenpunkte (SeP)</th>
-                            </tr>
-                        </table>
-                    </td>
-                    <td style="width: 75%; vertical-align: top;">
-                        <table class="table" style="width: 100%; border-collapse: collapse;">
-                            
-                            <tr>
-                                <td>{{ $character->we }}</td><th>Konzentration</th>
-                                <td>{{ $character->in }}</td><th>Wahrnehmung</th>
-                                <td>{{ $character->mu }}</td><th>Willenskraft</th>
-                                <td>{{ $character->ch }}</td><th>Kommunikation</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->we }}</td><td> Ausspähen</td>
-                                <td>{{ $character->in }}</td><td> Observieren</td>
-                                <td>{{ $character->mu }}</td><td> Verbinden</td>
-                                <td>{{ $character->ch }}</td><td> Provozieren</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->we }}</td><td> Talisman wechseln</td>
-                                <td> {{ $character->in }}</td><td> Gefahreninstinkt</td>
-                                <td> {{ $character->mu }}</td><td> Riskieren</td>
-                                <td> {{ $character->ch }}</td><td> Planen</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->we }}</td><td> Fokussierter Wille</td>
-                                <td> {{ $character->in }}</td><td> Zur rechten Zeit</td>
-                                <td> {{ $character->mu }}</td><td> Überwinden</td>
-                                <td> {{ $character->ch }}</td><td> Motivieren</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->we }}</td><td> Fokussieren</td>
-                                <td> {{ $character->in }}</td><td> Wittern</td>
-                                <td> {{ $character->mu }}</td><td> Gestählter Geist</td>
-                                <td> {{ $character->ch }}</td><td> Hundeblick</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>  
-
-        <div class="section" style="position: relative; z-index: 1;">
-            <h2>Fertigkeiten & Überlieferungen</h2>
-            <table class="table" style="width:95%;">
-                <tr>
-                    <th>Klassenfertigkeiten</th>
-                    <th>Handwerkskenntnisse</th>
-                    <th>Überlieferungen</th>
-                </tr>
-                <tr>
-                    <td>
-                    @foreach($character->klassenfertigkeiten as $fertigkeit)
-                        <li>{{ $fertigkeit }}</li>
-                    @endforeach
-                    </td>
-                    <td>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section" >
+                <table class="table" style="width: 95%;">
+                    <tr>
+                        <td style="width: 25%;">
+                            <table class="table" style="width: 100%;">
+                                <tr>
+                                    <td>{{ $character->kontrollwiderstand }}</td>
+                                    <th>Kontrollwiderstand (LeP)</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ $character->initiative }}</td>
+                                    <th>Initiative (Ini)</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ $character->verteidigung }}</td>
+                                    <th>Verteidigung</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ $character->seelenpunkte }}</td>
+                                    <th>Seelenpunkte (SeP)</th>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 75%; vertical-align: top;">
+                            <table class="table" style="width: 100%; border-collapse: collapse;">
+                                
+                                <tr>
+                                    <td>{{ $character->we }}</td><th>Konzentration</th>
+                                    <td>{{ $character->in }}</td><th>Wahrnehmung</th>
+                                    <td>{{ $character->mu }}</td><th>Willenskraft</th>
+                                    <td>{{ $character->ch }}</td><th>Kommunikation</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ $character->we }}</td><td> Ausspähen</td>
+                                    <td>{{ $character->in }}</td><td> Observieren</td>
+                                    <td>{{ $character->mu }}</td><td> Verbinden</td>
+                                    <td>{{ $character->ch }}</td><td> Provozieren</td>
+                                </tr>
+                                <tr>
+                                    <td> {{ $character->we }}</td><td> Talisman wechseln</td>
+                                    <td> {{ $character->in }}</td><td> Gefahreninstinkt</td>
+                                    <td> {{ $character->mu }}</td><td> Riskieren</td>
+                                    <td> {{ $character->ch }}</td><td> Planen</td>
+                                </tr>
+                                <tr>
+                                    <td> {{ $character->we }}</td><td> Fokussierter Wille</td>
+                                    <td> {{ $character->in }}</td><td> Zur rechten Zeit</td>
+                                    <td> {{ $character->mu }}</td><td> Überwinden</td>
+                                    <td> {{ $character->ch }}</td><td> Motivieren</td>
+                                </tr>
+                                <tr>
+                                    <td> {{ $character->we }}</td><td> Fokussieren</td>
+                                    <td> {{ $character->in }}</td><td> Wittern</td>
+                                    <td> {{ $character->mu }}</td><td> Gestählter Geist</td>
+                                    <td> {{ $character->ch }}</td><td> Hundeblick</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section" style="position: relative; z-index: 1;">
+                <h2>Fertigkeiten & Überlieferungen</h2>
+                <table class="table" style="width:95%;">
+                    <tr>
+                        <th>Klassenfertigkeiten</th>
+                        <th>Handwerkskenntnisse</th>
+                        <th>Überlieferungen</th>
+                    </tr>
+                    <tr>
+                        <td>
+                        @foreach($character->klassenfertigkeiten as $fertigkeit)
+                            <li>{{ $fertigkeit }}</li>
+                        @endforeach
+                        </td>
+                        <td>
+                            @foreach($character->handwerkskenntnisse as $handwerk)
+                                <li>{{ $handwerk }}</li>
+                            @endforeach
+                        </td>
+                        <td>
                         @foreach($character->handwerkskenntnisse as $handwerk)
-                            <li>{{ $handwerk }}</li>
-                        @endforeach
-                    </td>
-                    <td>
-                    @foreach($character->handwerkskenntnisse as $handwerk)
-                            <li>{{ $character->lore }}</li>
-                        @endforeach
-                    </td>
-                </tr>
-            </table>
+                                <li>{{ $character->lore }}</li>
+                            @endforeach
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
         <div class="section">
+        </div>
+        
+        <!-- Abschnitt: dunkle Hälfte -->
+        <div class="dark-area">
+        
             <h2>Equipment</h2>
-            @if ($character->Equipment()->exists())
+            @if ($character->equipmentAssignments->isNotEmpty())
                 <table class="table">
                     <thead>
                         <tr>
@@ -342,7 +347,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($character->Equipment as $item)
+                        @foreach($character->equipmentAssignments as $assignment)
+                            @php $item = $assignment->equipment; @endphp
+                            
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->item_type }}</td>

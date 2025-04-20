@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             'damage_type' => ['stumpf', 'schnitt'],
             'trefferwuerfel' => 6,
             'traglast' => 3,
-            'erweiterungen' => ['der Präzision', 'des Gemetzels'],
+            'wp_erweiterungen' => ['der Präzision', 'des Gemetzels'],
         ]);
 
         // Beispiel-Rüstung
@@ -83,8 +83,9 @@ class DatabaseSeeder extends Seeder
             'rs_stich' => 4,
             'rs_elementar' => 2,
             'traglast' => 4,
-            'verzauberungen' => 'des Schutzes',
-            'rs_erweiterungen' => 'verstärkt',
+            'enchantment' => 'des Schutzes',
+            'enchantment_qs' => 'einfach',
+            'rs_erweiterungen' => ['Verstärkt'],
         ]);
 
         // Beispiel-Talisman
@@ -98,8 +99,9 @@ class DatabaseSeeder extends Seeder
             'rs_arcan' => 2,
             'rs_chaos' => 1,
             'rs_spirit' => 3,
-            'verzauberungen' => 'der klarheit',
-            'ts_erweiterungen' => 'der konzentration',
+            'enchantment' => 'des Eifers',
+            'enchantment_qs' => 'episch',
+            'ts_erweiterungen' => ['der konzentration'],
         ]);
 
         // Beispiel-Schild
@@ -113,9 +115,22 @@ class DatabaseSeeder extends Seeder
             'rs_arcan' => 1,
             'rs_chaos' => 1,
             'rs_spirit' => 2,
-            'verzauberungen' => 'des Schutzes',
-            'ts_erweiterungen' => 'der ruhe',
+            'enchantment' => 'des Schutzes',
+            'enchantment_qs' => 'ungewöhnlich',
+            'ts_erweiterungen' => ['der ruhe'],
         ]);
         \Database\Factories\EquipmentFactory::new()->count(10)->create();
+        
+        // Beispiel-Schmuckstück
+        Equipment::create([
+            'name' => 'Ring der Macht',
+            'description' => 'Ein massiver Ring mit Gravuren eines Zaubers.',
+            'quality' => 'ungewöhnlich',
+            'item_type' => 'Schmuckstück',
+            'enchantment' => 'des Schutzes',
+            'enchantment_qs' => 'ungewöhnlich',
+        ]);
+        \Database\Factories\EquipmentFactory::new()->count(10)->create();
+        
     }
 }
