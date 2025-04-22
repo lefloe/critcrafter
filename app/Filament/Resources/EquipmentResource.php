@@ -214,18 +214,27 @@ class EquipmentResource extends Resource
             Section::make('Talisman')
             ->description('Werte des Talisman wählen')
             ->schema([
-                Textinput::make('hwp')
-                ->label('Handwerkspunkte')
-                ->numeric()
-                ->step(1)
-                ->minValue(1)
-                ->maxValue(99),
-                Textinput::make('kontrollwiderstand')
-                ->label('Kontrollwiderstand')
-                ->numeric()
-                ->step(1)
-                ->minvalue(1)
-                ->maxvalue(99),
+                Grid::make(3)
+                ->schema([
+                    Textinput::make('hwp')
+                    ->label('Handwerkspunkte')
+                    ->numeric()
+                    ->step(1)
+                    ->minValue(1)
+                    ->maxValue(99),
+                    Textinput::make('kontrollwiderstand')
+                    ->label('Kontrollwiderstand')
+                    ->numeric()
+                    ->step(1)
+                    ->minvalue(1)
+                    ->maxvalue(99),
+                    Textinput::make('traglast')
+                    ->label('Traglast')
+                    ->numeric()
+                    ->default(1)
+                    ->disabled()
+                    ->dehydrated(),
+                ]),
                 Grid::make(3)
                 ->schema([
                     Textinput::make('rs_arcan')
@@ -292,14 +301,14 @@ class EquipmentResource extends Resource
                 ->maxvalue(99),
                 Grid::make(3)
                 ->schema([
-                    Textinput::make('rs_arcan')
-                    ->label('Rüstungsschutz Arkan')
+                    Textinput::make('rs_schnitt')
+                    ->label('Rüstungsschutz Schnitt')
                     ->numeric(),
-                    Textinput::make('rs_chaos')
-                    ->label('Rüstungsschutz Chaos')
+                    Textinput::make('rs_stumpf')
+                    ->label('Rüstungsschutz Stumpf')
                     ->numeric(),
-                    Textinput::make('rs_spirit')
-                    ->label('Rüstungsschutz Spirituell')
+                    Textinput::make('rs_stich')
+                    ->label('Rüstungsschutz Stich')
                     ->numeric(),
                 ]),
                 Grid::make(2)

@@ -30,11 +30,10 @@
         }
         .section {
             margin-bottom: 10px;
+            /* margin-top: 10px; */
         }
         .section h2 {
             font-size: 14pt;
-            margin-bottom: 5px;
-            padding-bottom: 3px;
         }
         .img {
             margin: 8px;
@@ -56,6 +55,14 @@
             list-style:none;
             vertical-align: top;
         }
+        .table td.highlight {
+            background-color: white;
+        }
+
+        .test {
+            margin-bottom: 10px;
+        }
+
         .small {
             font-size: 8pt;
         }
@@ -92,6 +99,7 @@
     </style>
 </head>
 <body>
+{{--        
     <div class="container">
         <!-- Kopfzeile mit Portrait & Namen -->
         <div class="header">
@@ -118,8 +126,7 @@
             </table>
         </div>
 
-        <!-- Abschnitt: körperl. Eigenschaften -->
-        <div class="section" >
+        <div class="section" > <!-- Abschnitt: körperl. Eigenschaften -->
             <table class="table" style="width: 95%;">
                 <tr>
                     <td style="width: 25%;">
@@ -210,7 +217,7 @@
 
     <!-- Abschnitt: dark half -->
         <div class="dark-area" padding>
-            <div class="section" ><!-- Leib und co -->
+            <div class="section" ><!-- Seele und geist. Eigenschaften -->
                 <table class="table" style="width: 95%;">
                     <tr>
                         <td style="width: 30%; vertical-align: top;">
@@ -237,7 +244,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="section" >
+            <div class="section" > <!--  geist. Basiswerte und Basistalente -->
                 <table class="table" style="width: 95%;">
                     <tr>
                         <td style="width: 25%;">
@@ -298,7 +305,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="section" style="position: relative; z-index: 1;">
+            <div class="section" > <!-- Fertigkeiten & Überlieferungen -->
                 <h2>Fertigkeiten & Überlieferungen</h2>
                 <table class="table" style="width:95%;">
                     <tr>
@@ -329,43 +336,285 @@
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
-        <div class="section">
+        --}} 
+        <!-- equipped -->
+        <div class="section" style="margin-top:10pt;">  <!-- Rüstung & Schmuck -->
+            
+            <Table class="table" style="width:95%;">
+                <tr>
+                    <th>Rüstung</th>
+                    <th>Talisman</th>
+                    <th>Gesamtrüstung</th>
+                    <th>Schmuck</th>
+                </tr>
+                <td>
+                    @foreach($character->equipmentAssignments as $assignment)
+                        @php $item = $assignment->equipment; @endphp
+                        @if($item->item_type === 'Rüstung' && $assignment->equipped)
+                            <li>Name: {{ $item->name }}</li>
+                            <li>QS: {{ $item->quality }}</li>
+                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>RS Schnitt: {{ $item->rs_schnitt }}</li>
+                            <li>RS Stumpf: {{ $item->rs_stumpf }}</li>
+                            <li>RS Stich: {{ $item->rs_stich }}</li>
+                            <li>RS Elementar: {{ $item->rs_elementar }}</li>
+                            <li>passive verteidigung: {{ $item->passive_verteidigung }}</li>
+                            <li>Traglast: {{ $item->traglast }}</li>
+                            <li>Erweiterungen: {{ implode(', ', $item->rs_erweiterungen ?? []) }}</li>
+                            @if(!empty($item->enchantment))
+                                    <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                                @else
+                                    <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                                @endif
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($character->equipmentAssignments as $assignment)
+                        @php $item = $assignment->equipment; @endphp
+                        @if($item->item_type === 'Talisman' && $assignment->equipped)
+                            <li>Name: {{ $item->name }}</li>
+                            <li>QS: {{ $item->quality }}</li>
+                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>RS Arcan: {{ $item->rs_arcan }}</li>
+                            <li>RS Chaos: {{ $item->rs_chaos }}</li>
+                            <li>RS Spirituell: {{ $item->rs_spirit }}</li>
+                            <li>Kontrollwiderstand: {{ $item->kontrollwiderstand }}</li>
+                            <li>Traglast: {{ $item->traglast }}</li>
+                            <li>Erweiterungen: {{ implode(', ', $item->ts_erweiterungen ?? []) }}</li>
+                            @if(!empty($item->enchantment))
+                                <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                            @else
+                                <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                            @endif   
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    <li>tbd: Gesamtrüstung Berechnung </li>
+                </td>
+                <td>
+                @foreach($character->equipmentAssignments as $assignment)
+                    @php $item = $assignment->equipment; @endphp
+                    @if($item->item_type === 'Schmuckstück' && $assignment->equipped)
+                        <li>Name: {{ $item->name }}</li>
+                        <li>QS: {{ $item->quality }}</li>
+                        @if(!empty($item->enchantment))
+                            <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                        @else
+                            <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                        @endif                    
+                    @endif
+                @endforeach
+                </td>
+            </table>
         </div>
-        
+        <div class="section" style="margin-top:10pt;">  <!-- Waffen & Schild -->
+            <p>tbd: Haupthand und Nebenhand equipped</p>
+            <Table class="table" style="width:95%;">
+                <tr>
+                    <th>Haupthand</th>
+                    <th>Nebenhand</th>
+                    <th>Schild</th>
+                    <th>Natürliche Waffe</th>
+                </tr>
+                <td>
+                    @foreach($character->equipmentAssignments as $assignment)
+                        @php $item = $assignment->equipment; @endphp
+                        @if($item->item_type === 'Waffe' && $assignment->equipped)
+                            <li>Name: {{ $item->name }}</li>
+                            <li>QS: {{ $item->quality }}</li>
+                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>Waffengattung: {{ $item->waffengattung }}</li>
+                            <li>Angriffswert: {{ $item->angriffswert }}</li>
+                            <li>Schadensarten: {{ implode(', ', $item->damage_type ?? []) }}</li>
+                            <li>Trefferwürfel: {{ $item->trefferwuerfel }}</li>
+                            <li>Traglast: {{ $item->traglast }}</li>
+                            <li>Erweiterungen: {{ implode(', ', $item->wp_erweiterungen ?? []) }}</li>
+                            @if(!empty($item->enchantment))
+                                <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                            @else
+                                <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                            @endif   
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($character->equipmentAssignments as $assignment)
+                        @php $item = $assignment->equipment; @endphp
+                        @if($item->item_type === 'Waffe' && $assignment->equipped)
+                            <li>Name: {{ $item->name }}</li>
+                            <li>QS: {{ $item->quality }}</li>
+                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>Waffengattung: {{ $item->waffengattung }}</li>
+                            <li>Angriffswert: {{ $item->angriffswert }}</li>
+                            <li>Schadensarten: {{ implode(', ', $item->damage_type ?? []) }}</li>
+                            <li>Trefferwürfel: {{ $item->trefferwuerfel }}</li>
+                            <li>Traglast: {{ $item->traglast }}</li>
+                            <li>Erweiterungen: {{ implode(', ', $item->wp_erweiterungen ?? []) }}</li>
+                            @if(!empty($item->enchantment))
+                               <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                            @else
+                                <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                            @endif   
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($character->equipmentAssignments as $assignment)
+                        @php $item = $assignment->equipment; @endphp
+                        @if($item->item_type === 'Schild' && $assignment->equipped)
+                            <li>Name: {{ $item->name }}</li>
+                            <li>QS: {{ $item->quality }}</li>
+                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>RS Schnitt: {{ $item->rs_schnitt }}</li>
+                            <li>RS Stumpf: {{ $item->rs_stumpf }}</li>
+                            <li>RS Stich: {{ $item->rs_stich }}</li>
+                            <li>Traglast: {{ $item->traglast }}</li>
+                            <li>Erweiterungen: {{ implode(', ', $item->wp_erweiterungen ?? []) }}</li>
+                            @if(!empty($item->enchantment))
+                                <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
+                            @else
+                                <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
+                            @endif   
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    <li>tbd: Natürliche Waffe</li>
+                </td>
+            </table>
+        </div>
+            
         <!-- Abschnitt: dunkle Hälfte -->
         <div class="dark-area">
-        
-            <h2>Equipment</h2>
-            @if ($character->equipmentAssignments->isNotEmpty())
+            <div class="section" style="margin-top:10pt;">  <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
+                <h2>Aktuell</h2>
+                <table class="table" style="width: 45%;">
+                        <tr>
+                            <th>LeP</th>
+                            <td>
+                            {{ $character->leps }}
+                            </td>
+                            <td class="highlight"> Aktuelle Lebenspunkte</td>
+                        </tr>
+                        <tr>
+                            <th>SeP</th>
+                            <td>    
+                            <{{ $character->seelenpunkte }}
+                            </td>
+                            <td class="highlight"> Aktuelle Seelenpunkte</td>
+                        </tr>
+                </table>
+                <table class="table" style="width: 45%;">
+                        <tr>
+                            <th>Ressource</th>
+                            <td>
+                            {{ $character->main_stat_value }}
+                            </td>
+                            <td class="highlight"> Aktuelle Ressourcen</td>
+                        </tr>
+                </table>
+            </div>
+            <div class="section" style="margin-top:10pt;">  <!-- Abschnitt: Fertigkeiten -->
+                <h2>Fertigkeiten</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Art</th>
-                            <th>Qualität</th>
-                            <th>Weitere Details</th>
+                            <th>KO</th>
+                            <th>ST</th>
+                            <th>AG</th>
+                            <th>GE</th>
+                            <th>WE</th>
+                            <th>IN</th>
+                            <th>MU</th>
+                            <th>CH</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($character->equipmentAssignments as $assignment)
-                            @php $item = $assignment->equipment; @endphp
-                            
-                            <tr>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->item_type }}</td>
-                                <td>{{ $item->quality }}</td>
-                                <td>
-                                    @if($item->hwp)
-                                        HwP: {{ $item->hwp }}
-                                    @endif
-                                </td>
-                            </tr>
+                        <td>
+                            @foreach($character->skill_ko as $skill)
+                            <li>{{ $skill }}</li>
+                            @endforeach
+                        </td>
+                        <td>    
+                            @foreach($character->skill_st as $skill)
+                                <li>{{ $skill }}</li>
+                            @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_ag as $skill)
+                            <li>{{ $skill }}</li>
                         @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_ge as $skill)
+                            <li>{{ $skill }}</li>
+                        @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_we as $skill)
+                            <li>{{ $skill }}</li>
+                        @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_in as $skill)
+                            <li>{{ $skill }}</li>
+                        @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_mu as $skill)
+                            <li>{{ $skill }}</li>
+                        @endforeach
+                        </td>
+                        <td>
+                        @foreach($character->skill_ch as $skill)
+                            <li>{{ $skill }}</li>
+                        @endforeach
+                        </td>
                     </tbody>
                 </table>
-            @else
-                <p>Kein Equipment zugeordnet.</p>
-            @endif
+            </div>
+            <div class="section" style="margin-top:10pt;"> <!-- Abschnitt: Equipment -->
+
+                <h2>Equipment</h2>           
+                @if ($character->equipmentAssignments->isNotEmpty())
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Art</th>
+                                <th>Qualität</th>
+                                <th>HwP</th>
+                                <th>Ausgerüstet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($character->equipmentAssignments as $assignment)
+                                @php $item = $assignment->equipment; @endphp
+                                
+                                <tr>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->item_type }}</td>
+                                    <td>{{ $item->quality }}</td>
+                                    <td>
+                                        @if($item->hwp)
+                                            HwP: {{ $item->hwp }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($assignment->equipped)
+                                            <b>x</b>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>Kein Equipment zugeordnet.</p>
+                @endif
+            </div>
         </div>
     </div>
 </body>

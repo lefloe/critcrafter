@@ -166,7 +166,8 @@ class CharacterResource extends Resource
                                 TextInput::make('main_stat_value')
                                 ->label('Ressourcen')
                                 ->live()
-                                ->disabled(),
+                                ->disabled()
+                                ->dehydrated(),
                             ])
                             ]),
                             Section::make('Rasse und Rassenmerkmale')
@@ -464,7 +465,7 @@ class CharacterResource extends Resource
                                         ]),
                                     ]),                                
                                 ]),
-                                Section::make('Fertgkeiten wählen')
+                                Section::make('skills')
                                 ->description('Aspekt- und Waffenfertigkeiten auswählen')
                                 ->collapsible()
                                 ->schema([
@@ -760,6 +761,7 @@ class CharacterResource extends Resource
                                         Select::make('equipment_id')
                                         ->label('Ausrüstung wählen')
                                         ->options(\App\Models\Equipment::all()->pluck('name', 'id'))
+                                        ->searchable(['name', 'item_type'])
                                         ->required(),
                                         Toggle::make('equipped')
                                             ->label('Ausgerüstet')

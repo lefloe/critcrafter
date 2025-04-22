@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Equipment;
+use App\Models\EquipmentAssignment;
 
 
 class Character extends Model
@@ -18,6 +19,7 @@ class Character extends Model
         'leiteigenschaft1',
         'leiteigenschaft2',
         'achretype',
+        'main_stat_value',
         'race',
         'wesen',
         'rassenmerkmale',
@@ -73,13 +75,20 @@ class Character extends Model
         return $this->belongsTo(System::class);
     }
 
-    // public function equipment()
-    // {
-    //     return $this->hasMany(equipment::class);
-    // }
+
 
     public function equipmentAssignments()
     {
         return $this->hasMany(EquipmentAssignment::class);
+    }
+
+    public function equippedItems()
+    {
+        return $this->equipmentAssignments->filter(fn($a) => $a->equipped)->map->equipment;
+    }
+
+    public function equippedArmor()
+    {
+        return $this->equippedItems()->firstWhere('item_type', 'Rüstung');
     }
 }
