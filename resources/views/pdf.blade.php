@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-{{--        
+
     <div class="container">
         <!-- Kopfzeile mit Portrait & Namen -->
         <div class="header">
@@ -336,7 +336,7 @@
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
-        --}} 
+
         <!-- equipped -->
         <div class="section" style="margin-top:10pt;">  <!-- Rüstung & Schmuck -->
             
