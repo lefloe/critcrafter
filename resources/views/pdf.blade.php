@@ -533,44 +533,60 @@
                     </thead>
                     <tbody>
                         <td>
-                            @foreach($character->skill_ko as $skill)
-                            <li>{{ $skill }}</li>
-                            @endforeach
+                            @if(!empty($character->skill_ko))
+                                @foreach($character->skill_ko as $skill)
+                                <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>    
-                            @foreach($character->skill_st as $skill)
-                                <li>{{ $skill }}</li>
-                            @endforeach
+                            @if(!empty($character->skill_st))
+                                @foreach($character->skill_st as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_ag as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_ag))
+                                @foreach($character->skill_ag as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_ge as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_ge))
+                                @foreach($character->skill_ge as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_we as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_we))
+                                @foreach($character->skill_we as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_in as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_in))
+                                @foreach($character->skill_in as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_mu as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_mu))
+                                @foreach($character->skill_mu as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                         <td>
-                        @foreach($character->skill_ch as $skill)
-                            <li>{{ $skill }}</li>
-                        @endforeach
+                            @if(!empty($character->skill_ch))
+                                @foreach($character->skill_ch as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
+                            @endif
                         </td>
                     </tbody>
                 </table>
