@@ -435,7 +435,7 @@ class EquipmentResource extends Resource
         ];
     }
 
-    protected static function getQS(): array
+    public static function getQS(): array
     {
         return [
             'schlecht' => 'schlecht',

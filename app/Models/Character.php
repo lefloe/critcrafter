@@ -47,6 +47,12 @@ class Character extends Model
         'initiative',
         'verteidigung',
         'seelenpunkte',
+        'nw_quality',
+        'nw_gattung',
+        'nw_damage_type',
+        'nw_aw',
+        'nw_vw',
+        'nw_tw',
         'experience-level',
         'klassenfertigkeiten',
         'handwerkskenntnisse',
@@ -67,6 +73,7 @@ class Character extends Model
         'skill_ch' => 'array',
         'equipment' => 'array',
         'lore' => 'array',
+        'nw_damage_type' => 'array'
     ];
 
 

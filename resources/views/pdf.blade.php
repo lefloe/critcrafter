@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-
+{{--
     <div class="container">
         <!-- Kopfzeile mit Portrait & Namen -->
         <div class="header">
@@ -336,7 +336,7 @@
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
-
+--}}
         <!-- equipped -->
         <div class="section" style="margin-top:10pt;">  <!-- Rüstung & Schmuck -->
             
@@ -352,8 +352,8 @@
                         @php $item = $assignment->equipment; @endphp
                         @if($item->item_type === 'Rüstung' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
-                            <li>QS: {{ $item->quality }}</li>
-                            <li>HwP: {{ $item->hwp }}</li>
+                            <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
+                            <!-- <li></li> -->
                             <li>RS Schnitt: {{ $item->rs_schnitt }}</li>
                             <li>RS Stumpf: {{ $item->rs_stumpf }}</li>
                             <li>RS Stich: {{ $item->rs_stich }}</li>
@@ -374,8 +374,8 @@
                         @php $item = $assignment->equipment; @endphp
                         @if($item->item_type === 'Talisman' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
-                            <li>QS: {{ $item->quality }}</li>
-                            <li>HwP: {{ $item->hwp }}</li>
+                            <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
+                            <!-- <li></li> -->
                             <li>RS Arcan: {{ $item->rs_arcan }}</li>
                             <li>RS Chaos: {{ $item->rs_chaos }}</li>
                             <li>RS Spirituell: {{ $item->rs_spirit }}</li>
@@ -410,7 +410,7 @@
             </table>
         </div>
         <div class="section" style="margin-top:10pt;">  <!-- Waffen & Schild -->
-            <p>tbd: Haupthand und Nebenhand equipped</p>
+            <!-- <p>tbd: Haupthand und Nebenhand equipped</p> -->
             <Table class="table" style="width:95%;">
                 <tr>
                     <th>Haupthand</th>
@@ -423,8 +423,7 @@
                         @php $item = $assignment->equipment; @endphp
                         @if($item->item_type === 'Waffe' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
-                            <li>QS: {{ $item->quality }}</li>
-                            <li>HwP: {{ $item->hwp }}</li>
+                            <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>Waffengattung: {{ $item->waffengattung }}</li>
                             <li>Angriffswert: {{ $item->angriffswert }}</li>
                             <li>Schadensarten: {{ implode(', ', $item->damage_type ?? []) }}</li>
@@ -444,8 +443,7 @@
                         @php $item = $assignment->equipment; @endphp
                         @if($item->item_type === 'Waffe' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
-                            <li>QS: {{ $item->quality }}</li>
-                            <li>HwP: {{ $item->hwp }}</li>
+                            <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>Waffengattung: {{ $item->waffengattung }}</li>
                             <li>Angriffswert: {{ $item->angriffswert }}</li>
                             <li>Schadensarten: {{ implode(', ', $item->damage_type ?? []) }}</li>
@@ -465,8 +463,7 @@
                         @php $item = $assignment->equipment; @endphp
                         @if($item->item_type === 'Schild' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
-                            <li>QS: {{ $item->quality }}</li>
-                            <li>HwP: {{ $item->hwp }}</li>
+                            <li>QS: {{ $item->quality }} <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>RS Schnitt: {{ $item->rs_schnitt }}</li>
                             <li>RS Stumpf: {{ $item->rs_stumpf }}</li>
                             <li>RS Stich: {{ $item->rs_stich }}</li>
@@ -481,42 +478,63 @@
                     @endforeach
                 </td>
                 <td>
-                    <li>tbd: Natürliche Waffe</li>
+                    <li><b>Waffengattung</b> {{ $character->nw_gattung }}</li>
+                    <li><b>QS</b> {{ $character->nw_quality }}</li>
+                    <li><b>Schadenarten</b> {{ implode(', ', $character->nw_damage_type) }}</li>
+                    <li><b>AW</b> {{ $character->nw_aw }}</li>
+                    <li><b>VW</b> {{ $character->nw_vw }}</li>
+                    <li><b>TW</b> {{ $character->nw_tw }}</li>
                 </td>
             </table>
         </div>
             
         <!-- Abschnitt: dunkle Hälfte -->
         <div class="dark-area">
-            <div class="section" style="margin-top:10pt;">  <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
+            <div class="section" style="margin-top:10pt;">  
+                
+            <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
+
                 <h2>Aktuell</h2>
-                <table class="table" style="width: 45%;">
-                        <tr>
-                            <th>LeP</th>
-                            <td>
-                            {{ $character->leps }}
-                            </td>
-                            <td class="highlight"> Aktuelle Lebenspunkte</td>
-                        </tr>
-                        <tr>
-                            <th>SeP</th>
-                            <td>    
-                            <{{ $character->seelenpunkte }}
-                            </td>
-                            <td class="highlight"> Aktuelle Seelenpunkte</td>
-                        </tr>
-                </table>
-                <table class="table" style="width: 45%;">
-                        <tr>
-                            <th>Ressource</th>
-                            <td>
-                            {{ $character->main_stat_value }}
-                            </td>
-                            <td class="highlight"> Aktuelle Ressourcen</td>
-                        </tr>
-                </table>
+                <table class="table" style="width: 95%;">
+                    <td>
+                        <table class="table" style="width: 100%;">
+                                <tr>
+                                    <th>LeP</th>
+                                    <td>
+                                    {{ $character->leps }}
+                                    </td>
+                                    <td class="highlight"> Aktuelle Lebenspunkte</td>
+                                </tr>
+                                <tr>
+                                    <th>SeP</th>
+                                    <td>    
+                                    <{{ $character->seelenpunkte }}
+                                    </td>
+                                    <td class="highlight"> Aktuelle Seelenpunkte</td>
+                                </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table" style="width: 100%">
+                                <tr>
+                                    <th>Ressource</th>
+                                    <td>
+                                    {{ $character->main_stat_value }}
+                                    </td>
+                                    <td class="highlight"> Aktuelle Ressourcen</td>
+                                </tr>
+                                <tr>
+                                <td class="highlight" colspan="3"> Aktuelle Ressourcen</td>
+                                </tr>
+                        </table>
+                    </td>
             </div>
-            <div class="section" style="margin-top:10pt;">  <!-- Abschnitt: Fertigkeiten -->
+
+
+            <div class="section" style="margin-top:10pt;">
+                
+            <!-- Abschnitt: Fertigkeiten -->
+
                 <h2>Fertigkeiten</h2>
                 <table class="table">
                     <thead>

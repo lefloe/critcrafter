@@ -2,34 +2,35 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Resources\Resource;
 use App\Filament\Resources\CharacterResource\Pages;
 use App\Filament\Resources\CharacterResource\RelationManagers;
 use App\Models\Character;
 use App\Models\Equipment;
 use Filament\Forms;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Toggle;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
+use Filament\Forms\Components\Radio;
 
 
-
+// ToDo: Rassenmerkmale Einfluss, Erfahrungsgrad Einfluss, Klassenfertigkeiten Einfluss
+// Equipment Einfluss auf Basiswerte (Erweiterungen und Verzauberungen)
 
 
 class CharacterResource extends Resource
@@ -410,11 +411,11 @@ class CharacterResource extends Resource
                         ]),
                         Tabs\Tab::make('Tab 3')
                         ->schema([
-                                Section::make('Klassenfertigkeiten und Handwerkskenntnis wählen')
-                                ->description('Klassenfertigkeiten und Handwerkskenntnis auswählen')
+                                Section::make('Klassenfertigkeiten, Handwerkskenntnis, Überlieferungen')
+                                ->description('Klassenfertigkeiten, Handwerkskenntnis und Überlieferungen auswählen')
                                 ->collapsible()
                                 ->schema([
-                                    Grid::make(2)
+                                    Grid::make(3)
                                     ->schema([
                                         Select::make('klassenfertigkeiten')
                                         ->multiple()
@@ -463,9 +464,27 @@ class CharacterResource extends Resource
                                             'Verzauberungen' => 'Verzauberungen',
                                             'Waffen' => 'Waffen',
                                         ]),
+                                        Select::make('lore')
+                                        ->label('Überlieferungen')
+                                        ->multiple()
+                                        ->options([
+                                            'Aspektwesen' => 'Aspektwesen',
+                                            'Fauna & Flora' => 'Fauna & Flora',
+                                            'Götter' => 'Götter',
+                                            'Monster' => 'Monster',
+                                            'Seelen' => 'Seelen',
+                                            'Varculac' => 'Varculac',
+                                            'Länder des Nordens' => 'Länder des Nordens',
+                                            'Länder des Südens' => 'Länder des Südens',
+                                            'Spiegelwelt' => 'Spiegelwelt',
+                                            'Splitterwelt' => 'Splitterwelt',
+                                            'Unterwelt' => 'Unterwelt',
+                                            'Völker des Nordens' => 'Völker des Nordens',
+                                            'Völker des Südens' => 'Völker des Südens',
+                                        ]),
                                     ]),                                
                                 ]),
-                                Section::make('skills')
+                                Section::make('Fertigkeiten')
                                 ->description('Aspekt- und Waffenfertigkeiten auswählen')
                                 ->collapsible()
                                 ->schema([
@@ -735,23 +754,55 @@ class CharacterResource extends Resource
                             ]),
                         Tabs\Tab::make('Tab 4')
                             ->schema([
-                                Select::make('lore')
-                                    ->options([
-                                        'Aspektwesen' => 'Aspektwesen',
-                                        'Fauna & Flora' => 'Fauna & Flora',
-                                        'Götter' => 'Götter',
-                                        'Monster' => 'Monster',
-                                        'Seelen' => 'Seelen',
-                                        'Varculac' => 'Varculac',
-                                        'Länder des Nordens' => 'Länder des Nordens',
-                                        'Länder des Südens' => 'Länder des Südens',
-                                        'Spiegelwelt' => 'Spiegelwelt',
-                                        'Splitterwelt' => 'Splitterwelt',
-                                        'Unterwelt' => 'Unterwelt',
-                                        'Völker des Nordens' => 'Völker des Nordens',
-                                        'Völker des Südens' => 'Völker des Südens',
+                                Section::make('natürliche Waffe')
+                                ->collapsible()
+                                ->description('Natürliche Waffe')
+                                ->schema([
+                                    Grid::make(3)
+                                    ->schema([
+                                        Radio::make('nw_gattung')
+                                        ->label('Waffengattung')
+                                        ->required()
+                                        ->options([
+                                            'Nahkampfwaffe' => 'Nahkampfwaffe',
+                                            'Fernkampfwaffe' => 'Fernkampfwaffe', 
+                                        ]),
+                                        Select::make('nw_quality')
+                                        ->label('QS')
+                                        ->required()
+                                        ->options(EquipmentResource::getQS()),
+                                        Select::make('nw_damage_type')
+                                        ->label('Schadensarten')
+                                        ->required()
+                                        ->multiple()
+                                        ->options([
+                                            'stumpf' => 'ST (Stumpf)',
+                                            'schnitt' => 'AG (Schnitt)',
+                                            'stich' => 'GE (Stich)',
+                                            'arkan' => 'WE (Arkan)',
+                                            'Elementar' => 'IN (Elementar)',
+                                            'Chaos' => 'MU (Chaos)',
+                                            'Spirituell' => 'CH (Spirituell)',
+                                        ]),
                                     ]),
-                                Section::make('equip_items')
+                                    Grid::make(3)
+                                    ->schema([
+                                        Textinput::make('nw_aw')
+                                        ->label('AW')
+                                        ->required()
+                                        ->numeric(),
+                                        Textinput::make('nw_vw')
+                                        ->label('VW')
+                                        ->required()
+                                        ->numeric(),
+                                        Textinput::make('nw_tw')
+                                        ->label('TW')
+                                        ->required()
+                                        ->numeric(),
+                                    ]),
+                                ]),
+                                Section::make('Ausrüstung')
+                                ->collapsible()
                                 ->description('Wähle die aktuelle Ausrütung')
                                 ->schema([
                                     Repeater::make('equipmentAssignments')

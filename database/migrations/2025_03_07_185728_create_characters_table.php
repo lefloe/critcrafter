@@ -50,6 +50,12 @@ return new class extends Migration
             $table->integer('initiative');
             $table->integer('verteidigung');
             $table->integer('seelenpunkte');
+            $table->string('nw_gattung');
+            $table->string('nw_quality');
+            $table->json('nw_damage_type')->nullable();  
+            $table->integer('nw_aw');
+            $table->integer('nw_vw');
+            $table->integer('nw_tw');   
             $table->integer('experience-level');
             $table->json('klassenfertigkeiten')->nullable();
             $table->json('handwerkskenntnisse')->nullable();
