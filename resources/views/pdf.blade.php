@@ -59,20 +59,9 @@
             background-color: white;
         }
 
-        .test {
-            margin-bottom: 10px;
-        }
-
-        .small {
-            font-size: 8pt;
-        }
-        /* Beispielweise Spaltenbreiten anpassen */
-        .col-attr { width: 15%; }
-        .col-value { width: 15%; }
-
         .page-break {
         page-break-after: always;
-        }   
+        }
         .dark-area {
             position: absolute;
             top: 148.5mm;  /* genau ab der Mitte */
@@ -80,7 +69,6 @@
             width: 100%;
             height: 148.5mm;
             background-color: #333;
-            color: #fff;
             padding: 10px;
             color: white;
             box-sizing: border-box;
@@ -99,7 +87,7 @@
     </style>
 </head>
 <body>
-{{--
+
     <div class="container">
         <!-- Kopfzeile mit Portrait & Namen -->
         <div class="header">
@@ -108,15 +96,13 @@
                     <td style="width: 25%; vertical-align: top">
                         @if($character->portrait)
                             <img class="img" src="{{ public_path('storage/' . $character->portrait) }}" alt="Portrait" style="max-width: 200px; max-height: 250px;">
-                        @endif                
+                        @endif
                     </td>
                     <td style="width: 75%; vertical-align: top; padding-left: 15px;">
                         <h2 style="margin: 0;">{{ $character->name }}</h2>
                         <p><strong>Beschreibung:</strong></p>
-                            <p style="font-size: {{ strlen($character->description) > 600 ? '8pt' : '9pt' }};">
-                                {{ $character->description }}
-                            </p>
-                            <!-- {{ $character->description }} -->
+                        <p style="font-size: {{ strlen($character->description) > 600 ? '8pt' : '9pt' }};">
+                            {{ $character->description }}
                         </p>
                         <p><strong>Rasse:</strong> {{ $character->race }}</br>
                         <strong>Wesen:</strong> {{ $character->wesen ?? '—' }}</br>
@@ -151,7 +137,7 @@
                     </td>
                     <td style="width: 75%; vertical-align: top;">
                         <table class="table" style="width: 100%; border-collapse: collapse;">
-                            
+
                             <tr>
                                 <td>{{ $character->ko }}</td><th style="font-size: 7pt;">Zähigkeit</th>
                                 <td>{{ $character->st }}</td><th style="font-size: 7pt;">Kraftakt</th>
@@ -186,7 +172,7 @@
                     </td>
                 </tr>
             </table>
-        </div>        
+        </div>
         <div class="section" ><!-- Leib und co -->
             <table class="table" style="width: 95%;">
                 <tr>
@@ -195,7 +181,7 @@
                     </td>
                     <td style="width: 70%; vertical-align: top;">
                         <table class="table" style="width: 50%; border-collapse: collapse; table-layout: fixed">
-                            
+
                             <tr>
                                 <th style="font-size: 10pt;">KO</th>
                                 <th style="font-size: 10pt;">ST</th>
@@ -207,7 +193,7 @@
                                 <td style="font-size: 12pt;"> {{ $character->st }}</td>
                                 <td style="font-size: 12pt;"> {{ $character->ag }}</td>
                                 <td style="font-size: 12pt;"> {{ $character->ge }}</td>
-                            </tr>                            
+                            </tr>
 
                         </table>
                     </td>
@@ -216,33 +202,35 @@
         </div>
 
     <!-- Abschnitt: dark half -->
-        <div class="dark-area" padding>
+        <div class="dark-area" >
             <div class="section" ><!-- Seele und geist. Eigenschaften -->
-                <table class="table" style="width: 95%;">
-                    <tr>
-                        <td style="width: 30%; vertical-align: top;">
-                            <h2>Seele</h2>
-                        </td>
-                        <td style="width: 70%; vertical-align: top;">
-                            <table class="table" style="width: 50%; border-collapse: collapse; table-layout: fixed">
-                                
-                                <tr>
-                                    <th style="font-size: 10pt;">WE</th>
-                                    <th style="font-size: 10pt;">IN</th>
-                                    <th style="font-size: 10pt;">MU</th>
-                                    <th style="font-size: 10pt;">CH</th>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 12pt;"> {{ $character->we }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->in }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->mu }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->ch }}</td>
-                                </tr>                            
+                <div style="border: 1px solid #ccc; border-radius: 10px; overflow: hidden; padding: 5px; width: 95%;">
+                    <table class="table" style="width: 95%;">
+                        <tr>
+                            <td style="width: 30%; vertical-align: top;">
+                                <h2>Seele</h2>
+                            </td>
+                            <td style="width: 70%; vertical-align: top;">
+                                <table class="table" style="width: 50%; border-collapse: collapse; table-layout: fixed">
 
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                                    <tr>
+                                        <th style="font-size: 10pt;">WE</th>
+                                        <th style="font-size: 10pt;">IN</th>
+                                        <th style="font-size: 10pt;">MU</th>
+                                        <th style="font-size: 10pt;">CH</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 12pt;"> {{ $character->we }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->in }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->mu }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->ch }}</td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="section" > <!--  geist. Basiswerte und Basistalente -->
                 <table class="table" style="width: 95%;">
@@ -269,7 +257,7 @@
                         </td>
                         <td style="width: 75%; vertical-align: top;">
                             <table class="table" style="width: 100%; border-collapse: collapse;">
-                                
+
                                 <tr>
                                     <td>{{ $character->we }}</td><th>Konzentration</th>
                                     <td>{{ $character->in }}</td><th>Wahrnehmung</th>
@@ -325,8 +313,8 @@
                             @endforeach
                         </td>
                         <td>
-                        @foreach($character->handwerkskenntnisse as $handwerk)
-                                <li>{{ $character->lore }}</li>
+                        @foreach($character->lore as $lore)
+                                <li>{{ $lore }}</li>
                             @endforeach
                         </td>
                     </tr>
@@ -336,10 +324,9 @@
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
---}}
         <!-- equipped -->
         <div class="section" style="margin-top:10pt;">  <!-- Rüstung & Schmuck -->
-            
+
             <Table class="table" style="width:95%;">
                 <tr>
                     <th>Rüstung</th>
@@ -386,7 +373,7 @@
                                 <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
                             @else
                                 <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
-                            @endif   
+                            @endif
                         @endif
                     @endforeach
                 </td>
@@ -403,7 +390,7 @@
                             <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
                         @else
                             <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
-                        @endif                    
+                        @endif
                     @endif
                 @endforeach
                 </td>
@@ -434,7 +421,7 @@
                                 <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
                             @else
                                 <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
-                            @endif   
+                            @endif
                         @endif
                     @endforeach
                 </td>
@@ -454,7 +441,7 @@
                                <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
                             @else
                                 <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
-                            @endif   
+                            @endif
                         @endif
                     @endforeach
                 </td>
@@ -473,7 +460,7 @@
                                 <li style="margin-bottom: 10px;">Verzauberung: {{ $item->enchantment }} ({{ $item->enchantment_qs }})</li>
                             @else
                                 <li style="margin-bottom: 10px;">Verzauberung: keine Verzauberung</li>
-                            @endif   
+                            @endif
                         @endif
                     @endforeach
                 </td>
@@ -487,11 +474,11 @@
                 </td>
             </table>
         </div>
-            
+
         <!-- Abschnitt: dunkle Hälfte -->
         <div class="dark-area">
-            <div class="section" style="margin-top:10pt;">  
-                
+            <div class="section" style="margin-top:10pt;">
+
             <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
 
                 <h2>Aktuell</h2>
@@ -507,7 +494,7 @@
                                 </tr>
                                 <tr>
                                     <th>SeP</th>
-                                    <td>    
+                                    <td>
                                     <{{ $character->seelenpunkte }}
                                     </td>
                                     <td class="highlight"> Aktuelle Seelenpunkte</td>
@@ -528,11 +515,12 @@
                                 </tr>
                         </table>
                     </td>
+                </table>
             </div>
 
 
             <div class="section" style="margin-top:10pt;">
-                
+
             <!-- Abschnitt: Fertigkeiten -->
 
                 <h2>Fertigkeiten</h2>
@@ -557,7 +545,7 @@
                                 @endforeach
                             @endif
                         </td>
-                        <td>    
+                        <td>
                             @if(!empty($character->skill_st))
                                 @foreach($character->skill_st as $skill)
                                     <li>{{ $skill }}</li>
@@ -611,7 +599,7 @@
             </div>
             <div class="section" style="margin-top:10pt;"> <!-- Abschnitt: Equipment -->
 
-                <h2>Equipment</h2>           
+                <h2>Equipment</h2>
                 @if ($character->equipmentAssignments->isNotEmpty())
                     <table class="table">
                         <thead>
@@ -626,7 +614,7 @@
                         <tbody>
                             @foreach($character->equipmentAssignments as $assignment)
                                 @php $item = $assignment->equipment; @endphp
-                                
+
                                 <tr>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->item_type }}</td>

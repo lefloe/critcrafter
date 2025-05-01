@@ -117,16 +117,16 @@ class CharacterResource extends Resource
                                     ])
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                        // set the achetype 
-                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2'))); 
-                                        $data = self::getAttributeArray($get);                             
+                                        // set the achetype
+                                        $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
+                                        $data = self::getAttributeArray($get);
                                         $set('main_stat_value', self::getResources($state, $data, $get('leiteigenschaft2')));
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));   //sets archetype
                                         $data = self::getAttributeArray($get);
                                         $set('main_stat_value', self::getResources($get('leiteigenschaft2'), $data, $state));
-    
+
                                     }),
                                     Select::make('leiteigenschaft2')
                                     ->label('Leiteigenschaft 2')
@@ -146,7 +146,7 @@ class CharacterResource extends Resource
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
 
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
-                                        $data = self::getAttributeArray($get);                             
+                                        $data = self::getAttributeArray($get);
                                         $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
@@ -239,7 +239,7 @@ class CharacterResource extends Resource
                                     'Vierbeiner' => 'Vierbeiner',
                                     'Vital' => 'Vital',
                                     'Zierlich/Kleinwüchsig' => 'Zierlich/Kleinwüchsig',
-                                ])                            
+                                ])
                             ]),
                             Section::make('Eigenschaften')
                             ->collapsible()
@@ -269,7 +269,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Tragkraft value
                                             $set('tragkraft', $get('st'));
-                                            
+
                                             // If st is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'ST') {
                                                 $set('main_stat_value', $get('st'));
@@ -284,7 +284,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Geschwindigkeit value
                                             $set('geschwindigkeit', round($get('ag') / 2));
-                                            
+
                                             // If ag is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'AG') {
                                                 $set('main_stat_value', $get('ag'));
@@ -299,7 +299,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Handwerksbonus value
                                             $set('handwerksbonus', $get('ge') - 12);
-                                            
+
                                             // If ge is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'GE') {
                                                 $set('main_stat_value', $get('ge'));
@@ -314,7 +314,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Kontrollwiderstand value
                                             $set('kontrollwiderstand', $get('we') - 12);
-                                            
+
                                             // If we is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'WE') {
                                                 $set('main_stat_value', $get('we'));
@@ -329,7 +329,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Initiative value
                                             $set('initiative', round($get('in') / 2));
-                                            
+
                                             // If in is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'IN') {
                                                 $set('main_stat_value', $get('in'));
@@ -344,7 +344,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Verteidigung value
                                             $set('verteidigung', $get('mu') - 12);
-                                            
+
                                             // If mu is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'MU') {
                                                 $set('main_stat_value', $get('mu'));
@@ -359,7 +359,7 @@ class CharacterResource extends Resource
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Seelenpunkte value
                                             $set('seelenpunkte', $get('ch') * 2);
-                                            
+
                                             // If ch is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'CH') {
                                                 $set('main_stat_value', $get('ch'));
@@ -375,37 +375,37 @@ class CharacterResource extends Resource
                                 Grid::make(4)
                                 ->schema([
                                     TextInput::make('leps') // Lebenspunkte
-                                    ->label('Lebenspunkte (LeP)')   
+                                    ->label('Lebenspunkte (LeP)')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('tragkraft') // Tragkraft
                                     ->label('Tragkraft')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('geschwindigkeit') // Geschwindigkeit
                                     ->label('Geschwindigkeit')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('handwerksbonus') // Handwerksbonus
                                     ->label('Handwerksbonus')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('kontrollwiderstand') // Kontrollwiderstand
                                     ->label('Kontrollwiderstand')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('initiative') // Initiative
                                     ->label('Initiative (Ini)')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('verteidigung') // Verteidigung
                                     ->label('Verteidigung')
                                     ->disabled()
-                                    ->dehydrated(),                              
+                                    ->dehydrated(),
                                     TextInput::make('seelenpunkte') // Seelenpunkte
                                     ->label('Seelenpunkte (SeP)')
                                     ->disabled()
-                                    ->dehydrated(),                                  
+                                    ->dehydrated(),
                                 ])
                             ])
                         ]),
@@ -482,7 +482,7 @@ class CharacterResource extends Resource
                                             'Völker des Nordens' => 'Völker des Nordens',
                                             'Völker des Südens' => 'Völker des Südens',
                                         ]),
-                                    ]),                                
+                                    ]),
                                 ]),
                                 Section::make('Fertigkeiten')
                                 ->description('Aspekt- und Waffenfertigkeiten auswählen')
@@ -572,7 +572,6 @@ class CharacterResource extends Resource
                                             'Lux Columna' => 'Lux Columna',
                                             'Purgato' => 'Purgato',
                                             'Oculux' => 'Oculux',
-                                            'Calefaciendo' => 'Calefaciendo',
                                             'Calefaciendo' => 'Calefaciendo',
                                             'Anhelitus' => 'Anhelitus',
                                             'Intu' => 'Intu',
@@ -731,7 +730,6 @@ class CharacterResource extends Resource
                                             'Ferus' => 'Ferus',
                                             'Recuso' => 'Recuso',
                                             'Recordatio' => 'Recordatio',
-                                            'Recuso' => 'Recuso',
                                             'Pertinax' => 'Pertinax',
                                             'Detineo' => 'Detineo',
                                             'Effio Spiri' => 'Effio Spiri',
@@ -765,7 +763,7 @@ class CharacterResource extends Resource
                                         ->required()
                                         ->options([
                                             'Nahkampfwaffe' => 'Nahkampfwaffe',
-                                            'Fernkampfwaffe' => 'Fernkampfwaffe', 
+                                            'Fernkampfwaffe' => 'Fernkampfwaffe',
                                         ]),
                                         Select::make('nw_quality')
                                         ->label('QS')
@@ -834,7 +832,6 @@ class CharacterResource extends Resource
 
     protected function handleRecordCreation(array $data): Model
 {
-    dd($data);
     return static::getModel()::create($data);
 }
 
@@ -843,7 +840,7 @@ class CharacterResource extends Resource
         if (!$leiteigenschaft1 || !$leiteigenschaft2) {
             return 'Unbekannt'; // Standardwert, wenn ein Wert fehlt
         }
-    
+
         $archetypeMap = [
         'KO-KO' => 'Koloss',
         'KO-ST' => 'Sappeur',
@@ -920,7 +917,7 @@ class CharacterResource extends Resource
 
         return $value1 + $value2;
     }
-    
+
 
     public static function table(Table $table): Table
     {
@@ -944,6 +941,11 @@ class CharacterResource extends Resource
                 ->label('PDF')
                 ->icon('heroicon-o-printer')
                 ->url(fn (Character $record) => route('character.print', ['id' => $record->id]))
+                ->openUrlInNewTab(),
+                Tables\Actions\Action::make('fillable_pdf')
+                ->label('fillable PDF')
+                ->icon('heroicon-o-printer')
+                ->url(fn (Character $record) => route('fill-character.print', ['id' => $record->id]))
                 ->openUrlInNewTab(),
             ])
             ->bulkActions([
