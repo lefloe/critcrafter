@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'nw_aw' => 4,
             'nw_vw'=> 0,
             'nw_tw'=> 1,
-            'experience-level' => 1,
+            'xp' => 1,
             'klassenfertigkeiten' => ['Schwertkampf', 'Magiekunde'],
             'handwerkskenntnisse' => ['Schmieden'],
             'lore' => 'Aspektwesen',
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
             'ts_erweiterungen' => ['der ruhe'],
         ]);
         \Database\Factories\EquipmentFactory::new()->count(10)->create();
-        
+
         // Beispiel-Schmuckstück
         Equipment::create([
             'name' => 'Ring der Macht',
@@ -138,6 +138,6 @@ class DatabaseSeeder extends Seeder
             'enchantment_qs' => 'ungewöhnlich',
         ]);
         \Database\Factories\EquipmentFactory::new()->count(10)->create();
-        
+
     }
 }

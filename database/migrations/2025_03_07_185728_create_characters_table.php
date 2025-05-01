@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('wesen');
             $table->string('leiteigenschaft1');
             $table->string('leiteigenschaft2');
-            $table->integer('main_stat_value')->nullable();            
+            $table->integer('main_stat_value')->nullable();
             $table->string('archetype')->nullable();
             $table->json('rassenmerkmale')->nullable();
             $table->integer('ko');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->integer('we');
             $table->integer('in');
             $table->integer('mu');
-            $table->integer('ch');            
+            $table->integer('ch');
             $table->json('skill_ko')->nullable();
             $table->json('skill_st')->nullable();
             $table->json('skill_ag')->nullable();
@@ -52,11 +52,11 @@ return new class extends Migration
             $table->integer('seelenpunkte');
             $table->string('nw_gattung');
             $table->string('nw_quality');
-            $table->json('nw_damage_type')->nullable();  
+            $table->json('nw_damage_type')->nullable();
             $table->integer('nw_aw');
             $table->integer('nw_vw');
-            $table->integer('nw_tw');   
-            $table->integer('experience-level');
+            $table->integer('nw_tw');
+            $table->integer('xp');
             $table->json('klassenfertigkeiten')->nullable();
             $table->json('handwerkskenntnisse')->nullable();
             $table->json('lore')->nullable();
@@ -70,5 +70,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('characters');
-    }  
+    }
 };

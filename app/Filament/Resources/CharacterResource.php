@@ -56,13 +56,27 @@ class CharacterResource extends Resource
                                 ->label('Name')
                                 ->required()
                                 ->maxLength(255),
-                                TextInput::make('experience-level')
+                                TextInput::make('xp')
                                 ->Label('Erfahrungsstufe')
                                 ->numeric()
+                                ->default(1)
+                                ->live(onBlur: true)
                                 ->step(1)
                                 ->maxValue(22)
                                 ->required()
-                                ->minValue(1),
+                                ->minValue(1)
+                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                    $data = self::getAttributeArray($get);
+                                    $xpdata = self::getxpdata($get);
+                                    $set('leps', $get('ko') * 2 + $state);
+                                    $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
+                                    $set('initiative', round($get('in') / 2 + $get('xp')));
+
+
+                                    $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $get('leiteigenschaft2'), $data, $xpdata));
+
+                                })
+                                ->reactive(),
                             ]),
                             Textarea::make('description')
                             ->label('Description')
@@ -117,15 +131,14 @@ class CharacterResource extends Resource
                                     ])
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                        // set the achetype
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
                                         $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($state, $data, $get('leiteigenschaft2')));
+                                        $set('main_stat_value', self::getResources($state, $get('leiteigenschaft2'), $data, $get('xp')));
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));   //sets archetype
                                         $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($get('leiteigenschaft2'), $data, $state));
+                                        $set('main_stat_value', self::getResources($state, $get('leiteigenschaft2'), $data, $get('xp')));
 
                                     }),
                                     Select::make('leiteigenschaft2')
@@ -147,16 +160,16 @@ class CharacterResource extends Resource
 
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
                                         $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
+                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $state, $data, $get('xp')));
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
                                         $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $data, $state));
+                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $state, $data, $get('xp')));
 
                                     }),
                                 ]),
-                            Grid::make(2)
+                            Grid::make(3)
                             ->schema([
                                 TextInput::make('archetype')
                                 ->label('Archetyp')
@@ -169,6 +182,7 @@ class CharacterResource extends Resource
                                 ->live()
                                 ->disabled()
                                 ->dehydrated(),
+
                             ])
                             ]),
                             Section::make('Rasse und Rassenmerkmale')
@@ -251,14 +265,8 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update LeP value
-                                            $set('leps', $get('ko') * 2);
-
-                                            // If ko is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'KO') {
-                                                $set('main_stat_value', $get('ko'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            self::valueTest($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('st') // Stärke
@@ -328,7 +336,7 @@ class CharacterResource extends Resource
                                         ->live()
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Initiative value
-                                            $set('initiative', round($get('in') / 2));
+                                            $set('initiative', round($get('in') / 2 + $get('xp')));
 
                                             // If in is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'IN') {
@@ -358,7 +366,7 @@ class CharacterResource extends Resource
                                         ->live()
                                         ->afterStateUpdated(function (Get $get, Set $set) {
                                             // update Seelenpunkte value
-                                            $set('seelenpunkte', $get('ch') * 2);
+                                            $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
 
                                             // If ch is the main characteristic, update main_stat_value
                                             if ($get('leiteigenschaft1') == 'CH') {
@@ -894,6 +902,12 @@ class CharacterResource extends Resource
         return 'Unbekannt'; // Falls keine Kombination passt
 
     }
+    public static function getxpdata(Get $get): int
+    {
+        $xpdata = (int)$get('xp');
+        return $xpdata;
+    }
+
 
     public static function getAttributeArray(Get $get): array
     {
@@ -910,12 +924,13 @@ class CharacterResource extends Resource
 
     }
 
-    public static function getResources(?string $leiteigenschaft2, ?array $data, ?string $leiteigenschaft1): int
+    public static function getResources(?string $leiteigenschaft1, ?string $leiteigenschaft2, ?array $data, ?int $xpdata): int
     {
         $value1 = isset($data[$leiteigenschaft1]) ? (int)$data[$leiteigenschaft1]: 0;
         $value2 = isset($data[$leiteigenschaft2]) ? (int)$data[$leiteigenschaft2]: 0;
+        $value3 = $xpdata;
 
-        return $value1 + $value2;
+        return $value1 + $value2 + $value3;
     }
 
 
@@ -963,5 +978,10 @@ class CharacterResource extends Resource
             'create' => Pages\CreateCharacter::route('/create'),
             'edit' => Pages\EditCharacter::route('/{record}/edit'),
         ];
+    }
+
+    public static function valueTest(Get $get, Set $set): void
+    {
+        $set('main_stat_value',  self::getResources($get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('xp')));
     }
 }

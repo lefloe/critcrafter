@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <title>Charakterbogen – {{ $character->name }}</title>
     <style>
+
+        /*@font-face {*/
+        /*    font-family: "PaliFont";*/
+        /*    src: url("fonts/pali/Pali-Regular.otf") format("opentype");*/
+        /*    font-weight: normal;*/
+        /*    font-style: normal;*/
+        /*}*/
+
         @page {
             margin: 0;
         }
         body {
-            font-family: DejaVu Sans, sans-serif;
+            font-family: "PaliFont", DejaVu Sans, sans-serif;
             font-size: 10pt;
             margin: 0;
             padding: 0;
@@ -97,6 +105,7 @@
                         @if($character->portrait)
                             <img class="img" src="{{ public_path('storage/' . $character->portrait) }}" alt="Portrait" style="max-width: 200px; max-height: 250px;">
                         @endif
+                        <p><strong>Rasse:</strong> {{ $character->xp }}</p>
                     </td>
                     <td style="width: 75%; vertical-align: top; padding-left: 15px;">
                         <h2 style="margin: 0;">{{ $character->name }}</h2>
