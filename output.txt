@@ -1,0 +1,5140 @@
+---
+FieldType: Button
+FieldName: Portrait_af_image
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Name
+FieldFlags: 4194304
+FieldValue: Name
+FieldValueDefault: Name
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Geschwindigkeit
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Initiativebonus
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Verteidigungsbonus
+FieldFlags: 0
+FieldValue: -2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Charisma
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Mut
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Konstitution
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Erfahrungsgrad
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: PLE
+FieldFlags: 655360
+FieldValue: Agilit&#228;t
+FieldValueDefault: Geschick
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Agilit&#228;t
+FieldStateOption: Charisma
+FieldStateOption: Geschick
+FieldStateOption: Instinkt
+FieldStateOption: Konstitution
+FieldStateOption: Mut
+FieldStateOption: St&#228;rke
+FieldStateOption: Weisheit
+---
+FieldType: Choice
+FieldName: SLE
+FieldFlags: 655360
+FieldValue: Charisma
+FieldValueDefault: Konstitution
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Agilit&#228;t
+FieldStateOption: Charisma
+FieldStateOption: Geschick
+FieldStateOption: Instinkt
+FieldStateOption: Konstitution
+FieldStateOption: Mut
+FieldStateOption: St&#228;rke
+FieldStateOption: Weisheit
+---
+FieldType: Text
+FieldName: AW
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: ATK
+FieldFlags: 0
+FieldValue: 16
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: VW
+FieldFlags: 0
+FieldValue: 13
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Prim&#228;r
+FieldFlags: 0
+FieldValue: 32
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SCH
+FieldFlags: 0
+FieldValue: 1W6+AW*
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Handwerksbonus
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Lebenspunkte
+FieldFlags: 0
+FieldValue: 20
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Seelenpunkte
+FieldFlags: 0
+FieldValue: 20
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSElementar
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSArkan
+FieldFlags: 0
+FieldValue: 4
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSChaos
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSSpirituell
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: INI
+FieldFlags: 0
+FieldValue: 12
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: KTRLWD
+FieldFlags: 0
+FieldValue: 4
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS1
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS2
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS3
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS4
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS5
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS6
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS7
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: St&#228;rke
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Agilit&#228;t
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Geschick
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Weisheit
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Instinkt
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: EigenschaftenMAX
+FieldFlags: 1
+FieldValue: 96
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: EigenschaftenSUM
+FieldFlags: 1
+FieldValue: 80
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: SchildTL
+FieldFlags: 1
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildVW
+FieldFlags: 1
+FieldValue: 8
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: Klasse1
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Waldl&#228;ufer I
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Assassine I
+FieldStateOption: Barbar I
+FieldStateOption: Barde I
+FieldStateOption: Berserker I
+FieldStateOption: Bewahrer I
+FieldStateOption: Druide I
+FieldStateOption: Duellant I
+FieldStateOption: Elementarist I
+FieldStateOption: Fechter I
+FieldStateOption: Gladiator I
+FieldStateOption: Hexer I
+FieldStateOption: H&#252;ter I
+FieldStateOption: J&#228;ger I
+FieldStateOption: Klingemeister I
+FieldStateOption: Koloss I
+FieldStateOption: Krieger I
+FieldStateOption: Magus I
+FieldStateOption: M&#246;nch I
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Mystiker I
+FieldStateOption: Nekromant I
+FieldStateOption: Okkultist I
+FieldStateOption: Paladin I
+FieldStateOption: Pirscher I
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Sappeur I
+FieldStateOption: Schamane I
+FieldStateOption: Schreckensritter I
+FieldStateOption: Seher I
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Spiritualist I
+FieldStateOption: T&#228;nzer I
+FieldStateOption: Templer I
+FieldStateOption: Thaumathurg I
+FieldStateOption: Waldl&#228;ufer I
+---
+FieldType: Text
+FieldName: Kontrollbonus
+FieldFlags: 0
+FieldValue: -2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: SchildTaP
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ1QS
+FieldFlags: 131072
+FieldValue: 3
+FieldValueDefault: 4
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ1
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ2QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ3QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ4QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: Z&#228;higkeit
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Kraftakt
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: K&#246;rperbeherrschung
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Fingerfertigkeit
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Willenskraft
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Konzentration
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Wahrnehmung
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Kommunikation
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Button
+FieldName: Portrait2_af_image
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Tode
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: TLRS
+FieldFlags: 0
+FieldValue: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Button
+FieldName: Update
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Tragkraft
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: &#220;L1
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L2
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L3
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L4
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: Rasse
+FieldFlags: 655360
+FieldValue: Crocotta
+FieldValueDefault: Vodyanoy
+FieldJustification: Left
+FieldStateOption: Ainu
+FieldStateOption: Alkonost
+FieldStateOption: Balachko
+FieldStateOption: Bastet
+FieldStateOption: Crocotta
+FieldStateOption: Karura
+FieldStateOption: Leshy
+FieldStateOption: Vanaras
+FieldStateOption: Vodyanoy
+FieldStateOption: Vukodlak
+---
+FieldType: Choice
+FieldName: Seele
+FieldFlags: 655360
+FieldValue: Biest/Geist
+FieldValueDefault: D&#228;mon/Spekter
+FieldJustification: Left
+FieldStateOption: Biest/Geist
+FieldStateOption: D&#228;mon/Spekter
+---
+FieldType: Choice
+FieldName: VZ5QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Button
+FieldName: EQUIPRS
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Text
+FieldName: Ressource
+FieldFlags: 0
+FieldValue: Res
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: Klasse2
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Waldl&#228;ufer I
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Assassine I
+FieldStateOption: Barbar I
+FieldStateOption: Barde I
+FieldStateOption: Berserker I
+FieldStateOption: Bewahrer I
+FieldStateOption: Druide I
+FieldStateOption: Duellant I
+FieldStateOption: Elementarist I
+FieldStateOption: Fechter I
+FieldStateOption: Gladiator I
+FieldStateOption: Hexer I
+FieldStateOption: H&#252;ter I
+FieldStateOption: J&#228;ger I
+FieldStateOption: Klingemeister I
+FieldStateOption: Koloss I
+FieldStateOption: Krieger I
+FieldStateOption: Magus I
+FieldStateOption: M&#246;nch I
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Mystiker I
+FieldStateOption: Nekromant I
+FieldStateOption: Okkultist I
+FieldStateOption: Paladin I
+FieldStateOption: Pirscher I
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Sappeur I
+FieldStateOption: Schamane I
+FieldStateOption: Schreckensritter I
+FieldStateOption: Seher I
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Spiritualist I
+FieldStateOption: T&#228;nzer I
+FieldStateOption: Templer I
+FieldStateOption: Thaumathurg I
+FieldStateOption: Waldl&#228;ufer I
+---
+FieldType: Choice
+FieldName: Klasse3
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Assassine II
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+---
+FieldType: Choice
+FieldName: Klasse4
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Assassine II
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+---
+FieldType: Choice
+FieldName: Klasse5
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Animist III
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Animist III
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Assassine III
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barbar III
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Barde III
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Berserker III
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Bewahrer III
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Druide III
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Duellant III
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Elementarist III
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Fechter III
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Gladiator III
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: Hexer III
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: H&#252;ter III
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: J&#228;ger III
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Klingemeister III
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Koloss III
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Krieger III
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: Magus III
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: M&#246;nch III
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Monsterj&#228;ger III
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Mystiker III
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Nekromant III
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Okkultist III
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Paladin III
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Pirscher III
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Runenschnitzer III
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Sappeur III
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schamane III
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Schreckensritter III
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Seher III
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Sp&#228;her III
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: Spiritualist III
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: T&#228;nzer III
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Templer III
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Thaumathurg III
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+FieldStateOption: Waldl&#228;ufer III
+---
+FieldType: Choice
+FieldName: Klasse6
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Animist III
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Animist III
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Assassine III
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barbar III
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Barde III
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Berserker III
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Bewahrer III
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Druide III
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Duellant III
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Elementarist III
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Fechter III
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Gladiator III
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: Hexer III
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: H&#252;ter III
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: J&#228;ger III
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Klingemeister III
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Koloss III
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Krieger III
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: Magus III
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: M&#246;nch III
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Monsterj&#228;ger III
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Mystiker III
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Nekromant III
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Okkultist III
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Paladin III
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Pirscher III
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Runenschnitzer III
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Sappeur III
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schamane III
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Schreckensritter III
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Seher III
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Sp&#228;her III
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: Spiritualist III
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: T&#228;nzer III
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Templer III
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Thaumathurg III
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+FieldStateOption: Waldl&#228;ufer III
+---
+FieldType: Text
+FieldName: RSHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSStich
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSpVW
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: TLKW
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: RSQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: TAQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: TLHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSSchnitt
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSStumpf
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildStich
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildSchnitt
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildStumpf
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Button
+FieldName: EQUIPTAL
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Button
+FieldName: EQUIPSCHILD
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Choice
+FieldName: VZ2
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ3
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ4
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ5
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: HHQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: HHTL
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHTL
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHTW
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHVW
+FieldFlags: 0
+FieldValue: 7
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHTW
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHAW
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHAW
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: HHLE1
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: AG
+FieldStateOption: 3
+FieldStateOptionDisplay: GE
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: HHLE2
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: GE
+FieldStateOption: 3
+FieldStateOptionDisplay: AG
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: NHLE1
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: AG
+FieldStateOption: 3
+FieldStateOptionDisplay: GE
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: NHLE2
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: GE
+FieldStateOption: 3
+FieldStateOptionDisplay: AG
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: HHGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Text
+FieldName: HHHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: NWQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: NWAW
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NWTW
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NWVW
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: NHQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: NHHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: SCHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: RSHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: TLHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: NHGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Choice
+FieldName: NWGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Text
+FieldName: NWLE1
+FieldFlags: 0
+FieldValue: GE
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: TLTL
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE01
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE02
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE03
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE04
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE05
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE07
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE08
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE09
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE10
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE11
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE12
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE06
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Button
+FieldName: Portrait_af_image
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Name
+FieldFlags: 4194304
+FieldValue: Name
+FieldValueDefault: Name
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Geschwindigkeit
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Initiativebonus
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Verteidigungsbonus
+FieldFlags: 0
+FieldValue: -2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Charisma
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Mut
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Konstitution
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Erfahrungsgrad
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: PLE
+FieldFlags: 655360
+FieldValue: Agilit&#228;t
+FieldValueDefault: Geschick
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Agilit&#228;t
+FieldStateOption: Charisma
+FieldStateOption: Geschick
+FieldStateOption: Instinkt
+FieldStateOption: Konstitution
+FieldStateOption: Mut
+FieldStateOption: St&#228;rke
+FieldStateOption: Weisheit
+---
+FieldType: Choice
+FieldName: SLE
+FieldFlags: 655360
+FieldValue: Charisma
+FieldValueDefault: Konstitution
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Agilit&#228;t
+FieldStateOption: Charisma
+FieldStateOption: Geschick
+FieldStateOption: Instinkt
+FieldStateOption: Konstitution
+FieldStateOption: Mut
+FieldStateOption: St&#228;rke
+FieldStateOption: Weisheit
+---
+FieldType: Text
+FieldName: AW
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: ATK
+FieldFlags: 0
+FieldValue: 16
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: VW
+FieldFlags: 0
+FieldValue: 13
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Prim&#228;r
+FieldFlags: 0
+FieldValue: 32
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SCH
+FieldFlags: 0
+FieldValue: 1W6+AW*
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Handwerksbonus
+FieldFlags: 0
+FieldValue: 5
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Lebenspunkte
+FieldFlags: 0
+FieldValue: 20
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: Seelenpunkte
+FieldFlags: 0
+FieldValue: 20
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSElementar
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSArkan
+FieldFlags: 0
+FieldValue: 4
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSChaos
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSSpirituell
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: INI
+FieldFlags: 0
+FieldValue: 12
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: KTRLWD
+FieldFlags: 0
+FieldValue: 4
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS1
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS2
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS3
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS4
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS5
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS6
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RS7
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: St&#228;rke
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Agilit&#228;t
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Geschick
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Weisheit
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: Instinkt
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 6
+FieldJustification: Center
+FieldMaxLength: 2
+---
+FieldType: Text
+FieldName: EigenschaftenMAX
+FieldFlags: 1
+FieldValue: 96
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: EigenschaftenSUM
+FieldFlags: 1
+FieldValue: 80
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: SchildTL
+FieldFlags: 1
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildVW
+FieldFlags: 1
+FieldValue: 8
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: Klasse1
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Waldl&#228;ufer I
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Assassine I
+FieldStateOption: Barbar I
+FieldStateOption: Barde I
+FieldStateOption: Berserker I
+FieldStateOption: Bewahrer I
+FieldStateOption: Druide I
+FieldStateOption: Duellant I
+FieldStateOption: Elementarist I
+FieldStateOption: Fechter I
+FieldStateOption: Gladiator I
+FieldStateOption: Hexer I
+FieldStateOption: H&#252;ter I
+FieldStateOption: J&#228;ger I
+FieldStateOption: Klingemeister I
+FieldStateOption: Koloss I
+FieldStateOption: Krieger I
+FieldStateOption: Magus I
+FieldStateOption: M&#246;nch I
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Mystiker I
+FieldStateOption: Nekromant I
+FieldStateOption: Okkultist I
+FieldStateOption: Paladin I
+FieldStateOption: Pirscher I
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Sappeur I
+FieldStateOption: Schamane I
+FieldStateOption: Schreckensritter I
+FieldStateOption: Seher I
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Spiritualist I
+FieldStateOption: T&#228;nzer I
+FieldStateOption: Templer I
+FieldStateOption: Thaumathurg I
+FieldStateOption: Waldl&#228;ufer I
+---
+FieldType: Text
+FieldName: Kontrollbonus
+FieldFlags: 0
+FieldValue: -2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: SchildTaP
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ1QS
+FieldFlags: 131072
+FieldValue: 3
+FieldValueDefault: 4
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ1
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ2QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ3QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: VZ4QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: Z&#228;higkeit
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Kraftakt
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: K&#246;rperbeherrschung
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Fingerfertigkeit
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Willenskraft
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Konzentration
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Wahrnehmung
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: Kommunikation
+FieldFlags: 0
+FieldValue: 10
+FieldJustification: Center
+---
+FieldType: Button
+FieldName: Portrait2_af_image
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Tode
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+---
+FieldType: Text
+FieldName: TLRS
+FieldFlags: 0
+FieldValue: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Button
+FieldName: Update
+FieldFlags: 65536
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Tragkraft
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: &#220;L1
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L2
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L3
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: &#220;L4
+FieldFlags: 5111808
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Aspektwesen
+FieldStateOption: Fauna &amp; Flora
+FieldStateOption: G&#246;tter
+FieldStateOption: Kernlande
+FieldStateOption: L&#228;nder des Nordens
+FieldStateOption: L&#228;nder des S&#252;dens
+FieldStateOption: Monster
+FieldStateOption: Seelen
+FieldStateOption: Spiegelwelt
+FieldStateOption: Splitterwelt
+FieldStateOption: Unterwelt
+FieldStateOption: Varculac
+FieldStateOption: V&#246;lker des Nordens
+FieldStateOption: V&#246;lker des S&#252;dens
+---
+FieldType: Choice
+FieldName: Rasse
+FieldFlags: 655360
+FieldValue: Crocotta
+FieldValueDefault: Vodyanoy
+FieldJustification: Left
+FieldStateOption: Ainu
+FieldStateOption: Alkonost
+FieldStateOption: Balachko
+FieldStateOption: Bastet
+FieldStateOption: Crocotta
+FieldStateOption: Karura
+FieldStateOption: Leshy
+FieldStateOption: Vanaras
+FieldStateOption: Vodyanoy
+FieldStateOption: Vukodlak
+---
+FieldType: Choice
+FieldName: Seele
+FieldFlags: 655360
+FieldValue: Biest/Geist
+FieldValueDefault: D&#228;mon/Spekter
+FieldJustification: Left
+FieldStateOption: Biest/Geist
+FieldStateOption: D&#228;mon/Spekter
+---
+FieldType: Choice
+FieldName: VZ5QS
+FieldFlags: 131072
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 3
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 4
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 5
+FieldStateOptionDisplay: selten
+FieldStateOption: 6
+FieldStateOptionDisplay: episch
+FieldStateOption: 7
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Button
+FieldName: EQUIPRS
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Text
+FieldName: Ressource
+FieldFlags: 0
+FieldValue: Res
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: Klasse2
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Waldl&#228;ufer I
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Assassine I
+FieldStateOption: Barbar I
+FieldStateOption: Barde I
+FieldStateOption: Berserker I
+FieldStateOption: Bewahrer I
+FieldStateOption: Druide I
+FieldStateOption: Duellant I
+FieldStateOption: Elementarist I
+FieldStateOption: Fechter I
+FieldStateOption: Gladiator I
+FieldStateOption: Hexer I
+FieldStateOption: H&#252;ter I
+FieldStateOption: J&#228;ger I
+FieldStateOption: Klingemeister I
+FieldStateOption: Koloss I
+FieldStateOption: Krieger I
+FieldStateOption: Magus I
+FieldStateOption: M&#246;nch I
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Mystiker I
+FieldStateOption: Nekromant I
+FieldStateOption: Okkultist I
+FieldStateOption: Paladin I
+FieldStateOption: Pirscher I
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Sappeur I
+FieldStateOption: Schamane I
+FieldStateOption: Schreckensritter I
+FieldStateOption: Seher I
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Spiritualist I
+FieldStateOption: T&#228;nzer I
+FieldStateOption: Templer I
+FieldStateOption: Thaumathurg I
+FieldStateOption: Waldl&#228;ufer I
+---
+FieldType: Choice
+FieldName: Klasse3
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Assassine II
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+---
+FieldType: Choice
+FieldName: Klasse4
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Assassine II
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+---
+FieldType: Choice
+FieldName: Klasse5
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Animist III
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Animist III
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Assassine III
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barbar III
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Barde III
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Berserker III
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Bewahrer III
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Druide III
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Duellant III
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Elementarist III
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Fechter III
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Gladiator III
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: Hexer III
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: H&#252;ter III
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: J&#228;ger III
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Klingemeister III
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Koloss III
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Krieger III
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: Magus III
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: M&#246;nch III
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Monsterj&#228;ger III
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Mystiker III
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Nekromant III
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Okkultist III
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Paladin III
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Pirscher III
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Runenschnitzer III
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Sappeur III
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schamane III
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Schreckensritter III
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Seher III
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Sp&#228;her III
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: Spiritualist III
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: T&#228;nzer III
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Templer III
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Thaumathurg III
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+FieldStateOption: Waldl&#228;ufer III
+---
+FieldType: Choice
+FieldName: Klasse6
+FieldFlags: 655360
+FieldValue: -
+FieldValueDefault: Animist III
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: Animist I
+FieldStateOption: Animist II
+FieldStateOption: Animist III
+FieldStateOption: Assassine I
+FieldStateOption: Assassine II
+FieldStateOption: Assassine III
+FieldStateOption: Barbar I
+FieldStateOption: Barbar II
+FieldStateOption: Barbar III
+FieldStateOption: Barde I
+FieldStateOption: Barde II
+FieldStateOption: Barde III
+FieldStateOption: Berserker I
+FieldStateOption: Berserker II
+FieldStateOption: Berserker III
+FieldStateOption: Bewahrer I
+FieldStateOption: Bewahrer II
+FieldStateOption: Bewahrer III
+FieldStateOption: Druide I
+FieldStateOption: Druide II
+FieldStateOption: Druide III
+FieldStateOption: Duellant I
+FieldStateOption: Duellant II
+FieldStateOption: Duellant III
+FieldStateOption: Elementarist I
+FieldStateOption: Elementarist II
+FieldStateOption: Elementarist III
+FieldStateOption: Fechter I
+FieldStateOption: Fechter II
+FieldStateOption: Fechter III
+FieldStateOption: Gladiator I
+FieldStateOption: Gladiator II
+FieldStateOption: Gladiator III
+FieldStateOption: Hexer I
+FieldStateOption: Hexer II
+FieldStateOption: Hexer III
+FieldStateOption: H&#252;ter I
+FieldStateOption: H&#252;ter II
+FieldStateOption: H&#252;ter III
+FieldStateOption: J&#228;ger I
+FieldStateOption: J&#228;ger II
+FieldStateOption: J&#228;ger III
+FieldStateOption: Klingemeister I
+FieldStateOption: Klingemeister II
+FieldStateOption: Klingemeister III
+FieldStateOption: Koloss I
+FieldStateOption: Koloss II
+FieldStateOption: Koloss III
+FieldStateOption: Krieger I
+FieldStateOption: Krieger II
+FieldStateOption: Krieger III
+FieldStateOption: Magus I
+FieldStateOption: Magus II
+FieldStateOption: Magus III
+FieldStateOption: M&#246;nch I
+FieldStateOption: M&#246;nch II
+FieldStateOption: M&#246;nch III
+FieldStateOption: Monsterj&#228;ger I
+FieldStateOption: Monsterj&#228;ger II
+FieldStateOption: Monsterj&#228;ger III
+FieldStateOption: Mystiker I
+FieldStateOption: Mystiker II
+FieldStateOption: Mystiker III
+FieldStateOption: Nekromant I
+FieldStateOption: Nekromant II
+FieldStateOption: Nekromant III
+FieldStateOption: Okkultist I
+FieldStateOption: Okkultist II
+FieldStateOption: Okkultist III
+FieldStateOption: Paladin I
+FieldStateOption: Paladin II
+FieldStateOption: Paladin III
+FieldStateOption: Pirscher I
+FieldStateOption: Pirscher II
+FieldStateOption: Pirscher III
+FieldStateOption: Runenschnitzer I
+FieldStateOption: Runenschnitzer II
+FieldStateOption: Runenschnitzer III
+FieldStateOption: Sappeur I
+FieldStateOption: Sappeur II
+FieldStateOption: Sappeur III
+FieldStateOption: Schamane I
+FieldStateOption: Schamane II
+FieldStateOption: Schamane III
+FieldStateOption: Schreckensritter I
+FieldStateOption: Schreckensritter II
+FieldStateOption: Schreckensritter III
+FieldStateOption: Seher I
+FieldStateOption: Seher II
+FieldStateOption: Seher III
+FieldStateOption: Sp&#228;her I
+FieldStateOption: Sp&#228;her II
+FieldStateOption: Sp&#228;her III
+FieldStateOption: Spiritualist I
+FieldStateOption: Spiritualist II
+FieldStateOption: Spiritualist III
+FieldStateOption: T&#228;nzer I
+FieldStateOption: T&#228;nzer II
+FieldStateOption: T&#228;nzer III
+FieldStateOption: Templer I
+FieldStateOption: Templer II
+FieldStateOption: Templer III
+FieldStateOption: Thaumathurg I
+FieldStateOption: Thaumathurg II
+FieldStateOption: Thaumathurg III
+FieldStateOption: Waldl&#228;ufer I
+FieldStateOption: Waldl&#228;ufer II
+FieldStateOption: Waldl&#228;ufer III
+---
+FieldType: Text
+FieldName: RSHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSStich
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSpVW
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: TLKW
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: RSQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: TAQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: TLHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSSchnitt
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: RSStumpf
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildStich
+FieldFlags: 0
+FieldValue: 3
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildSchnitt
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: SchildStumpf
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Button
+FieldName: EQUIPTAL
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Button
+FieldName: EQUIPSCHILD
+FieldFlags: 0
+FieldValue: Ja
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Choice
+FieldName: VZ2
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ3
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ4
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: VZ5
+FieldFlags: 655360
+FieldValue: des kosmischen Durchflusses
+FieldValueDefault: des kosmischen Durchflusses
+FieldJustification: Left
+FieldStateOption: -
+FieldStateOption: BT Fingerfertigkeit
+FieldStateOption: BT Kommunikation
+FieldStateOption: BT Konzentration
+FieldStateOption: BT K&#246;rperbeherrschung
+FieldStateOption: BT Kraftakt
+FieldStateOption: BT Wahrnehmung
+FieldStateOption: BT Willenskraft
+FieldStateOption: BT Z&#228;higkeit
+FieldStateOption: der Rettung
+FieldStateOption: des Bands
+FieldStateOption: des Echos
+FieldStateOption: des kosmischen Durchflusses
+FieldStateOption: Initiative (1x)
+FieldStateOption: Kontrollwiderstand
+FieldStateOption: Lebenspunkte
+FieldStateOption: Ressource
+FieldStateOption: RS Arkan
+FieldStateOption: RS Chaos
+FieldStateOption: RS Elementar
+FieldStateOption: RS Schnitt
+FieldStateOption: RS Spirituell
+FieldStateOption: RS Stich
+FieldStateOption: RS Stumpf
+FieldStateOption: Tragkraft
+FieldStateOption: Unzerst&#246;rbar
+FieldStateOption: Geschwindigkeit
+FieldStateOptionDisplay: Geschwindigkeit (1x)
+---
+FieldType: Choice
+FieldName: HHQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: HHTL
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHTL
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHTW
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHVW
+FieldFlags: 0
+FieldValue: 7
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHTW
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: HHAW
+FieldFlags: 0
+FieldValue: 6
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHAW
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: HHLE1
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: AG
+FieldStateOption: 3
+FieldStateOptionDisplay: GE
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: HHLE2
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: GE
+FieldStateOption: 3
+FieldStateOptionDisplay: AG
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: NHLE1
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: AG
+FieldStateOption: 3
+FieldStateOptionDisplay: GE
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: NHLE2
+FieldFlags: 131072
+FieldValue: KO
+FieldValueDefault: KO
+FieldJustification: Left
+FieldStateOption: KO
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: ST
+FieldStateOption: 2
+FieldStateOptionDisplay: GE
+FieldStateOption: 3
+FieldStateOptionDisplay: AG
+FieldStateOption: 4
+FieldStateOptionDisplay: WE
+FieldStateOption: 5
+FieldStateOptionDisplay: IN
+FieldStateOption: 6
+FieldStateOptionDisplay: MU
+FieldStateOption: 7
+FieldStateOptionDisplay: CH
+---
+FieldType: Choice
+FieldName: HHGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Text
+FieldName: HHHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NHHwP
+FieldFlags: 0
+FieldValue: 22
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: NWQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Text
+FieldName: NWAW
+FieldFlags: 0
+FieldValue: 10
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NWTW
+FieldFlags: 0
+FieldValue: 2
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: NWVW
+FieldFlags: 0
+FieldValue: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Choice
+FieldName: NHQS
+FieldFlags: 131072
+FieldValue: 4
+FieldValueDefault: 1
+FieldJustification: Left
+FieldStateOption: 0
+FieldStateOptionDisplay:  
+FieldStateOption: 1
+FieldStateOptionDisplay: schlecht
+FieldStateOption: 2
+FieldStateOptionDisplay: brauchbar
+FieldStateOption: 4
+FieldStateOptionDisplay: gew&#246;hnlich
+FieldStateOption: 7
+FieldStateOptionDisplay: ungew&#246;hnlich
+FieldStateOption: 11
+FieldStateOptionDisplay: selten
+FieldStateOption: 16
+FieldStateOptionDisplay: episch
+FieldStateOption: 22
+FieldStateOptionDisplay: legend&#228;r
+---
+FieldType: Choice
+FieldName: NHHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: NHHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: HHHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Modularit&#228;t
+FieldStateOption: Finalit&#228;t
+FieldStateOption: Zweih&#228;ndigkeit
+FieldStateOption: Einh&#228;ndigkeit
+FieldStateOption: Nebenhand
+FieldStateOption: H&#228;rtung
+FieldStateOption: Einzigartigkeit
+FieldStateOption: &#220;berheblichkeit
+FieldStateOption: Attent&#228;ters
+FieldStateOption: Kette
+FieldStateOption: Handhabung
+FieldStateOption: Duell
+FieldStateOption: Gemetzel
+FieldStateOption: Grausamkeit
+FieldStateOption: T&#252;ftler
+FieldStateOption: Schlagkraft
+FieldStateOption: Pr&#228;zision
+FieldStateOption: Flexibilit&#228;t
+FieldStateOption: Effizienz
+FieldStateOption: Kampfkunst
+FieldStateOption: Brutalit&#228;t
+FieldStateOption: Hinterhalt
+FieldStateOption: Vorhut
+FieldStateOption: Jenseits
+FieldStateOption: Revolution
+---
+FieldType: Choice
+FieldName: SCHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: SCHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Brechstange
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Buckler
+FieldStateOption: Spiegelschild
+FieldStateOption: Turmschild
+FieldStateOption: Deckung
+FieldStateOption: Schildsto&#223;
+FieldStateOption: Stachelschild
+FieldStateOption: Wurfschild
+FieldStateOption: Schl&#228;ger
+FieldStateOption: Trommelschild
+FieldStateOption: Kampffluss
+FieldStateOption: &#220;bergro&#223;
+FieldStateOption: Schildschlag
+---
+FieldType: Choice
+FieldName: RSHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: RSHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: K&#246;cher
+FieldStateOption: Getarnt
+FieldStateOption: Gleitend
+FieldStateOption: Kletterausr&#252;stung
+FieldStateOption: Geh&#228;rtet
+FieldStateOption: Flexibel
+FieldStateOption: Verst&#228;rkt
+FieldStateOption: Mechanisch
+FieldStateOption: Passgenau
+FieldStateOption: Gelenkig
+FieldStateOption: Artisten
+FieldStateOption: Elements
+FieldStateOption: Gel&#228;utert
+FieldStateOption: Gepolstert
+FieldStateOption: Ge&#246;lt
+FieldStateOption: Genietet
+FieldStateOption: Holster
+---
+FieldType: Choice
+FieldName: TLHE2
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE1
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE4
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE5
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: TLHE3
+FieldFlags: 131072
+FieldValue:  
+FieldValueDefault:  
+FieldJustification: Left
+FieldStateOption:  
+FieldStateOption: Fokussierung
+FieldStateOption: Konzentration
+FieldStateOption: Willenskraft
+FieldStateOption: Kommunikation
+FieldStateOption: Wahrnehmung
+FieldStateOption: Widerspr&#252;che
+FieldStateOption: Nacklang
+FieldStateOption: Ordnung
+FieldStateOption: Ruhe
+FieldStateOption: Geduld
+FieldStateOption: Loyalit&#228;t
+FieldStateOption: Klarheit
+FieldStateOption: Furchtlosigkeit
+FieldStateOption: Vielseitigkeit
+FieldStateOption: Reflektion
+FieldStateOption: Meditation
+---
+FieldType: Choice
+FieldName: NHGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Choice
+FieldName: NWGATT
+FieldFlags: 131072
+FieldValue: Fernkampf
+FieldValueDefault: Fernkampf
+FieldJustification: Left
+FieldStateOption: Nahkampf
+FieldStateOption: Fernkampf
+---
+FieldType: Text
+FieldName: NWLE1
+FieldFlags: 0
+FieldValue: GE
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: TLTL
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE01
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE02
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE03
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE04
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE05
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE07
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE08
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE09
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE10
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE11
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE12
+FieldFlags: 0
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
+---
+FieldType: Text
+FieldName: FE06
+FieldFlags: 0
+FieldValue: 1
+FieldValueDefault: 0
+FieldJustification: Center
+FieldMaxLength: 3
