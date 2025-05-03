@@ -107,7 +107,7 @@
     <div class="container">
 
         <!-- Kopfzeile mit Portrait & Namen -->
-{{--
+
         <div class="header">
             <table style="width: 100%;">
                 <tr>
@@ -118,7 +118,7 @@
                     </td>
                     <td style="width: 75%; vertical-align: top; padding-left: 15px;">
                         <h2 style="margin: 0;">{{ $character->name }}</h2>
-                        <p><strong>Beschreibung:</strong></p>
+                        <p><b>Beschreibung:</b></p>
                         <p style="font-size: {{ strlen($character->description) > 600 ? '8pt' : '9pt' }};">
                             {{ $character->description }}
                         </p>
@@ -165,47 +165,47 @@
                         <table class="table" style="width: 100%; border: none; border-spacing: 1">
                             <tr style="border-spacing: 2;">
                                 <td>{{ $character->ko }}</td><th>Zähigkeit</th>
-                                <td style="width: 10px; border: none"></td>
+                                <td style="width: 1px; border: none"></td>
                                 <td>{{ $character->st }}</td><th>Kraftakt</th>
-                                <td style="width: 10px; border: none"></td>
+                                <td style="width: 1px; border: none"></td>
                                 <td>{{ $character->ag }}</td><th>Körperbeherrschung</th>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td>{{ $character->ge }}</td><th>Fingerfertigkeit</th>
                             </tr>
                             <tr>
                                 <td>{{ $character->ko }}</td><td> Zäher Hund</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td>{{ $character->st }}</td><td> Wurfarm</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td>{{ $character->ag }}</td><td> Lösen</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td>{{ $character->ge }}</td><td> Löschen Abstreifen</td>
                             </tr>
                             <tr>
                                 <td> {{ $character->ko }}</td><td> Standhalten</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->st }}</td><td> Halten Stoßen Zerren</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ag }}</td><td> Leichtfüßig</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ge }}</td><td> Schnell anwenden</td>
                             </tr>
                             <tr>
                                 <td> {{ $character->ko }}</td><td> Second Wind</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->st }}</td><td> Schleppen</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ag }}</td><td> Abrollen</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ge }}</td><td> Schnellziehen</td>
                             </tr>
                             <tr>
                                 <td> {{ $character->ko }}</td><td> Eisern</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->st }}</td><td> Dampwalze</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ag }}</td><td> Ausweichen</td>
-                                <td style="width: 10px; border: none""></td>
+                                <td style="width: 1px; border: none""></td>
                                 <td> {{ $character->ge }}</td><td> Schnell herstellen</td>
                             </tr>
                         </table>
@@ -355,17 +355,17 @@
                         <th>Überlieferungen</th>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="border: none">
                         @foreach($character->klassenfertigkeiten as $fertigkeit)
                             <li>{{ $fertigkeit }}</li>
                         @endforeach
                         </td>
-                        <td>
+                        <td style="border: none">
                             @foreach($character->handwerkskenntnisse as $handwerk)
                                 <li>{{ $handwerk }}</li>
                             @endforeach
                         </td>
-                        <td>
+                        <td style="border: none">
                         @foreach($character->lore as $lore)
                                 <li>{{ $lore }}</li>
                             @endforeach
@@ -377,7 +377,7 @@
 
         <!-- Seite 2: Equipment -->
         <div class="page-break"></div>
---}}
+
         <!-- equipped -->
         <div class="section" style="width: 95%;">  <!-- Rüstung & Schmuck -->
 

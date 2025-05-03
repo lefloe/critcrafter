@@ -81,13 +81,13 @@ class CharacterResource extends Resource
                             ->schema([
                                 Select::make('system_id')
                                 ->relationship('system', 'name')
-                                ->createOptionAction(fn($action) => $action->slideOver())
-                                ->createOptionForm([
-                                    TextInput::make('name'),
-                                ])
-                                ->editOptionForm([
-                                    TextInput::make('name'),
-                                ])
+//                                ->createOptionAction(fn($action) => $action->slideOver())
+//                                ->createOptionForm([
+//                                    TextInput::make('name'),
+//                                ])
+//                                ->editOptionForm([
+//                                    TextInput::make('name'),
+//                                ])
                                 ->preload()
                                 ->required(),
                                 FileUpload::make('portrait')
@@ -805,7 +805,7 @@ class CharacterResource extends Resource
                                         ->required()
                                         ->options([
                                             'Nahkampfwaffe' => 'Nahkampfwaffe',
-                                            'Fernkampfwaffe' => 'Fernkampfwaffe',
+                                            'Fernkampfwaffe' => 'Fernkampfwaffe (nur Spucker)',
                                         ]),
                                         Select::make('nw_quality')
                                         ->label('QS')
@@ -862,12 +862,7 @@ class CharacterResource extends Resource
                                     // ->columns(3)
                                 ]),
                             ]),
-                        Tabs\Tab::make('Zusammenfassung')
-                            ->schema([
-                                Textinput::make('sum_rs_schnitt')
-                                ->default(10),
-
-                            ])
+//                        Tabs\Tab::make('Zusammenfassung')
                     ]),
             ]);
 
@@ -1149,11 +1144,11 @@ class CharacterResource extends Resource
                 ->icon('heroicon-o-printer')
                 ->url(fn (Character $record) => route('character.print', ['id' => $record->id]))
                 ->openUrlInNewTab(),
-                Tables\Actions\Action::make('fillable_pdf')
-                ->label('fillable PDF')
-                ->icon('heroicon-o-printer')
-                ->url(fn (Character $record) => route('fill-character.print', ['id' => $record->id]))
-                ->openUrlInNewTab(),
+//                Tables\Actions\Action::make('fillable_pdf')
+//                ->label('fillable PDF')
+//                ->icon('heroicon-o-printer')
+//                ->url(fn (Character $record) => route('fill-character.print', ['id' => $record->id]))
+//                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

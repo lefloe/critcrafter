@@ -1,0 +1,12 @@
+<svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dice border -->
+    <rect x="10" y="10" width="80" height="80" rx="10" ry="10" fill="#ffffff" stroke="#000000" stroke-width="4"/>
+
+    <!-- Pips -->
+    <circle cx="30" cy="30" r="6" fill="#000000"/>
+    <circle cx="70" cy="30" r="6" fill="#000000"/>
+<!--    <circle cx="50" cy="50" r="6" fill="#000000"/>-->
+    <circle cx="30" cy="70" r="6" fill="#000000"/>
+    <circle cx="70" cy="70" r="6" fill="#000000"/>
+    <text x="50" y="55" font-size="16" text-anchor="middle" fill="#000000" font-family="sans-serif">Critcrafter</text>
+</svg>
