@@ -43,7 +43,7 @@ class EquipmentResource extends Resource
                     ->maxLength(800),
                     Select::make('quality')
                     ->required()
-                    ->options(self::getQS()),                        
+                    ->options(self::getQS()),
                     Select::make('item_type')
                     ->label('Ausrüstungsart')
                     ->required()
@@ -76,7 +76,7 @@ class EquipmentResource extends Resource
                 Radio::make('waffengattung')
                 ->options([
                     'Nahkampfwaffe' => 'Nahkampfwaffe',
-                    'Fernkampfwaffe' => 'Fernkampfwaffe', 
+                    'Fernkampfwaffe' => 'Fernkampfwaffe',
                 ]),
                 Textinput::make('angriffswert')
                 ->label('Angriffswert')
@@ -175,7 +175,7 @@ class EquipmentResource extends Resource
                     ->maxvalue(9),
                 ]),
                 Grid::make(2)
-                ->schema([   
+                ->schema([
                     Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
                     ->schema([
@@ -185,7 +185,7 @@ class EquipmentResource extends Resource
                         Select::make('enchantment_qs')
                         ->label('QS Verzauberung')
                         ->options(self::getQS()),
-                    ]),               
+                    ]),
                     Select::make('rs_erweiterungen')
                     ->label('Erweiterungen')
                     ->multiple()
@@ -248,7 +248,7 @@ class EquipmentResource extends Resource
                     ->numeric(),
                 ]),
                 Grid::make(2)
-                ->schema([                        
+                ->schema([
                     Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
                     ->schema([
@@ -312,7 +312,7 @@ class EquipmentResource extends Resource
                     ->numeric(),
                 ]),
                 Grid::make(2)
-                ->schema([                        
+                ->schema([
                     Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
                     ->schema([
@@ -351,7 +351,7 @@ class EquipmentResource extends Resource
             ->description('Werte des Schmuckstück wählen')
             ->schema([
                 Grid::make(2)
-                ->schema([                        
+                ->schema([
                     Fieldset::make('verzauberungen')
                     ->label('Verzauberungen')
                     ->schema([
@@ -374,9 +374,10 @@ class EquipmentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                ->searchable(),                
-                Tables\Columns\TextColumn::make('item_type')
                 ->searchable(),
+                Tables\Columns\TextColumn::make('item_type')
+                ->searchable()
+                ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                 ->dateTime()

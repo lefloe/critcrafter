@@ -55,9 +55,9 @@ class DatabaseSeeder extends Seeder
             'nw_aw' => 4,
             'nw_vw'=> 0,
             'nw_tw'=> 1,
-            'xp' => 1,
-            'klassenfertigkeiten' => ['Schwertkampf', 'Magiekunde'],
-            'handwerkskenntnisse' => ['Schmieden'],
+            'xp' => 7,
+            'klassenfertigkeiten' => ['Animist I', 'Barde I', 'Berserker I'],
+            'handwerkskenntnisse' => ['Werkzeuge'],
             'lore' => 'Aspektwesen',
         ]);
 

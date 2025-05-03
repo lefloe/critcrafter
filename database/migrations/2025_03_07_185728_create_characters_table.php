@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('leiteigenschaft1');
             $table->string('leiteigenschaft2');
             $table->integer('main_stat_value')->nullable();
+            $table->boolean('ko_toggle')->nullable();
             $table->string('archetype')->nullable();
             $table->json('rassenmerkmale')->nullable();
             $table->integer('ko');

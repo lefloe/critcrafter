@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Filament\Resources\Resource;
 use App\Filament\Resources\CharacterResource\Pages;
 use App\Filament\Resources\CharacterResource\RelationManagers;
+use Filament\Notifications\Notification;
 use App\Models\Character;
 use App\Models\Equipment;
 use Filament\Forms;
@@ -27,10 +28,9 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Radio;
+use MongoDB\BSON\Javascript;
 
 
-// ToDo: Rassenmerkmale Einfluss, Erfahrungsgrad Einfluss, Klassenfertigkeiten Einfluss
-// Equipment Einfluss auf Basiswerte (Erweiterungen und Verzauberungen)
 
 
 class CharacterResource extends Resource
@@ -66,15 +66,10 @@ class CharacterResource extends Resource
                                 ->required()
                                 ->minValue(1)
                                 ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                    $data = self::getAttributeArray($get);
-                                    $xpdata = self::getxpdata($get);
                                     $set('leps', $get('ko') * 2 + $state);
                                     $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
                                     $set('initiative', round($get('in') / 2 + $get('xp')));
-
-
-                                    $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $get('leiteigenschaft2'), $data, $xpdata));
-
+                                    self::setMainStateValue($get, $set);
                                 })
                                 ->reactive(),
                             ]),
@@ -132,14 +127,13 @@ class CharacterResource extends Resource
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
-                                        $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($state, $get('leiteigenschaft2'), $data, $get('xp')));
+                                        self::setMainStateValue($get, $set);
+                                        self::calculateLeps($get, $set);
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));   //sets archetype
-                                        $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($state, $get('leiteigenschaft2'), $data, $get('xp')));
-
+                                        self::setMainStateValue($get, $set);
+                                        self::calculateLeps($get, $set);
                                     }),
                                     Select::make('leiteigenschaft2')
                                     ->label('Leiteigenschaft 2')
@@ -157,16 +151,14 @@ class CharacterResource extends Resource
                                     ])
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
-
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
-                                        $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $state, $data, $get('xp')));
+                                        self::setMainStateValue($get, $set);
+                                        self::calculateLeps($get, $set);
                                     })
                                     ->afterStateHydrated(function ($state, Get $get, Set $set) {
                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
-                                        $data = self::getAttributeArray($get);
-                                        $set('main_stat_value', self::getResources($get('leiteigenschaft1'), $state, $data, $get('xp')));
-
+                                        self::setMainStateValue($get, $set);
+                                        self::calculateLeps($get, $set);
                                     }),
                                 ]),
                             Grid::make(3)
@@ -182,14 +174,23 @@ class CharacterResource extends Resource
                                 ->live()
                                 ->disabled()
                                 ->dehydrated(),
+                                Toggle::make('ko_toggle')
+                                ->label('KO für LeP verwenden')
+                                ->reactive()
+                                ->inline(false)
+                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                    self::setMainStateValue($get, $set);
+                                    self::calculateLeps($get, $set);
 
+                                })
+                                ->reactive(),
                             ])
                             ]),
                             Section::make('Rasse und Rassenmerkmale')
                             ->description('Rasse und Rassenmerkmale auswählen')
                             ->collapsible()
                             ->schema([
-                                Grid::make(2)
+                                Grid::make(3)
                                 ->schema([
                                     Select::make('race')
                                     ->required()
@@ -213,47 +214,47 @@ class CharacterResource extends Resource
                                         'Biest' => 'Biest/Geist',
                                         'Dämon' => 'Dämon/Spekter',
                                     ]),
+                                    Select::make('rassenmerkmale')
+                                    ->multiple(3)
+                                    ->options([
+                                        'Apex' => 'Apex',
+                                        'Balzkleid' => 'Balzkleid',
+                                        'Beutetier' => 'Beutetier',
+                                        'Eingefettet' => 'Eingefettet',
+                                        'Fettpolster' => 'Fettpolster',
+                                        'Fleischig' => 'Fleischig',
+                                        'Geschuppt' => 'Geschuppt',
+                                        'Giftig' => 'Giftig',
+                                        'Glitschig' => 'Glitschig',
+                                        'Kiemen' => 'Kiemen',
+                                        'Medium' => 'Medium',
+                                        'Nachtsicht' => 'Nachtsicht',
+                                        'Nackt' => 'Nackt',
+                                        'Panzer' => 'Panzer',
+                                        'Photosynthese' => 'Photosynthese',
+                                        'Raubtier/Hörner' => 'Raubtier/Hörner',
+                                        'Reittier' => 'Reittier',
+                                        'Samtpfote' => 'Samtpfote',
+                                        'Schleimspur' => 'Schleimspur',
+                                        'Schlinger' => 'Schlinger',
+                                        'Schwanz' => 'Schwanz',
+                                        'Schwingen' => 'Schwingen',
+                                        'Siebter Sinn' => 'Siebter Sinn',
+                                        'Spitzohr' => 'Spitzohr',
+                                        'Sprunggelenke' => 'Sprunggelenke',
+                                        'Spucker/Dornenkapseln' => 'Spucker/Dornenkapseln',
+                                        'Spürnase' => 'Spürnase',
+                                        'Stacheln' => 'Stacheln',
+                                        'Tarnmuster' => 'Tarnmuster',
+                                        'Tiefe Taschen' => 'Tiefe Taschen',
+                                        'Treibholz' => 'Treibholz',
+                                        'Unscheinbar' => 'Unscheinbar',
+                                        'Vielgliedrig' => 'Vielgliedrig',
+                                        'Vierbeiner' => 'Vierbeiner',
+                                        'Vital' => 'Vital',
+                                        'Zierlich/Kleinwüchsig' => 'Zierlich/Kleinwüchsig',
+                                    ]),
                                 ]),
-                                Select::make('rassenmerkmale')
-                                ->multiple()
-                                ->options([
-                                    'Apex' => 'Apex',
-                                    'Balzkleid' => 'Balzkleid',
-                                    'Beutetier' => 'Beutetier',
-                                    'Eingefettet' => 'Eingefettet',
-                                    'Fettpolster' => 'Fettpolster',
-                                    'Fleischig' => 'Fleischig',
-                                    'Geschuppt' => 'Geschuppt',
-                                    'Giftig' => 'Giftig',
-                                    'Glitschig' => 'Glitschig',
-                                    'Kiemen' => 'Kiemen',
-                                    'Medium' => 'Medium',
-                                    'Nachtsicht' => 'Nachtsicht',
-                                    'Nackt' => 'Nackt',
-                                    'Panzer' => 'Panzer',
-                                    'Photosynthese' => 'Photosynthese',
-                                    'Raubtier/Hörner' => 'Raubtier/Hörner',
-                                    'Reittier' => 'Reittier',
-                                    'Samtpfote' => 'Samtpfote',
-                                    'Schleimspur' => 'Schleimspur',
-                                    'Schlinger' => 'Schlinger',
-                                    'Schwanz' => 'Schwanz',
-                                    'Schwingen' => 'Schwingen',
-                                    'Siebter Sinn' => 'Siebter Sinn',
-                                    'Spitzohr' => 'Spitzohr',
-                                    'Sprunggelenke' => 'Sprunggelenke',
-                                    'Spucker/Dornenkapseln' => 'Spucker/Dornenkapseln',
-                                    'Spürnase' => 'Spürnase',
-                                    'Stacheln' => 'Stacheln',
-                                    'Tarnmuster' => 'Tarnmuster',
-                                    'Tiefe Taschen' => 'Tiefe Taschen',
-                                    'Treibholz' => 'Treibholz',
-                                    'Unscheinbar' => 'Unscheinbar',
-                                    'Vielgliedrig' => 'Vielgliedrig',
-                                    'Vierbeiner' => 'Vierbeiner',
-                                    'Vital' => 'Vital',
-                                    'Zierlich/Kleinwüchsig' => 'Zierlich/Kleinwüchsig',
-                                ])
                             ]),
                             Section::make('Eigenschaften')
                             ->collapsible()
@@ -266,7 +267,9 @@ class CharacterResource extends Resource
                                         ->minValue(0)
                                         ->live()
                                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            self::valueTest($get, $set);
+                                            self::calculateLeps($get, $set);
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('st') // Stärke
@@ -274,14 +277,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Tragkraft value
-                                            $set('tragkraft', $get('st'));
-
-                                            // If st is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'ST') {
-                                                $set('main_stat_value', $get('st'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('tragkraft', $state);
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('ag') // Agilität
@@ -289,14 +288,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Geschwindigkeit value
-                                            $set('geschwindigkeit', round($get('ag') / 2));
-
-                                            // If ag is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'AG') {
-                                                $set('main_stat_value', $get('ag'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('geschwindigkeit', round($state / 2));
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('ge') // Geschick
@@ -304,14 +299,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Handwerksbonus value
-                                            $set('handwerksbonus', $get('ge') - 12);
-
-                                            // If ge is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'GE') {
-                                                $set('main_stat_value', $get('ge'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('handwerksbonus', $state - 12);
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('we') // Weisheit
@@ -319,14 +310,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Kontrollwiderstand value
-                                            $set('kontrollwiderstand', $get('we') - 12);
-
-                                            // If we is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'WE') {
-                                                $set('main_stat_value', $get('we'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('kontrollwiderstand', $state - 12);
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('in') // Instinkt
@@ -334,14 +321,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Initiative value
-                                            $set('initiative', round($get('in') / 2 + $get('xp')));
-
-                                            // If in is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'IN') {
-                                                $set('main_stat_value', $get('in'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('initiative', round($state / 2 + $get('xp')));
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('mu') // Mut
@@ -349,14 +332,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Verteidigung value
-                                            $set('verteidigung', $get('mu') - 12);
-
-                                            // If mu is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'MU') {
-                                                $set('main_stat_value', $get('mu'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('verteidigung', $state - 12);                                            self::maxEigenschaften($get, $set);
+                                            self::maxEigenschaften($get, $set);
+                                            self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('ch') // Charisma
@@ -364,14 +343,10 @@ class CharacterResource extends Resource
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
-                                        ->afterStateUpdated(function (Get $get, Set $set) {
-                                            // update Seelenpunkte value
-                                            $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
-
-                                            // If ch is the main characteristic, update main_stat_value
-                                            if ($get('leiteigenschaft1') == 'CH') {
-                                                $set('main_stat_value', $get('ch'));
-                                            }
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set('seelenpunkte', $state * 2 + $get('xp'));
+                                            self::setMainStateValue($get, $set);
+                                            self::maxEigenschaften($get, $set);
                                         })
                                         ->required(),
                                 ])
@@ -457,9 +432,17 @@ class CharacterResource extends Resource
                                             'Waldläufer I' => 'Waldläufer I',
                                             'Eigenschaftsbonus' => 'Eigenschaftsbonus',
                                             'Basistalentbonus' => 'Basistalentbonus',
-                                        ]),
+                                        ])
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self:self::limitKlassenfertigkeiten($get, $set);
+                                        }
+
+                                        ),
                                         Select::make('handwerkskenntnisse')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self:self::limithandwerk($get, $set);
+                                        })
                                         ->options([
                                             'Handelswaren' => 'Handelswaren',
                                             'Werkzeuge' => 'Werkzeuge',
@@ -500,6 +483,15 @@ class CharacterResource extends Resource
                                     ->schema([
                                         Select::make('skill_ko')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            if ($get('leiteigenschaft1') === 'KO' || $get('leiteigenschaft2') === 'KO') {
+                                                return false;
+                                            }
+                                            return true;
+                                        })
                                         ->options([
                                             'Block' => 'Block',
                                             'Aus der Deckung' => 'Aus der Deckung',
@@ -519,6 +511,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_st')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                        return self::isSkillactive($get, 'ST');
+                                        })
                                         ->options([
                                             'Plattenbrecher' => 'Plattenbrecher',
                                             'Schädelbrecher' => 'Schädelbrecher',
@@ -536,6 +534,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_ag')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'AG');
+                                        })
                                         ->options([
                                             'Ausweiden' => 'Ausweiden',
                                             'Rüstung zerreißen' => 'Rüstung zerreißen',
@@ -555,6 +559,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_ge')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'GE');
+                                        })
                                         ->options([
                                             'Meucheln' => 'Meucheln',
                                             'Mit dem Spitzen Ende' => 'Mit dem Spitzen Ende',
@@ -573,6 +583,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_in')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'IN');
+                                        })
                                         ->options([
                                             'Illuminos' => 'Illuminos',
                                             'Spiri Exvocare' => 'Spiri Exvocare',
@@ -623,6 +639,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_we')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'WE');
+                                        })
                                         ->options([
                                             'Iunctio' => 'Iunctio',
                                             'Veto Umbrax' => 'Veto Umbrax',
@@ -668,6 +690,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_mu')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'MU');
+                                        })
                                         ->options([
                                             'Coactus' => 'Coactus',
                                             'Veto Nexus' => 'Veto Nexus',
@@ -714,6 +742,12 @@ class CharacterResource extends Resource
                                         ]),
                                         Select::make('skill_ch')
                                         ->multiple()
+                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                            self::limitskills($get, $set);
+                                        })
+                                        ->disabled(function ($state, Get $get) {
+                                            return self::isSkillactive($get, 'CH');
+                                        })
                                         ->options([
                                             'Quaestio Spiri' => 'Quaestio Spiri',
                                             'Conventus' => 'Conventus',
@@ -830,6 +864,8 @@ class CharacterResource extends Resource
                             ]),
                         Tabs\Tab::make('Zusammenfassung')
                             ->schema([
+                                Textinput::make('sum_rs_schnitt')
+                                ->default(10),
 
                             ])
                     ]),
@@ -846,7 +882,7 @@ class CharacterResource extends Resource
     protected static function getArchetype(?string $leiteigenschaft1, ?string $leiteigenschaft2): string
     {
         if (!$leiteigenschaft1 || !$leiteigenschaft2) {
-            return 'Unbekannt'; // Standardwert, wenn ein Wert fehlt
+            return 'Unbekannt';
         }
 
         $archetypeMap = [
@@ -892,26 +928,13 @@ class CharacterResource extends Resource
         $key2 = "$leiteigenschaft2-$leiteigenschaft1"; // Falls Reihenfolge umgekehrt eingegeben wurde
 
         return $archetypeMap[$key1] ?? $archetypeMap[$key2] ?? 'Unbekannt';
-
-        foreach ($archetypeMap as $attributes => $archetype) {
-            if (in_array($leiteigenschaft1, $attributes) && in_array($leiteigenschaft2, $attributes)) {
-                return $archetype;
-            }
-        }
-
-        return 'Unbekannt'; // Falls keine Kombination passt
-
     }
-    public static function getxpdata(Get $get): int
-    {
-        $xpdata = (int)$get('xp');
-        return $xpdata;
-    }
+
 
 
     public static function getAttributeArray(Get $get): array
     {
-        return [
+        $AttributeArray = [
             'KO' => $get('ko'),
             'ST' => $get('st'),
             'AG' => $get('ag'),
@@ -921,18 +944,187 @@ class CharacterResource extends Resource
             'MU' => $get('mu'),
             'CH' => $get('ch'),
         ];
+        return $AttributeArray;
 
     }
-
-    public static function getResources(?string $leiteigenschaft1, ?string $leiteigenschaft2, ?array $data, ?int $xpdata): int
+    public static function getResources(?int $ko_toggle, ?string $leiteigenschaft1, ?string $leiteigenschaft2, ?array $data, ?int $xpdata): int
     {
+//        dd($ko_toggle);
+
         $value1 = isset($data[$leiteigenschaft1]) ? (int)$data[$leiteigenschaft1]: 0;
         $value2 = isset($data[$leiteigenschaft2]) ? (int)$data[$leiteigenschaft2]: 0;
-        $value3 = $xpdata;
 
-        return $value1 + $value2 + $value3;
+        if ($leiteigenschaft1 === $leiteigenschaft2) {
+            $mainstatevalue = $value1 * 3 + $xpdata;
+            if (($leiteigenschaft1 === 'KO') && $ko_toggle) {
+            $mainstatevalue = $value1 + $value2 + $xpdata - $data['KO'] * 2;
+            }
+        } else {
+            if (($leiteigenschaft1 === 'KO' || $leiteigenschaft2 === 'KO') && $ko_toggle) {
+                $mainstatevalue = $value1 + $value2 + $xpdata - $data['KO'];
+            }
+            else {
+                $mainstatevalue = $value1 + $value2 + $xpdata;
+            }
+        }
+        return $mainstatevalue;
+        }
+
+    public static function setMainStateValue(Get $get, Set $set): void
+    {
+        $set('main_stat_value',  self::getResources($get('ko_toggle'), $get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('xp')));
     }
 
+    public static function calculateLeps(Get $get, Set $set): void
+    {
+
+        $ko = $get('ko');
+        $xp = $get('xp');
+        $le1 = $get('leiteigenschaft1');
+        $le2 = $get('leiteigenschaft2');
+        $ko_toggle = $get('ko_toggle');
+
+        if ($ko_toggle) {
+            if ($le1 === 'KO' && $le2 === 'KO') {
+                $set('leps', $ko * 5 + $xp);
+            } elseif ($le1 === 'KO' || $le2 === 'KO') {
+                $set('leps', $ko * 3 + $xp);
+            } else {
+                $set('leps', $ko * 2 + $xp);
+            }
+        } else {
+            $set('leps', $ko * 2 + $xp);
+        }
+
+    }
+
+    public static function limitKlassenfertigkeiten(Get $get, Set $set)
+    {
+        $xp = $get('xp');
+        $limit = match (true) {
+            $xp >= 21 => 6,
+            $xp >= 16 => 5,
+            $xp >= 11 => 4,
+            $xp >= 7 => 3,
+            $xp >= 4 => 2,
+            default => 1,
+        };
+
+        if (is_array($get('klassenfertigkeiten')) && count($get('klassenfertigkeiten')) > $limit) {
+            $set('klassenfertigkeiten', array_slice($get('klassenfertigkeiten'), 0, $limit));
+
+            // Warnung anzeigen
+            Notification::make()
+                ->title("Du darfst maximal {$limit} Klassenfertigkeiten wählen.")
+                ->danger()
+                ->persistent()
+                ->send();
+        }
+    }
+
+    public static function isSkillactive(Get $get, string $skillkey): bool
+    {
+        if ($get('leiteigenschaft1') === $skillkey || $get('leiteigenschaft2') === $skillkey) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function limitskills (Get $get, Set $set): void
+    {
+        $skillFields = [
+            'skill_ko', 'skill_st', 'skill_ag', 'skill_ge',
+            'skill_we', 'skill_in', 'skill_mu', 'skill_ch',
+        ];
+
+        $xp = $get('xp');
+        $limit = match (true) {
+            $xp >= 21=> 15,
+            $xp >= 20=> 14,
+            $xp >= 17=> 13,
+            $xp >= 15=> 12,
+            $xp >= 13=> 11,
+            $xp >= 10=> 10,
+            $xp >= 9=> 9,
+            $xp >= 8=> 8,
+            $xp >= 7=> 7,
+            $xp >= 5=> 6,
+            $xp >= 3=> 5,
+            $xp >= 2=> 4,
+            default   => 2,
+        };
+
+        // Alle ausgewählten Skills zusammenzählen
+        $allSkills = [];
+        foreach ($skillFields as $field) {
+            $values = $get($field);
+            if (is_array($values)) {
+                $allSkills[$field] = $values;
+            } else {
+                $allSkills[$field] = [];
+            }
+        }
+
+        // Gesamtliste aller ausgewählten Skills
+        $flatList = array_merge(...array_values($allSkills));
+
+        // Wenn das Limit überschritten wurde Warnung anzeigen
+        if (count($flatList) > $limit) {
+            Notification::make()
+                ->title("Du darfst maximal {$limit} Waffen- oder Aspektfertigkeiten wählen.")
+                ->danger()
+                ->persistent()
+                ->send();
+        }
+    }
+
+    public static function limithandwerk(Get $get, Set $set)
+    {
+        $xp = $get('xp');
+        $limit = match (true) {
+            $xp >= 11 => 5,
+            $xp >= 9 => 4,
+            $xp >= 5 => 3,
+            $xp >= 3 => 2,
+            default => 1,
+        };
+
+        if (is_array($get('handwerkskenntnisse')) && count($get('handwerkskenntnisse')) > $limit) {
+            $set('handwerkskenntnisse', array_slice($get('handwerkskenntnisse'), 0, $limit));
+
+            // Warnung anzeigen
+            Notification::make()
+                ->title("Du darfst maximal {$limit} Handwerkskenntnisse wählen.")
+                ->danger()
+                ->send();
+        }
+    }
+
+    public static function maxEigenschaften(Get $get, Set $set): void
+    {
+        // Liste aller Eigenschaftsfelder
+        $fields = ['ko', 'st', 'ag', 'ge', 'we', 'in', 'mu', 'ch'];
+
+        // Erlaubte Maximal-Summe berechnen
+        $xp = (int) $get('xp');
+        $max = 95 + $xp;
+
+        // Aktuelle Summe der Eigenschaften berechnen
+        $sum = 0;
+        foreach ($fields as $field) {
+            $value = (int) $get($field);
+            $sum += $value;
+        }
+
+        // Falls Summe zu hoch ist → Warnung
+        if ($sum > $max) {
+            Notification::make()
+                ->title("Die Summe deiner Eigenschaften darf bei XP {$xp} maximal {$max} betragen. Aktuell: {$sum}.")
+                ->danger()
+                ->persistent()
+                ->send();
+        }
+    }
 
     public static function table(Table $table): Table
     {
@@ -978,10 +1170,5 @@ class CharacterResource extends Resource
             'create' => Pages\CreateCharacter::route('/create'),
             'edit' => Pages\EditCharacter::route('/{record}/edit'),
         ];
-    }
-
-    public static function valueTest(Get $get, Set $set): void
-    {
-        $set('main_stat_value',  self::getResources($get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('xp')));
     }
 }

@@ -20,6 +20,7 @@ class Character extends Model
         'leiteigenschaft2',
         'archetype',
         'main_stat_value',
+        'ko_toggle',
         'race',
         'wesen',
         'rassenmerkmale',

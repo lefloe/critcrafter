@@ -10,6 +10,3 @@ Route::get('/characters/{id}/print', [CharacterPdfController::class, 'printChara
 
 Route::get('/fill-characters/{id}/print', [CharacterPdfController::class, 'fillForm'])
     ->name('fill-character.print');
-
-
-Route::get('/pdf-test', [PdfTestController::class, 'generate']);
