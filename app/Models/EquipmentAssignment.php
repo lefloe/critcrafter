@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EquipmentAssignment extends Model
 {
     protected $fillable = [
-        'equipment_id', 
+        'equipment_id',
         'equipped'
     ];
 

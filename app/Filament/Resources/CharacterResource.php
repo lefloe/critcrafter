@@ -31,8 +31,6 @@ use Filament\Forms\Components\Radio;
 use MongoDB\BSON\Javascript;
 
 
-
-
 class CharacterResource extends Resource
 {
     protected static ?string $model = Character::class;
@@ -70,12 +68,12 @@ class CharacterResource extends Resource
                                     $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
                                     $set('initiative', round($get('in') / 2 + $get('xp')));
                                     self::setMainStateValue($get, $set);
+                                    self::maxEigenschaften($get, $set);
                                 })
                                 ->reactive(),
                             ]),
                             Textarea::make('description')
                             ->label('Description')
-                            ->required()
                             ->maxLength(800),
                             Grid::make(2)
                             ->schema([
@@ -257,14 +255,30 @@ class CharacterResource extends Resource
                                 ]),
                             ]),
                             Section::make('Eigenschaften')
+                                ->description(function (Get $get, Set $set) {
+                                    $value = count($get('klassenfertigkeiten')) ?? 10;
+                                    $result = self::maxEigenschaften($get, $set);
+
+                                    return "{$result['sumeig']}   von {$result['maxeig']} Punkten vergeben. Maximal {$result['limit']} pro Eigenschaft.";
+                                })
+                                ->columns([
+                                    'lg' => 2,
+                                    'sm' => 1,
+                                ])
                             ->collapsible()
                             ->schema([
-                                Grid::make(4)
+                                Grid::make([
+                                    'default' => 2,
+                                    'lg' => 4,
+                                ])
                                 ->schema([
                                     TextInput::make('ko') // Konstitution
-                                        ->label('Konstitution (KO)')
+                                    ->label('Konstitution (KO)')
                                         ->numeric()
                                         ->minValue(0)
+                                        ->maxValue(function (callable $get) {
+                                            return $get('limit') ?? 100;;
+                                        })
                                         ->live()
                                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                             self::calculateLeps($get, $set);
@@ -273,7 +287,7 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('st') // Stärke
-                                        ->label('Stärke (ST)')
+                                    ->label('Stärke (ST)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -284,7 +298,7 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('ag') // Agilität
-                                        ->label('Agilität (AG)')
+                                    ->label('Agilität (AG)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -295,7 +309,7 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('ge') // Geschick
-                                        ->label('Geschick (GE)')
+                                    ->label('Geschick (GE)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -306,7 +320,7 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('we') // Weisheit
-                                        ->label('Weisheit (WE)')
+                                    ->label('Weisheit (WE)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -317,7 +331,7 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('in') // Instinkt
-                                        ->label('Instinkt (IN)')
+                                    ->label('Instinkt (IN)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -328,18 +342,18 @@ class CharacterResource extends Resource
                                         })
                                         ->required(),
                                     TextInput::make('mu') // Mut
-                                        ->label('Mut (MU)')
+                                    ->label('Mut (MU)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
                                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            $set('verteidigung', $state - 12);                                            self::maxEigenschaften($get, $set);
+                                            $set('verteidigung', $state - 12);
                                             self::maxEigenschaften($get, $set);
                                             self::setMainStateValue($get, $set);
                                         })
                                         ->required(),
                                     TextInput::make('ch') // Charisma
-                                        ->label('Charisma (CH)')
+                                    ->label('Charisma (CH)')
                                         ->numeric()
                                         ->minValue(0)
                                         ->live()
@@ -349,8 +363,7 @@ class CharacterResource extends Resource
                                             self::maxEigenschaften($get, $set);
                                         })
                                         ->required(),
-                                ])
-
+                                ]),
                             ]),
                             Section::make('Berechnete Werte')
                             ->collapsible()
@@ -402,6 +415,7 @@ class CharacterResource extends Resource
                                     ->schema([
                                         Select::make('klassenfertigkeiten')
                                         ->multiple()
+                                        ->live()
                                         ->options([
                                             'Animist I' => 'Animist I',
                                             'Barde I' => 'Barde I',
@@ -434,12 +448,19 @@ class CharacterResource extends Resource
                                             'Basistalentbonus' => 'Basistalentbonus',
                                         ])
                                         ->afterstateUpdated(function (Get $get, Set $set) {
-                                            self:self::limitKlassenfertigkeiten($get, $set);
+                                            self::limitKlassenfertigkeiten($get, $set);
                                         }
 
-                                        ),
+                                        )
+                                        ->hint(function (Get $get, Set $set) {
+                                            $value = count($get('klassenfertigkeiten')) ?? 10;
+                                            $limit = self::limitKlassenfertigkeiten($get, $set);
+                                            return "{$value} von {$limit}";
+                                        }),
                                         Select::make('handwerkskenntnisse')
                                         ->multiple()
+                                        ->live()
+                                        ->default(['Handelswaren','Werkzeuge'])
                                         ->afterstateUpdated(function (Get $get, Set $set) {
                                             self:self::limithandwerk($get, $set);
                                         })
@@ -454,10 +475,16 @@ class CharacterResource extends Resource
                                             'Schmuckstücke & Talismane' => 'Schmuckstücke & Talismane',
                                             'Verzauberungen' => 'Verzauberungen',
                                             'Waffen' => 'Waffen',
-                                        ]),
+                                        ])
+                                        ->hint(function (Get $get, Set $set) {
+                                            $value = count($get('handwerkskenntnisse')) ?? 10;
+                                            $limit = self::limithandwerk($get, $set);
+                                            return "{$value} von {$limit}";
+                                        }),
                                         Select::make('lore')
                                         ->label('Überlieferungen')
                                         ->multiple()
+                                        ->live()
                                         ->options([
                                             'Aspektwesen' => 'Aspektwesen',
                                             'Fauna & Flora' => 'Fauna & Flora',
@@ -476,14 +503,39 @@ class CharacterResource extends Resource
                                     ]),
                                 ]),
                                 Section::make('Fertigkeiten')
-                                ->description('Aspekt- und Waffenfertigkeiten auswählen')
+                                ->description(function (Get $get, Set $set) {
+                                    $result = self::limitskills($get, $set);
+                                    return  count($result['flatList']). ' von ' .$result['limit']. ' Aspekt- und Waffenfertigkeiten ausgewählt';
+                                })
                                 ->collapsible()
                                 ->schema([
                                     Grid::make(4)
                                     ->schema([
                                         Select::make('skill_ko')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_ko')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->options([
+                                                'Block' => 'Block',
+                                                'Aus der Deckung' => 'Aus der Deckung',
+                                                'Entwaffnen' => 'Entwaffnen',
+                                                'Schildschlag' => 'Schildschlag',
+                                                'Durch den Hagel' => 'Durch den Hagel',
+                                                'Sprengfalle' => 'Sprengfalle',
+                                                'Notreserve' => 'Notreserve',
+                                                'Ricochet' => 'Ricochet',
+                                                'Aus dem Gleichgewicht' => 'Aus dem Gleichgewicht',
+                                                'Schulterwurf' => 'Schulterwurf',
+                                                'Katapult' => 'Katapult',
+                                                'An meine Seite' => 'An meine Seite',
+                                                'Kommando' => 'Kommando',
+                                                'Kriegslärm' => 'Kriegslärm',
+                                                'Aus der Not' => 'Aus der Not',
+                                        ])
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -491,27 +543,15 @@ class CharacterResource extends Resource
                                                 return false;
                                             }
                                             return true;
-                                        })
-                                        ->options([
-                                            'Block' => 'Block',
-                                            'Aus der Deckung' => 'Aus der Deckung',
-                                            'Entwaffnen' => 'Entwaffnen',
-                                            'Schildschlag' => 'Schildschlag',
-                                            'Durch den Hagel' => 'Durch den Hagel',
-                                            'Sprengfalle' => 'Sprengfalle',
-                                            'Notreserve' => 'Notreserve',
-                                            'Ricochet' => 'Ricochet',
-                                            'Aus dem Gleichgewicht' => 'Aus dem Gleichgewicht',
-                                            'Schulterwurf' => 'Schulterwurf',
-                                            'Katapult' => 'Katapult',
-                                            'An meine Seite' => 'An meine Seite',
-                                            'Kommando' => 'Kommando',
-                                            'Kriegslärm' => 'Kriegslärm',
-                                            'Aus der Not' => 'Aus der Not',
-                                        ]),
+                                        }),
                                         Select::make('skill_st')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_st')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -533,8 +573,13 @@ class CharacterResource extends Resource
                                             'Kraftvoller Wurf' => 'Kraftvoller Wurf',
                                         ]),
                                         Select::make('skill_ag')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_ag')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -558,8 +603,13 @@ class CharacterResource extends Resource
                                             'Waffenschmuck' => 'Waffenschmuck',
                                         ]),
                                         Select::make('skill_ge')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_ge')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -582,8 +632,13 @@ class CharacterResource extends Resource
                                             'Riposte' => 'Riposte',
                                         ]),
                                         Select::make('skill_in')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_in')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -638,8 +693,13 @@ class CharacterResource extends Resource
                                             'Corpus Lapis' => 'Corpus Lapis',
                                         ]),
                                         Select::make('skill_we')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_we')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -689,8 +749,13 @@ class CharacterResource extends Resource
                                             'Custodia' => 'Custodia',
                                         ]),
                                         Select::make('skill_mu')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_mu')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -741,8 +806,13 @@ class CharacterResource extends Resource
                                             'Dissaeptum' => 'Dissaeptum',
                                         ]),
                                         Select::make('skill_ch')
+                                        ->hint(function (Get $get, Set $set) {
+                                            $result = self::limitskills($get, $set);
+                                            return count($get('skill_ch')) . ' von insgesamt ' . $result['limit'];
+                                        })
                                         ->multiple()
-                                        ->afterstateUpdated(function (Get $get, Set $set) {
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, Set $set) {
                                             self::limitskills($get, $set);
                                         })
                                         ->disabled(function ($state, Get $get) {
@@ -849,17 +919,17 @@ class CharacterResource extends Resource
                                     ->relationship('equipmentAssignments') // wichtig! Dadurch wird character_id automatisch gesetzt
                                     ->label('Ausrüstung zuweisen')
                                     ->schema([
-                                        Select::make('equipment_id')
+                                        Select::make('equipmentAssignments')
                                         ->label('Ausrüstung wählen')
-                                        ->options(\App\Models\Equipment::all()->pluck('name', 'id'))
-                                        ->searchable(['name', 'item_type'])
-                                        ->required(),
+                                        ->live()
+                                        ->options(Equipment::all()->pluck('name', 'id'))
+                                        ->searchable(['name', 'id'])
+                                        ->preload(),
                                         Toggle::make('equipped')
                                             ->label('Ausgerüstet')
                                             ->inline(false),
                                     ])
-                                    ->createItemButtonLabel('weitere Ausrüstung hinzufügen')
-                                    // ->columns(3)
+                                    ->addActionLabel('weitere Ausrüstung hinzufügen')
                                 ]),
                             ]),
 //                        Tabs\Tab::make('Zusammenfassung')
@@ -944,8 +1014,6 @@ class CharacterResource extends Resource
     }
     public static function getResources(?int $ko_toggle, ?string $leiteigenschaft1, ?string $leiteigenschaft2, ?array $data, ?int $xpdata): int
     {
-//        dd($ko_toggle);
-
         $value1 = isset($data[$leiteigenschaft1]) ? (int)$data[$leiteigenschaft1]: 0;
         $value2 = isset($data[$leiteigenschaft2]) ? (int)$data[$leiteigenschaft2]: 0;
 
@@ -1010,11 +1078,11 @@ class CharacterResource extends Resource
 
             // Warnung anzeigen
             Notification::make()
-                ->title("Du darfst maximal {$limit} Klassenfertigkeiten wählen.")
+                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
                 ->danger()
-                ->persistent()
                 ->send();
         }
+        return $limit;
     }
 
     public static function isSkillactive(Get $get, string $skillkey): bool
@@ -1025,13 +1093,12 @@ class CharacterResource extends Resource
         return true;
     }
 
-    public static function limitskills (Get $get, Set $set): void
+    public static function limitskills (Get $get, Set $set)
     {
         $skillFields = [
             'skill_ko', 'skill_st', 'skill_ag', 'skill_ge',
             'skill_we', 'skill_in', 'skill_mu', 'skill_ch',
         ];
-
         $xp = $get('xp');
         $limit = match (true) {
             $xp >= 21=> 15,
@@ -1063,14 +1130,18 @@ class CharacterResource extends Resource
         // Gesamtliste aller ausgewählten Skills
         $flatList = array_merge(...array_values($allSkills));
 
+
         // Wenn das Limit überschritten wurde Warnung anzeigen
         if (count($flatList) > $limit) {
             Notification::make()
-                ->title("Du darfst maximal {$limit} Waffen- oder Aspektfertigkeiten wählen.")
+                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Waffen- oder Aspektfertigkeiten wählen.")
                 ->danger()
-                ->persistent()
                 ->send();
         }
+        return [
+            'flatList' => $flatList,
+            'limit' => $limit,
+        ];
     }
 
     public static function limithandwerk(Get $get, Set $set)
@@ -1084,18 +1155,20 @@ class CharacterResource extends Resource
             default => 1,
         };
 
+
         if (is_array($get('handwerkskenntnisse')) && count($get('handwerkskenntnisse')) > $limit) {
             $set('handwerkskenntnisse', array_slice($get('handwerkskenntnisse'), 0, $limit));
 
             // Warnung anzeigen
             Notification::make()
-                ->title("Du darfst maximal {$limit} Handwerkskenntnisse wählen.")
+                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Handwerkskenntnisse wählen.")
                 ->danger()
                 ->send();
         }
+        return $limit;
     }
 
-    public static function maxEigenschaften(Get $get, Set $set): void
+    public static function maxEigenschaften(Get $get, Set $set)
     {
         // Liste aller Eigenschaftsfelder
         $fields = ['ko', 'st', 'ag', 'ge', 'we', 'in', 'mu', 'ch'];
@@ -1110,6 +1183,9 @@ class CharacterResource extends Resource
             $value = (int) $get($field);
             $sum += $value;
         }
+        $set('maxeig', $max);
+        $set('sumeig', $sum);
+        $limit = min($xp + 13, 22);
 
         // Falls Summe zu hoch ist → Warnung
         if ($sum > $max) {
@@ -1119,6 +1195,12 @@ class CharacterResource extends Resource
                 ->persistent()
                 ->send();
         }
+
+        return [
+            'maxeig' => $max,
+            'sumeig' => $sum,
+            'limit' => $limit,
+        ];
     }
 
     public static function table(Table $table): Table

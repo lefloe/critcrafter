@@ -105,286 +105,296 @@
 <body>
 
     <div class="container">
+                <!-- Kopfzeile mit Portrait & Namen -->
 
-        <!-- Kopfzeile mit Portrait & Namen -->
-
-        <div class="header">
-            <table style="width: 100%;">
-                <tr>
-                    <td style="width: 25%; vertical-align: top">
-                        @if($character->portrait)
-                            <img class="img" src="{{ public_path('storage/' . $character->portrait) }}" alt="Portrait" style="max-width: 200px; max-height: 250px;">
-                        @endif
-                    </td>
-                    <td style="width: 75%; vertical-align: top; padding-left: 15px;">
-                        <h2 style="margin: 0;">{{ $character->name }}</h2>
-                        <p><b>Beschreibung:</b></p>
-                        <p style="font-size: {{ strlen($character->description) > 600 ? '8pt' : '9pt' }};">
-                            {{ $character->description }}
-                        </p>
-                        <table style="padding-bottom: 10px;">
-                            <td style="padding-right: 50px;">
-                                <strong>Rasse:</strong> {{ $character->race }}</br>
-                                <strong>Wesen:</strong> {{ $character->wesen ?? '—' }}
+                <div class="header">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 25%; vertical-align: top">
+                                @if($character->portrait)
+                                    <img class="img" src="{{ public_path('storage/' . $character->portrait) }}" alt="Portrait" style="max-width: 200px; max-height: 250px;">
+                                @endif
                             </td>
-                            <td>
-                                <strong>Leiteigenschaften:</strong> {{ $character->leiteigenschaft1 }} / {{ $character->leiteigenschaft2 }}  ({{ $character->archetype }})</br>
-                                <strong>Erfahrungsgrad:</strong> {{ $character->xp }}
+                            <td style="width: 75%; vertical-align: top; padding-left: 15px;">
+                                <h2 style="margin: 0;">{{ $character->name }}</h2>
+                                <p><b>Beschreibung:</b></p>
+                                <p style="font-size: {{ strlen($character->description) > 600 ? '8pt' : '9pt' }};">
+                                    {{ $character->description }}
+                                </p>
+                                <table style="padding-bottom: 10px;">
+                                    <td style="padding-right: 50px;">
+                                        <strong>Rasse:</strong> {{ $character->race }}</br>
+                                        <strong>Wesen:</strong> {{ $character->wesen ?? '—' }}
+                                    </td>
+                                    <td>
+                                        <strong>Leiteigenschaften:</strong> {{ $character->leiteigenschaft1 }} / {{ $character->leiteigenschaft2 }}  ({{ $character->archetype }})</br>
+                                        <strong>Erfahrungsgrad:</strong> {{ $character->xp }}
+                                    </td>
+                                </table>
+
                             </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section" > <!-- Abschnitt: körperl. Eigenschaften -->
+                    <table class="table" style="width: 95%; border: none">
+                        <tr>
+                            <td style="width: 25%; border: none;">
+                                <table  style="width: 90%;">
+                                    <tr>
+                                        <td>{{ $character->leps }}</td>
+                                        <th>Lebenspunkte (LeP)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $character->tragkraft }}</td>
+                                        <th>Tragkraft</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $character->geschwindigkeit }}</td>
+                                        <th>Geschwindigkeit</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $character->handwerksbonus }}</td>
+                                        <th>Handwerksbonus</th>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 75%; vertical-align: top; border: none">
+                                <table class="table" style="width: 100%; border: none; border-spacing: 1">
+                                    <tr style="border-spacing: 2;">
+                                        <td>{{ $character->ko }}</td><th>Zähigkeit</th>
+                                        <td style="width: 1px; border: none"></td>
+                                        <td>{{ $character->st }}</td><th>Kraftakt</th>
+                                        <td style="width: 1px; border: none"></td>
+                                        <td>{{ $character->ag }}</td><th>Körperbeherrschung</th>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td>{{ $character->ge }}</td><th>Fingerfertigkeit</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $character->ko }}</td><td> Zäher Hund</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td>{{ $character->st }}</td><td> Wurfarm</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td>{{ $character->ag }}</td><td> Lösen</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td>{{ $character->ge }}</td><td> Löschen Abstreifen</td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ $character->ko }}</td><td> Standhalten</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->st }}</td><td> Halten Stoßen Zerren</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ag }}</td><td> Leichtfüßig</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ge }}</td><td> Schnell anwenden</td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ $character->ko }}</td><td> Second Wind</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->st }}</td><td> Schleppen</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ag }}</td><td> Abrollen</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ge }}</td><td> Schnellziehen</td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ $character->ko }}</td><td> Eisern</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->st }}</td><td> Dampwalze</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ag }}</td><td> Ausweichen</td>
+                                        <td style="width: 1px; border: none""></td>
+                                        <td> {{ $character->ge }}</td><td> Schnell herstellen</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="section" ><!-- Leib und co -->
+                    <table class="table" style="width: 95%; border: none;">
+                        <tr>
+                            <td style="width: 30%; vertical-align: bottom; border: none;">
+                                <h2>Leib</h2>
+                            </td>
+                            <td style="width: 70%; vertical-align: top; border: none;">
+                                <table class="table" style="width: 50%; table-layout: fixed; border: none; border-spacing: 2;">
+
+                                    <tr>
+                                        <th style="font-size: 10pt;">KO</th>
+                                        <th style="font-size: 10pt;">ST</th>
+                                        <th style="font-size: 10pt;">AG</th>
+                                        <th style="font-size: 10pt;">GE</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 12pt;"> {{ $character->ko }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->st }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->ag }}</td>
+                                        <td style="font-size: 12pt;"> {{ $character->ge }}</td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            <!-- Abschnitt: dark half -->
+                <div class="dark-area" >
+                    <div class="section" ><!-- Seele und geist. Eigenschaften -->
+                        <table class="table" style="width: 95%; border: none;">
+                            <tr>
+                                <td style="width: 30%; vertical-align: top; border: none;">
+                                    <h2>Seele</h2>
+                                </td>
+                                <td style="width: 70%; vertical-align: top; border: none;">
+                                    <table class="table" style="width: 50%;  border: none; border-spacing: 2;  table-layout: fixed; ">
+
+                                        <tr>
+                                            <th style="font-size: 10pt;">WE</th>
+                                            <th style="font-size: 10pt;">IN</th>
+                                            <th style="font-size: 10pt;">MU</th>
+                                            <th style="font-size: 10pt;">CH</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 12pt;"> {{ $character->we }}</td>
+                                            <td style="font-size: 12pt;"> {{ $character->in }}</td>
+                                            <td style="font-size: 12pt;"> {{ $character->mu }}</td>
+                                            <td style="font-size: 12pt;"> {{ $character->ch }}</td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
                         </table>
+                    </div>
+                    <div class="section" > <!--  geist. Basiswerte und Basistalente -->
+                        <table class="table" style="width: 95%; border: none;">
+                            <tr>
+                                <td style="width: 25%; border: none;">
+                                    <table class="table" style="width: 90%; border: none; border-spacing: 2;">
+                                        <tr>
+                                            <td>{{ $character->kontrollwiderstand }}</td>
+                                            <th>Kontrollwiderstand</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $character->initiative }}</td>
+                                            <th>Initiative (Ini)</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $character->verteidigung }}</td>
+                                            <th>Verteidigung</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $character->seelenpunkte }}</td>
+                                            <th>Seelenpunkte (SeP)</th>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="width: 75%; vertical-align: top; border: none;">
+                                    <table class="table" style="width: 100%; border: none; border-spacing: 1">
 
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="section" > <!-- Abschnitt: körperl. Eigenschaften -->
-            <table class="table" style="width: 95%; border: none">
-                <tr>
-                    <td style="width: 25%; border: none;">
-                        <table  style="width: 90%;">
-                            <tr>
-                                <td>{{ $character->leps }}</td>
-                                <th>Lebenspunkte (LeP)</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->tragkraft }}</td>
-                                <th>Tragkraft</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->geschwindigkeit }}</td>
-                                <th>Geschwindigkeit</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $character->handwerksbonus }}</td>
-                                <th>Handwerksbonus</th>
+                                        <tr>
+                                            @if({ $character->we }<10 ||
+                                            <td>{{ $character->we }}</td><th>Konzentration</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->in }}</td><th>Wahrnehmung</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->mu }}</td><th>Willenskraft</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->ch }}</td><th>Kommunikation</th>
+                                            )
+                                            @elseif
+                                            <td>{{ $character->we }}</td><th>Konzentration</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->in }}</td><th>Wahrnehmung</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->mu }}</td><th>Willenskraft</th>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->ch }}</td><th>Kommunikation</th>
+                                            )
+                                            @endif
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $character->we }}</td><td> Ausspähen</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->in }}</td><td> Observieren</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->mu }}</td><td> Verbinden</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td>{{ $character->ch }}</td><td> Provozieren</td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ $character->we }}</td><td> Talisman wechseln</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->in }}</td><td> Gefahreninstinkt</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->mu }}</td><td> Riskieren</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->ch }}</td><td> Planen</td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ $character->we }}</td><td> Fokussierter Wille</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->in }}</td><td> Zur rechten Zeit</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->mu }}</td><td> Überwinden</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->ch }}</td><td> Motivieren</td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ $character->we }}</td><td> Fokussieren</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->in }}</td><td> Wittern</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->mu }}</td><td> Gestählter Geist</td>
+                                            <td style="width: 10px; border: none""></td>
+                                            <td> {{ $character->ch }}</td><td> Hundeblick</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
-                    </td>
-                    <td style="width: 75%; vertical-align: top; border: none">
-                        <table class="table" style="width: 100%; border: none; border-spacing: 1">
-                            <tr style="border-spacing: 2;">
-                                <td>{{ $character->ko }}</td><th>Zähigkeit</th>
-                                <td style="width: 1px; border: none"></td>
-                                <td>{{ $character->st }}</td><th>Kraftakt</th>
-                                <td style="width: 1px; border: none"></td>
-                                <td>{{ $character->ag }}</td><th>Körperbeherrschung</th>
-                                <td style="width: 1px; border: none""></td>
-                                <td>{{ $character->ge }}</td><th>Fingerfertigkeit</th>
+                    </div>
+                    <div class="section" > <!-- Fertigkeiten & Überlieferungen -->
+                        <h2>Fertigkeiten & Überlieferungen</h2>
+                        <table class="table" style="width:95%; border: none;border-spacing: 5;table-layout: fixed">
+                            <tr>
+                                <th>Klassenfertigkeiten</th>
+                                <th>Handwerkskenntnisse</th>
+                                <th>Überlieferungen</th>
                             </tr>
                             <tr>
-                                <td>{{ $character->ko }}</td><td> Zäher Hund</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td>{{ $character->st }}</td><td> Wurfarm</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td>{{ $character->ag }}</td><td> Lösen</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td>{{ $character->ge }}</td><td> Löschen Abstreifen</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->ko }}</td><td> Standhalten</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->st }}</td><td> Halten Stoßen Zerren</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ag }}</td><td> Leichtfüßig</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ge }}</td><td> Schnell anwenden</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->ko }}</td><td> Second Wind</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->st }}</td><td> Schleppen</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ag }}</td><td> Abrollen</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ge }}</td><td> Schnellziehen</td>
-                            </tr>
-                            <tr>
-                                <td> {{ $character->ko }}</td><td> Eisern</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->st }}</td><td> Dampwalze</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ag }}</td><td> Ausweichen</td>
-                                <td style="width: 1px; border: none""></td>
-                                <td> {{ $character->ge }}</td><td> Schnell herstellen</td>
+                                <td style="border: none">
+                                @foreach($character->klassenfertigkeiten as $fertigkeit)
+                                    <li>{{ $fertigkeit }}</li>
+                                @endforeach
+                                </td>
+                                <td style="border: none">
+                                    @foreach($character->handwerkskenntnisse as $handwerk)
+                                        <li>{{ $handwerk }}</li>
+                                    @endforeach
+                                </td>
+                                <td style="border: none">
+                                @foreach($character->lore as $lore)
+                                        <li>{{ $lore }}</li>
+                                    @endforeach
+                                </td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="section" ><!-- Leib und co -->
-            <table class="table" style="width: 95%; border: none;">
-                <tr>
-                    <td style="width: 30%; vertical-align: bottom; border: none;">
-                        <h2>Leib</h2>
-                    </td>
-                    <td style="width: 70%; vertical-align: top; border: none;">
-                        <table class="table" style="width: 50%; table-layout: fixed; border: none; border-spacing: 2;">
+                    </div>
+                </div>
 
-                            <tr>
-                                <th style="font-size: 10pt;">KO</th>
-                                <th style="font-size: 10pt;">ST</th>
-                                <th style="font-size: 10pt;">AG</th>
-                                <th style="font-size: 10pt;">GE</th>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 12pt;"> {{ $character->ko }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->st }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->ag }}</td>
-                                <td style="font-size: 12pt;"> {{ $character->ge }}</td>
-                            </tr>
-
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    <!-- Abschnitt: dark half -->
-        <div class="dark-area" >
-            <div class="section" ><!-- Seele und geist. Eigenschaften -->
-                <table class="table" style="width: 95%; border: none;">
-                    <tr>
-                        <td style="width: 30%; vertical-align: top; border: none;">
-                            <h2>Seele</h2>
-                        </td>
-                        <td style="width: 70%; vertical-align: top; border: none;">
-                            <table class="table" style="width: 50%;  border: none; border-spacing: 2;  table-layout: fixed; ">
-
-                                <tr>
-                                    <th style="font-size: 10pt;">WE</th>
-                                    <th style="font-size: 10pt;">IN</th>
-                                    <th style="font-size: 10pt;">MU</th>
-                                    <th style="font-size: 10pt;">CH</th>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 12pt;"> {{ $character->we }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->in }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->mu }}</td>
-                                    <td style="font-size: 12pt;"> {{ $character->ch }}</td>
-                                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section" > <!--  geist. Basiswerte und Basistalente -->
-                <table class="table" style="width: 95%; border: none;">
-                    <tr>
-                        <td style="width: 25%; border: none;">
-                            <table class="table" style="width: 90%; border: none; border-spacing: 2;">
-                                <tr>
-                                    <td>{{ $character->kontrollwiderstand }}</td>
-                                    <th>Kontrollwiderstand</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ $character->initiative }}</td>
-                                    <th>Initiative (Ini)</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ $character->verteidigung }}</td>
-                                    <th>Verteidigung</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ $character->seelenpunkte }}</td>
-                                    <th>Seelenpunkte (SeP)</th>
-                                </tr>
-                            </table>
-                        </td>
-                        <td style="width: 75%; vertical-align: top; border: none;">
-                            <table class="table" style="width: 100%; border: none; border-spacing: 1">
-
-                                <tr>
-                                    <td>{{ $character->we }}</td><th>Konzentration</th>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->in }}</td><th>Wahrnehmung</th>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->mu }}</td><th>Willenskraft</th>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->ch }}</td><th>Kommunikation</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ $character->we }}</td><td> Ausspähen</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->in }}</td><td> Observieren</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->mu }}</td><td> Verbinden</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td>{{ $character->ch }}</td><td> Provozieren</td>
-                                </tr>
-                                <tr>
-                                    <td> {{ $character->we }}</td><td> Talisman wechseln</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->in }}</td><td> Gefahreninstinkt</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->mu }}</td><td> Riskieren</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->ch }}</td><td> Planen</td>
-                                </tr>
-                                <tr>
-                                    <td> {{ $character->we }}</td><td> Fokussierter Wille</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->in }}</td><td> Zur rechten Zeit</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->mu }}</td><td> Überwinden</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->ch }}</td><td> Motivieren</td>
-                                </tr>
-                                <tr>
-                                    <td> {{ $character->we }}</td><td> Fokussieren</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->in }}</td><td> Wittern</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->mu }}</td><td> Gestählter Geist</td>
-                                    <td style="width: 10px; border: none""></td>
-                                    <td> {{ $character->ch }}</td><td> Hundeblick</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section" > <!-- Fertigkeiten & Überlieferungen -->
-                <h2>Fertigkeiten & Überlieferungen</h2>
-                <table class="table" style="width:95%; border: none;border-spacing: 5;table-layout: fixed">
-                    <tr>
-                        <th>Klassenfertigkeiten</th>
-                        <th>Handwerkskenntnisse</th>
-                        <th>Überlieferungen</th>
-                    </tr>
-                    <tr>
-                        <td style="border: none">
-                        @foreach($character->klassenfertigkeiten as $fertigkeit)
-                            <li>{{ $fertigkeit }}</li>
-                        @endforeach
-                        </td>
-                        <td style="border: none">
-                            @foreach($character->handwerkskenntnisse as $handwerk)
-                                <li>{{ $handwerk }}</li>
-                            @endforeach
-                        </td>
-                        <td style="border: none">
-                        @foreach($character->lore as $lore)
-                                <li>{{ $lore }}</li>
-                            @endforeach
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Seite 2: Equipment -->
-        <div class="page-break"></div>
-
+                <!-- Seite 2: Equipment -->
+                <div class="page-break"></div>
         <!-- equipped -->
         <div class="section" style="width: 95%;">  <!-- Rüstung & Schmuck -->
 
             <table class="table" style="width:100%; border: none"> <!-- outer table -->
                 <td style="width: 78%; border: none">
                     <table>
-                        <td style="width: 45%; border-spacing: 3; border: none">
+                        <td style="width: 45%; border-spacing: 2; border: none">
                             <table>
                                 <th style="border: none" colspan="2">Rüstung</th>
                                 @foreach($character->equipmentAssignments as $assignment)
@@ -584,8 +594,25 @@
         <!-- Abschnitt: dunkle Hälfte -->
         <div class="dark-area">
             <div class="section" style="margin-top:10pt;">
+{{--                <table class="table" style="width: 95%; border: none;">--}}
+{{--                    <tr>--}}
+{{--                        <td>--}}
+{{--                            AT--}}
+{{--                        </td>--}}
+{{--                        <td>--}}
+{{--                            @foreach($character->equipmentAssignments as $assignment)--}}
+{{--                                @php $item = $assignment->equipment; @endphp--}}
+{{--                                @if($item->item_type === 'Waffe' && $assignment->equipped)--}}
+{{--                                {{$item->angriffswert }}--}}
+{{--                                @endif--}}
+{{--                                @endforeach--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                </table>--}}
+
+            </div>
+                <div class="section" style="margin-top:10pt;">
             <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
-                <h3>Aktuell</h3>
                 <table class="table" style="width: 95%; border: none;">
                     <td style="border: none">
                         <table class="table" style="width: 95%; border: none; border-spacing: 2">

@@ -378,7 +378,6 @@ class EquipmentResource extends Resource
                 Tables\Columns\TextColumn::make('item_type')
                 ->searchable()
                 ->sortable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                 ->dateTime()
                 ->sortable()

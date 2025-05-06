@@ -41,9 +41,9 @@ class Equipment extends Model
         'equipped'
     ];
     protected $casts = [
-        'damage_type' => 'array', 
-        'enchantment' => 'array', 
-        'wp_erweiterungen' => 'array', 
+        'damage_type' => 'array',
+        'enchantment' => 'array',
+        'wp_erweiterungen' => 'array',
         'rs_erweiterungen' => 'array',
         'ts_erweiterungen' => 'array',
     ];
