@@ -1192,7 +1192,6 @@ class CharacterResource extends Resource
             Notification::make()
                 ->title("Die Summe deiner Eigenschaften darf bei XP {$xp} maximal {$max} betragen. Aktuell: {$sum}.")
                 ->danger()
-                ->persistent()
                 ->send();
         }
 

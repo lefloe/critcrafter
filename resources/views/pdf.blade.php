@@ -137,7 +137,7 @@
                     </table>
                 </div>
 
-                <div class="section" > <!-- Abschnitt: körperl. Eigenschaften -->
+                <div class="section"> <!-- Abschnitt: körperl. Eigenschaften -->
                     <table class="table" style="width: 95%; border: none">
                         <tr>
                             <td style="width: 25%; border: none;">
@@ -168,43 +168,47 @@
                                         <td>{{ $character->st }}</td><th>Kraftakt</th>
                                         <td style="width: 1px; border: none"></td>
                                         <td>{{ $character->ag }}</td><th>Körperbeherrschung</th>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td>{{ $character->ge }}</td><th>Fingerfertigkeit</th>
                                     </tr>
                                     <tr>
-                                        <td>{{ $character->ko }}</td><td> Zäher Hund</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td>
+                                        @if(isset($basistalente['KO']['verfügbar']['Zäher Hund']))
+                                            {{ $character->ko }}
+                                        @endif
+                                        </td><td> Zäher Hund</td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td>{{ $character->st }}</td><td> Wurfarm</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td>{{ $character->ag }}</td><td> Lösen</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td>{{ $character->ge }}</td><td> Löschen Abstreifen</td>
                                     </tr>
                                     <tr>
                                         <td> {{ $character->ko }}</td><td> Standhalten</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->st }}</td><td> Halten Stoßen Zerren</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ag }}</td><td> Leichtfüßig</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ge }}</td><td> Schnell anwenden</td>
                                     </tr>
                                     <tr>
                                         <td> {{ $character->ko }}</td><td> Second Wind</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->st }}</td><td> Schleppen</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ag }}</td><td> Abrollen</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ge }}</td><td> Schnellziehen</td>
                                     </tr>
                                     <tr>
                                         <td> {{ $character->ko }}</td><td> Eisern</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->st }}</td><td> Dampwalze</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ag }}</td><td> Ausweichen</td>
-                                        <td style="width: 1px; border: none""></td>
+                                        <td style="width: 1px; border: none"></td>
                                         <td> {{ $character->ge }}</td><td> Schnell herstellen</td>
                                     </tr>
                                 </table>
@@ -296,7 +300,6 @@
                                     <table class="table" style="width: 100%; border: none; border-spacing: 1">
 
                                         <tr>
-                                            @if({ $character->we }<10 ||
                                             <td>{{ $character->we }}</td><th>Konzentration</th>
                                             <td style="width: 10px; border: none""></td>
                                             <td>{{ $character->in }}</td><th>Wahrnehmung</th>
@@ -304,17 +307,6 @@
                                             <td>{{ $character->mu }}</td><th>Willenskraft</th>
                                             <td style="width: 10px; border: none""></td>
                                             <td>{{ $character->ch }}</td><th>Kommunikation</th>
-                                            )
-                                            @elseif
-                                            <td>{{ $character->we }}</td><th>Konzentration</th>
-                                            <td style="width: 10px; border: none""></td>
-                                            <td>{{ $character->in }}</td><th>Wahrnehmung</th>
-                                            <td style="width: 10px; border: none""></td>
-                                            <td>{{ $character->mu }}</td><th>Willenskraft</th>
-                                            <td style="width: 10px; border: none""></td>
-                                            <td>{{ $character->ch }}</td><th>Kommunikation</th>
-                                            )
-                                            @endif
                                         </tr>
                                         <tr>
                                             <td>{{ $character->we }}</td><td> Ausspähen</td>
@@ -367,9 +359,9 @@
                             </tr>
                             <tr>
                                 <td style="border: none">
-                                @foreach($character->klassenfertigkeiten as $fertigkeit)
-                                    <li>{{ $fertigkeit }}</li>
-                                @endforeach
+                                    @foreach($character->klassenfertigkeiten as $fertigkeit)
+                                        <li>{{ $fertigkeit }}</li>
+                                    @endforeach
                                 </td>
                                 <td style="border: none">
                                     @foreach($character->handwerkskenntnisse as $handwerk)
@@ -377,7 +369,7 @@
                                     @endforeach
                                 </td>
                                 <td style="border: none">
-                                @foreach($character->lore as $lore)
+                                    @foreach($character->lore as $lore)
                                         <li>{{ $lore }}</li>
                                     @endforeach
                                 </td>
@@ -399,7 +391,7 @@
                                 <th style="border: none" colspan="2">Rüstung</th>
                                 @foreach($character->equipmentAssignments as $assignment)
                                     @php $item = $assignment->equipment; @endphp
-                                    @if($item->item_type === 'Rüstung' && $assignment->equipped)
+                                @if(isset($item) && $item->item_type === 'Rüstung' && $assignment->equipped)
                                         <tr>
                                             <td colspan="2">Name: {{ $item->name }}</td>
                                         </tr>
@@ -436,7 +428,7 @@
 
                                 @foreach($character->equipmentAssignments as $assignment)
                                     @php $item = $assignment->equipment; @endphp
-                                    @if($item->item_type === 'Talisman' && $assignment->equipped)
+                                    @if(isset($item) && $item->item_type === 'Talisman' && $assignment->equipped)
                                         <tr>
                                             <td colspan="2">Name: {{ $item->name }}</td>
                                         </tr>
@@ -487,11 +479,11 @@
                                 foreach ($character->equipmentAssignments as $assignment) {
                                     if (! $assignment->equipped) continue;
 
-                                    if ($assignment->equipment->item_type === 'Rüstung') {
+                                    if (isset($item) && $assignment->equipment->item_type === 'Rüstung') {
                                         $armor = $assignment->equipment;
                                     }
 
-                                    if ($assignment->equipment->item_type === 'Talisman') {
+                                    if (isset($item) && $assignment->equipment->item_type === 'Talisman') {
                                         $talisman = $assignment->equipment;
                                     }
                                 }
@@ -510,7 +502,7 @@
 
                         @foreach($character->equipmentAssignments as $assignment)
                             @php $item = $assignment->equipment; @endphp
-                            @if($item->item_type === 'Schmuckstück' && $assignment->equipped)
+                            @if(isset($item) && $item->item_type === 'Schmuckstück' && $assignment->equipped)
                                 <tr>
                                     <td>
                                         <b> {{ $item->name }} </b></br>
@@ -539,7 +531,7 @@
                 <td style="border: none;">
                     @foreach($character->equipmentAssignments as $assignment)
                         @php $item = $assignment->equipment; @endphp
-                        @if($item->item_type === 'Waffe' && $assignment->equipped)
+                        @if(isset($item) && $item->item_type === 'Waffe' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
                             <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>Waffengattung: {{ $item->waffengattung }}</li>
@@ -554,7 +546,7 @@
                 <td style="border: none;">
                     @foreach($character->equipmentAssignments as $assignment)
                         @php $item = $assignment->equipment; @endphp
-                        @if($item->item_type === 'Waffe' && $assignment->equipped)
+                        @if(isset($item) && $item->item_type === 'Waffe' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
                             <li><b>QS:</b> {{ $item->quality }}  <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>Waffengattung: {{ $item->waffengattung }}</li>
@@ -569,7 +561,7 @@
                 <td style="border: none;">
                     @foreach($character->equipmentAssignments as $assignment)
                         @php $item = $assignment->equipment; @endphp
-                        @if($item->item_type === 'Schild' && $assignment->equipped)
+                        @if(isset($item) && $item->item_type === 'Schild' && $assignment->equipped)
                             <li>Name: {{ $item->name }}</li>
                             <li>QS: {{ $item->quality }} <b>HwP:</b> {{ $item->hwp }}</li>
                             <li>RS Schnitt: {{ $item->rs_schnitt }}</li>
@@ -594,23 +586,7 @@
         <!-- Abschnitt: dunkle Hälfte -->
         <div class="dark-area">
             <div class="section" style="margin-top:10pt;">
-{{--                <table class="table" style="width: 95%; border: none;">--}}
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            AT--}}
-{{--                        </td>--}}
-{{--                        <td>--}}
-{{--                            @foreach($character->equipmentAssignments as $assignment)--}}
-{{--                                @php $item = $assignment->equipment; @endphp--}}
-{{--                                @if($item->item_type === 'Waffe' && $assignment->equipped)--}}
-{{--                                {{$item->angriffswert }}--}}
-{{--                                @endif--}}
-{{--                                @endforeach--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                </table>--}}
-
-            </div>
+{{--            </div>--}}
                 <div class="section" style="margin-top:10pt;">
             <!-- Abschnitt: aktuelle LeP, SeP &Ressourcen -->
                 <table class="table" style="width: 95%; border: none;">
@@ -726,7 +702,7 @@
             </div>
             <div class="section" style="margin-top:5pt;"> <!-- Abschnitt: Equipment dark -->
                 <h3>Equipment</h3>
-                @if ($character->equipmentAssignments->isNotEmpty())
+                @if (isset($item) && $character->equipmentAssignments->isNotEmpty())
                     <table class="table" style="border: none; border-spacing: 1">
                         <thead>
                             <tr>
@@ -740,7 +716,6 @@
                         <tbody>
                             @foreach($character->equipmentAssignments as $assignment)
                                 @php $item = $assignment->equipment; @endphp
-
                                 <tr>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->item_type }}</td>

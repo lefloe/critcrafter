@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('equipment_assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('character_id')->constrained()->onDelete('cascade');
-            $table->foreignId('equipment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('character_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('equipment_id')->nullable()->constrained()->onDelete('cascade');
             $table->boolean('equipped')->default(false);
             $table->timestamps();
         });

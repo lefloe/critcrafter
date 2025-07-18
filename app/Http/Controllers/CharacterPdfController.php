@@ -13,8 +13,9 @@ class CharacterPdfController extends Controller
     {
         // Lade den Charakter oder scheitere, falls nicht gefunden
         $character = Character::with('equipmentAssignments.equipment')->findOrFail($id);
+        $basistalente = $this->getBasistalente($character);
         // Lade die View "pdf.character" und übergebe den Character
-        $pdf = Pdf::loadView('pdf', compact('character'));
+        $pdf = Pdf::loadView('pdf', compact('character', 'basistalente'));
 
         //PDF direkt anzeigen
         return $pdf->stream('character-' . $id . '.pdf');
@@ -22,6 +23,32 @@ class CharacterPdfController extends Controller
         // downlaod
         // return $pdf->download('character-' . $id . '.pdf');
     }
+
+    public function getBasistalente($character): array
+    {
+        $basistalente = [
+            'KO' => [
+                'wert' => $character->ko,
+                'name' => 'Zähigkeit',
+                'talente' => [
+                    'Zäher Hund' => 14,
+                    'Standhalten' => 15,
+                    'Second Wind' => 16,
+                    'Eisern' => 17,
+                ],
+            ],
+        ];
+        foreach ($basistalente as $eigenschaft => $data) {
+            $basistalente[$eigenschaft]
+            ['verfügbar'] = array_filter(
+                $data['talente'],
+                fn($schwelle) => $data['wert'] >= $schwelle
+            );
+        };
+        return $basistalente;
+    }
+
+
 
     public function fillForm($id)
     {
@@ -42,9 +69,7 @@ class CharacterPdfController extends Controller
             $fields[$pdfField] = $character->$modelAttribute;
         }
 
-//        $fields = [
-//            'Name'     => $character->name,
-//        ];
+
 
         $pdf = new \mikehaertl\pdftk\Pdf(
             storage_path('app/templates/Character-Sheet-LOSS-2_0.pdf'),
