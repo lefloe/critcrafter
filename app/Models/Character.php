@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 
 class Character extends Model
@@ -75,7 +77,17 @@ class Character extends Model
         'skill_ch' => 'array',
         'equipment' => 'array',
         'lore' => 'array',
-        'nw_damage_type' => 'array'
+        'nw_damage_type' => 'array',
     ];
 
+    public function equipment(): BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'character_equipment')
+            ->withPivot('slot')
+            ->withTimestamps();
+    }
+    public function characterEquipment()
+    {
+        return $this->hasMany(CharacterEquipment::class);
+    }
 }

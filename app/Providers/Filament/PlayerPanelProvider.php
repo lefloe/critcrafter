@@ -27,6 +27,7 @@ class PlayerPanelProvider extends PanelProvider
             ->id('player')
             ->path('player')
             ->login()
+            ->registration()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -51,6 +52,8 @@ class PlayerPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->resourceCreatePageRedirect('index')
+            ->resourceEditPageRedirect('index')
             ->authMiddleware([
                 Authenticate::class,
             ]);
