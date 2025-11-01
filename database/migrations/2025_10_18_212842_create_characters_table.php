@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('user_id');
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('race');

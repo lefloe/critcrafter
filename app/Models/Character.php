@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -15,7 +16,7 @@ class Character extends Model
 
     protected $fillable = [
         'name',
-        'player_id',
+        'user_id',
         'description',
         'leiteigenschaft1',
         'leiteigenschaft2',
@@ -79,6 +80,11 @@ class Character extends Model
         'lore' => 'array',
         'nw_damage_type' => 'array',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function equipment(): BelongsToMany
     {

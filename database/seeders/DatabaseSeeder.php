@@ -18,13 +18,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'user',
+            'email' => 'user@example.com',
+            'role' => 'user',
+            'password' => bcrypt('password'),
+        ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'role' => 'admin',
             'password' => bcrypt('password'),
         ]);
 
         Character::create([
             'name' => 'Testcharakter',
+            'user_id' => 1,
             'description' => 'Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
             'leiteigenschaft1' => 'KO',
             'leiteigenschaft2' => 'ST',
@@ -65,6 +73,7 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Waffe
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Kriegsaxt der Glut',
             'description' => 'Eine schwere, geschmiedete Axt mit glühender Schneide.',
             'quality' => 'episch',
@@ -80,6 +89,7 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Rüstung
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Verstärkte Knochenrüstung',
             'description' => 'Rüstung aus alchemistisch gehärtetem Knochen.',
             'quality' => 'selten',
@@ -98,6 +108,7 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Talisman
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Talisman der Klarheit',
             'description' => 'Ein schimmernder Kristall, der geistige Klarheit spendet.',
             'quality' => 'legendär',
@@ -115,6 +126,7 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Schild
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Schild der Vorhut',
             'description' => 'Ein massiver Schild mit Gravuren eines Löwen.',
             'quality' => 'ungewöhnlich',
@@ -131,6 +143,7 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Schmuckstück
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Ring der Macht',
             'description' => 'Ein massiver Ring mit Gravuren eines Zaubers.',
             'quality' => 'ungewöhnlich',

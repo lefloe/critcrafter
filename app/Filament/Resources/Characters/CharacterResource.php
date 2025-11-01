@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Player\Resources\Characters;
+namespace App\Filament\Resources\Characters;
 
-use App\Filament\Player\Resources\Characters\Pages\CreateCharacter;
-use App\Filament\Player\Resources\Characters\Pages\EditCharacter;
-use App\Filament\Player\Resources\Characters\Pages\ListCharacters;
-use App\Filament\Player\Resources\Characters\Pages\ViewCharacter;
-use App\Filament\Player\Resources\Characters\Schemas\CharacterForm;
-use App\Filament\Player\Resources\Characters\Schemas\CharacterInfolist;
-use App\Filament\Player\Resources\Characters\Tables\CharactersTable;
+use App\Filament\Resources\Characters\Pages\CreateCharacter;
+use App\Filament\Resources\Characters\Pages\EditCharacter;
+use App\Filament\Resources\Characters\Pages\ListCharacters;
+use App\Filament\Resources\Characters\Pages\ViewCharacter;
+use App\Filament\Resources\Characters\Schemas\CharacterForm;
+use App\Filament\Resources\Characters\Schemas\CharacterInfolist;
+use App\Filament\Resources\Characters\Tables\CharactersTable;
 use App\Models\Character;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -44,7 +44,7 @@ class CharacterResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\EquipmentRelationManager::class,
+            //
         ];
     }
 
@@ -64,10 +64,5 @@ class CharacterResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-    public static function getEloquentQuery(): Builder
-    {
-        // Zeige nur Charaktere, die dem eingeloggten Benutzer gehören
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 }

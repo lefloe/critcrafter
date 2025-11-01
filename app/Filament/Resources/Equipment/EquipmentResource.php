@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Player\Resources\Equipment;
+namespace App\Filament\Resources\Equipment;
 
-use App\Filament\Player\Resources\Equipment\Pages\CreateEquipment;
-use App\Filament\Player\Resources\Equipment\Pages\EditEquipment;
-use App\Filament\Player\Resources\Equipment\Pages\ListEquipment;
-use App\Filament\Player\Resources\Equipment\Pages\ViewEquipment;
-use App\Filament\Player\Resources\Equipment\Schemas\EquipmentForm;
-use App\Filament\Player\Resources\Equipment\Schemas\EquipmentInfolist;
-use App\Filament\Player\Resources\Equipment\Tables\EquipmentTable;
-use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\Equipment\Pages\CreateEquipment;
+use App\Filament\Resources\Equipment\Pages\EditEquipment;
+use App\Filament\Resources\Equipment\Pages\ListEquipment;
+use App\Filament\Resources\Equipment\Pages\ViewEquipment;
+use App\Filament\Resources\Equipment\Schemas\EquipmentForm;
+use App\Filament\Resources\Equipment\Schemas\EquipmentInfolist;
+use App\Filament\Resources\Equipment\Tables\EquipmentTable;
 use App\Models\Equipment;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -55,10 +54,5 @@ class EquipmentResource extends Resource
             'view' => ViewEquipment::route('/{record}'),
             'edit' => EditEquipment::route('/{record}/edit'),
         ];
-    }
-    public static function getEloquentQuery(): Builder
-    {
-        // Zeige nur Charaktere, die dem eingeloggten Benutzer gehören
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 }
