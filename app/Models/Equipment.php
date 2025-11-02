@@ -14,7 +14,7 @@ class Equipment extends Model
 {
     protected $fillable = [
         'name',
-        'player_id',
+        'user_id',
         'description',
         'quality',
         'item_type',

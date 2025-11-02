@@ -26,6 +26,11 @@ return new class extends Migration
             $table->boolean('ko_toggle')->nullable();
             $table->string('archetype')->nullable();
             $table->json('rassenmerkmale')->nullable();
+            $table->integer('ko_bonus')->nullable();
+            $table->integer('bonus_lep')->nullable();
+            $table->integer('bonus_sep')->nullable();
+            $table->integer('bonus_ini')->nullable();
+            $table->integer('bonus_re')->nullable();
             $table->integer('ko');
             $table->integer('st');
             $table->integer('ag');
@@ -57,9 +62,9 @@ return new class extends Migration
             $table->integer('nw_vw');
             $table->integer('nw_tw');
             $table->integer('xp');
-            $table->json('klassenfertigkeiten')->nullable();
-            $table->json('klassenfertigkeiten2')->nullable();
-            $table->json('klassenfertigkeiten3')->nullable();
+            $table->json('classability1')->nullable();
+            $table->json('classability2')->nullable();
+            $table->json('classability3')->nullable();
             $table->json('handwerkskenntnisse')->nullable();
             $table->json('lore')->nullable();
         });

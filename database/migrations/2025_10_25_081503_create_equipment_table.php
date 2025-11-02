@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('quality')->nullable();;
@@ -41,6 +40,7 @@ return new class extends Migration
             $table->json('rs_erweiterungen')->nullable();
             $table->json('ts_erweiterungen')->nullable();
             $table->foreignId('character_id')->nullable()->constrained()->onDelete('set Null');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->boolean('equipped')->default(false);
         });
     }

@@ -4,9 +4,11 @@ namespace App\Filament\Player\Resources\Characters\Schemas;
 
 use App\Filament\Resources\EquipmentResource;
 use App\Models\Equipment;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Radio;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
@@ -17,6 +19,8 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
+use Filament\Infolists\Components\TextEntry;
+
 
 class CharacterForm
 {
@@ -24,15 +28,19 @@ class CharacterForm
     {
         return $schema
             ->components([
+
+//                Section::make() //       evtl später einmal Infoliste für Die Grundwerte anzeigen?
+//                    ->schema([
+//                        TextEntry::make('Erfahrungsstufe')
+//                                ->state(fn (Get $get): ?string => $get ('xp')),
+//                    ]),
                 Tabs::make('Tabs')
                     ->columnSpanFull()
-                    ->statePath('')
                     ->tabs([
-                        Tabs\Tab::make('Name und Rasse')
+                        Tabs\Tab::make('Grundwerte')
                             ->schema([
                                 Section::make('Name Erfahrungsgrad und Beschreibung')
                                     ->description('Name Erfahrungsgrad und Beschreibung auswählen')
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make(2)
                                             ->schema([
@@ -41,7 +49,7 @@ class CharacterForm
                                                     ->required()
                                                     ->maxLength(255),
                                                 TextInput::make('xp')
-                                                    ->Label('Erfahrungsstufe')
+                                                    ->Label('Erfahrungsgrad')
                                                     ->numeric()
                                                     ->default(1)
                                                     ->live(onBlur: true)
@@ -50,21 +58,91 @@ class CharacterForm
                                                     ->required()
                                                     ->minValue(1)
                                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                                        $set('leps', $get('ko') * 2 + $state);
-                                                        $set('seelenpunkte', $get('ch') * 2 + $get('xp'));
-                                                        $set('initiative', round($get('in') / 2 + $get('xp')));
                                                         self::setMainStateValue($get, $set);
                                                         self::maxEigenschaften($get, $set);
+                                                        $isBeutetier = in_array('Beutetier', (array) $get('rassenmerkmale'));
+                                                        $set('nw_aw', $isBeutetier ? 0 : $state);
+                                                        $set('nw_vw', $isBeutetier ? $state : 0);
+                                                        $eg_breakpoints = [1, 2, 4, 7, 11, 16, 20];
+                                                        foreach (array_reverse($eg_breakpoints, true) as $qs_index => $eg_breakpoint) {
+                                                            $actual_qs = $qs_index + 1;
+                                                            if ((int) $state >= $eg_breakpoint) {
+                                                                $qs = $actual_qs;
+                                                                break;
+                                                            }
+                                                        }
+                                                        $set('nw_quality', $qs);
                                                     })
                                                     ->reactive(),
                                             ]),
                                         Textarea::make('description')
                                             ->label('Description')
                                             ->maxLength(800),
-                                    ]),
+                                        Grid::make(2)
+                                            ->schema([
+                                                Fieldset::make('LeP oder SeP Bonus')
+                                                    ->schema([
+                                                        TextInput::make('bonus_lep')
+                                                            ->live()
+                                                            ->numeric()
+                                                            ->step(4)
+                                                            ->live()
+                                                            ->afterStateUpdatedJs(
+                                                                <<<'JS'
+                                                                    $kobonus = parseInt($get('ko_bonus'))
+                                                                    $set('leps', parseInt($state) + $kobonus + parseInt($get('ko')))
+                                                                JS
+                                                            )
+                                                            ->hint(function ($state, Get $get, Set $set) {
+                                                                $result = self::LepBonusfromXp($get, $set)-$get('bonus_sep')-$state;
+                                                                return $result;
+                                                            }),
+                                                        TextInput::make('bonus_sep')
+                                                            ->live()
+                                                            ->numeric()
+                                                            ->step(4)
+                                                            ->afterStateUpdatedJs(
+                                                                <<<'JS'
+                                                                    $set('seelenpunkte', parseInt($state) + 2 * parseInt($get('ch')));
+                                                                JS
+                                                            )
+                                                            ->hint(function ($state, Get $get, Set $set) {
+                                                                $result = self::LepBonusfromXp($get, $set)-$get('bonus_lep')-$state;
+                                                                return $result;
+                                                            }),
+                                                    ]),
+                                                Fieldset::make('Ini oder RE Bonus')
+                                                    ->schema([
+                                                        TextInput::make('bonus_ini')
+                                                            ->live()
+                                                            ->numeric()
+                                                            ->step(4)
+                                                            ->afterStateUpdatedJs(
+                                                                <<<'JS'
+                                                                    $set('initiative', parseInt($state) + $get('in')/2)
+                                                                JS
+                                                            )
+                                                            ->hint(function ($state, Get $get, Set $set) {
+                                                                $result = self::IniBonusfromXp($get, $set)-$get('bonus_re')-$state;
+                                                                return $result;
+                                                            }),
+                                                        TextInput::make('bonus_re')
+                                                            ->live()
+                                                            ->numeric()
+                                                            ->step(4)
+                                                            ->live()
+                                                            ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                                                self::setMainStateValue($get, $set);
+                                                            })
+                                                            ->hint(function ($state, Get $get, Set $set) {
+                                                                $result = self::IniBonusfromXp($get, $set)-$get('bonus_ini')-$state;;
+                                                                return $result;
+                                                            }),
+                                                    ])
+                                        ]),
+                                ]),
                                 Section::make('Rasse und Rassenmerkmale')
                                     ->description('Rasse und Rassenmerkmale auswählen')
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make(3)
                                             ->schema([
@@ -92,6 +170,12 @@ class CharacterForm
                                                     ]),
                                                 Select::make('rassenmerkmale')
                                                     ->multiple(3)
+                                                    ->live()
+                                                    ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                                        $isBeutetier = in_array('Beutetier', (array) $state);
+                                                        $set('nw_aw', $isBeutetier ? 0 : $get('xp'));
+                                                        $set('nw_vw', $isBeutetier ? $get('xp') : 0);
+                                                    })
                                                     ->options([
                                                         'Apex' => 'Apex',
                                                         'Balzkleid' => 'Balzkleid',
@@ -132,12 +216,8 @@ class CharacterForm
                                                     ]),
                                             ]),
                                     ]),
-                            ]),
-                        Tabs\Tab::make('Eigenschaften und Archetyp')
-                            ->schema([
                                 Section::make('Archetyp, Leiteigenschaften')
                                     ->description('Leiteigenschaften und Archetyp auswählen')
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make(2)
                                             ->schema([
@@ -198,7 +278,6 @@ class CharacterForm
                                                     ->live()
                                                     ->default(fn (callable $get) => self::getArchetype($get('leiteigenschaft1'), $get('leiteigenschaft2')))
                                                     ->disabled(),
-
                                                 TextInput::make('main_stat_value')
                                                     ->label('Ressourcen')
                                                     ->live()
@@ -214,6 +293,15 @@ class CharacterForm
 
                                                     })
                                                     ->reactive(),
+                                                TextInput::make('ko_bonus')
+                                                    ->hidden()
+                                                    ->live()
+                                                    ->reactive()
+                                                    ->numeric()
+                                                    ->disabled()
+                                                    ->default(0)
+                                                    ->dehydrated(),
+
                                             ])
                                     ]),
                                 Section::make('Eigenschaften')
@@ -222,11 +310,6 @@ class CharacterForm
 
                                         return "{$result['sumeig']}   von {$result['maxeig']} Punkten vergeben. Maximal {$result['limit']} pro Eigenschaft.";
                                     })
-//                                    ->columns([
-//                                        'lg' => 2,
-//                                        'sm' => 1,
-//                                    ])
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make([
                                             'default' => 2,
@@ -238,9 +321,10 @@ class CharacterForm
                                                     ->numeric()
                                                     ->minValue(0)
                                                     ->maxValue(function (callable $get) {
-                                                        return $get('limit') ?? 100;;
+                                                        return $get('limit') ?? 100;
                                                     })
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                                         self::calculateLeps($get, $set);
                                                         self::maxEigenschaften($get, $set);
@@ -251,9 +335,10 @@ class CharacterForm
                                                 ->label('Stärke (ST)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                                        $set('tragkraft', $state);
+        //                                                        $set('tragkraft', $state);
                                                         self::maxEigenschaften($get, $set);
                                                         self::setMainStateValue($get, $set);
                                                     })
@@ -262,7 +347,8 @@ class CharacterForm
                                                 ->label('Agilität (AG)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                                         $set('geschwindigkeit', round($state / 2));
                                                         self::maxEigenschaften($get, $set);
@@ -273,9 +359,11 @@ class CharacterForm
                                                 ->label('Geschick (GE)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                                        $set('handwerksbonus', $state - 12);
+                                                        $bonus = ($state < 12) ? 0 : $state - 12;
+                                                        $set('handwerksbonus', $bonus);
                                                         self::maxEigenschaften($get, $set);
                                                         self::setMainStateValue($get, $set);
                                                     })
@@ -284,7 +372,8 @@ class CharacterForm
                                                 ->label('Weisheit (WE)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                                         $set('kontrollwiderstand', $state - 12);
                                                         self::maxEigenschaften($get, $set);
@@ -295,9 +384,10 @@ class CharacterForm
                                                 ->label('Instinkt (IN)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                                        $set('initiative', round($state / 2 + $get('xp')));
+                                                        $set('initiative', round($state / 2 + $get('bonus_ini')));
                                                         self::maxEigenschaften($get, $set);
                                                         self::setMainStateValue($get, $set);
                                                     })
@@ -306,7 +396,8 @@ class CharacterForm
                                                 ->label('Mut (MU)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                                         $set('verteidigung', $state - 12);
                                                         self::maxEigenschaften($get, $set);
@@ -317,17 +408,17 @@ class CharacterForm
                                                 ->label('Charisma (CH)')
                                                     ->numeric()
                                                     ->minValue(0)
-                                                    ->live()
+                                                    ->live(onBlur: true)
+                                                    ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                                        $set('seelenpunkte', $state * 2 + $get('xp'));
+                                                        $set('seelenpunkte', $state * 2 + $get('bonus_sep'));;
                                                         self::setMainStateValue($get, $set);
                                                         self::maxEigenschaften($get, $set);
                                                     })
                                                     ->required(),
                                             ]),
                                     ]),
-                                Section::make('Berechnete Werte')
-                                    ->collapsible()
+                                Section::make('Basiswerte')
                                     ->schema([
                                         Grid::make(4)
                                             ->schema([
@@ -364,13 +455,12 @@ class CharacterForm
                                                     ->disabled()
                                                     ->dehydrated(),
                                             ])
-                                    ])
+                                    ]),
                             ]),
                         Tabs\Tab::make('Fertigkeiten')
                             ->schema([
                                 Section::make('Klassenfertigkeiten, Handwerkskenntnis, Überlieferungen')
                                     ->description('Klassenfertigkeiten, Handwerkskenntnis und Überlieferungen auswählen')
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make(3)
                                             ->schema([
@@ -436,8 +526,11 @@ class CharacterForm
                                                         'Massaker' => 'Massaker',
                                                         'An Leibern laben' => 'An Leibern laben',
                                                         ])
-                                                    ->afterstateUpdated(function (Get $get, Set $set) {
+                                                    ->afterstateUpdated(function ($state, Get $get, Set $set) {
                                                         self::limitclassability1($get, $set);
+                                                        $true = in_array('Wer austeilt, kann auch einstecken', (array) $state);
+                                                        $set('nw_vw', $true ? $get('xp') : 0);
+
                                                     })
                                                     ->hint(function (Get $get, Set $set) {
                                                         $value = count($get('classability1')) ?? 10;
@@ -579,6 +672,12 @@ class CharacterForm
                                                     ->label('Überlieferungen')
                                                     ->multiple()
                                                     ->live()
+                                                    ->hint(function ($state, Get $get, Set $set) {
+                                                        $value = count($state);
+                                                        $true = in_array('Aufmerksamer Zuhörer', (array) $get('classability1'));
+                                                        $limit = $true ? 4 : 2;
+                                                        return "{$value} von {$limit}";
+                                                    })
                                                     ->options([
                                                         'Aspektwesen' => 'Aspektwesen',
                                                         'Fauna & Flora' => 'Fauna & Flora',
@@ -601,14 +700,13 @@ class CharacterForm
                                         $result = self::limitskills($get, $set);
                                         return  count($result['flatList']). ' von ' .$result['limit']. ' Aspekt- und Waffenfertigkeiten ausgewählt';
                                     })
-                                    ->collapsible()
                                     ->schema([
                                         Grid::make(4)
                                             ->schema([
                                                 Select::make('skill_ko')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_ko')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -639,9 +737,9 @@ class CharacterForm
                                                         return true;
                                                     }),
                                                 Select::make('skill_st')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_st')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -667,9 +765,9 @@ class CharacterForm
                                                         'Kraftvoller Wurf' => 'Kraftvoller Wurf',
                                                     ]),
                                                 Select::make('skill_ag')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_ag')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -697,9 +795,9 @@ class CharacterForm
                                                         'Waffenschmuck' => 'Waffenschmuck',
                                                     ]),
                                                 Select::make('skill_ge')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_ge')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -726,9 +824,9 @@ class CharacterForm
                                                         'Riposte' => 'Riposte',
                                                     ]),
                                                 Select::make('skill_in')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_in')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -787,9 +885,9 @@ class CharacterForm
                                                         'Corpus Lapis' => 'Corpus Lapis',
                                                     ]),
                                                 Select::make('skill_we')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_we')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -843,9 +941,9 @@ class CharacterForm
                                                         'Custodia' => 'Custodia',
                                                     ]),
                                                 Select::make('skill_mu')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_mu')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -900,9 +998,9 @@ class CharacterForm
                                                         'Dissaeptum' => 'Dissaeptum',
                                                     ]),
                                                 Select::make('skill_ch')
-                                                    ->hint(function (Get $get, Set $set) {
+                                                    ->hint(function ($state, Get $get, Set $set) {
                                                         $result = self::limitskills($get, $set);
-                                                        return count($get('skill_ch')) . ' von maximal ' . $result['limit'];
+                                                        return  $result['limit']-count($result['flatList']);
                                                     })
                                                     ->multiple()
                                                     ->live()
@@ -959,13 +1057,12 @@ class CharacterForm
                         Tabs\Tab::make('Ausrüstung')
                             ->schema([
                                 Section::make('natürliche Waffe')
-                                    ->collapsible()
                                     ->description('Natürliche Waffe')
                                     ->schema([
                                         Grid::make(3)
                                             ->schema([
-                                                Radio::make('nw_gattung')
-                                                    ->label('Waffengattung')
+                                                CheckboxList::make('nw_gattung')
+                                                    ->label('Waffengattung (beides nur Eins mit der Seele)')
                                                     ->required()
                                                     ->options([
                                                         'Nahkampfwaffe' => 'Nahkampfwaffe',
@@ -973,19 +1070,17 @@ class CharacterForm
                                                     ]),
                                                 TextInput::make('nw_quality')
                                                     ->label('QS')
-                                                    ->required(),
-                                                Select::make('nw_damage_type')
-                                                    ->label('Schadensarten')
                                                     ->required()
+                                                    ->disabled(),
+                                                Select::make('nw_damage_type')
+                                                    ->label('Schadensart (zweite Schadensart nur Raubtier/Hörner')
+                                                    ->required()
+                                                    ->live()
                                                     ->multiple()
                                                     ->options([
                                                         'stumpf' => 'ST (Stumpf)',
                                                         'schnitt' => 'AG (Schnitt)',
                                                         'stich' => 'GE (Stich)',
-                                                        'arkan' => 'WE (Arkan)',
-                                                        'Elementar' => 'IN (Elementar)',
-                                                        'Chaos' => 'MU (Chaos)',
-                                                        'Spirituell' => 'CH (Spirituell)',
                                                     ]),
                                             ]),
                                         Grid::make(3)
@@ -1005,35 +1100,34 @@ class CharacterForm
                                             ]),
                                     ]),
                                 Section::make('Ausrüstung anlegen')
-                                    ->collapsible()
                                     ->description('Wähle die aktuelle Ausrüstung')
                                     ->schema([
                                         Repeater::make('characterEquipment')
-//                                            ->label()
                                             ->relationship('characterEquipment')
                                             ->schema(components: [
                                                 Select::make('equipment_id')
                                                     ->label('Equipment')
                                                     ->relationship('equipment', 'name')
                                                     ->options(Equipment::available()->pluck('name', 'id'))
-                                                    ->searchable()
-                                                    ->required(),
-
+                                                    ->searchable(),
                                                 Select::make('slot')
                                                     ->label('Wo angelegt')
                                                     ->options([
+                                                        'not_equipped' => 'nicht angelegt',
                                                         'weapon1' => 'Waffe 1',
                                                         'weapon2' => 'Waffe 2',
                                                         'armor' => 'Rüstung',
                                                         'shield' => 'Schild',
                                                         'talisman' => 'Talisman',
+                                                        'talisman_2' => 'Talisman 2 (nur mit Resonanz)',
                                                         'jewelry1' => 'Schmuckstück 1',
                                                         'jewelry2' => 'Schmuckstück 2',
                                                         'jewelry3' => 'Schmuckstück 3',
-                                                    ])
-                                                    ->required(),
+                                                        'jewelry4' => 'Schmuckstück 4 (nur Gaben des Tempels)',
+                                                        'jewelry5' => 'Schmuckstück 5 (nur Gaben des Tempels)',
+
+                                                    ]),
                                             ])
-                                            ->collapsible()
                                             ->addActionLabel('weitere Ausrüstung hinzufügen')
                                     ]),
                             ]),
@@ -1045,7 +1139,6 @@ class CharacterForm
         if (!$leiteigenschaft1 || !$leiteigenschaft2) {
             return 'Unbekannt';
         }
-
         $archetypeMap = [
             'KO-KO' => 'Koloss',
             'KO-ST' => 'Sappeur',
@@ -1129,14 +1222,58 @@ class CharacterForm
 
     public static function setMainStateValue(Get $get, Set $set): void
     {
-        $set('main_stat_value',  self::getResources($get('ko_toggle'), $get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('xp')));
+        $set('main_stat_value',  self::getResources($get('ko_toggle'), $get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('bonus_re')));
     }
+
+    public static function LepBonusfromXp(Get $get, Set $set): int
+    {
+
+        $xp = $get('xp');
+        $limit = match (true) {
+            $xp >= 21 => 44,
+            $xp >= 19 => 40,
+            $xp >= 17 => 36,
+            $xp >= 15 => 32,
+            $xp >= 13 => 28,
+            $xp >= 11 => 24,
+            $xp >= 9 => 20,
+            $xp >= 7 => 16,
+            $xp >= 5 => 12,
+            $xp >= 3 => 8,
+            $xp >= 1 => 4,
+
+            default => 0,
+        };
+        return $limit;
+    }
+
+    public static function IniBonusfromXp(Get $get, Set $set): int
+    {
+
+        $xp = $get('xp');
+        $limit = match (true) {
+            $xp >= 22 => 40,
+            $xp >= 18 => 36,
+            $xp >= 16 => 32,
+            $xp >= 14 => 28,
+            $xp >= 12 => 24,
+            $xp >= 10 => 20,
+            $xp >= 8 => 16,
+            $xp >= 6 => 12,
+            $xp >= 4 => 8,
+            $xp >= 2 => 4,
+
+            default => 0,
+        };
+        return $limit;
+    }
+
 
     public static function calculateLeps(Get $get, Set $set): void
     {
 
         $ko = $get('ko');
-        $xp = $get('xp');
+        $xp = $get('bonus_lep');
         $le1 = $get('leiteigenschaft1');
         $le2 = $get('leiteigenschaft2');
         $ko_toggle = $get('ko_toggle');
@@ -1144,13 +1281,19 @@ class CharacterForm
         if ($ko_toggle) {
             if ($le1 === 'KO' && $le2 === 'KO') {
                 $set('leps', $ko * 5 + $xp);
+                $set('ko_bonus', $ko * 4);
             } elseif ($le1 === 'KO' || $le2 === 'KO') {
                 $set('leps', $ko * 3 + $xp);
+                $set('ko_bonus', $ko * 2);
             } else {
                 $set('leps', $ko * 2 + $xp);
+                $set('ko_bonus', $ko);
+
             }
         } else {
             $set('leps', $ko * 2 + $xp);
+            $set('ko_bonus', $ko);
+
         }
 
     }
@@ -1159,9 +1302,6 @@ class CharacterForm
     {
         $xp = $get('xp');
         $limit = match (true) {
-//            $xp >= 21 => 6,
-//            $xp >= 16 => 5,
-//            $xp >= 11 => 4,
             $xp >= 4 => 3,
             $xp >= 2 => 2,
 
@@ -1172,10 +1312,10 @@ class CharacterForm
             $set('classability1', array_slice($get('classability1'), 0, $limit));
 
             // Warnung anzeigen
-            Notification::make()
-                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
-                ->danger()
-                ->send();
+//            Notification::make()
+//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
+//                ->danger()
+//                ->send();
         }
         return $limit;
     }
@@ -1183,9 +1323,6 @@ class CharacterForm
     {
         $xp = $get('xp');
         $limit = match (true) {
-//            $xp >= 21 => 6,
-//            $xp >= 16 => 5,
-//            $xp >= 11 => 4,
             $xp >= 11 => 2,
             $xp >= 7 => 1,
             default => 0,
@@ -1195,10 +1332,10 @@ class CharacterForm
             $set('classability2', array_slice($get('classability2'), 0, $limit));
 
             // Warnung anzeigen
-            Notification::make()
-                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
-                ->danger()
-                ->send();
+//            Notification::make()
+//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
+//                ->danger()
+//                ->send();
         }
         return $limit;
     }
@@ -1206,9 +1343,6 @@ class CharacterForm
     {
         $xp = $get('xp');
         $limit = match (true) {
-//            $xp >= 21 => 6,
-//            $xp >= 16 => 5,
-//            $xp >= 11 => 4,
             $xp >= 22 => 2,
             $xp >= 16 => 1,
             default => 0,
@@ -1218,10 +1352,10 @@ class CharacterForm
             $set('classability3', array_slice($get('classability3'), 0, $limit));
 
             // Warnung anzeigen
-            Notification::make()
-                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
-                ->danger()
-                ->send();
+//            Notification::make()
+//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
+//                ->danger()
+//                ->send();
         }
         return $limit;
     }
@@ -1247,12 +1381,12 @@ class CharacterForm
         $limit = min($xp + 13, 22);
 
         // Falls Summe zu hoch ist → Warnung
-        if ($sum > $max) {
-            Notification::make()
-                ->title("Die Summe deiner Eigenschaften darf bei XP {$xp} maximal {$max} betragen. Aktuell: {$sum}.")
-                ->danger()
-                ->send();
-        }
+//        if ($sum > $max) {
+//            Notification::make()
+//                ->title("Die Summe deiner Eigenschaften darf bei XP {$xp} maximal {$max} betragen. Aktuell: {$sum}.")
+//                ->danger()
+//                ->send();
+//        }
 
         return [
             'maxeig' => $max,
@@ -1275,10 +1409,10 @@ class CharacterForm
             $set('handwerkskenntnisse', array_slice($get('handwerkskenntnisse'), 0, $limit));
 
             // Warnung anzeigen
-            Notification::make()
-                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Handwerkskenntnisse wählen.")
-                ->danger()
-                ->send();
+//            Notification::make()
+//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Handwerkskenntnisse wählen.")
+//                ->danger()
+//                ->send();
         }
         return $limit;
     }
@@ -1322,10 +1456,10 @@ class CharacterForm
 
         // Wenn das Limit überschritten wurde Warnung anzeigen
         if (count($flatList) > $limit) {
-            Notification::make()
-                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Waffen- oder Aspektfertigkeiten wählen.")
-                ->danger()
-                ->send();
+//            Notification::make()
+//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Waffen- oder Aspektfertigkeiten wählen.")
+//                ->danger()
+//                ->send();
         }
         return [
             'flatList' => $flatList,

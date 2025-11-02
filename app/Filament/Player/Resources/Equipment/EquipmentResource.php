@@ -58,7 +58,7 @@ class EquipmentResource extends Resource
     }
     public static function getEloquentQuery(): Builder
     {
-        // Zeige nur Charaktere, die dem eingeloggten Benutzer gehören
+        // Zeige nur Equipment, die dem eingeloggten Benutzer gehören
         return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 }
