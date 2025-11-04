@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('waffengattung')->nullable();
             $table->integer('attackvalue')->nullable();
             $table->json('damage_type')->nullable();
-            $table->integer('trefferwuerfel')->nullable();
+            $table->integer('tw')->nullable();
             $table->integer('traglast')->nullable();
             $table->integer('passive_verteidigung')->nullable();
             $table->integer('schild_verteidigung')->nullable();

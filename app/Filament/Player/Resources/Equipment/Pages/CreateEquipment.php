@@ -2,7 +2,6 @@
 
 namespace App\Filament\Player\Resources\Equipment\Pages;
 
-
 use App\Filament\Player\Resources\Equipment\EquipmentResource;
 use Filament\Resources\Pages\CreateRecord;
 

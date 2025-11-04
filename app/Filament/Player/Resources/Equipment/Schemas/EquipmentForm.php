@@ -40,21 +40,22 @@ class EquipmentForm
                                 Select::make('item_type')
                                     ->label('Ausrüstungsart')
                                     ->required()
+                                    ->reactive()
                                     ->options([
                                         'Material' => 'Material',
                                         'Waffe' => 'Waffe',
                                         'Rüstung' => 'Rüstung',
                                         'Talisman' => 'Talisman',
                                         'Schild' => 'Schild',
-                                        'Werkzeug' => 'Werkzeug',
+//                                        'Werkzeug' => 'Werkzeug',
                                         'Schmuckstück' => 'Schmuckstück',
                                         'Handelsware' => 'Handelsware',
                                         'Nahrungsmittel' => 'Nahrungsmittel',
                                         'Paraphernalia' => 'Paraphernalia',
+                                        'Leib' => 'Leib',
                                         'Anwendung' => 'Anwendung',
                                         'sonstiges' => 'sonstiges',
                                     ])
-                                    ->reactive()
                             ])
                     ]),
                 Section::make('weapon')
@@ -87,7 +88,7 @@ class EquipmentForm
                                 'chaos' => 'MU (Chaos)',
                                 'spirituell' => 'CH (Spirituell)',
                             ]),
-                        Textinput::make('trefferwuerfel')
+                        Textinput::make('tw')
                             ->label('Trefferwürfel')
                             ->numeric()
                             ->step(1)
@@ -130,9 +131,8 @@ class EquipmentForm
                                 'der Revolution' => 'der Revolution  (13 HwP)',
                                 'mit Köcher' => 'mit Köcher (3 HwP)',
                             ])
-                            ->reactive(),
                     ])
-                    ->visible(fn (callable $get) => in_array($get('item_type'), ['Waffe'])),
+                    ->visible(fn (callable $get) => $get('item_type') == 'Waffe'),
                 Section::make('Rüstung')
                     ->description('Werte der Rüstung wählen')
                     ->schema([
@@ -203,7 +203,7 @@ class EquipmentForm
                                     ->reactive(),
                             ]),
                     ])
-                    ->visible(fn (callable $get) => in_array($get('item_type'), ['Rüstung'])),
+                    ->visible(fn (callable $get) => $get('item_type') == 'Rüstung'),
                 Section::make('Talisman')
                     ->description('Werte des Talisman wählen')
                     ->schema([
@@ -276,7 +276,7 @@ class EquipmentForm
                                     ->reactive(),
                             ]),
                     ])
-                    ->visible(fn (callable $get) => in_array($get('item_type'), ['Talisman'])),
+                    ->visible(fn (callable $get) => $get('item_type') == 'Talisman'),
                 Section::make('Schild')
                     ->description('Werte des Schild wählen')
                     ->schema([
@@ -339,7 +339,7 @@ class EquipmentForm
                                     ->reactive(),
                             ]),
                     ])
-                    ->visible(fn (callable $get) => in_array($get('item_type'), ['Schild'])),
+                    ->visible(fn (callable $get) => $get('item_type') == 'Schild'),
                 Section::make('schmuckstück')
                     ->description('Werte des Schmuckstück wählen')
                     ->schema([
@@ -357,7 +357,7 @@ class EquipmentForm
                                     ])
                             ])
                     ])
-                    ->visible(fn (callable $get) => in_array($get('item_type'), ['Schmuckstück'])),
+                    ->visible(fn (callable $get) => $get('item_type') == 'Schmuckstück'),
 
             ]);
     }

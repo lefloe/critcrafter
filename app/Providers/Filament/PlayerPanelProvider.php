@@ -40,7 +40,6 @@ class PlayerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Player/Widgets'), for: 'App\Filament\Player\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

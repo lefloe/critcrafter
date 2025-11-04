@@ -62,10 +62,11 @@ class Character extends Model
         'nw_vw',
         'nw_tw',
         'xp',
-        'klassenfertigkeiten',
+        'classability1',
+        'classability2',
+        'classability3',
         'handwerkskenntnisse',
         'lore',
-        'portrait'
     ];
     protected $casts = [
         'rassenmerkmale' => 'array',
@@ -81,8 +82,8 @@ class Character extends Model
         'skill_in' => 'array',
         'skill_mu' => 'array',
         'skill_ch' => 'array',
-        'equipment' => 'array',
         'lore' => 'array',
+        'nw_gattung' => 'array',
         'nw_damage_type' => 'array',
     ];
 

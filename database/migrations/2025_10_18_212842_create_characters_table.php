@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('race');
@@ -55,12 +55,12 @@ return new class extends Migration
             $table->integer('initiative');
             $table->integer('verteidigung');
             $table->integer('seelenpunkte');
-            $table->string('nw_gattung');
-            $table->string('nw_quality');
+            $table->json('nw_gattung')->nullable();
+            $table->string('nw_quality')->nullable();
             $table->json('nw_damage_type')->nullable();
-            $table->integer('nw_aw');
-            $table->integer('nw_vw');
-            $table->integer('nw_tw');
+            $table->integer('nw_aw')->nullable();
+            $table->integer('nw_vw')->nullable();
+            $table->integer('nw_tw')->nullable();
             $table->integer('xp');
             $table->json('classability1')->nullable();
             $table->json('classability2')->nullable();

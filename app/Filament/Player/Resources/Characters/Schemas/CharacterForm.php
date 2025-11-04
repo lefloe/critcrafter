@@ -72,8 +72,7 @@ class CharacterForm
                                                             }
                                                         }
                                                         $set('nw_quality', $qs);
-                                                    })
-                                                    ->reactive(),
+                                                    }),
                                             ]),
                                         Textarea::make('description')
                                             ->label('Description')
@@ -86,7 +85,7 @@ class CharacterForm
                                                             ->live()
                                                             ->numeric()
                                                             ->step(4)
-                                                            ->live()
+                                                            ->live(debounce: 500)
                                                             ->afterStateUpdatedJs(
                                                                 <<<'JS'
                                                                     $kobonus = parseInt($get('ko_bonus'))
@@ -98,7 +97,7 @@ class CharacterForm
                                                                 return $result;
                                                             }),
                                                         TextInput::make('bonus_sep')
-                                                            ->live()
+                                                            ->live(debounce: 500)
                                                             ->numeric()
                                                             ->step(4)
                                                             ->afterStateUpdatedJs(
@@ -114,7 +113,7 @@ class CharacterForm
                                                 Fieldset::make('Ini oder RE Bonus')
                                                     ->schema([
                                                         TextInput::make('bonus_ini')
-                                                            ->live()
+                                                            ->live(debounce: 500)
                                                             ->numeric()
                                                             ->step(4)
                                                             ->afterStateUpdatedJs(
@@ -127,7 +126,7 @@ class CharacterForm
                                                                 return $result;
                                                             }),
                                                         TextInput::make('bonus_re')
-                                                            ->live()
+                                                            ->live(debounce: 500)
                                                             ->numeric()
                                                             ->step(4)
                                                             ->live()
@@ -234,7 +233,6 @@ class CharacterForm
                                                         'MU' => 'Mut',
                                                         'CH' => 'Charisma',
                                                     ])
-                                                    ->reactive()
                                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft2')));
                                                         self::setMainStateValue($get, $set);
@@ -259,7 +257,6 @@ class CharacterForm
                                                         'MU' => 'Mut',
                                                         'CH' => 'Charisma',
                                                     ])
-                                                    ->reactive()
                                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                                         $set('archetype', self::getArchetype($state, $get('leiteigenschaft1')));   //sets archetype
                                                         self::setMainStateValue($get, $set);
@@ -285,18 +282,15 @@ class CharacterForm
                                                     ->dehydrated(),
                                                 Toggle::make('ko_toggle')
                                                     ->label('KO für LeP verwenden')
-                                                    ->reactive()
                                                     ->inline(false)
                                                     ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                                         self::setMainStateValue($get, $set);
                                                         self::calculateLeps($get, $set);
 
-                                                    })
-                                                    ->reactive(),
+                                                    }),
                                                 TextInput::make('ko_bonus')
                                                     ->hidden()
                                                     ->live()
-                                                    ->reactive()
                                                     ->numeric()
                                                     ->disabled()
                                                     ->default(0)
@@ -338,7 +332,7 @@ class CharacterForm
                                                     ->live(onBlur: true)
                                                     ->partiallyRenderComponentsAfterStateUpdated(['main_stat_value', 'leps', 'tragkraft', 'geschwindigkeit', 'handwerksbonus', 'kontrollwiderstand', 'initiative', 'verteidigung', 'seelenpunkte'])
                                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-        //                                                        $set('tragkraft', $state);
+                                                        $set('tragkraft', $state);
                                                         self::maxEigenschaften($get, $set);
                                                         self::setMainStateValue($get, $set);
                                                     })
@@ -469,62 +463,62 @@ class CharacterForm
                                                     ->multiple()
                                                     ->live()
                                                     ->options([
-                                                        'Synchronreflex' => 'Synchronreflex',
-                                                        'Ruf des Vertrauten' => 'Ruf des Vertrauten',
-                                                        'Krüge zerdeppern' => 'Krüge zerdeppern',
-                                                        'Wer austeilt, kann auch einstecken' => 'Wer austeilt, kann auch einstecken',
-                                                        'Vorbereitung' => 'Vorbereitung',
-                                                        'Lautlos' => 'Lautlos',
-                                                        'Empathie' => 'Empathie',
-                                                        'Laute Stimme' => 'Laute Stimme',
-                                                        'Kein Entrinnen' => 'Kein Entrinnen',
-                                                        'Wut' => 'Wut',
-                                                        'Tierflüsterer' => 'Tierflüsterer',
-                                                        'Erneuerung' => 'Erneuerung',
-                                                        'Unter meinem Schutz' => 'Unter meinem Schutz',
                                                         'Alle meine Schäfchen' => 'Alle meine Schäfchen',
-                                                        'Opportunist' => 'Opportunist',
-                                                        'Kampfgespür' => 'Kampfgespür',
-                                                        'Elementare Essenz - wähle zwei' => 'Elementare Essenz - wähle zwei',
-                                                        'Frost- und Brandkontrolle' => 'Frost- und Brandkontrolle',
-                                                        'Im Antlitz der Gefahr' => 'Im Antlitz der Gefahr',
-                                                        'Unnötiger Balast' => 'Unnötiger Balast',
-                                                        'In Stellung' => 'In Stellung',
-                                                        'Zur Deckung' => 'Zur Deckung',
-                                                        'Fluchwirker' => 'Fluchwirker',
-                                                        'Leide!' => 'Leide!',
-                                                        'Aufmerksamer Zuhörer' => 'Aufmerksamer Zuhörer',
-                                                        'Gebildet' => 'Gebildet',
-                                                        'Versatiler Kampfstil' => 'Versatiler Kampfstil',
-                                                        'Geschärfte Klingen' => 'Geschärfte Klingen',
                                                         'Alles wird verwertet' => 'Alles wird verwertet',
-                                                        'Treuer Weggefährte' => 'Treuer Weggefährte',
-                                                        'Blut und Schweiß' => 'Blut und Schweiß',
-                                                        'Gute Gene' => 'Gute Gene',
-                                                        'Mit Schwung' => 'Mit Schwung',
-                                                        'Taktischer Rückzug' => 'Taktischer Rückzug',
-                                                        'Eins mit der Seele' => 'Eins mit der Seele',
+                                                        'An Leibern laben' => 'An Leibern laben',
+                                                        'Auf der Lauer' => 'Auf der Lauer',
+                                                        'Aufmerksamer Zuhörer' => 'Aufmerksamer Zuhörer',
                                                         'Aura lesen' => 'Aura lesen',
-                                                        'Randnotizen' => 'Randnotizen',
-                                                        'Ganz selbstverständlich' => 'Ganz selbstverständlich',
-                                                        'Furchtlos' => 'Furchtlos',
+                                                        'Aus dem Nichts' => 'Aus dem Nichts',
                                                         'Bewegungsmuster' => 'Bewegungsmuster',
+                                                        'Blut und Schweiß' => 'Blut und Schweiß',
+                                                        'Eins mit der Seele' => 'Eins mit der Seele',
+                                                        'Elementare Essenz - wähle zwei' => 'Elementare Essenz - wähle zwei',
+                                                        'Elementarer Anker' => 'Elementarer Anker',
+                                                        'Empathie' => 'Empathie',
+                                                        'Erneuerung' => 'Erneuerung',
+                                                        'Fahler Schleier' => 'Fahler Schleier',
+                                                        'Fluchwirker' => 'Fluchwirker',
+                                                        'Frost- und Brandkontrolle' => 'Frost- und Brandkontrolle',
+                                                        'Furchtlos' => 'Furchtlos',
+                                                        'Ganz selbstverständlich' => 'Ganz selbstverständlich',
+                                                        'Gebildet' => 'Gebildet',
+                                                        'Geschärfte Klingen' => 'Geschärfte Klingen',
+                                                        'Gestählter Wille' => 'Gestählter Wille',
+                                                        'Gute Gene' => 'Gute Gene',
+                                                        'Im Antlitz der Gefahr' => 'Im Antlitz der Gefahr',
+                                                        'In Stellung' => 'In Stellung',
+                                                        'Kampfgespür' => 'Kampfgespür',
+                                                        'Kein Entrinnen' => 'Kein Entrinnen',
+                                                        'Kosmische Schnitzerei' => 'Kosmische Schnitzerei',
+                                                        'Krüge zerdeppern' => 'Krüge zerdeppern',
+                                                        'Laute Stimme' => 'Laute Stimme',
+                                                        'Lautlos' => 'Lautlos',
+                                                        'Leide!' => 'Leide!',
+                                                        'Machtvoller Wille' => 'Machtvoller Wille',
+                                                        'Massaker' => 'Massaker',
+                                                        'Mit Schwung' => 'Mit Schwung',
                                                         'Nexuspunkt' => 'Nexuspunkt',
                                                         'Offene Pforten' => 'Offene Pforten',
-                                                        'Fahler Schleier' => 'Fahler Schleier',
-                                                        'Verzerrter Schleier' => 'Verzerrter Schleier',
-                                                        'Unleben' => 'Unleben',
-                                                        'Stummer Diener' => 'Stummer Diener',
-                                                        'Gestählter Wille' => 'Gestählter Wille',
-                                                        'Machtvoller Wille' => 'Machtvoller Wille',
-                                                        'Aus dem Nichts' => 'Aus dem Nichts',
-                                                        'Auf der Lauer' => 'Auf der Lauer',
-                                                        'Elementarer Anker' => 'Elementarer Anker',
-                                                        'Totem' => 'Totem',
-                                                        'Kosmische Schnitzerei' => 'Kosmische Schnitzerei',
+                                                        'Opportunist' => 'Opportunist',
+                                                        'Randnotizen' => 'Randnotizen',
+                                                        'Ruf des Vertrauten' => 'Ruf des Vertrauten',
                                                         'Runenschmuck' => 'Runenschmuck',
-                                                        'Massaker' => 'Massaker',
-                                                        'An Leibern laben' => 'An Leibern laben',
+                                                        'Stummer Diener' => 'Stummer Diener',
+                                                        'Synchronreflex' => 'Synchronreflex',
+                                                        'Taktischer Rückzug' => 'Taktischer Rückzug',
+                                                        'Tierflüsterer' => 'Tierflüsterer',
+                                                        'Totem' => 'Totem',
+                                                        'Treuer Weggefährte' => 'Treuer Weggefährte',
+                                                        'Unleben' => 'Unleben',
+                                                        'Unnötiger Balast' => 'Unnötiger Balast',
+                                                        'Unter meinem Schutz' => 'Unter meinem Schutz',
+                                                        'Versatiler Kampfstil' => 'Versatiler Kampfstil',
+                                                        'Verzerrter Schleier' => 'Verzerrter Schleier',
+                                                        'Vorbereitung' => 'Vorbereitung',
+                                                        'Wer austeilt, kann auch einstecken' => 'Wer austeilt, kann auch einstecken',
+                                                        'Wut' => 'Wut',
+                                                        'Zur Deckung' => 'Zur Deckung'
                                                         ])
                                                     ->afterstateUpdated(function ($state, Get $get, Set $set) {
                                                         self::limitclassability1($get, $set);
@@ -542,62 +536,63 @@ class CharacterForm
                                                     ->multiple()
                                                     ->live()
                                                     ->options([
-                                                        'Spiegel des Willens' => 'Spiegel des Willens',
-                                                        'Herr über den Verstand' => 'Herr über den Verstand',
-                                                        'Unerschöpflich' => 'Unerschöpflich',
-                                                        'Gewusst wie' => 'Gewusst wie',
-                                                        'Aus dem Ärmel' => 'Aus dem Ärmel',
-                                                        'Unbemerkt' => 'Unbemerkt',
-                                                        'Seeleninstrument' => 'Seeleninstrument',
-                                                        'Auf der Tonspur' => 'Auf der Tonspur',
-                                                        'Adrenalin' => 'Adrenalin',
-                                                        'Mit Gewalt' => 'Mit Gewalt',
-                                                        'Für den Kampf geschaffen' => 'Für den Kampf geschaffen',
-                                                        'Aus dem besten Holz geschnitzt' => 'Aus dem besten Holz geschnitzt',
-                                                        'Bollwerk' => 'Bollwerk',
-                                                        'Stille' => 'Stille',
-                                                        'Von allen Seiten' => 'Von allen Seiten',
-                                                        'Kreuzblock' => 'Kreuzblock',
-                                                        'Synergetik' => 'Synergetik',
-                                                        'Einklang' => 'Einklang',
-                                                        'Volle Kontrolle' => 'Volle Kontrolle',
-                                                        'In Erwartung' => 'In Erwartung',
-                                                        'Kaskade' => 'Kaskade',
-                                                        'En Garde' => 'En Garde',
-                                                        'Dunkles Geschenk' => 'Dunkles Geschenk',
-                                                        'Verrotte!' => 'Verrotte!',
-                                                        'Gedankenschutz' => 'Gedankenschutz',
-                                                        'Mit allen Sinnen' => 'Mit allen Sinnen',
-                                                        'Resonanz' => 'Resonanz',
-                                                        'Tausend Klingen' => 'Tausend Klingen',
-                                                        'Reiche Beute' => 'Reiche Beute',
-                                                        'Kampfgeschirr' => 'Kampfgeschirr',
-                                                        'Borke' => 'Borke',
-                                                        'Mit dem flachen Ende' => 'Mit dem flachen Ende',
-                                                        'Scheitern ist keine Option' => 'Scheitern ist keine Option',
-                                                        'Blitzschnell' => 'Blitzschnell',
-                                                        'Gesplitterte Bindung' => 'Gesplitterte Bindung',
-                                                        'Astralreise' => 'Astralreise',
-                                                        'Ritualisiert' => 'Ritualisiert',
-                                                        'Aus dem Handgelenk' => 'Aus dem Handgelenk',
-                                                        'Schwachstellen aufdecken' => 'Schwachstellen aufdecken',
                                                         'Ablenkungsmanöver' => 'Ablenkungsmanöver',
-                                                        'Seelenentzug' => 'Seelenentzug',
-                                                        'Grenzenloses Wissen' => 'Grenzenloses Wissen',
-                                                        'Hinter dem Vorhang' => 'Hinter dem Vorhang',
-                                                        'Blick dahinter' => 'Blick dahinter',
+                                                        'Adrenalin' => 'Adrenalin',
+                                                        'Astralreise' => 'Astralreise',
+                                                        'Auf der Tonspur' => 'Auf der Tonspur',
+                                                        'Aus dem Ärmel' => 'Aus dem Ärmel',
+                                                        'Aus dem besten Holz geschnitzt' => 'Aus dem besten Holz geschnitzt',
+                                                        'Aus dem Handgelenk' => 'Aus dem Handgelenk',
                                                         'Austauschbar' => 'Austauschbar',
-                                                        'Mit einer Stimme' => 'Mit einer Stimme',
-                                                        'Karmale Barriere' => 'Karmale Barriere',
-                                                        'Schild des Rechtschaffenen' => 'Schild des Rechtschaffenen',
-                                                        'Gnadenlos' => 'Gnadenlos',
-                                                        'Kettenreaktion' => 'Kettenreaktion',
-                                                        'Faust der Elemente' => 'Faust der Elemente',
-                                                        'Wandelndes Land' => 'Wandelndes Land',
-                                                        'Esoterische Kunst' => 'Esoterische Kunst',
-                                                        'Machtvolle Runen' => 'Machtvolle Runen',
+                                                        'Blick dahinter' => 'Blick dahinter',
+                                                        'Blitzschnell' => 'Blitzschnell',
                                                         'Blutmagie' => 'Blutmagie',
-                                                        'Lebensentzug' => 'Lebensentzug',                                                    ])
+                                                        'Bollwerk' => 'Bollwerk',
+                                                        'Borke' => 'Borke',
+                                                        'Dunkles Geschenk' => 'Dunkles Geschenk',
+                                                        'Einklang' => 'Einklang',
+                                                        'En Garde' => 'En Garde',
+                                                        'Esoterische Kunst' => 'Esoterische Kunst',
+                                                        'Faust der Elemente' => 'Faust der Elemente',
+                                                        'Für den Kampf geschaffen' => 'Für den Kampf geschaffen',
+                                                        'Gedankenschutz' => 'Gedankenschutz',
+                                                        'Gesplitterte Bindung' => 'Gesplitterte Bindung',
+                                                        'Gewusst wie' => 'Gewusst wie',
+                                                        'Gnadenlos' => 'Gnadenlos',
+                                                        'Grenzenloses Wissen' => 'Grenzenloses Wissen',
+                                                        'Herr über den Verstand' => 'Herr über den Verstand',
+                                                        'Hinter dem Vorhang' => 'Hinter dem Vorhang',
+                                                        'In Erwartung' => 'In Erwartung',
+                                                        'Kampfgeschirr' => 'Kampfgeschirr',
+                                                        'Karmale Barriere' => 'Karmale Barriere',
+                                                        'Kaskade' => 'Kaskade',
+                                                        'Kettenreaktion' => 'Kettenreaktion',
+                                                        'Kreuzblock' => 'Kreuzblock',
+                                                        'Lebensentzug' => 'Lebensentzug',
+                                                        'Machtvolle Runen' => 'Machtvolle Runen',
+                                                        'Mit allen Sinnen' => 'Mit allen Sinnen',
+                                                        'Mit dem flachen Ende' => 'Mit dem flachen Ende',
+                                                        'Mit einer Stimme' => 'Mit einer Stimme',
+                                                        'Mit Gewalt' => 'Mit Gewalt',
+                                                        'Reiche Beute' => 'Reiche Beute',
+                                                        'Resonanz' => 'Resonanz',
+                                                        'Ritualisiert' => 'Ritualisiert',
+                                                        'Scheitern ist keine Option' => 'Scheitern ist keine Option',
+                                                        'Schild des Rechtschaffenen' => 'Schild des Rechtschaffenen',
+                                                        'Schwachstellen aufdecken' => 'Schwachstellen aufdecken',
+                                                        'Seelenentzug' => 'Seelenentzug',
+                                                        'Seeleninstrument' => 'Seeleninstrument',
+                                                        'Spiegel des Willens' => 'Spiegel des Willens',
+                                                        'Stille' => 'Stille',
+                                                        'Synergetik' => 'Synergetik',
+                                                        'Tausend Klingen' => 'Tausend Klingen',
+                                                        'Unbemerkt' => 'Unbemerkt',
+                                                        'Unerschöpflich' => 'Unerschöpflich',
+                                                        'Verrotte!' => 'Verrotte!',
+                                                        'Volle Kontrolle' => 'Volle Kontrolle',
+                                                        'Von allen Seiten' => 'Von allen Seiten',
+                                                        'Wandelndes Land' => 'Wandelndes Land',
+                                                        ])
                                                     ->afterstateUpdated(function (Get $get, Set $set) {
                                                         self::limitclassability2($get, $set);
                                                     })
@@ -611,32 +606,33 @@ class CharacterForm
                                                     ->multiple()
                                                     ->live()
                                                     ->options([
-                                                        'Herr über den Verstand' => 'Herr über den Verstand',
-                                                        'Trefferwürfel Steigerung' => 'Trefferwürfel Steigerung',
-                                                        'Meuchler' => 'Meuchler',
-                                                        'Fest für die Sinne' => 'Fest für die Sinne',
                                                         'Alles oder nichts' => 'Alles oder nichts',
-                                                        'Gestaltwandler' => 'Gestaltwandler',
-                                                        'Unzertrennlich' => 'Unzertrennlich',
-                                                        'Sekundenbruchteil' => 'Sekundenbruchteil',
-                                                        'Avatar' => 'Avatar',
-                                                        'Urteil der Arena' => 'Urteil der Arena',
-                                                        'Flèche' => 'Flèche',
-                                                        'Im Leid suhlen' => 'Im Leid suhlen',
-                                                        'Reflektierter Geist' => 'Reflektierter Geist',
-                                                        'Zwischen die Schuppen' => 'Zwischen die Schuppen',
-                                                        'Jäger Stufe III' => 'Jäger Stufe III',
-                                                        'Krieger Stufe III' => 'Krieger Stufe III',
-                                                        'Mönch Stufe III' => 'Mönch Stufe III',
-                                                        'Magus Stufe III' => 'Magus Stufe III',
-                                                        'Unterjocht' => 'Unterjocht',
-                                                        'Fluss des Kosmos' => 'Fluss des Kosmos',
-                                                        'Zwischen Leben und Tod' => 'Zwischen Leben und Tod',
                                                         'Armee der Toten' => 'Armee der Toten',
+                                                        'Avatar' => 'Avatar',
+                                                        'Blutsbruderschaft' => 'Blutsbruderschaft',
+                                                        'Fest für die Sinne' => 'Fest für die Sinne',
+                                                        'Flèche' => 'Flèche',
+                                                        'Fluss des Kosmos' => 'Fluss des Kosmos',
+                                                        'Gestaltwandler' => 'Gestaltwandler',
+                                                        'Im Leid suhlen' => 'Im Leid suhlen',
+                                                        'Jäger Stufe III' => 'Jäger Stufe III',
+                                                        'Kontrolle Rang 3 Wesen' => 'Kontrolle Rang 3 Wesen',
+                                                        'Krieger Stufe III' => 'Krieger Stufe III',
                                                         'Lohn der Gläubigen' => 'Lohn der Gläubigen',
+                                                        'Magus Stufe III' => 'Magus Stufe III',
+                                                        'Meuchler' => 'Meuchler',
+                                                        'Mönch Stufe III' => 'Mönch Stufe III',
                                                         'Pirscher Stufe III' => 'Pirscher Stufe III',
+                                                        'Reflektierter Geist' => 'Reflektierter Geist',
                                                         'Runenschnitzer Stufe III' => 'Runenschnitzer Stufe III',
-                                                        'Blutsbruderschaft' => 'Blutsbruderschaft',                                                    ])
+                                                        'Sekundenbruchteil' => 'Sekundenbruchteil',
+                                                        'Trefferwürfel Steigerung' => 'Trefferwürfel Steigerung',
+                                                        'Unterjocht' => 'Unterjocht',
+                                                        'Unzertrennlich' => 'Unzertrennlich',
+                                                        'Urteil der Arena' => 'Urteil der Arena',
+                                                        'Zwischen die Schuppen' => 'Zwischen die Schuppen',
+                                                        'Zwischen Leben und Tod' => 'Zwischen Leben und Tod',
+                                                        ])
                                                     ->afterstateUpdated(function (Get $get, Set $set) {
                                                         self::limitclassability3($get, $set);
                                                     })
@@ -1063,18 +1059,15 @@ class CharacterForm
                                             ->schema([
                                                 CheckboxList::make('nw_gattung')
                                                     ->label('Waffengattung (beides nur Eins mit der Seele)')
-                                                    ->required()
                                                     ->options([
                                                         'Nahkampfwaffe' => 'Nahkampfwaffe',
                                                         'Fernkampfwaffe' => 'Fernkampfwaffe (nur Spucker)',
                                                     ]),
                                                 TextInput::make('nw_quality')
                                                     ->label('QS')
-                                                    ->required()
                                                     ->disabled(),
                                                 Select::make('nw_damage_type')
                                                     ->label('Schadensart (zweite Schadensart nur Raubtier/Hörner')
-                                                    ->required()
                                                     ->live()
                                                     ->multiple()
                                                     ->options([
@@ -1087,15 +1080,12 @@ class CharacterForm
                                             ->schema([
                                                 Textinput::make('nw_aw')
                                                     ->label('AW')
-                                                    ->required()
                                                     ->numeric(),
                                                 Textinput::make('nw_vw')
                                                     ->label('VW')
-                                                    ->required()
                                                     ->numeric(),
                                                 Textinput::make('nw_tw')
                                                     ->label('TW')
-                                                    ->required()
                                                     ->numeric(),
                                             ]),
                                     ]),
@@ -1106,12 +1096,15 @@ class CharacterForm
                                             ->relationship('characterEquipment')
                                             ->schema(components: [
                                                 Select::make('equipment_id')
+                                                    ->required()
                                                     ->label('Equipment')
                                                     ->relationship('equipment', 'name')
                                                     ->options(Equipment::available()->pluck('name', 'id'))
-                                                    ->searchable(),
+                                                    ->searchable()
+                                                    ->requiredIf('equipment_id', fn ($state) => $state !== null),
                                                 Select::make('slot')
                                                     ->label('Wo angelegt')
+                                                    ->requiredIf('equipment_id',fn (Get $get) => $get('equipment_id') !== null)
                                                     ->options([
                                                         'not_equipped' => 'nicht angelegt',
                                                         'weapon1' => 'Waffe 1',
@@ -1125,9 +1118,10 @@ class CharacterForm
                                                         'jewelry3' => 'Schmuckstück 3',
                                                         'jewelry4' => 'Schmuckstück 4 (nur Gaben des Tempels)',
                                                         'jewelry5' => 'Schmuckstück 5 (nur Gaben des Tempels)',
-
                                                     ]),
                                             ])
+                                            ->columns(2)
+                                            ->defaultItems(0)
                                             ->addActionLabel('weitere Ausrüstung hinzufügen')
                                     ]),
                             ]),
