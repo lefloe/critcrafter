@@ -17,7 +17,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->foreignId('user_id')->constrained();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('race');
             $table->string('wesen');
             $table->string('leiteigenschaft1');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('main_stat_value')->nullable();
             $table->boolean('ko_toggle')->nullable();
             $table->string('archetype')->nullable();
-            $table->json('rassenmerkmale')->nullable();
+            $table->json('racial_traits')->nullable();
             $table->integer('ko_bonus')->nullable();
             $table->integer('bonus_lep')->nullable();
             $table->integer('bonus_sep')->nullable();

@@ -29,6 +29,7 @@ class PlayerPanelProvider extends PanelProvider
             ->path('player')
             ->login()
             ->registration(Register::class)
+            ->topNavigation()
             ->colors([
                 'primary' => Color::Amber,
             ])

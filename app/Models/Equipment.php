@@ -22,7 +22,9 @@ class Equipment extends Model
         'waffengattung',
         'attackvalue',
         'damage_type',
-        'trefferwuerfel',
+        'tw',
+        'count_dice',
+        'waffenführung',
         'traglast',
         'passive_verteidigung',
         'schild_verteidigung',
@@ -38,8 +40,10 @@ class Equipment extends Model
         'kontrollwiderstand',
         'rs_arcan',
         'rs_chaos',
+        'wp_erweiterungen',
         'rs_erweiterungen',
         'ts_erweiterungen',
+        'sd_erweiterungen',
         'character_id',
         'equipped'
     ];
@@ -49,6 +53,8 @@ class Equipment extends Model
         'wp_erweiterungen' => 'array',
         'rs_erweiterungen' => 'array',
         'ts_erweiterungen' => 'array',
+        'sd_erweiterungen' => 'array',
+        'waffenführung' => 'array',
     ];
 
     public function character(): BelongsToMany

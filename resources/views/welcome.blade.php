@@ -63,7 +63,7 @@
                             </span>
                             <span>
                                 Login für
-                                <a href="https://critcrafter.com/plyer/login" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
+                                <a href="https://critcrafter.de/plyer/login" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
                                     <span>Spieler</span>
                                     <svg
                                         width="10"
@@ -90,7 +90,7 @@
                             </span>
                             <span>
                                 Login für
-                                <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
+                                <a href="https://critcrafter.de/gm/login" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
                                     <span>Spielleiter</span>
                                     <svg
                                         width="10"

@@ -33,13 +33,18 @@ class DatabaseSeeder extends Seeder
         Character::create([
             'name' => 'Testcharakter',
             'user_id' => 1,
-            'description' => 'Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
+            'description' => '<h3>Hintergrund und Persönlichkeit</h3>
+            <p><strong>Herkunft:</strong> (Woher stammt der Charakter? Wer waren seine Eltern?)<br>
+            <strong>Motivation:</strong> (Was treibt den Charakter an? Welche Ziele verfolgt er?)<br>
+            <strong>Charakterzüge:</strong> (Welche Stärken und Schwächen hat der Charakter?)<br>
+            <strong>Einschneidendes Ereignis:</strong> (Welches Erlebnis hat ihn geprägt?)<br>
+            </p>Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
             'leiteigenschaft1' => 'KO',
             'leiteigenschaft2' => 'ST',
             'archetype' => 'Sappeur',
             'race' => 'Ainu',
             'wesen' => 'Biest',
-            'rassenmerkmale' => ['Apex', 'Nachtsicht'],
+            'racial_traits' => ['Apex', 'Nachtsicht'],
             'ko' => 12,
             'st' => 10,
             'ag' => 9,
@@ -82,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'waffengattung' => 'Nahkampfwaffe',
             'attackvalue' => 7,
             'damage_type' => ['stumpf', 'schnitt'],
-            'trefferwuerfel' => 6,
+            'tw' => 'W8',
             'traglast' => 3,
             'wp_erweiterungen' => ['der Präzision', 'des Gemetzels'],
         ]);
@@ -95,7 +100,7 @@ class DatabaseSeeder extends Seeder
             'quality' => 'selten',
             'item_type' => 'Rüstung',
             'hwp' => 9,
-            'passive_verteidigung' => 4,
+            'pVW' => 4,
             'rs_schnitt' => 5,
             'rs_stumpf' => 3,
             'rs_stich' => 4,
@@ -114,7 +119,7 @@ class DatabaseSeeder extends Seeder
             'quality' => 'legendär',
             'item_type' => 'Talisman',
             'hwp' => 8,
-            'kontrollwiderstand' => 5,
+            'kw' => 5,
             'rs_arcan' => 2,
             'rs_chaos' => 1,
             'rs_spirit' => 3,

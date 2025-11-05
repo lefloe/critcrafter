@@ -30,7 +30,7 @@ class Character extends Model
         'bonus_re',
         'race',
         'wesen',
-        'rassenmerkmale',
+        'racial_traits',
         'ko',
         'st',
         'ag',
@@ -69,7 +69,7 @@ class Character extends Model
         'lore',
     ];
     protected $casts = [
-        'rassenmerkmale' => 'array',
+        'racial_traits' => 'array',
         'handwerkskenntnisse' => 'array',
         'classability1' => 'array',
         'classability2' => 'array',
