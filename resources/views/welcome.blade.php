@@ -63,7 +63,7 @@
                             </span>
                             <span>
                                 Login für
-                                <a href="https://critcrafter.de/plyer/login" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
+                                <a href="https://critcrafter.de/player/login" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
                                     <span>Spieler</span>
                                     <svg
                                         width="10"
