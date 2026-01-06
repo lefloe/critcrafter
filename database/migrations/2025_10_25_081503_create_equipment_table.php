@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('count_dice')->nullable();
             $table->string('tw')->nullable();
             $table->json('waffenführung')->nullable();
+            $table->string('waffengattung')->nullable();
             $table->integer('traglast')->nullable();
             $table->integer('pVW')->nullable();
             $table->integer('wp_vw')->nullable();

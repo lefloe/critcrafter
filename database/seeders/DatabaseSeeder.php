@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             <strong>Einschneidendes Ereignis:</strong> (Welches Erlebnis hat ihn geprägt?)<br>
             </p>Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
             'leiteigenschaft1' => 'KO',
-            'leiteigenschaft2' => 'ST',
+            'leiteigenschaft2' => 'MU',
             'archetype' => 'Sappeur',
             'race' => 'Ainu',
             'wesen' => 'Biest',
@@ -53,8 +53,8 @@ class DatabaseSeeder extends Seeder
             'in' => 10,
             'mu' => 9,
             'ch' => 10,
-            'skill_ko' => ['Block', 'Entwaffnen'],
-            'skill_st' => ['Plattenbrecher', 'Schädelbrecher'],
+            'skill_weapon' => ['Block', 'Entwaffnen'],
+            'skill_aspect' => ['Magniforma', 'Pandemalum'],
             'leps' => 24,
             'tragkraft' => 10,
             'geschwindigkeit' => 4.5,
@@ -83,12 +83,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'Ein gewöhnliches Kurzschwert, einfach aber effektiv.',
             'quality' => 'gewöhnlich',
             'item_type' => 'Waffe',
-            'hwp' => 40, // Beispielwert
+            'hwp' => 40,
 
             // Waffe-spezifische Felder
             'attackvalue' => 4, // QS 'gewöhnlich'
             'damage_type' => json_encode(['Schnitt', 'Stich']),
-            'kontrollwiderstand' => 'AG', // Angenommen, AG/KO/ZW/etc.
             'count_dice' => 1,
             'tw' => 'W6', // QS 'gewöhnlich'
             'waffenführung' => json_encode(['Einhändig']),

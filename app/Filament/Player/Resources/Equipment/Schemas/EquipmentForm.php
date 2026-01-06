@@ -2,6 +2,7 @@
 
 namespace App\Filament\Player\Resources\Equipment\Schemas;
 
+use App\Helpers\equipmentextensionshelper;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Radio;
@@ -165,32 +166,9 @@ class EquipmentForm
                         Select::make('wp_erweiterungen')
                             ->label('Erweiterungen')
                             ->multiple()
-                            ->options([
-                                'der einfachen Handhabung' => 'der einfachen Handhabung(1 HwP)',
-                                'der Einzigartigkeit' => 'der Einzigartigkeit(1 HwP)',
-                                'an der Kette' => 'an der Kette(2 HwP)',
-                                'der Kraftkontrolle' => 'der Kraftkontrolle(2 HwP)',
-                                'des Attentäters' => 'des Attentäters(2 HwP)',
-                                'der Flexibilität' => 'der Flexibilität (2 HwP)',
-                                'der Grausamkeit' => 'der Grausamkeit(3 HwP)',
-                                'der Härtung' => 'der Härtung(3 HwP)',
-                                'des Duells' => 'des Duells(3 HwP)',
-                                'des Tüftlers' => 'des Tüftlers(3 HwP)',
-                                'mit Parierstange' => 'mit Parierstange(3 HwP)',
-                                'des Gemetzels' => 'des Gemetzels(3 HwP)',
-                                'der Präzision' => 'der Präzision(5 HW)',
-                                'der Zermürbung' => 'der Zermürbung(5 HwP)',
-                                'der Zielgenauigkeit' => 'der Zielgenauigkeit(5 HwP)',
-                                'der Brutalität' => 'der Brutalität(7 HwP)',
-                                'der Effizienz' => 'der Effizienz(7 HwP)',
-                                'der Kampfkunst' => 'der Kampfkunst(7 HwP)',
-                                'der Schlagkraft' => 'der Schlagkraft(7 HwP)',
-                                'der Revolution' => 'der Revolution(9 HwP)',
-                                'der Vorhut' => 'der Vorhut(9 HwP)',
-                                'der Wucht' => 'der Wucht(9 HwP)',
-                                'des Hinterhalts' => 'des Hinterhalts(9 HwP)',
-                                'des Jenseits' => 'des Jenseits(9 HwP)',
-                                ])
+                            ->options(fn (Get $get, Set $set) =>
+                                equipmentextensionshelper::getWpExtensions($get, $set)
+                            )
                             ->afterStateUpdated(function (Get $get, Set $set) {
                                 self::setWeaponStats($get, $set);
                             })
@@ -249,7 +227,7 @@ class EquipmentForm
                                     })
                                     ->live(),
                             ]),
-                            // Hidden Fields only activ if "Beseelt"
+                            // Hidden Field only active if "Beseelt"
                             Grid::make(3)
                                 ->visible(fn (callable $get) => in_array('beseelt', $get('rs_erweiterungen')))
                                 ->schema([
@@ -625,12 +603,13 @@ class EquipmentForm
             ],
         ];
     }
-
-    protected static function getErweiterungenCosts(): array
+    protected static function getExtensionCosts(): array
     {
         // Die Schlüssel sind die reinen Namen der Erweiterungen (die in der DB gespeichert werden)
         // Die Werte sind die numerischen HwP-Kosten
         return [
+
+            // Waffenerweiterungen
             'der einfachen Handhabung' => 1,
             'der Einzigartigkeit' => 1,
             'an der Kette' => 2,
@@ -641,7 +620,7 @@ class EquipmentForm
             'der Härtung' => 3,
             'des Duells' => 3,
             'des Tüftlers' => 3,
-            'mit Parierstange' => 3,
+//          'mit Parierstange' => 3,  <-wird über extra Feld geregelt
             'des Gemetzels' => 3,
             'der Präzision' => 5,
             'der Zermürbung' => 5,
@@ -845,7 +824,7 @@ class EquipmentForm
     {
         $wp_vw = $get('wp_vw');
         $selectedExtensions = $get('wp_erweiterungen');
-        $costs = self::getErweiterungenCosts();
+        $costs = self::getExtensionCosts();
         $totalHwp = 0;
 
         foreach ($selectedExtensions as $extensionKey) {
@@ -860,7 +839,7 @@ class EquipmentForm
     $sum_rs = $get('armor_schnitt')+$get('armor_stumpf')+$get('armor_stich')+$get('armor_elementar')+$get('armor_arcan')+$get('armor_chaos')+$get('armor_spirit');
 
     $selectedExtensions = $get('rs_erweiterungen');
-    $costs = self::getErweiterungenCosts();
+    $costs = self::getExtensionCosts();
     $totalHwp = 0;
 
     foreach ($selectedExtensions as $extensionKey) {
@@ -875,7 +854,7 @@ class EquipmentForm
         $sum_rs = $get('charm_arcan')+$get('charm_chaos')+$get('charm_spirit');
 
         $selectedExtensions = $get('ts_erweiterungen');
-        $costs = self::getErweiterungenCosts();
+        $costs = self::getExtensionCosts();
         $totalHwp = 0;
 
         foreach ($selectedExtensions as $extensionKey) {
@@ -891,7 +870,7 @@ class EquipmentForm
 
         $sumExtrahwp = $get('offensivschild')+$get('defensivschild');
         $selectedExtensions = $get('ts_erweiterungen');
-        $costs = self::getErweiterungenCosts();
+        $costs = self::getExtensionCosts();
         $totalHwp = 0;
 
         foreach ($selectedExtensions as $extensionKey) {
@@ -902,6 +881,5 @@ class EquipmentForm
         $totalHwp += $sumExtrahwp;
         return $totalHwp;
     }
-
 
 }

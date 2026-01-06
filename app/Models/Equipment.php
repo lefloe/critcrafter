@@ -25,6 +25,7 @@ class Equipment extends Model
         'tw',
         'count_dice',
         'waffenführung',
+        'waffengattung',
         'traglast',
         'passive_verteidigung',
         'wp_vw',
