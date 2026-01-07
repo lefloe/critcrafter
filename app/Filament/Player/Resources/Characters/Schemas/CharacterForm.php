@@ -38,136 +38,134 @@ class CharacterForm
                         ->tabs([
                             Tabs\Tab::make('Grundwerte')
                                 ->schema([
-//                                    Section::make()
-//                                        ->compact()
-//                                        ->schema([
-                                            Grid::make(4)
-                                                ->schema([
-                                                    TextInput::make('name')
-                                                        ->columnSpan(2)
-                                                        ->label('Name')
-                                                        ->required()
-                                                        ->maxLength(255),
-                                                    Select::make('race')
-                                                        ->required()
-                                                        ->label('Rasse')
-                                                        ->options([
-                                                            'Ainu' => 'Ainu',
-                                                            'Alkonost' => 'Alkonost',
-                                                            'Balachko' => 'Balachko',
-                                                            'Bastet' => 'Bastet',
-                                                            'Crocotta' => 'Crocotta',
-                                                            'Karura' => 'Karura',
-                                                            'Leshy' => 'Leshy',
-                                                            'Vanaras' => 'Vanaras',
-                                                            'Vodyanoy' => 'Vodyanoy',
-                                                            'Vukodlak' => 'Vukodlak',
-                                                            'Chepri' => 'Chepri',
-                                                        ]),
-                                                    TextInput::make('xp')
-                                                        ->Label('Erfahrungsgrad')
-                                                        ->numeric()
-                                                        ->default(1)
-                                                        ->live(onBlur: true)
-                                                        ->step(1)
-                                                        ->maxValue(22)
-                                                        ->required()
-                                                        ->minValue(1)
-                                                        ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                                            self::setMainStateValue($get, $set);
-                                                            self::maxEigenschaften($get, $set);
-                                                            $eg_breakpoints = [1, 2, 4, 7, 11, 16, 20];
-                                                            foreach (array_reverse($eg_breakpoints, true) as $qs_index => $eg_breakpoint) {
-                                                                $actual_qs = $qs_index + 1;
-                                                                if ((int) $state >= $eg_breakpoint) {
-                                                                    $qs = $actual_qs;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            $set('nw_quality', $qs);
-                                                        }),
+                                    Grid::make(4)
+                                        ->schema([
+                                            TextInput::make('name')
+                                                ->columnSpan(2)
+                                                ->label('Name')
+                                                ->required()
+                                                ->maxLength(255),
+                                            Select::make('race')
+                                                ->required()
+                                                ->label('Rasse')
+                                                ->options([
+                                                    'Ainu' => 'Ainu',
+                                                    'Alkonost' => 'Alkonost',
+                                                    'Balachko' => 'Balachko',
+                                                    'Bastet' => 'Bastet',
+                                                    'Crocotta' => 'Crocotta',
+                                                    'Karura' => 'Karura',
+                                                    'Leshy' => 'Leshy',
+                                                    'Vanaras' => 'Vanaras',
+                                                    'Vodyanoy' => 'Vodyanoy',
+                                                    'Vukodlak' => 'Vukodlak',
+                                                    'Chepri' => 'Chepri',
                                                 ]),
-                                            Grid::make(2)
-                                                ->schema([
-                                                    Select::make('racial_traits')
-                                                        ->label('Rassenmerkmale')
-                                                        ->multiple(3)
-                                                        ->live(onBlur: true)
-                                                        ->reactive()
-                                                        ->options([
-                                                            'Apex' => 'Apex',
-                                                            'Balzkleid' => 'Balzkleid',
-                                                            'Beutetier' => 'Beutetier',
-                                                            'Eingefettet' => 'Eingefettet',
-                                                            'Fettpolster' => 'Fettpolster',
-                                                            'Fleischig' => 'Fleischig',
-                                                            'Geschuppt' => 'Geschuppt',
-                                                            'Giftig' => 'Giftig',
-                                                            'Glitschig' => 'Glitschig',
-                                                            'Kiemen' => 'Kiemen',
-                                                            'Medium' => 'Medium',
-                                                            'Nachtsicht' => 'Nachtsicht',
-                                                            'Nackt' => 'Nackt',
-                                                            'Panzer' => 'Panzer',
-                                                            'Photosynthese' => 'Photosynthese',
-                                                            'Raubtier/Hörner' => 'Raubtier/Hörner',
-                                                            'Reittier' => 'Reittier',
-                                                            'Samtpfote' => 'Samtpfote',
-                                                            'Schleimspur' => 'Schleimspur',
-                                                            'Schlinger' => 'Schlinger',
-                                                            'Schwanz' => 'Schwanz',
-                                                            'Schwingen' => 'Schwingen',
-                                                            'Siebter Sinn' => 'Siebter Sinn',
-                                                            'Spitzohr' => 'Spitzohr',
-                                                            'Sprunggelenke' => 'Sprunggelenke',
-                                                            'Spucker/Dornenkapseln' => 'Spucker/Dornenkapseln',
-                                                            'Spürnase' => 'Spürnase',
-                                                            'Stacheln' => 'Stacheln',
-                                                            'Tarnmuster' => 'Tarnmuster',
-                                                            'Tiefe Taschen' => 'Tiefe Taschen',
-                                                            'Treibholz' => 'Treibholz',
-                                                            'Unscheinbar' => 'Unscheinbar',
-                                                            'Vielgliedrig' => 'Vielgliedrig',
-                                                            'Vierbeiner' => 'Vierbeiner',
-                                                            'Vital' => 'Vital',
-                                                            'Zierlich/Kleinwüchsig' => 'Zierlich/Kleinwüchsig',
-                                                        ]),
-                                                    Radio::make('wesen')
-                                                        ->required()
-                                                        ->inline()
-                                                        ->options([
-                                                            'Biest' => 'Biest/Geist',
-                                                            'Dämon' => 'Dämon/Spekter',
-                                                        ]),
+                                            TextInput::make('xp')
+                                                ->Label('Erfahrungsgrad')
+                                                ->numeric()
+                                                ->default(1)
+                                                ->live(onBlur: true)
+                                                ->step(1)
+                                                ->maxValue(22)
+                                                ->required()
+                                                ->minValue(1)
+                                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                                    self::setMainStateValue($get, $set);
+                                                    self::maxEigenschaften($get, $set);
+                                                    $eg_breakpoints = [1, 2, 4, 7, 11, 16, 20];
+                                                    foreach (array_reverse($eg_breakpoints, true) as $qs_index => $eg_breakpoint) {
+                                                        $actual_qs = $qs_index + 1;
+                                                        if ((int) $state >= $eg_breakpoint) {
+                                                            $qs = $actual_qs;
+                                                            break;
+                                                        }
+                                                    }
+                                                    $set('nw_quality', $qs);
+                                                }),
+                                        ]),
+                                    Grid::make(2)
+                                        ->schema([
+                                            Select::make('racial_traits')
+                                                ->label('Rassenmerkmale')
+                                                ->multiple(3)
+                                                ->live(onBlur: true)
+                                                ->reactive()
+                                                ->options([
+                                                    'Apex' => 'Apex',
+                                                    'Arborikol' => 'Arborikol',
+                                                    'Balzkleid' => 'Balzkleid',
+                                                    'Beutetier' => 'Beutetier',
+                                                    'Pheromone' => 'Pheromone',
+                                                    'Eingefettet' => 'Eingefettet',
+                                                    'Fettpolster' => 'Fettpolster',
+                                                    'Fleischig' => 'Fleischig',
+                                                    'Geschuppt' => 'Geschuppt',
+                                                    'Giftig' => 'Giftig',
+                                                    'Glitschig' => 'Glitschig',
+                                                    'Stacheln' => 'Stacheln',
+                                                    'Kiemen' => 'Kiemen',
+                                                    'Nachtsicht' => 'Nachtsicht',
+                                                    'Panzer' => 'Panzer',
+                                                    'Photosynthese' => 'Photosynthese',
+                                                    'Raubtier / Hörner' => 'Raubtier / Hörner',
+                                                    'Reittier' => 'Reittier',
+                                                    'Samtpfote' => 'Samtpfote',
+                                                    'Schleimspur' => 'Schleimspur',
+                                                    'Schlinger' => 'Schlinger',
+                                                    'Schwanz' => 'Schwanz',
+                                                    'Schwingen' => 'Schwingen',
+                                                    'Siebter Sinn' => 'Siebter Sinn',
+                                                    'Spatulae' => 'Spatulae',
+                                                    'Spitzohr' => 'Spitzohr',
+                                                    'Sprunggelenke' => 'Sprunggelenke',
+                                                    'Spucker' => 'Spucker',
+                                                    'Spürnase' => 'Spürnase',
+                                                    'Tarnmuster' => 'Tarnmuster',
+                                                    'Tiefe Taschen' => 'Tiefe Taschen',
+                                                    'Treibholz' => 'Treibholz',
+                                                    'Unscheinbar' => 'Unscheinbar',
+                                                    'Vielgliedrig' => 'Vielgliedrig',
+                                                    'Vierbeiner' => 'Vierbeiner',
+                                                    'Wurzeln' => 'Wurzeln',
+                                                    'Zierlich / Kleinwüchsig' => 'Zierlich / Kleinwüchsig',
+                                                    'Zweite Haut' => 'Zweite Haut',
                                                 ]),
-                                            RichEditor::make('description')
-                                                ->label('Beschreibung')
-                                                ->fileAttachmentsDisk('public') // Wichtig: Definiert das Speichersystem
-                                                ->fileAttachmentsDirectory('descriptions') // Optional: Unterordner für Bilder
-                                                ->fileAttachmentsVisibility('public') // Wichtig: Macht die Bilder öffentlich zugänglich
-                                                ->disableToolbarButtons(['codeBlock','attachFiles',])
-                                                ->default('
-                                                <h3>Hintergrund und Persönlichkeit</h3>
-                                                <p><strong>Herkunft:</strong> (Woher stammt der Charakter? Wer waren seine Eltern?)<br>
-                                                <strong>Motivation:</strong> (Was treibt den Charakter an? Welche Ziele verfolgt er?)<br>
-                                                <strong>Charakterzüge:</strong> (Welche Stärken und Schwächen hat der Charakter?)<br>
-                                                <strong>Einschneidendes Ereignis:</strong> (Welches Erlebnis hat ihn geprägt?)<br>
-                                                </p>
-                                                ')
-                                                ->columnSpanFull(), // Optional: Lässt den Editor die volle Spaltenbreite einnehmen
-//                                    ]),
+                                            Radio::make('wesen')
+                                                ->required()
+                                                ->inline()
+                                                ->options([
+                                                    'Biest' => 'Biest/Geist',
+                                                    'Dämon' => 'Dämon/Spekter',
+                                                ]),
+                                        ]),
+                                    RichEditor::make('description')
+                                        ->label('Beschreibung')
+                                        ->fileAttachmentsDisk('public')
+                                        ->fileAttachmentsDirectory('descriptions')
+                                        ->fileAttachmentsVisibility('public')
+                                        ->disableToolbarButtons(['codeBlock','attachFiles',])
+                                        ->default('
+                                        <h3>Hintergrund und Persönlichkeit</h3>
+                                        <p><strong>Herkunft:</strong> (Woher stammt der Charakter? Wer waren seine Eltern?)<br>
+                                        <strong>Motivation:</strong> (Was treibt den Charakter an? Welche Ziele verfolgt er?)<br>
+                                        <strong>Charakterzüge:</strong> (Welche Stärken und Schwächen hat der Charakter?)<br>
+                                        <strong>Einschneidendes Ereignis:</strong> (Welches Erlebnis hat ihn geprägt?)<br>
+                                        </p>
+                                        ')
+                                        ->columnSpanFull(),
                                 ]),
                             Tabs\Tab::make('Eigenschaften')
                                 ->schema([
-                                    Grid::make(2)
-                                        ->schema([
-                                            Fieldset::make('LeP oder SeP Bonus')
+                                            Fieldset::make('LeP, SeP & Ressourcen Bonus')
+                                                ->columns([
+                                                    'xl' => 3,
+                                                    ])
                                                 ->schema([
                                                     TextInput::make('bonus_lep')
                                                         ->label('LeP Bonus')
                                                         ->live()
                                                         ->numeric()
-                                                        ->step(4)
                                                         ->live(debounce: 300)
                                                         ->afterStateUpdatedJs(
                                                             <<<'JS'
@@ -176,55 +174,35 @@ class CharacterForm
                                                             JS
                                                         )
                                                         ->hint(function ($state, Get $get, Set $set) {
-                                                            $result = self::LepBonusfromXp($get, $set)-$get('bonus_sep')-$state;
+                                                            $result = self::BonusfromXp($get, $set)-$get('bonus_sep')-$get('bonus_re')-$state;
                                                             return $result;
                                                         }),
                                                     TextInput::make('bonus_sep')
                                                         ->label('SeP Bonus')
                                                         ->live(debounce: 500)
                                                         ->numeric()
-                                                        ->step(4)
                                                         ->afterStateUpdatedJs(
                                                             <<<'JS'
                                                                 $set('seelenpunkte', parseInt($state) + 2 * parseInt($get('ch')));
                                                             JS
                                                         )
                                                         ->hint(function ($state, Get $get, Set $set) {
-                                                            $result = self::LepBonusfromXp($get, $set)-$get('bonus_lep')-$state;
-                                                            return $result;
-                                                        }),
-                                                ]),
-                                            Fieldset::make('Ini oder RE Bonus')
-                                                ->schema([
-                                                    TextInput::make('bonus_ini')
-                                                        ->label('Ini Bonus')
-                                                        ->live(debounce: 500)
-                                                        ->numeric()
-                                                        ->step(4)
-                                                        ->afterStateUpdatedJs(
-                                                            <<<'JS'
-                                                                $set('initiative', parseInt($state) + $get('in')/2)
-                                                            JS
-                                                        )
-                                                        ->hint(function ($state, Get $get, Set $set) {
-                                                            $result = self::IniBonusfromXp($get, $set)-$get('bonus_re')-$state;
+                                                            $result = self::BonusfromXp($get, $set)-$get('bonus_lep')-$get('bonus_re')-$state;
                                                             return $result;
                                                         }),
                                                     TextInput::make('bonus_re')
                                                         ->label('RE Bonus')
                                                         ->live(debounce: 500)
                                                         ->numeric()
-                                                        ->step(4)
                                                         ->live()
                                                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
                                                             self::setMainStateValue($get, $set);
                                                         })
                                                         ->hint(function ($state, Get $get, Set $set) {
-                                                            $result = self::IniBonusfromXp($get, $set)-$get('bonus_ini')-$state;;
+                                                            $result = self::BonusfromXp($get, $set)-$get('bonus_lep')-$get('bonus_sep')-$state;;
                                                             return $result;
                                                         }),
-                                                ])
-                                    ]),
+                                                ]),
                                     Section::make()
                                         ->compact()
                                         ->schema([
@@ -340,7 +318,7 @@ class CharacterForm
                                                         ->minValue(0)
                                                         ->live(onBlur: true)
                                                         ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                                            $set('geschwindigkeit', round($state / 2));
+                                                            $set('gs_leib', round($state / 2));
                                                             self::maxEigenschaften($get, $set);
                                                             self::setMainStateValue($get, $set);
                                                             self::setAttributeBonus($state, $get, $set);
@@ -690,25 +668,37 @@ class CharacterForm
                                             ->multiple()
                                             ->live()
                                             ->options([
-                                                'Aspektwesen' => 'Aspektwesen',
-                                                'Fauna & Flora' => 'Fauna & Flora',
-                                                'Götter' => 'Götter',
-                                                'Monster' => 'Monster',
-                                                'Seelen' => 'Seelen',
-                                                'Varculac' => 'Varculac',
-                                                'Länder des Nordens' => 'Länder des Nordens',
-                                                'Länder des Südens' => 'Länder des Südens',
+                                                'Kernlande' => 'Kernlande',
+                                                'Der hohe Norden' => 'Der hohe Norden',
+                                                'Die fruchtbaren Ebenen' => 'Die fruchtbaren Ebenen',
+                                                'Das Dschungelreich' => 'Das Dschungelreich',
+                                                'Kantropent' => 'Kantropent',
+                                                'Der erbarmungslose Süden' => 'Der erbarmungslose Süden',
+                                                'Die Angerlande' => 'Die Angerlande',
+                                                'Das Nimmerlicht' => 'Das Nimmerlicht',
                                                 'Spiegelwelt' => 'Spiegelwelt',
                                                 'Splitterwelt' => 'Splitterwelt',
                                                 'Unterwelt' => 'Unterwelt',
-                                                'Völker des Nordens' => 'Völker des Nordens',
-                                                'Völker des Südens' => 'Völker des Südens',
-                                                'Schleier' => 'Schleier (nur Blick dahinter)',
-                                            ])
+                                                'Baukunst und Architektur' => 'Baukunst und Architektur',
+                                                'Seefahrt und Navigation' => 'Seefahrt und Navigation',
+                                                'Schrift und Sprache' => 'Schrift und Sprache',
+                                                'Fauna und Flora' => 'Fauna und Flora',
+                                                'Mathematik und Messkunst' => 'Mathematik und Messkunst',
+                                                'Kriegsführung und Taktik' => 'Kriegsführung und Taktik',
+                                                'Landwirtschaft und Geologie' => 'Landwirtschaft und Geologie',
+                                                'Fahrzeuge und Lastwesen' => 'Fahrzeuge und Lastwesen',
+                                                'Äthertech' => 'Äthertech',
+                                                'Der Kosmos' => 'Der Kosmos',
+                                                'Legenden und Mythen' => 'Legenden und Mythen',
+                                                'Prophezeiungen und Omen' => 'Prophezeiungen und Omen',
+                                                'Orte der Macht' => 'Orte der Macht',
+                                                'Die Aspekte' => 'Die Aspekte',
+                                                'Das zersplitterte Erbe' => 'Das zersplitterte Erbe',
+                                                ])
                                             ->hint(function ($state, Get $get, Set $set) {
                                                 $value = count($state);
                                                 $true = in_array('Aufmerksamer Zuhörer', (array) $get('classability1'));
-                                                $limit = $true ? 4 : 2;
+                                                $limit = $true ? 6 : 4;
                                                 return $limit - $value;
                                             }),
                                             ]),
@@ -903,28 +893,28 @@ class CharacterForm
                                                         ->label('Tragkraft')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('geschwindigkeit')
-                                                        ->label('GS')
+                                                    TextInput::make('gs_leib')
+                                                        ->label('GS Leib')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('handwerksbonus')
-                                                        ->label('Hw-Bonus')
+                                                    TextInput::make('gs_seele')
+                                                        ->label('GS Seele')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('zähigkeit')
+                                                    TextInput::make('zähigkeit_sum')
                                                         ->label('Zähigkeit')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('kraftakt')
+                                                    TextInput::make('kraftakt_sum')
                                                         ->label('Kraftakt')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('körperbeherrschung')
-                                                        ->label('Körperbeh.')
+                                                    TextInput::make('körperbeherrschung_sum')
+                                                        ->label('Körperbeherrschung')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('fingerfertigkeit')
-                                                        ->label('Fingerfer.')
+                                                    TextInput::make('fingerfertigkeit_sum')
+                                                        ->label('Fingerfertigkeit')
                                                         ->disabled()
                                                         ->dehydrated(),
                                                 ]),
@@ -973,19 +963,19 @@ class CharacterForm
                                                         ->label('Seelen-punkte')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('konzentration')
+                                                    TextInput::make('konzentration_sum')
                                                     ->label('Konzentration')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('wahrnehmung')
+                                                    TextInput::make('wahrnehmung_sum')
                                                     ->label('Wahrnehmung')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('willenskraft')
+                                                    TextInput::make('willenskraft_sum')
                                                         ->label('Willenskraft')
                                                         ->disabled()
                                                         ->dehydrated(),
-                                                    TextInput::make('kommunikation')
+                                                    TextInput::make('kommunikation_sum')
                                                         ->label('Kommunikation')
                                                         ->disabled()
                                                         ->dehydrated(),
@@ -1342,9 +1332,6 @@ class CharacterForm
     protected static function getRacialTraitsEffects(Get $get, Set $set): array
     {
         return [
-            'Arborikol' => [
-                'GS' => -1, // Grundgeschwindigkeit
-            ],
             'Fleischig' => [
                 // LeP benötigt die Eigenschafts-Güte (EG), die wir später über $get() abrufen müssen.
                 'LeP_mod' => $get('xp') / 2,
@@ -1373,66 +1360,6 @@ class CharacterForm
             ],
             // ... weitere Merkmale
         ];
-    }
-    protected static function calculateRacialStats(Get $get, Set $set): void
-    {
-        // Die ausgewählten Merkmale abrufen (Annahme: Dies ist ein Select::make('racial_traits')->multiple())
-        $selectedTraits = $get('racial_traits') ?? [];
-        $effects = self::getRacialTraitsEffects();
-
-        // 1. Alle Basiswerte/Modifikatoren auf den Standardwert (0) zurücksetzen
-        //    Dies ist kritisch, um den kumulativen Effekt korrekt zu berechnen,
-        //    wenn Merkmale entfernt werden.
-        $set('gs_mod', 0);
-        $set('lep_mod', 0);
-        $set('tragkraft_mod', 0);
-        $set('pvw_mod', 0);
-        // ... andere zu modifizierende Felder auf 0 setzen
-
-        // 2. Kumulative Boni initialisieren
-        $cumulativeGS = 0;
-        $cumulativeLeP = 0;
-        $cumulativeTragkraft = 0;
-        $cumulativepVW = 0;
-
-        // 3. Alle ausgewählten Merkmale iterieren und Boni addieren
-        foreach ($selectedTraits as $trait) {
-            if (isset($effects[$trait])) {
-                foreach ($effects[$trait] as $field => $value) {
-
-                    // Behandlung der Standard-Zahlen-Boni
-                    if ($field === 'GS') {
-                        $cumulativeGS += $value;
-                    } elseif ($field === 'Tragkraft') {
-                        $cumulativeTragkraft += $value;
-                    } elseif ($field === 'pVW') {
-                        $cumulativepVW += $value;
-                    }
-
-                    // Behandlung der dynamischen Boni (z.B. 'Fleischig')
-                    elseif ($field === 'LeP_mod') {
-                        // $value ist hier die Closure-Funktion aus dem Mapping
-                        $cumulativeLeP += $value($get);
-                    }
-
-                    // Behandlung der Spezial-Flags (z.B. 'Panzer', 'Zweite Haut')
-                    elseif (str_starts_with($field, 'RS_')) {
-                        // Hier müssen Sie eine separate Logik für Rüstungsschutz-Felder implementieren
-                        // $set($field, $value);
-                    }
-                    // ... weitere Spezialfälle
-                }
-            }
-        }
-
-        // 4. Endgültige, kumulierte Werte in die Modifikatoren-Felder schreiben
-        $set('gs_mod', $cumulativeGS);
-        $set('lep_mod', $cumulativeLeP);
-        $set('tragkraft_mod', $cumulativeTragkraft);
-        $set('pvw_mod', $cumulativepVW);
-
-        // Anmerkung: Die finalen Basiswerte (GS, LeP, Tragkraft) sollten dann
-        // das Ergebnis einer Addition des Basiswerts und des Modifikator-Feldes sein.
     }
 
     protected static function getArchetype(?string $leiteigenschaft1, ?string $leiteigenschaft2): string
@@ -1524,42 +1451,33 @@ class CharacterForm
     {
         $set('main_stat_value',  self::getResources($get('ko_toggle'), $get('leiteigenschaft1'), $get('leiteigenschaft2'), self::getAttributeArray($get), $get('bonus_re')));
     }
-    public static function LepBonusfromXp(Get $get, Set $set): int
+    public static function BonusfromXp(Get $get, Set $set): int
     {
 
         $xp = $get('xp');
         $limit = match (true) {
-            $xp >= 21 => 44,
-            $xp >= 19 => 40,
-            $xp >= 17 => 36,
-            $xp >= 15 => 32,
-            $xp >= 13 => 28,
-            $xp >= 11 => 24,
-            $xp >= 9 => 20,
-            $xp >= 7 => 16,
-            $xp >= 5 => 12,
-            $xp >= 3 => 8,
-            $xp >= 1 => 4,
-
-            default => 0,
-        };
-        return $limit;
-    }
-    public static function IniBonusfromXp(Get $get, Set $set): int
-    {
-
-        $xp = $get('xp');
-        $limit = match (true) {
-            $xp >= 22 => 40,
-            $xp >= 18 => 36,
-            $xp >= 16 => 32,
-            $xp >= 14 => 28,
-            $xp >= 12 => 24,
-            $xp >= 10 => 20,
-            $xp >= 8 => 16,
-            $xp >= 6 => 12,
-            $xp >= 4 => 8,
-            $xp >= 2 => 4,
+            $xp >= 22 => 97,
+            $xp >= 21 => 90,
+            $xp >= 20 => 84,
+            $xp >= 19 => 78,
+            $xp >= 18 => 72,
+            $xp >= 17 => 66,
+            $xp >= 16 => 60,
+            $xp >= 15 => 54,
+            $xp >= 14 => 49,
+            $xp >= 13 => 44,
+            $xp >= 12 => 39,
+            $xp >= 11 => 34,
+            $xp >= 10 => 29,
+            $xp >= 9 => 25,
+            $xp >= 8 => 21,
+            $xp >= 7 => 17,
+            $xp >= 6 => 13,
+            $xp >= 5 => 10,
+            $xp >= 4 => 7,
+            $xp >= 3 => 4,
+            $xp >= 2 => 2,
+            $xp >= 1 => 0,
 
             default => 0,
         };
@@ -1627,19 +1545,23 @@ class CharacterForm
         }
 
     }
-    public static function limitcraftability($get, $set)
+    public static function limitcraftability($get, $set): int
     {
         $xp = $get('xp');
 
-        if (in_array('Esoterische Kunst',$get('classability2'))) {
+//        if (in_array('Esoterische Kunst',$get('classability2'))) {
+//            $limit = match (true) {
+//                $xp >= 4 => 4,
+//                $xp >= 2 => 3,
+//                default => 2,
+//            };
+//        }
+//        else
             $limit = match (true) {
-                $xp >= 4 => 4,
-                $xp >= 2 => 3,
-                default => 2,
-            };
-        }
-        else
-            $limit = match (true) {
+                $xp >= 22 => 7,
+                $xp >= 16 => 6,
+                $xp >= 11 => 5,
+                $xp >= 7 => 4,
                 $xp >= 4 => 3,
                 $xp >= 2 => 2,
                 default => 1,
@@ -1651,24 +1573,24 @@ class CharacterForm
         }
         return $limit;
     }
+
     public static function limitskills ($get)
     {
         $skillFields = ['skill_weapon', 'skill_aspect',];
         $xp = $get('xp');
         $limit = match (true) {
-            $xp >= 21=> 15,
             $xp >= 20=> 14,
-            $xp >= 17=> 13,
-            $xp >= 15=> 12,
-            $xp >= 13=> 11,
-            $xp >= 10=> 10,
-            $xp >= 9=> 9,
-            $xp >= 8=> 8,
-            $xp >= 7=> 7,
-            $xp >= 5=> 6,
-            $xp >= 3=> 5,
-            $xp >= 2=> 4,
-            default   => 2,
+            $xp >= 19=> 13,
+            $xp >= 18=> 12,
+            $xp >= 15=> 11,
+            $xp >= 14=> 10,
+            $xp >= 12=> 9,
+            $xp >= 10=> 8,
+            $xp >= 8=> 7,
+            $xp >= 6=> 6,
+            $xp >= 5=> 5,
+            $xp >= 3=> 4,
+            default   => 3,
         };
 
         // Alle ausgewählten Skills zusammenzählen
@@ -1687,6 +1609,7 @@ class CharacterForm
             'limit' => $limit,
         ];
     }
+
     public static function setAttributeBonus($state, Get $get, Set $set): void
     {
         $boni = $get('boni') ?? [];
@@ -1700,7 +1623,7 @@ class CharacterForm
         }
 
         $baseTalente = [
-            'Zähigkeit', 'Kraftakt', 'Körperbeh', 'Fingerfer',
+            'Zähigkeit', 'Kraftakt', 'Körperbeherrschung', 'Fingerfertigkeit',
             'Konzentration', 'Wahrnehmung', 'Willenskraft', 'Kommunikation'
         ];
 
@@ -1722,17 +1645,9 @@ class CharacterForm
             if (in_array($selected, $baseTalente, true)) {
                 $key = strtolower(str_replace('.', '', $selected));
                 $current = $get("{$key}_sum") ?? 0;
-                $set("{$key}_sum", $current + 2);
+                $set("{$key}_sum", $current + 4);
             }
         }
     }
-//      NOT NEEDED ANYMORE??
-//    public static function isSkillactive($get, string $skillkey): bool
-//    {
-//        if ($get('leiteigenschaft1') === $skillkey || $get('leiteigenschaft2') === $skillkey) {
-//            return false;
-//        }
-//        return true;
-//    }
 
 }

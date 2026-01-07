@@ -32,12 +32,6 @@ class limitClassabilitiesHelper
 
         if (is_array($get('classability2')) && count($get('classability2')) > $limit) {
             $set('classability2', array_slice($get('classability2'), 0, $limit));
-
-            // Warnung anzeigen
-//            Notification::make()
-//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
-//                ->danger()
-//                ->send();
         }
         return $limit;
     }
@@ -52,12 +46,6 @@ class limitClassabilitiesHelper
 
         if (is_array($get('classability3')) && count($get('classability3')) > $limit) {
             $set('classability3', array_slice($get('classability3'), 0, $limit));
-
-            // Warnung anzeigen
-//            Notification::make()
-//                ->title("Du darfst auf Stufe {$xp} maximal {$limit} Klassenfertigkeiten wählen.")
-//                ->danger()
-//                ->send();
         }
         return $limit;
     }
