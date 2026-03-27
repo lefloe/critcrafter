@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -15,16 +16,21 @@ class Character extends Model
 
     protected $fillable = [
         'name',
-        'player_id',
+        'user_id',
         'description',
         'leiteigenschaft1',
         'leiteigenschaft2',
         'archetype',
         'main_stat_value',
         'ko_toggle',
+        'ko_bonus',
+        'bonus_sep',
+        'bonus_lep',
+        'bonus_ini',
+        'bonus_re',
         'race',
         'wesen',
-        'rassenmerkmale',
+        'racial_traits',
         'ko',
         'st',
         'ag',
@@ -33,8 +39,24 @@ class Character extends Model
         'in',
         'mu',
         'ch',
-        'skill_ko',
-        'skill_st',
+        'ko_sum',
+        'st_sum',
+        'ag_sum',
+        'ge_sum',
+        'we_sum',
+        'in_sum',
+        'mu_sum',
+        'ch_sum',
+        'zähigkeit_sum',
+        'kraftakt_sum',
+        'körperbeherrschung_sum',
+        'fingerfertigkeit_sum',
+        'konzentration_sum',
+        'wahrnehmung_sum',
+        'willenskraft_sum',
+        'kommunikation_sum',
+        'skill_weapon',
+        'skill_aspect',
         'skill_ag',
         'skill_ge',
         'skill_we',
@@ -43,7 +65,8 @@ class Character extends Model
         'skill_ch',
         'leps',
         'tragkraft',
-        'geschwindigkeit',
+        'gs_leib',
+        'gs_seele',
         'handwerksbonus',
         'kontrollwiderstand',
         'initiative',
@@ -56,29 +79,29 @@ class Character extends Model
         'nw_vw',
         'nw_tw',
         'xp',
-        'klassenfertigkeiten',
+        'classability1',
+        'classability2',
+        'classability3',
         'handwerkskenntnisse',
         'lore',
-        'portrait'
     ];
     protected $casts = [
-        'rassenmerkmale' => 'array',
+        'racial_traits' => 'array',
         'handwerkskenntnisse' => 'array',
-        'klassenfertigkeiten' => 'array',
-        'klassenfertigkeiten2' => 'array',
-        'klassenfertigkeiten3' => 'array',
-        'skill_ko' => 'array',
-        'skill_st' => 'array',
-        'skill_ag' => 'array',
-        'skill_ge' => 'array',
-        'skill_we' => 'array',
-        'skill_in' => 'array',
-        'skill_mu' => 'array',
-        'skill_ch' => 'array',
-        'equipment' => 'array',
+        'classability1' => 'array',
+        'classability2' => 'array',
+        'classability3' => 'array',
+        'skill_weapon' => 'array',
+        'skill_aspect' => 'array',
         'lore' => 'array',
+        'nw_gattung' => 'array',
         'nw_damage_type' => 'array',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function equipment(): BelongsToMany
     {

@@ -29,6 +29,7 @@ class GmPanelProvider extends PanelProvider
             ->path('gm')
             ->login()
             ->registration()
+            ->topNavigation()
             ->colors([
                 'primary' => Color::Amber,
             ])

@@ -65,4 +65,9 @@ class CharacterResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+    public static function getEloquentQuery(): Builder
+    {
+        // Zeige nur Charaktere, die dem eingeloggten Benutzer gehören
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
+    }
 }

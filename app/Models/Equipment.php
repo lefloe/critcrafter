@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
@@ -13,7 +14,7 @@ class Equipment extends Model
 {
     protected $fillable = [
         'name',
-        'player_id',
+        'user_id',
         'description',
         'quality',
         'item_type',
@@ -21,24 +22,38 @@ class Equipment extends Model
         'waffengattung',
         'attackvalue',
         'damage_type',
-        'trefferwuerfel',
+        'tw',
+        'count_dice',
+        'waffenführung',
+        'waffengattung',
         'traglast',
         'passive_verteidigung',
+        'wp_vw',
         'schild_verteidigung',
-        'rs_schnitt',
-        'rs_stumpf',
-        'rs_stich',
-        'rs_elementar',
-        'rs_arcan',
-        'rs_chaos',
-        'rs_spirit',
+        'armor_schnitt',
+        'armor_stumpf',
+        'armor_stich',
+        'armor_elementar',
+        'armor_arcan',
+        'armor_chaos',
+        'armor_spirit',
+        'shield_schnitt',
+        'shield_stumpf',
+        'shield_stich',
+        'shield_elementar',
+        'shield_arcan',
+        'shield_chaos',
+        'shield_spirit',
+        'charm_arcan',
+        'charm_chaos',
+        'charm_spirit',
         'enchantment',
         'enchantment_qs',
         'kontrollwiderstand',
-        'rs_arcan',
-        'rs_chaos',
+        'wp_erweiterungen',
         'rs_erweiterungen',
         'ts_erweiterungen',
+        'sd_erweiterungen',
         'character_id',
         'equipped'
     ];
@@ -48,6 +63,8 @@ class Equipment extends Model
         'wp_erweiterungen' => 'array',
         'rs_erweiterungen' => 'array',
         'ts_erweiterungen' => 'array',
+        'sd_erweiterungen' => 'array',
+        'waffenführung' => 'array',
     ];
 
     public function character(): BelongsToMany
@@ -55,6 +72,11 @@ class Equipment extends Model
         return $this->belongsToMany(Character::class, 'character_equipment')
             ->withPivot('slot')
             ->withTimestamps();
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopeAvailable($query)

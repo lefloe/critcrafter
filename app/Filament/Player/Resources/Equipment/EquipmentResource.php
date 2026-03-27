@@ -9,6 +9,7 @@ use App\Filament\Player\Resources\Equipment\Pages\ViewEquipment;
 use App\Filament\Player\Resources\Equipment\Schemas\EquipmentForm;
 use App\Filament\Player\Resources\Equipment\Schemas\EquipmentInfolist;
 use App\Filament\Player\Resources\Equipment\Tables\EquipmentTable;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Equipment;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -54,5 +55,10 @@ class EquipmentResource extends Resource
             'view' => ViewEquipment::route('/{record}'),
             'edit' => EditEquipment::route('/{record}/edit'),
         ];
+    }
+    public static function getEloquentQuery(): Builder
+    {
+        // Zeige nur Equipment, die dem eingeloggten Benutzer gehören
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\Player\Register;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,7 +28,8 @@ class PlayerPanelProvider extends PanelProvider
             ->id('player')
             ->path('player')
             ->login()
-            ->registration()
+            ->registration(Register::class)
+            ->topNavigation()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -39,7 +41,6 @@ class PlayerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Player/Widgets'), for: 'App\Filament\Player\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

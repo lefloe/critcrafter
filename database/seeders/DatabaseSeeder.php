@@ -18,20 +18,33 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'user',
+            'email' => 'user@example.com',
+            'role' => 'user',
+            'password' => bcrypt('password'),
+        ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'role' => 'admin',
             'password' => bcrypt('password'),
         ]);
 
         Character::create([
             'name' => 'Testcharakter',
-            'description' => 'Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
+            'user_id' => 1,
+            'description' => '<h3>Hintergrund und Persönlichkeit</h3>
+            <p><strong>Herkunft:</strong> (Woher stammt der Charakter? Wer waren seine Eltern?)<br>
+            <strong>Motivation:</strong> (Was treibt den Charakter an? Welche Ziele verfolgt er?)<br>
+            <strong>Charakterzüge:</strong> (Welche Stärken und Schwächen hat der Charakter?)<br>
+            <strong>Einschneidendes Ereignis:</strong> (Welches Erlebnis hat ihn geprägt?)<br>
+            </p>Lorem ipsum dolor Aenean sit amet turpis a sapien faucibus dapibus. Vestibulum et lorem ut nulla mattis bibendum. Integer in congue sem. Curabitur egestas justo id malesuada gravida. Vivamus eget felis erat. Phasellus pretium blandit eros, in imperdiet justo bibendum in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vestibulum convallis lorem, vitae pretium sapien ullamcorper ac. Aliquam erat volutpat. Cras id augue id diam ullamcorper imperdiet. Nam at fringilla magna, et finibus ex. Sed sit amet nulla sed enim cursus porta. Vivamus a pulvinar sapien. Etiam pretium magna sit amet arcu imperdiet, sit amet porta neque tincidunt. Mauris bibendum fermentum elit.',
             'leiteigenschaft1' => 'KO',
-            'leiteigenschaft2' => 'ST',
+            'leiteigenschaft2' => 'MU',
             'archetype' => 'Sappeur',
             'race' => 'Ainu',
             'wesen' => 'Biest',
-            'rassenmerkmale' => ['Apex', 'Nachtsicht'],
+            'racial_traits' => ['Apex', 'Nachtsicht'],
             'ko' => 12,
             'st' => 10,
             'ag' => 9,
@@ -40,11 +53,12 @@ class DatabaseSeeder extends Seeder
             'in' => 10,
             'mu' => 9,
             'ch' => 10,
-            'skill_ko' => ['Block', 'Entwaffnen'],
-            'skill_st' => ['Plattenbrecher', 'Schädelbrecher'],
+            'skill_weapon' => ['Block', 'Entwaffnen'],
+            'skill_aspect' => ['Magniforma', 'Pandemalum'],
             'leps' => 24,
             'tragkraft' => 10,
-            'geschwindigkeit' => 4.5,
+            'gs_leib' => 5,
+            'gs_seele' => 8,
             'handwerksbonus' => 1,
             'kontrollwiderstand' => 4,
             'initiative' => 5,
@@ -57,7 +71,7 @@ class DatabaseSeeder extends Seeder
             'nw_vw'=> 0,
             'nw_tw'=> 1,
             'xp' => 7,
-            'klassenfertigkeiten' => ['Animist I', 'Barde I', 'Berserker I'],
+            'classability1' => ['Krüge zerdeppern'],
             'handwerkskenntnisse' => ['Werkzeuge'],
             'lore' => 'Aspektwesen',
         ]);
@@ -65,72 +79,92 @@ class DatabaseSeeder extends Seeder
 
         // Beispiel-Waffe
         Equipment::create([
-            'name' => 'Kriegsaxt der Glut',
-            'description' => 'Eine schwere, geschmiedete Axt mit glühender Schneide.',
-            'quality' => 'episch',
+            'user_id' => 1,
+            'name' => 'Gewöhnliches Kurzschwert',
+            'description' => 'Ein gewöhnliches Kurzschwert, einfach aber effektiv.',
+            'quality' => 'gewöhnlich',
             'item_type' => 'Waffe',
-            'hwp' => 12,
-            'waffengattung' => 'Nahkampfwaffe',
-            'attackvalue' => 7,
-            'damage_type' => ['stumpf', 'schnitt'],
-            'trefferwuerfel' => 6,
-            'traglast' => 3,
-            'wp_erweiterungen' => ['der Präzision', 'des Gemetzels'],
+            'hwp' => 40,
+
+            // Waffe-spezifische Felder
+            'attackvalue' => 4, // QS 'gewöhnlich'
+            'damage_type' => json_encode(['Schnitt', 'Stich']),
+            'count_dice' => 1,
+            'tw' => 'W6', // QS 'gewöhnlich'
+            'waffenführung' => json_encode(['Einhändig']),
+            'traglast' => 2,
+            'wp_vw' => 4, // QS 'gewöhnlich'
+
+            // Erweiterungen & Verzauberungen
+            'wp_erweiterungen' => json_encode(['der einfachen Handhabung']),
+            'enchantment' => json_encode(['der Künste']),
+            'enchantment_qs' => 'einfach',
         ]);
 
         // Beispiel-Rüstung
         Equipment::create([
-            'name' => 'Verstärkte Knochenrüstung',
-            'description' => 'Rüstung aus alchemistisch gehärtetem Knochen.',
-            'quality' => 'selten',
+            'user_id' => 1,
+            'name' => 'Lederrüstung',
+            'description' => 'Leichte Lederrüstung für Reisende.',
+            'quality' => 'einfach',
             'item_type' => 'Rüstung',
-            'hwp' => 9,
-            'passive_verteidigung' => 4,
-            'rs_schnitt' => 5,
-            'rs_stumpf' => 3,
-            'rs_stich' => 4,
-            'rs_elementar' => 2,
-            'traglast' => 4,
-            'enchantment' => 'des Schutzes',
-            'enchantment_qs' => 'einfach',
-            'rs_erweiterungen' => ['Verstärkt'],
+            'hwp' => 25,
+
+            // Rüstung-spezifische Felder (RS)
+            'pVW' => 2, // QS 'einfach'
+            'armor_schnitt' => 2,
+            'armor_stumpf' => 1,
+            'armor_stich' => 1,
+            'armor_elementar' => 0,
+
+            // Erweiterungen & Verzauberungen
+            'rs_erweiterungen' => json_encode(['passgenau']),
+            'enchantment' => json_encode(['der Erleichterung']),
+            'enchantment_qs' => 'schlecht',
         ]);
 
         // Beispiel-Talisman
         Equipment::create([
-            'name' => 'Talisman der Klarheit',
-            'description' => 'Ein schimmernder Kristall, der geistige Klarheit spendet.',
-            'quality' => 'legendär',
+            'user_id' => 1,
+            'name' => 'Talisman der Willenskraft',
+            'description' => 'Ein kleiner Anhänger, der die Willenskraft stärkt.',
+            'quality' => 'ungewöhnlich',
             'item_type' => 'Talisman',
-            'hwp' => 8,
-            'kontrollwiderstand' => 5,
-            'rs_arcan' => 2,
-            'rs_chaos' => 1,
-            'rs_spirit' => 3,
-            'traglast' => 1,
-            'enchantment' => 'des Eifers',
-            'enchantment_qs' => 'episch',
-            'ts_erweiterungen' => ['der konzentration'],
+            'hwp' => 50,
+
+            // Talisman-spezifische Felder
+            'kw' => 7, // QS 'ungewöhnlich'
+            'charm_arcan' => 3,
+            'charm_chaos' => 0,
+            'charm_spirit' => 0,
+
+            'ts_erweiterungen' => json_encode(['der willenskraft']),
+            'enchantment' => json_encode(['der Hast']),
+            'enchantment_qs' => 'einfach',
         ]);
 
         // Beispiel-Schild
         Equipment::create([
-            'name' => 'Schild der Vorhut',
-            'description' => 'Ein massiver Schild mit Gravuren eines Löwen.',
-            'quality' => 'ungewöhnlich',
+            'name' => 'Gewöhnlicher Rundschild',
+            'description' => 'Ein einfacher, solider Rundschild.',
+            'quality' => 'gewöhnlich',
             'item_type' => 'Schild',
-            'hwp' => 6,
-            'schild_verteidigung' => 5,
-            'rs_schnitt' => 1,
-            'rs_stumpf' => 1,
-            'rs_stich' => 2,
-            'enchantment' => 'des Schutzes',
-            'enchantment_qs' => 'ungewöhnlich',
-            'ts_erweiterungen' => ['der ruhe'],
+            'hwp' => 35,
+
+            // Schild-spezifische Felder
+            'schild_verteidigung' => 4, // QS 'gewöhnlich'
+            'shield_stumpf' => 1,
+            'shield_stich' => 2,
+            'shield_schnitt' => 2,
+            'shield_elementar' => 0,
+            'offensivschild' => 0,
+
+            'sd_erweiterungen' => json_encode(['stabil', 'trommelschild']),
         ]);
 
         // Beispiel-Schmuckstück
         Equipment::create([
+            'user_id' => 1,
             'name' => 'Ring der Macht',
             'description' => 'Ein massiver Ring mit Gravuren eines Zaubers.',
             'quality' => 'ungewöhnlich',
