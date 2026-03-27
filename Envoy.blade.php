@@ -40,6 +40,7 @@
 @task('assets', ['on' => 'live'])
     echo "--- Building frontend assets ---"
     cd {{ $path }}
+    export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     npm ci --prefer-offline
     npm run build
 @endtask
