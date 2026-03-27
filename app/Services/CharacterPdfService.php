@@ -34,13 +34,13 @@ class CharacterPdfService
         );
 
         $templatePath = resource_path('pdf/Character_Sheet.pdf');
-        $outputPath = tempnam(sys_get_temp_dir(), 'char_pdf_') . '.pdf';
+        $outputPath = tempnam(sys_get_temp_dir(), 'char_pdf_').'.pdf';
 
         $pdf = new Pdf($templatePath);
         $pdf->fillForm($fields)->saveAs($outputPath);
 
         if ($pdf->getError()) {
-            throw new \RuntimeException('PDF generation failed: ' . $pdf->getError());
+            throw new \RuntimeException('PDF generation failed: '.$pdf->getError());
         }
 
         return $outputPath;
@@ -55,53 +55,54 @@ class CharacterPdfService
         };
 
         return [
-            'Name'          => $character->name ?? '',
-            'Rasse'         => $character->race ?? '',
-            'Erfahrungsgrad'=> $character->xp ?? '',
-            'PLE'           => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft1 ?? ''] ?? '',
-            'SLE'           => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft2 ?? ''] ?? '',
-            'Primär'        => $character->archetype ?? '',
-            'Ressource'     => $character->main_stat_value ?? '',
-            'Seele'         => $wesen,
+            'Name' => $character->name ?? '',
+            'Rasse' => $character->race ?? '',
+            'Erfahrungsgrad' => $character->xp ?? '',
+            'PLE' => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft1 ?? ''] ?? '',
+            'SLE' => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft2 ?? ''] ?? '',
+            'Primär' => $character->archetype ?? '',
+            'Ressource' => $character->main_stat_value ?? '',
+            'Seele' => $wesen,
         ];
     }
 
     private function eigenschaftenFields(Character $character): array
     {
         return [
-            'Konstitution'       => $character->ko_sum ?? '',
-            'Stärke'             => $character->st_sum ?? '',
-            'Agilität'           => $character->ag_sum ?? '',
-            'Geschick'           => $character->ge_sum ?? '',
-            'Weisheit'           => $character->we_sum ?? '',
-            'Instinkt'           => $character->in_sum ?? '',
-            'Mut'                => $character->mu_sum ?? '',
-            'Charisma'           => $character->ch_sum ?? '',
-            'Zähigkeit'          => $character->zähigkeit_sum ?? '',
-            'Kraftakt'           => $character->kraftakt_sum ?? '',
+            'Konstitution' => $character->ko_sum ?? '',
+            'Stärke' => $character->st_sum ?? '',
+            'Agilität' => $character->ag_sum ?? '',
+            'Geschick' => $character->ge_sum ?? '',
+            'Weisheit' => $character->we_sum ?? '',
+            'Instinkt' => $character->in_sum ?? '',
+            'Mut' => $character->mu_sum ?? '',
+            'Charisma' => $character->ch_sum ?? '',
+            'Ausdauer' => $character->ausdauer_sum ?? '',
+            'BFZäh' => $character->zähigkeit_sum ?? '',
+            'Kraftakt' => $character->kraftakt_sum ?? '',
             'Körperbeherrschung' => $character->körperbeherrschung_sum ?? '',
-            'Fingerfertigkeit'   => $character->fingerfertigkeit_sum ?? '',
-            'Konzentration'      => $character->konzentration_sum ?? '',
-            'Wahrnehmung'        => $character->wahrnehmung_sum ?? '',
-            'Willenskraft'       => $character->willenskraft_sum ?? '',
-            'Kommunikation'      => $character->kommunikation_sum ?? '',
+            'Fingerfertigkeit' => $character->fingerfertigkeit_sum ?? '',
+            'Konzentration' => $character->konzentration_sum ?? '',
+            'Wahrnehmung' => $character->wahrnehmung_sum ?? '',
+            'Willenskraft' => $character->willenskraft_sum ?? '',
+            'Kommunikation' => $character->kommunikation_sum ?? '',
         ];
     }
 
     private function combatFields(Character $character): array
     {
         return [
-            'Lebenspunkte'    => $character->leps ?? '',
-            'Seelenpunkte'    => $character->seelenpunkte ?? '',
-            'Tragkraft'       => $character->tragkraft ?? '',
+            'Lebenspunkte' => $character->leps ?? '',
+            'Seelenpunkte' => $character->seelenpunkte ?? '',
+            'Tragkraft' => $character->tragkraft ?? '',
             'Geschwindigkeit' => $character->gs_leib ?? '',
-            'INI'             => $character->initiative ?? '',
+            'INI' => $character->initiative ?? '',
             'Initiativebonus' => $character->bonus_ini ?? '',
-            'VW'              => $character->verteidigung ?? '',
+            'VW' => $character->verteidigung ?? '',
             'Verteidigungsbonus' => $character->bonus_re ?? '',
-            'Handwerksbonus'  => $character->handwerksbonus ?? '',
-            'Kontrollbonus'   => $character->ko_bonus ?? '',
-            'KTRLWD'          => $character->kontrollwiderstand ?? '',
+            'Handwerksbonus' => $character->handwerksbonus ?? '',
+            'Kontrollbonus' => $character->ko_bonus ?? '',
+            'KTRLWD' => $character->kontrollwiderstand ?? '',
         ];
     }
 
@@ -111,13 +112,13 @@ class CharacterPdfService
         $damageTypes = (array) ($character->nw_damage_type ?? []);
 
         return [
-            'NWQS'   => $character->nw_quality ?? '',
+            'NWQS' => $character->nw_quality ?? '',
             'NWGATT' => $gattung,
-            'NWAW'   => $character->nw_aw ?? '',
-            'NWVW'   => $character->nw_vw ?? '',
-            'NWTW'   => $character->nw_tw ?? '',
-            'NWLE1'  => $damageTypes[0] ?? '',
-            'AW'     => $character->nw_aw ?? '',
+            'NWAW' => $character->nw_aw ?? '',
+            'NWVW' => $character->nw_vw ?? '',
+            'NWTW' => $character->nw_tw ?? '',
+            'NWLE1' => $damageTypes[0] ?? '',
+            'AW' => $character->nw_aw ?? '',
         ];
     }
 
@@ -163,6 +164,7 @@ class CharacterPdfService
         foreach (range(1, 7) as $i) {
             $fields["RS{$i}"] = $traits[$i - 1] ?? '';
         }
+
         return $fields;
     }
 
@@ -183,7 +185,7 @@ class CharacterPdfService
 
         // Nebenhand weapon (left_arm, only if it's a weapon not a shield)
         $offHandItems = $bySlot['left_arm'] ?? [];
-        $offWeapon = collect($offHandItems)->first(fn($e) => $e->item_type === 'Waffe');
+        $offWeapon = collect($offHandItems)->first(fn ($e) => $e->item_type === 'Waffe');
         $fields = array_merge($fields, $this->weaponFields($offWeapon, 'NH'));
 
         // Rüstung (armor slot)
@@ -191,7 +193,7 @@ class CharacterPdfService
         $fields = array_merge($fields, $this->armorFields($armor));
 
         // Schild (left_arm shield)
-        $shield = collect($offHandItems)->first(fn($e) => $e->item_type === 'Schild');
+        $shield = collect($offHandItems)->first(fn ($e) => $e->item_type === 'Schild');
         $fields = array_merge($fields, $this->shieldFields($shield));
 
         // Talisman (talisman_1)
@@ -199,21 +201,23 @@ class CharacterPdfService
         $fields = array_merge($fields, $this->talismanFields($talisman));
 
         // EQUIP flags
-        $fields['EQUIPRS']     = $armor ? 'Ja' : '';
+        $fields['EQUIPRS'] = $armor ? 'Ja' : '';
         $fields['EQUIPSCHILD'] = $shield ? 'Ja' : '';
-        $fields['EQUIPTAL']    = $talisman ? 'Ja' : '';
+        $fields['EQUIPTAL'] = $talisman ? 'Ja' : '';
 
         // Enchantments: collect VZ/QS pairs from all equipped items
         $enchantments = [];
         foreach ($character->equipment as $item) {
             $slot = $item->pivot->slot ?? 'not_equipped';
-            if ($slot === 'not_equipped') continue;
+            if ($slot === 'not_equipped') {
+                continue;
+            }
             foreach ((array) ($item->enchantment ?? []) as $ench) {
                 $enchantments[] = ['name' => $ench, 'qs' => $item->enchantment_qs ?? ''];
             }
         }
         foreach (range(1, 5) as $i) {
-            $fields["VZ{$i}"]   = $enchantments[$i - 1]['name'] ?? '';
+            $fields["VZ{$i}"] = $enchantments[$i - 1]['name'] ?? '';
             $fields["VZ{$i}QS"] = $enchantments[$i - 1]['qs'] ?? '';
         }
 
@@ -222,11 +226,11 @@ class CharacterPdfService
 
     private function weaponFields(?Equipment $weapon, string $prefix): array
     {
-        if (!$weapon) {
+        if (! $weapon) {
             return array_fill_keys(
                 ["{$prefix}QS", "{$prefix}GATT", "{$prefix}AW", "{$prefix}VW", "{$prefix}TW",
-                 "{$prefix}TL", "{$prefix}HwP", "{$prefix}LE1", "{$prefix}LE2",
-                 "{$prefix}HE1", "{$prefix}HE2", "{$prefix}HE3", "{$prefix}HE4", "{$prefix}HE5"],
+                    "{$prefix}TL", "{$prefix}HwP", "{$prefix}LE1", "{$prefix}LE2",
+                    "{$prefix}HE1", "{$prefix}HE2", "{$prefix}HE3", "{$prefix}HE4", "{$prefix}HE5"],
                 ''
             );
         }
@@ -234,12 +238,12 @@ class CharacterPdfService
         $extensions = (array) ($weapon->wp_erweiterungen ?? []);
 
         return [
-            "{$prefix}QS"  => $weapon->quality ?? '',
-            "{$prefix}GATT"=> implode(', ', (array) ($weapon->waffenführung ?? [])),
-            "{$prefix}AW"  => $weapon->attackvalue ?? '',
-            "{$prefix}VW"  => $weapon->wp_vw ?? '',
-            "{$prefix}TW"  => $weapon->tw ?? '',
-            "{$prefix}TL"  => $weapon->traglast ?? '',
+            "{$prefix}QS" => $weapon->quality ?? '',
+            "{$prefix}GATT" => implode(', ', (array) ($weapon->waffenführung ?? [])),
+            "{$prefix}AW" => $weapon->attackvalue ?? '',
+            "{$prefix}VW" => $weapon->wp_vw ?? '',
+            "{$prefix}TW" => $weapon->tw ?? '',
+            "{$prefix}TL" => $weapon->traglast ?? '',
             "{$prefix}HwP" => $weapon->hwp ?? '',
             "{$prefix}LE1" => implode(', ', (array) ($weapon->damage_type ?? [])),
             "{$prefix}LE2" => $weapon->name ?? '',
@@ -253,11 +257,11 @@ class CharacterPdfService
 
     private function armorFields(?Equipment $armor): array
     {
-        if (!$armor) {
+        if (! $armor) {
             return array_fill_keys(
                 ['RSQS', 'RSHwP', 'RSpVW', 'RSSchnitt', 'RSStumpf', 'RSStich',
-                 'RSElementar', 'RSArkan', 'RSChaos', 'RSSpirituell',
-                 'RSHE1', 'RSHE2', 'RSHE3', 'RSHE4', 'RSHE5'],
+                    'RSElementar', 'RSArkan', 'RSChaos', 'RSSpirituell',
+                    'RSHE1', 'RSHE2', 'RSHE3', 'RSHE4', 'RSHE5'],
                 ''
             );
         }
@@ -265,31 +269,31 @@ class CharacterPdfService
         $extensions = (array) ($armor->rs_erweiterungen ?? []);
 
         return [
-            'RSQS'        => $armor->quality ?? '',
-            'RSHwP'       => $armor->hwp ?? '',
-            'RSpVW'       => $armor->passive_verteidigung ?? '',
-            'RSSchnitt'   => $armor->armor_schnitt ?? '',
-            'RSStumpf'    => $armor->armor_stumpf ?? '',
-            'RSStich'     => $armor->armor_stich ?? '',
+            'RSQS' => $armor->quality ?? '',
+            'RSHwP' => $armor->hwp ?? '',
+            'RSpVW' => $armor->passive_verteidigung ?? '',
+            'RSSchnitt' => $armor->armor_schnitt ?? '',
+            'RSStumpf' => $armor->armor_stumpf ?? '',
+            'RSStich' => $armor->armor_stich ?? '',
             'RSElementar' => $armor->armor_elementar ?? '',
-            'RSArkan'     => $armor->armor_arcan ?? '',
-            'RSChaos'     => $armor->armor_chaos ?? '',
-            'RSSpirituell'=> $armor->armor_spirit ?? '',
-            'RSHE1'       => $extensions[0] ?? '',
-            'RSHE2'       => $extensions[1] ?? '',
-            'RSHE3'       => $extensions[2] ?? '',
-            'RSHE4'       => $extensions[3] ?? '',
-            'RSHE5'       => $extensions[4] ?? '',
+            'RSArkan' => $armor->armor_arcan ?? '',
+            'RSChaos' => $armor->armor_chaos ?? '',
+            'RSSpirituell' => $armor->armor_spirit ?? '',
+            'RSHE1' => $extensions[0] ?? '',
+            'RSHE2' => $extensions[1] ?? '',
+            'RSHE3' => $extensions[2] ?? '',
+            'RSHE4' => $extensions[3] ?? '',
+            'RSHE5' => $extensions[4] ?? '',
         ];
     }
 
     private function shieldFields(?Equipment $shield): array
     {
-        if (!$shield) {
+        if (! $shield) {
             return array_fill_keys(
                 ['SCH', 'SchildVW', 'SchildHwP', 'SchildTL', 'SchildTaP',
-                 'SchildSchnitt', 'SchildStich', 'SchildStumpf',
-                 'SCHE1', 'SCHE2', 'SCHE3', 'SCHE4', 'SCHE5'],
+                    'SchildSchnitt', 'SchildStich', 'SchildStumpf',
+                    'SCHE1', 'SCHE2', 'SCHE3', 'SCHE4', 'SCHE5'],
                 ''
             );
         }
@@ -297,25 +301,25 @@ class CharacterPdfService
         $extensions = (array) ($shield->sd_erweiterungen ?? []);
 
         return [
-            'SCH'          => $shield->schild_verteidigung ?? '',
-            'SchildVW'     => $shield->schild_verteidigung ?? '',
-            'SchildHwP'    => $shield->hwp ?? '',
-            'SchildTL'     => $shield->traglast ?? '',
-            'SchildTaP'    => $shield->offensivschild ?? '',
-            'SchildSchnitt'=> $shield->shield_schnitt ?? '',
-            'SchildStich'  => $shield->shield_stich ?? '',
+            'SCH' => $shield->schild_verteidigung ?? '',
+            'SchildVW' => $shield->schild_verteidigung ?? '',
+            'SchildHwP' => $shield->hwp ?? '',
+            'SchildTL' => $shield->traglast ?? '',
+            'SchildTaP' => $shield->offensivschild ?? '',
+            'SchildSchnitt' => $shield->shield_schnitt ?? '',
+            'SchildStich' => $shield->shield_stich ?? '',
             'SchildStumpf' => $shield->shield_stumpf ?? '',
-            'SCHE1'        => $extensions[0] ?? '',
-            'SCHE2'        => $extensions[1] ?? '',
-            'SCHE3'        => $extensions[2] ?? '',
-            'SCHE4'        => $extensions[3] ?? '',
-            'SCHE5'        => $extensions[4] ?? '',
+            'SCHE1' => $extensions[0] ?? '',
+            'SCHE2' => $extensions[1] ?? '',
+            'SCHE3' => $extensions[2] ?? '',
+            'SCHE4' => $extensions[3] ?? '',
+            'SCHE5' => $extensions[4] ?? '',
         ];
     }
 
     private function talismanFields(?Equipment $talisman): array
     {
-        if (!$talisman) {
+        if (! $talisman) {
             return array_fill_keys(
                 ['TLKW', 'TLRS', 'TLHwP', 'TLTL', 'TLHE1', 'TLHE2', 'TLHE3', 'TLHE4', 'TLHE5'],
                 ''
@@ -326,10 +330,10 @@ class CharacterPdfService
         $charmTotal = ($talisman->charm_arcan ?? 0) + ($talisman->charm_chaos ?? 0) + ($talisman->charm_spirit ?? 0);
 
         return [
-            'TLKW'  => $charmTotal ?: '',
-            'TLRS'  => $talisman->charm_arcan ?? '',
+            'TLKW' => $charmTotal ?: '',
+            'TLRS' => $talisman->charm_arcan ?? '',
             'TLHwP' => $talisman->hwp ?? '',
-            'TLTL'  => $talisman->traglast ?? '',
+            'TLTL' => $talisman->traglast ?? '',
             'TLHE1' => $extensions[0] ?? '',
             'TLHE2' => $extensions[1] ?? '',
             'TLHE3' => $extensions[2] ?? '',

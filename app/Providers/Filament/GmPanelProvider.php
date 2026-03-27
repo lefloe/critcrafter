@@ -30,6 +30,8 @@ class GmPanelProvider extends PanelProvider
             ->login()
             ->registration()
             ->topNavigation()
+            ->brandLogo(asset('images/logo-header.svg'))
+            ->brandLogoHeight('2rem')
             ->colors([
                 'primary' => Color::Amber,
             ])

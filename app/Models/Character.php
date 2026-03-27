@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Character extends Model
 {
@@ -48,6 +46,7 @@ class Character extends Model
         'mu_sum',
         'ch_sum',
         'zähigkeit_sum',
+        'ausdauer_sum',
         'kraftakt_sum',
         'körperbeherrschung_sum',
         'fingerfertigkeit_sum',
@@ -85,6 +84,7 @@ class Character extends Model
         'handwerkskenntnisse',
         'lore',
     ];
+
     protected $casts = [
         'racial_traits' => 'array',
         'handwerkskenntnisse' => 'array',
@@ -109,6 +109,7 @@ class Character extends Model
             ->withPivot('slot')
             ->withTimestamps();
     }
+
     public function characterEquipment()
     {
         return $this->hasMany(CharacterEquipment::class);

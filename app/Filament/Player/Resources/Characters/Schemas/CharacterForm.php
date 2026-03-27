@@ -236,7 +236,7 @@ class CharacterForm
                                                                 self::calculateLeps($get, $set);
                                                                 self::getweaponskills($get, $set);
                                                                 self::getaspectskills($get, $set);
-
+                                                                self::setAttributeBonus($state, $get, $set);
                                                             }),
                                                         Select::make('leiteigenschaft2')
                                                             ->label('Leiteigenschaft 2')
@@ -665,6 +665,7 @@ class CharacterForm
                                                                             ->visible(fn (Get $get) => $get('special_skill_type') === 'basistalent_bonus')
                                                                             ->inlineLabel()
                                                                             ->options([
+                                                                                'Ausdauer' => 'Ausdauer',
                                                                                 'Zähigkeit' => 'Zähigkeit',
                                                                                 'Kraftakt' => 'Kraftakt',
                                                                                 'Körperbeh' => 'Körperbeh.',
@@ -857,6 +858,10 @@ class CharacterForm
                                             ->schema([
                                                 Repeater::make('characterEquipment')
                                                     ->relationship('characterEquipment')
+                                                    ->live()
+                                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                                        self::setAttributeBonus($state, $get, $set);
+                                                    })
                                                     ->schema(components: [
                                                         Select::make('equipment_id')
                                                             ->required()
@@ -955,6 +960,10 @@ class CharacterForm
                                                             ->dehydrated(),
                                                         TextInput::make('gs_seele')
                                                             ->label('GS Seele')
+                                                            ->disabled()
+                                                            ->dehydrated(),
+                                                        TextInput::make('ausdauer_sum')
+                                                            ->label('Ausdauer')
                                                             ->disabled()
                                                             ->dehydrated(),
                                                         TextInput::make('zähigkeit_sum')
@@ -1669,44 +1678,106 @@ class CharacterForm
         ];
     }
 
+    /**
+     * Maps equipment extension keys to the Basistalent they boost and by how much.
+     * Add entries here when new extensions that grant Basistalent bonuses are introduced.
+     */
+    private const EXTENSION_BASISTALENT_BONI = [
+        // Rüstungs-Erweiterungen
+        'gelenkig' => ['key' => 'ausdauer',          'bonus' => 2],
+        'verstärkt' => ['key' => 'kraftakt',           'bonus' => 2],
+        'passgenau' => ['key' => 'körperbeherrschung', 'bonus' => 2],
+        'mechanisch' => ['key' => 'fingerfertigkeit',   'bonus' => 2],
+        // Talisman-Erweiterungen
+        'der konzentration' => ['key' => 'konzentration', 'bonus' => 2],
+        'der willenskraft' => ['key' => 'willenskraft',  'bonus' => 2],
+        'der kommunikation' => ['key' => 'kommunikation', 'bonus' => 2],
+        'der wahrnehmung' => ['key' => 'wahrnehmung',   'bonus' => 2],
+    ];
+
+    /** Maps sonderboni basistalent select values to their _sum field key. */
+    private const BASISTALENT_SUM_KEY = [
+        'Ausdauer' => 'ausdauer',
+        'Zähigkeit' => 'zähigkeit',
+        'Kraftakt' => 'kraftakt',
+        'Körperbeh' => 'körperbeherrschung',
+        'Fingerfer' => 'fingerfertigkeit',
+        'Konzentration' => 'konzentration',
+        'Wahrnehmung' => 'wahrnehmung',
+        'Willenskraft' => 'willenskraft',
+        'Kommunikation' => 'kommunikation',
+    ];
+
     public static function setAttributeBonus($state, Get $get, Set $set): void
     {
-        $boni = $get('boni') ?? [];
-
-        // Basiswerte zurücksetzen, bevor neu berechnet wird
         $baseAttributes = ['ko', 'st', 'ag', 'ge', 'we', 'in', 'mu', 'ch'];
+
+        // 1. Primärattribute auf Basiswerte zurücksetzen
         foreach ($baseAttributes as $attr) {
-            $baseValue = $get($attr) ?? 0;
-            $set("{$attr}_sum", $baseValue);
+            $set("{$attr}_sum", $get($attr) ?? 0);
             $set("{$attr}_max", $get("{$attr}_max_base") ?? 10);
         }
 
-        $baseTalente = [
-            'Zähigkeit', 'Kraftakt', 'Körperbeherrschung', 'Fingerfertigkeit',
-            'Konzentration', 'Wahrnehmung', 'Willenskraft', 'Kommunikation',
+        // 2. Basistalente mit dem Wert des zugehörigen Primärattributs initialisieren
+        $basistalenteMap = [
+            'ausdauer' => 'ko',
+            'zähigkeit' => 'ko',
+            'kraftakt' => 'st',
+            'körperbeherrschung' => 'ag',
+            'fingerfertigkeit' => 'ge',
+            'konzentration' => 'we',
+            'wahrnehmung' => 'in',
+            'willenskraft' => 'mu',
+            'kommunikation' => 'ch',
         ];
+        foreach ($basistalenteMap as $key => $attr) {
+            $set("{$key}_sum", $get($attr) ?? 0);
+        }
 
-        // Schleife durch alle vergebenen Boni
-        foreach ($boni as $bonus) {
-            $selected = $bonus['bonus'] ?? null;
-            if (! $selected) {
-                continue;
+        // 3. Sonderfertigkeits-Boni (Klassenfertigkeiten) anwenden
+        foreach ($get('sonderboni') ?? [] as $bonus) {
+            $type = $bonus['special_skill_type'] ?? null;
+
+            if ($type === 'eigenschaft_bonus') {
+                $attr = $bonus['eigenschaft'] ?? null;
+                if ($attr && in_array($attr, $baseAttributes, true)) {
+                    $set("{$attr}_sum", ($get("{$attr}_sum") ?? 0) + 1);
+                    $set("{$attr}_max", ($get("{$attr}_max") ?? 0) + 1);
+                }
             }
 
-            // Eigenschaftsbonus
-            if (in_array($selected, $baseAttributes, true)) {
-                $current = $get("{$selected}_sum") ?? 0;
-                $set("{$selected}_sum", $current + 1);
-
-                $max = $get("{$selected}_max") ?? 0;
-                $set("{$selected}_max", $max + 1);
+            if ($type === 'basistalent_bonus') {
+                $talent = $bonus['basistalent'] ?? null;
+                if ($talent && isset(self::BASISTALENT_SUM_KEY[$talent])) {
+                    $key = self::BASISTALENT_SUM_KEY[$talent];
+                    $set("{$key}_sum", ($get("{$key}_sum") ?? 0) + 4);
+                }
             }
+        }
 
-            // Basistalentbonus
-            if (in_array($selected, $baseTalente, true)) {
-                $key = strtolower(str_replace('.', '', $selected));
-                $current = $get("{$key}_sum") ?? 0;
-                $set("{$key}_sum", $current + 4);
+        // 4. Ausrüstungs-Boni aus Extensions anwenden
+        $characterEquipment = $get('characterEquipment') ?? [];
+        $equippedIds = collect($characterEquipment)
+            ->values()
+            ->filter(fn ($row) => ! empty($row['equipment_id']) && ($row['slot'] ?? 'not_equipped') !== 'not_equipped')
+            ->pluck('equipment_id')
+            ->toArray();
+
+        if (! empty($equippedIds)) {
+            $allExtensions = \App\Models\Equipment::whereIn('id', $equippedIds)
+                ->get()
+                ->flatMap(fn ($e) => array_merge(
+                    (array) ($e->wp_erweiterungen ?? []),
+                    (array) ($e->rs_erweiterungen ?? []),
+                    (array) ($e->ts_erweiterungen ?? []),
+                    (array) ($e->sd_erweiterungen ?? []),
+                ));
+
+            foreach ($allExtensions as $ext) {
+                if (isset(self::EXTENSION_BASISTALENT_BONI[$ext])) {
+                    $map = self::EXTENSION_BASISTALENT_BONI[$ext];
+                    $set("{$map['key']}_sum", ($get("{$map['key']}_sum") ?? 0) + $map['bonus']);
+                }
             }
         }
     }
