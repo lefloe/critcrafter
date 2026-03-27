@@ -3,14 +3,13 @@
 namespace App\Filament\Player\Resources\Equipment\Schemas;
 
 use App\Helpers\equipmentextensionshelper;
-use Filament\Schemas\Components\Fieldset;
-use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Radio;
-use Filament\Schemas\Components\Livewire;
-use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
@@ -24,12 +23,12 @@ class EquipmentForm
                 Section::make('allgemein')
                     ->description('Art der Ausrüstung wählen')
                     ->schema([
-                    Select::make('character_id')
-                        ->label('Besitzer')
-                        ->relationship('character', 'name')
-                        ->searchable()
-                        ->preload()
-                        ->nullable(),
+                        Select::make('character_id')
+                            ->label('Besitzer')
+                            ->relationship('character', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('name')
@@ -69,7 +68,7 @@ class EquipmentForm
                                         'sonstiges' => 'sonstiges',
                                     ])
                                     ->live()
-                                    ->afterStateUpdated(function ($livewire, $state, Get $get,Set $set) {
+                                    ->afterStateUpdated(function ($livewire, $state, Get $get, Set $set) {
                                         $livewire->emptyForm($set);
                                         switch ($state) {
                                             case 'Waffe':
@@ -86,7 +85,7 @@ class EquipmentForm
                                                 break;
                                         }
                                     }),
-                            ])
+                            ]),
                     ]),
                 Section::make('weapon')
                     ->label('Waffe')
@@ -94,80 +93,79 @@ class EquipmentForm
                     ->visible(fn (callable $get) => $get('item_type') == 'Waffe')
                     ->schema([
                         Grid::make(3)
-                        ->schema([
-                            Textinput::make('hwp')
-                                ->label('Handwerkspunkte')
-                                ->numeric()
-                                ->hint(function ($state, Get $get, Set $set) {
-                                    return $state - self::setWeaponHwp($get, $set);
-                                })
-                                ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                    return $state - self::setWeaponHwp($get, $set);
-                                })
-                                ->live(),
-                            Textinput::make('attackvalue')
-                                ->label('Angriffswert')
-                                ->numeric()
-                                ->step(1),
-                            Textinput::make('traglast')
-                                ->label('Traglast')
-                                ->numeric()
-                                ->step(1)
-                                ->minvalue(1)
-                                ->maxvalue(9),
-                            Select::make('waffenführung')
-                                ->label('Waffenführung')
-                                ->live()
-                                ->options([
-                                    'Zweihändig' => 'Zweihändig',
-                                    'Einhändig' => 'Einhändig',
-                                    'Beidhändig' => 'Beidhändig',
-                                    'Freihändig' => 'Freihändig',
-                                    'mit Schild' => 'mit Schild',
-                                ])
-                                ->afterStateUpdated(function (Get $get, Set $set) {
-                                    self::setWeaponStats($get, $set);
-                                })
-                                ->live(),
-                            Textinput::make('count_dice')
-                                ->label('Trefferwürfel')
-                                ->numeric()
-                                ->step(1)
-                                ->minvalue(1)
-                                ->maxvalue(9),
-                            TextInput::make('tw')
-                                ->label('Würfel'),
-                            Radio::make('waffengattung')
-                                ->options([
-                                    'Nahkampfwaffe' => 'Nahkampfwaffe',
-                                    'Fernkampfwaffe' => 'Fernkampfwaffe',
-                                ]),
-                            Textinput::make('wp_vw')
-                                ->label('VW 3HwP pro 2 VW')
-                                ->numeric()
-                                ->step(2)
-                                ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                    self::setWeaponHwp($get, $set);
-                                })
-                                ->live(),
-                            Select::make('damage_type')
-                                ->Label('Leiteigenschaft (2te mit "der Flexibilität")')
-                                ->multiple()
-                                ->options([
-                                    'stumpf' => 'ST (Stumpf)',
-                                    'schnitt' => 'AG (Schnitt)',
-                                    'stich' => 'GE (Stich)',
-                                    'arkan' => 'WE (Arkan)',
-                                    'elementar' => 'IN (Elementar)',
-                                    'chaos' => 'MU (Chaos)',
-                                    'spirituell' => 'CH (Spirituell)',
-                                ]),
+                            ->schema([
+                                Textinput::make('hwp')
+                                    ->label('Handwerkspunkte')
+                                    ->numeric()
+                                    ->hint(function ($state, Get $get, Set $set) {
+                                        return $state - self::setWeaponHwp($get, $set);
+                                    })
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setWeaponHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('attackvalue')
+                                    ->label('Angriffswert')
+                                    ->numeric()
+                                    ->step(1),
+                                Textinput::make('traglast')
+                                    ->label('Traglast')
+                                    ->numeric()
+                                    ->step(1)
+                                    ->minvalue(1)
+                                    ->maxvalue(9),
+                                Select::make('waffenführung')
+                                    ->label('Waffenführung')
+                                    ->live()
+                                    ->options([
+                                        'Zweihändig' => 'Zweihändig',
+                                        'Einhändig' => 'Einhändig',
+                                        'Beidhändig' => 'Beidhändig',
+                                        'Freihändig' => 'Freihändig',
+                                        'mit Schild' => 'mit Schild',
+                                    ])
+                                    ->afterStateUpdated(function (Get $get, Set $set) {
+                                        self::setWeaponStats($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('count_dice')
+                                    ->label('Trefferwürfel')
+                                    ->numeric()
+                                    ->step(1)
+                                    ->minvalue(1)
+                                    ->maxvalue(9),
+                                TextInput::make('tw')
+                                    ->label('Würfel'),
+                                Radio::make('waffengattung')
+                                    ->options([
+                                        'Nahkampfwaffe' => 'Nahkampfwaffe',
+                                        'Fernkampfwaffe' => 'Fernkampfwaffe',
+                                    ]),
+                                Textinput::make('wp_vw')
+                                    ->label('VW 3HwP pro 2 VW')
+                                    ->numeric()
+                                    ->step(2)
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        self::setWeaponHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Select::make('damage_type')
+                                    ->Label('Leiteigenschaft (2te mit "der Flexibilität")')
+                                    ->multiple()
+                                    ->options([
+                                        'stumpf' => 'ST (Stumpf)',
+                                        'schnitt' => 'AG (Schnitt)',
+                                        'stich' => 'GE (Stich)',
+                                        'arkan' => 'WE (Arkan)',
+                                        'elementar' => 'IN (Elementar)',
+                                        'chaos' => 'MU (Chaos)',
+                                        'spirituell' => 'CH (Spirituell)',
+                                    ]),
                             ]),
                         Select::make('wp_erweiterungen')
                             ->label('Erweiterungen')
                             ->multiple()
-                            ->options(fn (Get $get, Set $set) =>
-                                equipmentextensionshelper::getWpExtensions($get, $set)
+                            ->options(fn (Get $get, Set $set) => equipmentextensionshelper::getWpExtensions($get, $set)
                             )
                             ->afterStateUpdated(function (Get $get, Set $set) {
                                 self::setWeaponStats($get, $set);
@@ -205,7 +203,7 @@ class EquipmentForm
                                         return $state - self::setArmorHwp($get, $set);
                                     })
                                     ->live(),
-                        Textinput::make('armor_stumpf')
+                                Textinput::make('armor_stumpf')
                                     ->label('RS Stumpf')
                                     ->numeric()
                                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
@@ -227,76 +225,76 @@ class EquipmentForm
                                     })
                                     ->live(),
                             ]),
-                            // Hidden Field only active if "Beseelt"
-                            Grid::make(3)
-                                ->visible(fn (callable $get) => in_array('beseelt', $get('rs_erweiterungen')))
-                                ->schema([
-                                    Textinput::make('armor_arcan')
-                                        ->label('RS Arkan')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setArmorHwp($get, $set);
-                                        })
-                                        ->live(),
-                                    Textinput::make('armor_chaos')
-                                        ->label('RS Chaos')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setArmorHwp($get, $set);
-                                        })
-                                        ->live(),
-                                    Textinput::make('armor_spirit')
-                                        ->label('RS Spirituell')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setArmorHwp($get, $set);
-                                        })
-                                        ->live(),
-                                ]),
-                            Select::make('rs_erweiterungen')
-                                ->label('Erweiterungen')
-                                ->multiple()
-                                ->live()
-                                ->afterStateUpdated(function (Get $get, Set $set) {
-                                    self::setArmorStats($get, $set);
-                                    if (!in_array('beseelt', $get('rs_erweiterungen'))) {
-                                        $set('armor_arcan', null);
-                                        $set('armor_chaos', null);
-                                        $set('armor_spirit', null);
-                                    }
-                                })
-                                ->options([
-                                    'der modularität' => 'der Modularität (0 HwP)',
-                                    'flexibel' => 'Flexibel (2 HwP)',
-                                    'verstärkt' => 'Verstärkt (2 HwP)',
-                                    'mechanisch' => 'Mechanisch (2 HwP)',
-                                    'passgenau' => 'Passgenau (2 HwP)',
-                                    'gelenkig' => 'Gelenkig (2 HwP)',
-                                    'mit köcher' => 'mit Köcher (3 HwP)',
-                                    'getarnt' => 'Getarnt (3 HwP)',
-                                    'gleitend' => 'Gleitend (3 HwP)',
-                                    'mit kletterausrüstung' => 'mit Kletterausrüstung (3 HwP)',
-                                    'gehärtet' => 'Gehärtet (3 HwP)',
-                                    'des artisten' => 'des Artisten (5 HwP)',
-                                    'mit holster' => 'mit Holster (5 HwP)',
-                                    'gleitend' => 'Gleitend (5 HwP)',
-                                    'beseelt' => 'Beseelt (5 HwP)',
-                                    'geläutert' => 'Geläutert (7 HwP)',
-                                    'gepolstert' => 'Gepolstert (7 HwP)',
-                                    'geölt' => 'Geölt (7 HwP)',
-                                    'genietet' => 'Genietet (7 HwP)',
-                                    'des elements' => 'des Elements (9 HwP)',
-                                    ]),
-                            Fieldset::make('verzauberungen')
-                                ->label('Verzauberungen')
-                                ->schema([
-                                    Select::make('enchantment')
-                                        ->label('Verzauberung')
-                                        ->options(self::getEnchantments()),
-                                    Select::make('enchantment_qs')
-                                        ->label('QS Verzauberung')
-                                        ->options(self::getQS()),
-                                ]),
+                        // Hidden Field only active if "Beseelt"
+                        Grid::make(3)
+                            ->visible(fn (callable $get) => in_array('beseelt', $get('rs_erweiterungen')))
+                            ->schema([
+                                Textinput::make('armor_arcan')
+                                    ->label('RS Arkan')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setArmorHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('armor_chaos')
+                                    ->label('RS Chaos')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setArmorHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('armor_spirit')
+                                    ->label('RS Spirituell')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setArmorHwp($get, $set);
+                                    })
+                                    ->live(),
+                            ]),
+                        Select::make('rs_erweiterungen')
+                            ->label('Erweiterungen')
+                            ->multiple()
+                            ->live()
+                            ->afterStateUpdated(function (Get $get, Set $set) {
+                                self::setArmorStats($get, $set);
+                                if (! in_array('beseelt', $get('rs_erweiterungen'))) {
+                                    $set('armor_arcan', null);
+                                    $set('armor_chaos', null);
+                                    $set('armor_spirit', null);
+                                }
+                            })
+                            ->options([
+                                'der modularität' => 'der Modularität (0 HwP)',
+                                'flexibel' => 'Flexibel (2 HwP)',
+                                'verstärkt' => 'Verstärkt (2 HwP)',
+                                'mechanisch' => 'Mechanisch (2 HwP)',
+                                'passgenau' => 'Passgenau (2 HwP)',
+                                'gelenkig' => 'Gelenkig (2 HwP)',
+                                'mit köcher' => 'mit Köcher (3 HwP)',
+                                'getarnt' => 'Getarnt (3 HwP)',
+                                'gleitend' => 'Gleitend (3 HwP)',
+                                'mit kletterausrüstung' => 'mit Kletterausrüstung (3 HwP)',
+                                'gehärtet' => 'Gehärtet (3 HwP)',
+                                'des artisten' => 'des Artisten (5 HwP)',
+                                'mit holster' => 'mit Holster (5 HwP)',
+                                'gleitend' => 'Gleitend (5 HwP)',
+                                'beseelt' => 'Beseelt (5 HwP)',
+                                'geläutert' => 'Geläutert (7 HwP)',
+                                'gepolstert' => 'Gepolstert (7 HwP)',
+                                'geölt' => 'Geölt (7 HwP)',
+                                'genietet' => 'Genietet (7 HwP)',
+                                'des elements' => 'des Elements (9 HwP)',
+                            ]),
+                        Fieldset::make('verzauberungen')
+                            ->label('Verzauberungen')
+                            ->schema([
+                                Select::make('enchantment')
+                                    ->label('Verzauberung')
+                                    ->options(self::getEnchantments()),
+                                Select::make('enchantment_qs')
+                                    ->label('QS Verzauberung')
+                                    ->options(self::getQS()),
+                            ]),
                     ]),
                 Section::make('charm')
                     ->description('Werte des Talisman wählen')
@@ -329,63 +327,63 @@ class EquipmentForm
                                 Textinput::make('charm_arcan')
                                     ->label('RS Arkan')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setCharmHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setCharmHwp($get, $set);
+                                    })
+                                    ->live(),
                                 Textinput::make('charm_chaos')
                                     ->label('RS Chaos')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setCharmHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setCharmHwp($get, $set);
+                                    })
+                                    ->live(),
                                 Textinput::make('charm_spirit')
                                     ->label('RS Spirituell')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setCharmHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setCharmHwp($get, $set);
+                                    })
+                                    ->live(),
                             ]),
-                            Select::make('ts_erweiterungen')
-                                ->label('Erweiterungen')
-                                ->multiple()
-                                ->live()
-                                ->afterStateUpdated(function (Get $get, Set $set) {
-                                    self::setCharmStats($get, $set);
-                                })
-                                ->options([
-                                    'der modularität' => 'der Modularität (0 HwP)',
-                                    'der konzentration' => 'der Konzentration (2 HwP)',
-                                    'der willenskraft' => 'der Willenskraft (2 HwP)',
-                                    'der kommunikation' => 'der Kommunikation (2 HwP)',
-                                    'der wahrnehmung' => 'der Wahrnehmung (2 HwP)',
-                                    'der fokussierung' => 'der Fokussierung (3 HwP)',
-                                    'der sympathie' => 'der Sympathie (3 HwP)',
-                                    'der erinnerung' => 'der Erinnerung (3 HwP)',
-                                    'der freiheit' => 'der Freiheit (5 HwP)',
-                                    'des nachklangs' => 'des Nachklangs (5 HwP)',
-                                    'der ordnung' => 'der Ordnung (5 HwP)',
-                                    'der ruhe' => 'der Ruhe (5 HwP)',
-                                    'der geduld' => 'der Geduld (5 HwP)',
-                                    'der loyalität' => 'der Loyalität (7 HwP)',
-                                    'der klarheit' => 'der Klarheit (7 HwP)',
-                                    'der furchtlosigkeit' => 'der Furchtlosigkeit (7 HwP)',
-                                    'der vielseitigkeit' => 'der Vielseitigkeit (7 HwP)',
-                                    'der reflektion' => 'der Reflektion (9 HwP)',
-                                    'der widersprüche' => 'der Widersprüche (9 HwP)',
-                                ]),
-                            Fieldset::make('verzauberungen')
-                                ->label('Verzauberungen')
-                                ->schema([
-                                    Select::make('enchantment')
-                                        ->label('Verzauberung')
-                                        ->options(self::getEnchantments()),
-                                    Select::make('enchantment_qs')
-                                        ->label('QS Verzauberung')
-                                        ->options(self::getQS()),
-                                ]),
+                        Select::make('ts_erweiterungen')
+                            ->label('Erweiterungen')
+                            ->multiple()
+                            ->live()
+                            ->afterStateUpdated(function (Get $get, Set $set) {
+                                self::setCharmStats($get, $set);
+                            })
+                            ->options([
+                                'der modularität' => 'der Modularität (0 HwP)',
+                                'der konzentration' => 'der Konzentration (2 HwP)',
+                                'der willenskraft' => 'der Willenskraft (2 HwP)',
+                                'der kommunikation' => 'der Kommunikation (2 HwP)',
+                                'der wahrnehmung' => 'der Wahrnehmung (2 HwP)',
+                                'der fokussierung' => 'der Fokussierung (3 HwP)',
+                                'der sympathie' => 'der Sympathie (3 HwP)',
+                                'der erinnerung' => 'der Erinnerung (3 HwP)',
+                                'der freiheit' => 'der Freiheit (5 HwP)',
+                                'des nachklangs' => 'des Nachklangs (5 HwP)',
+                                'der ordnung' => 'der Ordnung (5 HwP)',
+                                'der ruhe' => 'der Ruhe (5 HwP)',
+                                'der geduld' => 'der Geduld (5 HwP)',
+                                'der loyalität' => 'der Loyalität (7 HwP)',
+                                'der klarheit' => 'der Klarheit (7 HwP)',
+                                'der furchtlosigkeit' => 'der Furchtlosigkeit (7 HwP)',
+                                'der vielseitigkeit' => 'der Vielseitigkeit (7 HwP)',
+                                'der reflektion' => 'der Reflektion (9 HwP)',
+                                'der widersprüche' => 'der Widersprüche (9 HwP)',
+                            ]),
+                        Fieldset::make('verzauberungen')
+                            ->label('Verzauberungen')
+                            ->schema([
+                                Select::make('enchantment')
+                                    ->label('Verzauberung')
+                                    ->options(self::getEnchantments()),
+                                Select::make('enchantment_qs')
+                                    ->label('QS Verzauberung')
+                                    ->options(self::getQS()),
+                            ]),
 
                     ]),
                 Section::make('Schild')
@@ -394,79 +392,79 @@ class EquipmentForm
                     ->schema([
                         Grid::make(3)
                             ->schema([
-                            Textinput::make('hwp')
-                                ->label('Handwerkspunkte')
-                                ->numeric()
-                                ->hint(function ($state, Get $get, Set $set) {
-                                    return $state - self::setShieldHwp($get, $set);
-                                })
-                                ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                    return $state - self::setShieldHwp($get, $set);
-                                })
-                                ->live(),
-                            Textinput::make('schild_verteidigung')
-                                ->label('Verteidigungswert')
-                                ->numeric(),
-                            Textinput::make('traglast')
-                                ->label('Traglast')
-                                ->numeric(),
+                                Textinput::make('hwp')
+                                    ->label('Handwerkspunkte')
+                                    ->numeric()
+                                    ->hint(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('schild_verteidigung')
+                                    ->label('Verteidigungswert')
+                                    ->numeric(),
+                                Textinput::make('traglast')
+                                    ->label('Traglast')
+                                    ->numeric(),
                             ]),
-                            Grid::make(4)
-                                ->schema([
+                        Grid::make(4)
+                            ->schema([
                                 Textinput::make('shield_schnitt')
                                     ->label('Rs Schnitt')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
                                 Textinput::make('shield_stumpf')
                                     ->label('Rs Stumpf')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
                                 Textinput::make('shield_stich')
                                     ->label('Rs Stich')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
                                 Textinput::make('shield_elementar')
                                     ->label('Rs Elementar')
                                     ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
                             ]),
-                            Grid::make(3)
-                                ->visible(fn (callable $get) => in_array('kosmischer schild', $get('sd_erweiterungen')))
-                                ->schema([
-                                    Textinput::make('shield_arcan')
-                                        ->label('Rs Stumpf')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
-                                    Textinput::make('shield_chaos')
-                                        ->label('Rs Stich')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
-                                    Textinput::make('shield_spirit')
-                                        ->label('Rs Elementar')
-                                        ->numeric()
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                                            return $state - self::setShieldHwp($get, $set);
-                                        })
-                                        ->live(),
-                                ]),
+                        Grid::make(3)
+                            ->visible(fn (callable $get) => in_array('kosmischer schild', $get('sd_erweiterungen')))
+                            ->schema([
+                                Textinput::make('shield_arcan')
+                                    ->label('Rs Stumpf')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('shield_chaos')
+                                    ->label('Rs Stich')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
+                                Textinput::make('shield_spirit')
+                                    ->label('Rs Elementar')
+                                    ->numeric()
+                                    ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                        return $state - self::setShieldHwp($get, $set);
+                                    })
+                                    ->live(),
+                            ]),
                         Grid::make(2)
                             ->schema([
                                 Textinput::make('offensivschild')
@@ -492,7 +490,7 @@ class EquipmentForm
                             ->live()
                             ->afterStateUpdated(function (Get $get, Set $set) {
                                 self::setShieldStats($get, $set);
-                                if (!in_array('kosmischer schild', $get('sd_erweiterungen'))) {
+                                if (! in_array('kosmischer schild', $get('sd_erweiterungen'))) {
                                     $set('armor_arcan', null);
                                     $set('armor_chaos', null);
                                     $set('armor_spirit', null);
@@ -516,17 +514,17 @@ class EquipmentForm
                                 'des kampfflusses' => 'des Kampfflusses (7 HwP)',
                                 'schildschlag' => 'Schildschlag (7 HwP)',
                                 'übergroß' => 'Übergroß (9 HwP)',
-                                ]),
+                            ]),
                         Fieldset::make('verzauberungen')
                             ->label('Verzauberungen')
                             ->schema([
-                                    Select::make('enchantment')
-                                        ->label('Verzauberung')
-                                        ->options(self::getEnchantments()),
-                                    Select::make('enchantment_qs')
-                                        ->label('QS Verzauberung')
-                                        ->options(self::getQS()),
-                                ]),
+                                Select::make('enchantment')
+                                    ->label('Verzauberung')
+                                    ->options(self::getEnchantments()),
+                                Select::make('enchantment_qs')
+                                    ->label('QS Verzauberung')
+                                    ->options(self::getQS()),
+                            ]),
                     ]),
                 Section::make('schmuckstück')
                     ->description('Werte des Schmuckstück wählen')
@@ -559,6 +557,7 @@ class EquipmentForm
             'legendär' => 'legendär',
         ];
     }
+
     protected static function getEnchantments(): array
     {
         return [
@@ -577,6 +576,7 @@ class EquipmentForm
             'des kosmischen Durchflusses' => 'des kosmischen Durchflusses',
         ];
     }
+
     protected static function getQSValues(): array
     {
         return [
@@ -603,6 +603,7 @@ class EquipmentForm
             ],
         ];
     }
+
     protected static function getExtensionCosts(): array
     {
         // Die Schlüssel sind die reinen Namen der Erweiterungen (die in der DB gespeichert werden)
@@ -620,7 +621,7 @@ class EquipmentForm
             'der Härtung' => 3,
             'des Duells' => 3,
             'des Tüftlers' => 3,
-//          'mit Parierstange' => 3,  <-wird über extra Feld geregelt
+            //          'mit Parierstange' => 3,  <-wird über extra Feld geregelt
             'des Gemetzels' => 3,
             'der Präzision' => 5,
             'der Zermürbung' => 5,
@@ -696,6 +697,7 @@ class EquipmentForm
             'übergroß' => 9,
         ];
     }
+
     protected static function getDiceProgression(string $currentDice): string
     {
         $progression = [
@@ -708,9 +710,11 @@ class EquipmentForm
             '2W10' => '2W12',
             '2W12' => '2W12', // Max Stufe
         ];
+
         // Gibt den nächsten Wert zurück, oder den aktuellen Wert, wenn er das Maximum erreicht hat
         return $progression[$currentDice] ?? $currentDice;
     }
+
     protected static function setWeaponStats(Get $get, Set $set): void
     {
         $quality = $get('quality');
@@ -719,9 +723,10 @@ class EquipmentForm
         $count_dice = 1;
         $wp_erweiterungen = $get('wp_erweiterungen');
 
-        if (!$quality || !isset($qsValues[$quality])) {
+        if (! $quality || ! isset($qsValues[$quality])) {
             $set('attackvalue', null);
             $set('tw', null);
+
             return;
         }
 
@@ -757,14 +762,16 @@ class EquipmentForm
         }
         $set('count_dice', $count_dice);
     }
+
     protected static function setArmorStats(Get $get, Set $set): void
     {
         $quality = $get('quality');
         $qsValues = self::getQSValues();
         $traglast = 2;
 
-        if (!$quality || !isset($qsValues[$quality])) {
+        if (! $quality || ! isset($qsValues[$quality])) {
             $set('pVW', null);
+
             return;
         }
 
@@ -776,15 +783,16 @@ class EquipmentForm
         }
         $set('traglast', $traglast);
     }
+
     protected static function setCharmStats(Get $get, Set $set): void
     {
         $quality = $get('quality');
         $qsValues = self::getQSValues();
         $traglast = 1;
 
-
-        if (!$quality || !isset($qsValues[$quality])) {
+        if (! $quality || ! isset($qsValues[$quality])) {
             $set('kontrollwiderstand', null);
+
             return;
         }
 
@@ -796,20 +804,21 @@ class EquipmentForm
         }
         $set('traglast', $traglast);
     }
+
     protected static function setShieldStats(Get $get, Set $set): void
     {
         $quality = $get('quality');
         $qsValues = self::getQSValues();
         $traglast = 1;
 
-
-        if (!$quality || !isset($qsValues[$quality])) {
+        if (! $quality || ! isset($qsValues[$quality])) {
             $set('schild_verteidigung', null);
+
             return;
         }
 
         $values = $qsValues[$quality];
-        $set('schild_verteidigung', $values['VW']+$get('defensivschild'));
+        $set('schild_verteidigung', $values['VW'] + $get('defensivschild'));
 
         if (in_array('der modularität', $get('sd_erweiterungen'))) {
             $traglast += 1;
@@ -820,6 +829,7 @@ class EquipmentForm
 
         $set('traglast', $traglast);
     }
+
     protected static function setWeaponHwp(Get $get, Set $set): int
     {
         $wp_vw = $get('wp_vw');
@@ -831,27 +841,31 @@ class EquipmentForm
             // Prüfe, ob der Schlüssel in unserem Mapping existiert
             $totalHwp += $costs[$extensionKey] ?? 0;
         }
-        $totalHwp += $wp_vw *3/2;
+        $totalHwp += $wp_vw * 3 / 2;
+
         return $totalHwp;
     }
+
     protected static function setArmorHwp(Get $get, Set $set): int
     {
-    $sum_rs = $get('armor_schnitt')+$get('armor_stumpf')+$get('armor_stich')+$get('armor_elementar')+$get('armor_arcan')+$get('armor_chaos')+$get('armor_spirit');
+        $sum_rs = $get('armor_schnitt') + $get('armor_stumpf') + $get('armor_stich') + $get('armor_elementar') + $get('armor_arcan') + $get('armor_chaos') + $get('armor_spirit');
 
-    $selectedExtensions = $get('rs_erweiterungen');
-    $costs = self::getExtensionCosts();
-    $totalHwp = 0;
+        $selectedExtensions = $get('rs_erweiterungen');
+        $costs = self::getExtensionCosts();
+        $totalHwp = 0;
 
-    foreach ($selectedExtensions as $extensionKey) {
-        // Prüfe, ob der Schlüssel in unserem Mapping existiert
-        $totalHwp += $costs[$extensionKey] ?? 0;
+        foreach ($selectedExtensions as $extensionKey) {
+            // Prüfe, ob der Schlüssel in unserem Mapping existiert
+            $totalHwp += $costs[$extensionKey] ?? 0;
+        }
+        $totalHwp += $sum_rs;
+
+        return $totalHwp;
     }
-    $totalHwp += $sum_rs;
-    return $totalHwp;
-    }
+
     protected static function setCharmHwp(Get $get, Set $set): int
     {
-        $sum_rs = $get('charm_arcan')+$get('charm_chaos')+$get('charm_spirit');
+        $sum_rs = $get('charm_arcan') + $get('charm_chaos') + $get('charm_spirit');
 
         $selectedExtensions = $get('ts_erweiterungen');
         $costs = self::getExtensionCosts();
@@ -862,13 +876,15 @@ class EquipmentForm
             $totalHwp += $costs[$extensionKey] ?? 0;
         }
         $totalHwp += $sum_rs;
+
         return $totalHwp;
     }
+
     protected static function setShieldHwp(Get $get, Set $set): int
     {
-        $sum_rs = $get('shield_schnitt')+$get('shield_stumpf')+$get('shield_stich')+$get('shield_elementar')+$get('shield_arcan')+$get('shield_chaos')+$get('shield_spirit');
+        $sum_rs = $get('shield_schnitt') + $get('shield_stumpf') + $get('shield_stich') + $get('shield_elementar') + $get('shield_arcan') + $get('shield_chaos') + $get('shield_spirit');
 
-        $sumExtrahwp = $get('offensivschild')+$get('defensivschild');
+        $sumExtrahwp = $get('offensivschild') + $get('defensivschild');
         $selectedExtensions = $get('ts_erweiterungen');
         $costs = self::getExtensionCosts();
         $totalHwp = 0;
@@ -879,7 +895,7 @@ class EquipmentForm
         }
         $totalHwp += $sum_rs;
         $totalHwp += $sumExtrahwp;
+
         return $totalHwp;
     }
-
 }
