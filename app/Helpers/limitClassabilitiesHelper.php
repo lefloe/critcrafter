@@ -32,6 +32,7 @@ class limitClassabilitiesHelper
 
         if (is_array($get('classability2')) && count($get('classability2')) > $limit) {
             $set('classability2', array_slice($get('classability2'), 0, $limit));
+
         }
         return $limit;
     }

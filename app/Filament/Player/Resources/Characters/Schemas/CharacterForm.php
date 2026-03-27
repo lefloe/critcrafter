@@ -23,7 +23,6 @@ use Filament\Forms\Components\RichEditor;
 
 
 
-
 class CharacterForm
 {
     public static function configure(Schema $schema): Schema
@@ -409,6 +408,7 @@ class CharacterForm
                                                                     'Eigenschaftsbonus' => 'Eigenschaftsbonus',
                                                                     'Basistalentbonus' => 'Basistalentbonus',
                                                                     'Begabung' => 'Begabung',
+                                                                    'Eingebung' => 'Eingebung',
                                                                     'Alle meine Schäfchen' => 'Alle meine Schäfchen',
                                                                     'Alles wird verwertet' => 'Alles wird verwertet',
                                                                     'An Leibern laben' => 'An Leibern laben',
@@ -496,6 +496,7 @@ class CharacterForm
                                                                     'Bollwerk' => 'Bollwerk',
                                                                     'Borke' => 'Borke',
                                                                     'Dunkles Geschenk' => 'Dunkles Geschenk',
+                                                                    'Eingebung' => 'Eingebung',
                                                                     'Einklang' => 'Einklang',
                                                                     'En Garde' => 'En Garde',
                                                                     'Esoterische Kunst' => 'Esoterische Kunst',
@@ -559,6 +560,7 @@ class CharacterForm
                                                                     'Armee der Toten' => 'Armee der Toten',
                                                                     'Avatar' => 'Avatar',
                                                                     'Blutsbruderschaft' => 'Blutsbruderschaft',
+                                                                    'Eingebung' => 'Eingebung',
                                                                     'Fest für die Sinne' => 'Fest für die Sinne',
                                                                     'Flèche' => 'Flèche',
                                                                     'Fluss des Kosmos' => 'Fluss des Kosmos',
@@ -595,26 +597,70 @@ class CharacterForm
                                                         ->hiddenLabel()
                                                         ->contained(false)
                                                         ->dense()
+                                                        ->afterStateUpdated(
+                                                            function ($state, Get $get, Set $set) {
+                                                                limitClassabilitiesHelper::limitClassability1($get, $set);
+                                                                limitClassabilitiesHelper::limitclassability2($get, $set);
+                                                                limitClassabilitiesHelper::limitclassability3($get, $set);
+                                                                self::setAttributeBonus($state, $get, $set);
+                                                                self::getaspectskills($get, $set);
+                                                                self::setMainStateValue($get, $set);
+                                                            })
                                                         ->schema([
-                                                            Repeater::make('boni')
-                                                                ->hiddenLabel()
+//                                                            Repeater::make('boni')
+//                                                                ->hiddenLabel()
+//                                                                ->live()
+//                                                                ->columnSpanFull()
+//                                                                ->addActionLabel('Allgemeine Klassenfertigkeiten')
+//                                                                ->simple(
+//                                                                    Select::make('bonus')
+//                                                                        ->options([
+//                                                                        'Eigenschaft' => [
+//                                                                            'ko' => 'Konstitution',
+//                                                                            'st' => 'Stärke',
+//                                                                            'ag' => 'Agilität',
+//                                                                            'ge' => 'Geschick',
+//                                                                            'we' => 'Weisheit',
+//                                                                            'in' => 'Intuition',
+//                                                                            'mu' => 'Mut',
+//                                                                            'ch' => 'Charisma',
+//                                                                        ],
+//                                                                        'Basistalent' => [
+//                                                                            'Zähigkeit' => 'Zähigkeit',
+//                                                                            'Kraftakt' => 'Kraftakt',
+//                                                                            'Körperbeh' => 'Körperbeh.',
+//                                                                            'Fingerfer' => 'Fingerfer.',
+//                                                                            'Konzentration' => 'Konzentration',
+//                                                                            'Wahrnehmung' => 'Wahrnehmung',
+//                                                                            'Willenskraft' => 'Willenskraft',
+//                                                                            'Kommunikation' => 'Kommunikation',
+//                                                                            ],
+//                                                                    ])
+//                                                                ),
+                                                            Repeater::make('sonderboni')
+                                                                ->label('Sonderfertigkeiten')
+                                                                ->compact()
                                                                 ->live()
                                                                 ->columnSpanFull()
-                                                                ->addActionLabel('Eigenschafts-/ Basistalentbonus')
-                                                                ->simple(
-                                                                    Select::make('bonus')
-                                                                    ->options([
-                                                                        'Eigenschaft' => [
-                                                                            'ko' => 'Konstitution',
-                                                                            'st' => 'Stärke',
-                                                                            'ag' => 'Agilität',
-                                                                            'ge' => 'Geschick',
-                                                                            'we' => 'Weisheit',
-                                                                            'in' => 'Intuition',
-                                                                            'mu' => 'Mut',
-                                                                            'ch' => 'Charisma',
-                                                                        ],
-                                                                        'Basistalent' => [
+                                                                ->addActionLabel('Sonderbonus hinzufügen')
+                                                                ->schema([
+                                                                    Select::make('special_skill_type')
+                                                                        ->hiddenlabel()
+                                                                        ->required()
+                                                                        ->options([
+                                                                            'eingebung' => 'Eingebung (+1 Skill-Limit)',
+                                                                            'basistalent_bonus' => 'Basistalentbonus',
+                                                                            'eigenschaft_bonus' => 'Eigenschaftsbonus',
+                                                                        ])
+                                                                        ->live(),
+                                                                    TextInput::make('eingebung_info')
+                                                                        ->hiddenLabel()
+                                                                        ->visible(fn (Get $get) => $get('special_skill_type') === 'eingebung')
+                                                                        ->placeholder('Aspekt- oder Waffenfertigkeit eintragen'),
+                                                                    Select::make('basistalent')
+                                                                        ->visible(fn (Get $get) => $get('special_skill_type') === 'basistalent_bonus')
+                                                                        ->inlineLabel()
+                                                                        ->options([
                                                                             'Zähigkeit' => 'Zähigkeit',
                                                                             'Kraftakt' => 'Kraftakt',
                                                                             'Körperbeh' => 'Körperbeh.',
@@ -623,19 +669,22 @@ class CharacterForm
                                                                             'Wahrnehmung' => 'Wahrnehmung',
                                                                             'Willenskraft' => 'Willenskraft',
                                                                             'Kommunikation' => 'Kommunikation',
-                                                                            ]
-                                                                    ]),
-                                                                    )
-                                                                    ->afterStateUpdated(
-                                                                        function ($state, Get $get, Set $set) {
-                                                                            limitClassabilitiesHelper::limitClassability1($get, $set);
-                                                                            limitClassabilitiesHelper::limitclassability2($get, $set);
-                                                                            limitClassabilitiesHelper::limitclassability3($get, $set);
-                                                                            self::setAttributeBonus($state, $get, $set);
-                                                                            self::getaspectskills($get, $set);
-                                                                            self::setMainStateValue($get, $set);
-                                                                        })
-                                                        ]),
+                                                                        ]),
+                                                                    Select::make('eigenschaft')
+                                                                        ->visible(fn (Get $get) => $get('special_skill_type') === 'eigenschaft_bonus')
+                                                                        ->inlineLabel()
+                                                                        ->options([
+                                                                            'ko' => 'Konstitution',
+                                                                            'st' => 'Stärke',
+                                                                            'ag' => 'Agilität',
+                                                                            'ge' => 'Geschick',
+                                                                            'we' => 'Weisheit',
+                                                                            'in' => 'Intuition',
+                                                                            'mu' => 'Mut',
+                                                                            'ch' => 'Charisma',
+                                                                        ]),
+                                                                ]),
+                                                            ]),
                                                 ]),
                                         ]),
                                     Fieldset::make('Handwerk und Überlieferungen')
@@ -1026,184 +1075,167 @@ class CharacterForm
     protected static function getaspectskills(Get $get, Set $set): array
     {
         $weOptions = [
-            'Iunctio' => 'Iunctio',
-            'Veto Umbrax' => 'Veto Umbrax',
-            'Vitae' => 'Vitae',
-            'Quaestio Arcana' => 'Quaestio Arcana',
-            'Effio Arcana' => 'Effio Arcana',
-            'Porta Speculum' => 'Porta Speculum',
-            'Forma Kinetia' => 'Forma Kinetia',
-            'Proiectum' => 'Proiectum',
-            'Pupa' => 'Pupa',
-            'Celero' => 'Celero',
-            'Ictos' => 'Ictos',
-            'Moveo' => 'Moveo',
-            'Corpus Morpha' => 'Corpus Morpha',
-            'Corpus Forma' => 'Corpus Forma',
-            'Forma Mutatio' => 'Forma Mutatio',
-            'Confirma' => 'Confirma',
-            'Erupit' => 'Erupit',
-            'Principor' => 'Principor',
-            'Collatio' => 'Collatio',
-            'Vexillum' => 'Vexillum',
-            'Auxillum' => 'Auxillum',
-            'Sucus Constantia' => 'Sucus Constantia',
-            'Exvocare Exterreo' => 'Exvocare Exterreo',
-            'Corpus Nox' => 'Corpus Nox',
-            'Perdita' => 'Perdita',
-            'Tenebra' => 'Tenebra',
-            'Maledictum' => 'Maledictum',
-            'Duplici' => 'Duplici',
-            'Fecundo' => 'Fecundo',
-            'Purus' => 'Purus',
-            'Curatio Morbus' => 'Curatio Morbus',
-            'Corpus Renovo' => 'Corpus Renovo',
             'Corpus Cupla' => 'Corpus Cupla',
-            'Veritas' => 'Veritas',
             'Lepos' => 'Lepos',
             'Ligo Spiri' => 'Ligo Spiri',
+            'Lucida' => 'Lucida',
+            'Auxillum' => 'Auxillum',
+            'Collatio' => 'Collatio',
+            'Principor' => 'Principor',
+            'Sucus Constantia' => 'Sucus Constantia',
+            'Vexillum' => 'Vexillum',
+            'Celero' => 'Celero',
+            'Forma Kinetia' => 'Forma Kinetia',
+            'Ictos' => 'Ictos',
+            'Proiectum' => 'Proiectum',
+            'Pupa' => 'Pupa',
+            'Corpus Nox' => 'Corpus Nox',
+            'Exvocare Exterreo' => 'Exvocare Exterreo',
+            'Maledictum' => 'Maledictum',
+            'Perdita' => 'Perdita',
+            'Tenebra' => 'Tenebra',
+            'Confirma' => 'Confirma',
+            'Corpus Forma' => 'Corpus Forma',
+            'Corpus Morpha' => 'Corpus Morpha',
+            'Debilitas' => 'Debilitas',
+            'Forma Mutatio' => 'Forma Mutatio',
+            'Iunctio' => 'Iunctio',
+            'Porta Speculum' => 'Porta Speculum',
+            'Crux' => 'Crux',
+            'Veto Umbrax' => 'Veto Umbrax',
+            'Vitae' => 'Vitae',
+            'Custodia' => 'Custodia',
+            'Percello' => 'Percello',
             'Pondus' => 'Pondus',
             'Spiri Duro' => 'Spiri Duro',
             'Vigil' => 'Vigil',
-            'Percello' => 'Percello',
-            'Custodia' => 'Custodia',
-        ];
+            'Corpus Renovo' => 'Corpus Renovo',
+            'Curatio Morbus' => 'Curatio Morbus',
+            'Duplici' => 'Duplici',
+            'Phagia' => 'Phagia',
+            ];
 
         $inOptions = [
-            'Illuminos' => 'Illuminos',
-            'Spiri Exvocare' => 'Spiri Exvocare',
-            'Soliri' => 'Soliri',
-            'Lux Columna' => 'Lux Columna',
-            'Purgato' => 'Purgato',
-            'Oculux' => 'Oculux',
-            'Calefaciendo' => 'Calefaciendo',
-            'Anhelitus' => 'Anhelitus',
-            'Intu' => 'Intu',
-            'Volaris' => 'Volaris',
-            'Liberare' => 'Liberare',
-            'Sonarus' => 'Sonarus',
-            'Ambulaqua' => 'Ambulaqua',
-            'Caligos' => 'Caligos',
             'Mollis' => 'Mollis',
-            'Pundio' => 'Pundio',
-            'Sitis' => 'Sitis',
-            'Tempestare' => 'Tempestare',
             'Siccatio' => 'Siccatio',
-            'Quaestio Elementi' => 'Quaestio Elementi',
-            'Crystaspino' => 'Crystaspino',
+            'Caligos' => 'Caligos',
+            'Ambulaqua' => 'Ambulaqua',
+            'Pundio' => 'Pundio',
+            'Corpus Lapis' => 'Corpus Lapis',
+            'Gravis' => 'Gravis',
+            'Magnes' => 'Magnes',
+            'Terra Motus' => 'Terra Motus',
+            'Terra Sculpta' => 'Terra Sculpta',
+            'Cyastaspino' => 'Cyastaspino',
             'Fricarcer' => 'Fricarcer',
-            'Calyx' => 'Calyx',
             'Pellucidus' => 'Pellucidus',
+            'Calyx' => 'Calyx',
             'Frigtreus' => 'Frigtreus',
-            'Convertempa' => 'Convertempa',
-            'Praeterivide' => 'Praeterivide',
-            'Tardius' => 'Tardius',
-            'Posultempa' => 'Posultempa',
-            'Divinatio' => 'Divinatio',
-            'Furtim' => 'Furtim',
-            'Sano' => 'Sano',
+            'Ahenum' => 'Ahenum',
+            'Arsitis' => 'Arsitis',
+            'Caminus' => 'Caminus',
+            'Circuligne' => 'Circuligne',
+            'Incendium' => 'Incendium',
+            'Illuminos' => 'Illuminos',
+            'Lux Columna' => 'Lux Columna',
+            'Oculux' => 'Oculux',
+            'Purgato' => 'Purgato',
+            'Spiri Exvocare' => 'Spiri Exvocare',
             'Corpus Mutare' => 'Corpus Mutare',
             'Dumus' => 'Dumus',
-            'Vocatus Pral' => 'Vocatus Pral',
+            'Sano' => 'Sano',
             'Vocatus Bestia' => 'Vocatus Bestia',
-            'Caminus' => 'Caminus',
-            'Arsitis' => 'Arsitis',
-            'Circuligne' => 'Circuligne',
-            'Ahenum' => 'Ahenum',
-            'Incendium' => 'Incendium',
-            'Gravis' => 'Gravis',
-            'Terra Motus' => 'Terra Motus',
-            'Magnes' => 'Magnes',
-            'Terra Sculpta' => 'Terra Sculpta',
-            'Corpus Lapis' => 'Corpus Lapis',
-        ];
+            'Vocatus Pral' => 'Vocatus Pral',
+            'Convertempa' => 'Convertempa',
+            'Divinatio' => 'Divinatio',
+            'Percutit' => 'Percutit',
+            'Praeterivide' => 'Praeterivide',
+            'Tardius' => 'Tardius',
+            'Calefaciendo' => 'Calefaciendo',
+            'Intu' => 'Intu',
+            'Liberare' => 'Liberare',
+            'Sonarus' => 'Sonarus',
+            'Volaris' => 'Volaris',
+            ];
 
         $muOptions = [
-            'Coactus' => 'Coactus',
-            'Veto Nexus' => 'Veto Nexus',
-            'Corpo Sucus' => 'Corpo Sucus',
-            'Vocare Inmortui' => 'Vocare Inmortui',
-            'Quaestio Chaos' => 'Quaestio Chaos',
-            'Porta Exterreo' => 'Porta Exterreo',
             'Inanis' => 'Inanis',
-            'Effio Chaos' => 'Effio Chaos',
-            'Vocare Interdict' => 'Vocare Interdict',
             'Reicio' => 'Reicio',
             'Veto Memoria' => 'Veto Memoria',
-            'Vocare Phantasma' => 'Vocare Phantasma',
-            'Ligo Irae' => 'Ligo Irae',
-            'Trepidatio' => 'Trepidatio',
-            'Terrere' => 'Terrere',
-            'Porta Fracti' => 'Porta Fracti',
-            'Mille Acus' => 'Mille Acus',
-            'Cruciatus' => 'Cruciatus',
-            'Vocare Tormentis' => 'Vocare Tormentis',
-            'Tedium' => 'Tedium',
-            'Vinculum' => 'Vinculum',
-            'Malum Specio' => 'Malum Specio',
-            'Simulacrum' => 'Simulacrum',
-            'Vocatus Malum' => 'Vocatus Malum',
-            'Magniforma' => 'Magniforma',
-            'Pandemalum' => 'Pandemalum',
-            'Pestis' => 'Pestis',
-            'Morbus' => 'Morbus',
-            'Rubigo' => 'Rubigo',
-            'Corpus Verto' => 'Corpus Verto',
-            'Vocare Toxicum' => 'Vocare Toxicum',
-            'Venatio' => 'Venatio',
-            'Vocare Furia' => 'Vocare Furia',
-            'Dissolutium' => 'Dissolutium',
-            'Concavum' => 'Concavum',
-            'Atrox' => 'Atrox',
+            'Vocare Interdict' => 'Vocare Interdict',
+            'Dissaeptum' => 'Dissaeptum',
+            'Impero' => 'Impero',
             'Legere' => 'Legere',
             'Plaga' => 'Plaga',
             'Vinco' => 'Vinco',
             'Vis' => 'Vis',
-            'Impero' => 'Impero',
-            'Dissaeptum' => 'Dissaeptum',
-        ];
+            'Magniforma' => 'Magniforma',
+            'Pandemalum' => 'Pandemalum',
+            'Simulacrum' => 'Simulacrum',
+            'Vocatus Malum' => 'Vocatus Malum',
+            'Ligo Irae' => 'Ligo Irae',
+            'Porta Fracti' => 'Porta Fracti',
+            'Terrere' => 'Terrere',
+            'Trepidatio' => 'Trepidatio',
+            'Vocare Phantasma' => 'Vocare Phantasma',
+            'Cruciatus' => 'Cruciatus',
+            'Malum Specio' => 'Malum Specio',
+            'Mille Acus' => 'Mille Acus',
+            'Tedium' => 'Tedium',
+            'Vocare Tormentis' => 'Vocare Tormentis',
+            'Corpus Verto' => 'Corpus Verto',
+            'Morbus' => 'Morbus',
+            'Pestis' => 'Pestis',
+            'Rubigo' => 'Rubigo',
+            'Coactus' => 'Coactus',
+            'Corpo Sucus' => 'Corpo Sucus',
+            'Porta Exterreo' => 'Porta Exterreo',
+            'Veto Nexus' => 'Veto Nexus',
+            'Vocare Inmortui' => 'Vocare Inmortui',
+            'Atrox' => 'Atrox',
+            'Concavum' => 'Concavum',
+            'Dissolutium' => 'Dissolutium',
+            'Venatio' => 'Venatio',
+            'Vocare Furia' => 'Vocare Furia',
+            ];
 
         $chOptions = [
-            'Quaestio Spiri' => 'Quaestio Spiri',
-            'Conventus' => 'Conventus',
-            'Sensus' => 'Sensus',
-            'Alienus' => 'Alienus',
-            'Aenigma' => 'Aenigma',
-            'Vocare Spiri' => 'Vocare Spiri',
-            'Peregrinus' => 'Peregrinus',
-            'Pax' => 'Pax',
-            'Nuntius' => 'Nuntius',
-            'Veto Spiri' => 'Veto Spiri',
-            'Lacero Spiri' => 'Lacero Spiri',
-            'Machina Vitam' => 'Machina Vitam',
-            'Artifex' => 'Artifex',
-            'Inspiratio' => 'Inspiratio',
+            'Affectio' => 'Affectio',
+            'Cupiditas' => 'Cupiditas',
+            'Ines' => 'Ines',
+            'Meretrix' => 'Meretrix',
+            'Effio Spiri' => 'Effio Spiri',
+            'Castigato' => 'Castigato',
+            'Vinculum' => 'Vinculum',
+            'Sermo' => 'Sermo',
+            'Spiri Vitae' => 'Spiri Vitae',
             'Ars' => 'Ars',
+            'Excogitus' => 'Excogitus',
             'Clavicarius' => 'Clavicarius',
+            'Inspiratio' => 'Inspiratio',
+            'Machina Vitam' => 'Machina Vitam',
+            'Ferus' => 'Ferus',
             'Ico' => 'Ico',
             'Ira' => 'Ira',
             'Spiritelum' => 'Spiritelum',
-            'Sententia' => 'Sententia',
-            'Ferus' => 'Ferus',
-            'Recuso' => 'Recuso',
-            'Recordatio' => 'Recordatio',
+            'Conventus' => 'Conventus',
+            'Eminentia' => 'Eminentia',
+            'Sensus' => 'Sensus',
+            'Vocare Spiri' => 'Vocare Spiri',
+            'Lacero Spiri' => 'Lacero Spiri',
+            'Pax' => 'Pax',
+            'Peregrinus' => 'Peregrinus',
+            'Aegis' => 'Aegis',
+            'Vocare Fidus' => 'Vocare Fidus',
             'Pertinax' => 'Pertinax',
             'Detineo' => 'Detineo',
-            'Effio Spiri' => 'Effio Spiri',
-            'Ligo Anima' => 'Ligo Anima',
-            'Spiri Vitae' => 'Spiri Vitae',
-            'Nanciscor' => 'Nanciscor',
-            'Sermo' => 'Sermo',
-            'Meretrix' => 'Meretrix',
-            'Cupiditas' => 'Cupiditas',
-            'Affectio' => 'Affectio',
-            'Ines' => 'Ines',
-            'Fortuna' => 'Fortuna',
+            'Recuso' => 'Recuso',
             'Cavillor' => 'Cavillor',
-            'Vocare Credo' => 'Vocare Credo',
-            'Velox' => 'Velox',
             'Exeo' => 'Exeo',
-        ];
+            'Fortuna' => 'Fortuna',
+            'Velox' => 'Velox',
+            'Vocare Credo' => 'Vocare Credo',
+            ];
 
         $arrayGroup =[
             'WE' => $weOptions,
@@ -1252,7 +1284,7 @@ class CharacterForm
             'Schildschlag' => 'Schildschlag',
             'Schulterwurf' => 'Schulterwurf',
             'Sprengfalle' => 'Sprengfalle',
-        ];
+            ];
         $stOptions = [
             'Ansturm' => 'Ansturm',
             'Aufwühlen' => 'Aufwühlen',
@@ -1267,7 +1299,7 @@ class CharacterForm
             'Schwitzkasten' => 'Schwitzkasten',
             'Sprungangriff' => 'Sprungangriff',
             'Tausend Schläge' => 'Tausend Schläge',
-        ];
+            ];
         $agOptions =[
             'An die Kehle' => 'An die Kehle',
             'Ausweiden' => 'Ausweiden',
@@ -1284,7 +1316,7 @@ class CharacterForm
             'Waffenschmuck' => 'Waffenschmuck',
             'Wirbelwind' => 'Wirbelwind',
             'Zwischen die Schuppen' => 'Zwischen die Schuppen',
-        ];
+            ];
         $geOptions = [
             'Arsenal' => 'Arsenal',
             'Auf Distanz halten' => 'Auf Distanz halten',
@@ -1300,7 +1332,7 @@ class CharacterForm
             'Riposte' => 'Riposte',
             'Sturmangriff' => 'Sturmangriff',
             'Taschenspieler' => 'Taschenspieler',
-        ];
+            ];
 
         $arrayGroup =[
             'KO' => $koOptions,
@@ -1592,6 +1624,23 @@ class CharacterForm
             $xp >= 3=> 4,
             default   => 3,
         };
+
+
+        $classabilityFields = [
+            'classability1',
+            'classability2',
+            'classability3',
+        ];
+
+        $eingebungCount = collect($classabilityFields)
+            ->map(fn ($field) => $get($field) ?? [])
+            ->flatten()
+            ->filter(fn ($ability) =>
+            is_string($ability)
+                ? $ability === 'Eingebung'
+                : ($ability['name'] ?? null) === 'Eingebung'
+            )
+            ->count();
 
         // Alle ausgewählten Skills zusammenzählen
         $allSkills = [];
