@@ -60,7 +60,7 @@ class CharacterPdfService
             'Erfahrungsgrad' => $character->xp ?? '',
             'PLE' => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft1 ?? ''] ?? '',
             'SLE' => self::LEITEIGENSCHAFT_MAP[$character->leiteigenschaft2 ?? ''] ?? '',
-            'Primär' => $character->archetype ?? '',
+            'Archetyp' => $character->archetype ?? '',
             'Ressource' => $character->main_stat_value ?? '',
             'Seele' => $wesen,
         ];
@@ -142,13 +142,13 @@ class CharacterPdfService
             (array) ($character->skill_aspect ?? []),
         );
         foreach (range(1, 12) as $i) {
-            $fields[sprintf('FE%02d', $i)] = $skills[$i - 1] ?? '';
+            $fields["FE{$i}"] = $skills[$i - 1] ?? '';
         }
 
-        // Überlieferungen: lore → ÜL1-4
+        // Überlieferungen: lore → UEL1-7
         $lore = (array) ($character->lore ?? []);
-        foreach (range(1, 4) as $i) {
-            $fields["ÜL{$i}"] = $lore[$i - 1] ?? '';
+        foreach (range(1, 7) as $i) {
+            $fields["UEL{$i}"] = $lore[$i - 1] ?? '';
         }
 
         // Handwerkskenntnisse: just append to lore overflow if needed
@@ -230,7 +230,7 @@ class CharacterPdfService
             return array_fill_keys(
                 ["{$prefix}QS", "{$prefix}GATT", "{$prefix}AW", "{$prefix}VW", "{$prefix}TW",
                     "{$prefix}TL", "{$prefix}HwP", "{$prefix}LE1", "{$prefix}LE2",
-                    "{$prefix}HE1", "{$prefix}HE2", "{$prefix}HE3", "{$prefix}HE4", "{$prefix}HE5"],
+                    "{$prefix}HE1", "{$prefix}HE2", "{$prefix}HE3", "{$prefix}HE4", "{$prefix}HE5", "{$prefix}HE6"],
                 ''
             );
         }
@@ -252,6 +252,7 @@ class CharacterPdfService
             "{$prefix}HE3" => $extensions[2] ?? '',
             "{$prefix}HE4" => $extensions[3] ?? '',
             "{$prefix}HE5" => $extensions[4] ?? '',
+            "{$prefix}HE6" => $extensions[5] ?? '',
         ];
     }
 
@@ -261,7 +262,7 @@ class CharacterPdfService
             return array_fill_keys(
                 ['RSQS', 'RSHwP', 'RSpVW', 'RSSchnitt', 'RSStumpf', 'RSStich',
                     'RSElementar', 'RSArkan', 'RSChaos', 'RSSpirituell',
-                    'RSHE1', 'RSHE2', 'RSHE3', 'RSHE4', 'RSHE5'],
+                    'RSHE1', 'RSHE2', 'RSHE3', 'RSHE4', 'RSHE5', 'RSHE6'],
                 ''
             );
         }
@@ -284,6 +285,7 @@ class CharacterPdfService
             'RSHE3' => $extensions[2] ?? '',
             'RSHE4' => $extensions[3] ?? '',
             'RSHE5' => $extensions[4] ?? '',
+            'RSHE6' => $extensions[5] ?? '',
         ];
     }
 
@@ -293,7 +295,7 @@ class CharacterPdfService
             return array_fill_keys(
                 ['SCH', 'SchildVW', 'SchildHwP', 'SchildTL', 'SchildTaP',
                     'SchildSchnitt', 'SchildStich', 'SchildStumpf',
-                    'SCHE1', 'SCHE2', 'SCHE3', 'SCHE4', 'SCHE5'],
+                    'SHHE1', 'SHHE2', 'SHHE3', 'SHHE4', 'SHHE5', 'SHHE6'],
                 ''
             );
         }
@@ -309,11 +311,12 @@ class CharacterPdfService
             'SchildSchnitt' => $shield->shield_schnitt ?? '',
             'SchildStich' => $shield->shield_stich ?? '',
             'SchildStumpf' => $shield->shield_stumpf ?? '',
-            'SCHE1' => $extensions[0] ?? '',
-            'SCHE2' => $extensions[1] ?? '',
-            'SCHE3' => $extensions[2] ?? '',
-            'SCHE4' => $extensions[3] ?? '',
-            'SCHE5' => $extensions[4] ?? '',
+            'SHHE1' => $extensions[0] ?? '',
+            'SHHE2' => $extensions[1] ?? '',
+            'SHHE3' => $extensions[2] ?? '',
+            'SHHE4' => $extensions[3] ?? '',
+            'SHHE5' => $extensions[4] ?? '',
+            'SHHE6' => $extensions[5] ?? '',
         ];
     }
 
@@ -321,7 +324,7 @@ class CharacterPdfService
     {
         if (! $talisman) {
             return array_fill_keys(
-                ['TLKW', 'TLRS', 'TLHwP', 'TLTL', 'TLHE1', 'TLHE2', 'TLHE3', 'TLHE4', 'TLHE5'],
+                ['TLKW', 'TLRS', 'TLHwP', 'TLTL', 'TAHE1', 'TAHE2', 'TAHE3', 'TAHE4', 'TAHE5', 'TAHE6'],
                 ''
             );
         }
@@ -334,11 +337,12 @@ class CharacterPdfService
             'TLRS' => $talisman->charm_arcan ?? '',
             'TLHwP' => $talisman->hwp ?? '',
             'TLTL' => $talisman->traglast ?? '',
-            'TLHE1' => $extensions[0] ?? '',
-            'TLHE2' => $extensions[1] ?? '',
-            'TLHE3' => $extensions[2] ?? '',
-            'TLHE4' => $extensions[3] ?? '',
-            'TLHE5' => $extensions[4] ?? '',
+            'TAHE1' => $extensions[0] ?? '',
+            'TAHE2' => $extensions[1] ?? '',
+            'TAHE3' => $extensions[2] ?? '',
+            'TAHE4' => $extensions[3] ?? '',
+            'TAHE5' => $extensions[4] ?? '',
+            'TAHE6' => $extensions[5] ?? '',
         ];
     }
 }
