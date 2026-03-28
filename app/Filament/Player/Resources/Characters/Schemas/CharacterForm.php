@@ -646,6 +646,7 @@ class CharacterForm
                                                                     ->compact()
                                                                     ->live()
                                                                     ->columnSpanFull()
+                                                                    ->defaultItems(0)
                                                                     ->addActionLabel('Sonderbonus hinzufügen')
                                                                     ->schema([
                                                                         Select::make('special_skill_type')
@@ -921,7 +922,7 @@ class CharacterForm
                                                 'xl' => 1,
                                             ])
                                             ->schema([
-                                                Grid::make(4)
+                                                Grid::make(['default' => 2, 'md' => 4])
                                                     ->schema([
                                                         TextInput::make('ko_sum')
                                                             ->label('KO')
@@ -944,7 +945,7 @@ class CharacterForm
                                                             ->disabled()
                                                             ->dehydrated(),
                                                     ]),
-                                                Grid::make(2)
+                                                Grid::make(['default' => 2])
                                                     ->schema([
                                                         TextInput::make('leps')
                                                             ->label('LeP')
@@ -991,7 +992,7 @@ class CharacterForm
                                                 'xl' => 1,
                                             ])
                                             ->schema([
-                                                Grid::make(4)
+                                                Grid::make(['default' => 2, 'md' => 4])
                                                     ->schema([
                                                         TextInput::make('we_sum')
                                                             ->label('WE')
@@ -1010,7 +1011,7 @@ class CharacterForm
                                                             ->disabled()
                                                             ->dehydrated(),
                                                     ]),
-                                                Grid::make(2)
+                                                Grid::make(['default' => 2])
                                                     ->schema([
                                                         TextInput::make('kontrollwiderstand')
                                                             ->label('KW')
