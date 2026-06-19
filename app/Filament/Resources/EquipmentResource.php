@@ -32,7 +32,7 @@ class EquipmentResource extends Resource
         return $form
         ->schema([
             Section::make('allgemein')
-            ->description('Art der Ausrütung wählen')
+            ->description('Art der Ausrüstung wählen')
             ->schema([
                 Grid::make(2)
                 ->schema([

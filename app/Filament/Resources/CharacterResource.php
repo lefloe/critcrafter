@@ -1225,11 +1225,12 @@ class CharacterResource extends Resource
                 ->icon('heroicon-o-printer')
                 ->url(fn (Character $record) => route('character.print', ['id' => $record->id]))
                 ->openUrlInNewTab(),
-//                Tables\Actions\Action::make('fillable_pdf')
-//                ->label('fillable PDF')
-//                ->icon('heroicon-o-printer')
-//                ->url(fn (Character $record) => route('fill-character.print', ['id' => $record->id]))
-//                ->openUrlInNewTab(),
+                Tables\Actions\Action::make('fillable_pdf')
+                ->label('fillable PDF')
+                ->icon('heroicon-o-printer')
+                ->url(fn (Character $record) => route('fill-character.print', ['id' => $record->id]))
+                ->openUrlInNewTab(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

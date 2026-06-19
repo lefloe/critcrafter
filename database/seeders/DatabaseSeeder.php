@@ -137,7 +137,6 @@ class DatabaseSeeder extends Seeder
             'enchantment' => 'des Schutzes',
             'enchantment_qs' => 'ungewöhnlich',
         ]);
-        \Database\Factories\EquipmentFactory::new()->count(10)->create();
 
     }
 }

@@ -74,14 +74,12 @@ class CharacterPdfController extends Controller
         $pdf = new \mikehaertl\pdftk\Pdf(
             storage_path('app/templates/Character-Sheet-LOSS-2_0.pdf'),
             [
-            'command' => '/usr/bin/pdftk' // Pfad aus `which pdftk`
+            'command' => '/usr/bin/pdftk'
             ]
         );
         $result = $pdf
         ->fillForm($fields)
         ->saveAs(storage_path('app/output/ausgefüllt.pdf'));
-        // dd($result);
-
         if ($result === false) {
             throw new \Exception('PDF-Befüllung fehlgeschlagen: ' . $pdf->getError());
         }
@@ -90,7 +88,7 @@ class CharacterPdfController extends Controller
             'Content-Type' => 'application/pdf',
         ]);
 
-        //return response()->download(storage_path('app/output/ausgefüllt.pdf'));
+        return response()->download(storage_path('app/output/ausgefüllt.pdf'));
     }
 
 
